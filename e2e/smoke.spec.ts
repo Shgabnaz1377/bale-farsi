@@ -92,12 +92,15 @@ test('a full lesson can be completed', async ({ page }) => {
   expect(ignoreFonts(problems)).toEqual([])
 })
 
+/** The browser's service worker container (typed here because the e2e tsconfig has no DOM lib). */
+type SW = { serviceWorker: { ready: Promise<unknown>; controller: unknown } }
+
 test('works offline after the first visit', async ({ page, context }) => {
   const problems = watchConsole(page)
   await page.goto('/')
-  await page.evaluate(async () => { await navigator.serviceWorker.ready })
+  await page.evaluate(async () => { await (navigator as unknown as SW).serviceWorker.ready })
   await page.reload()
-  await expect.poll(() => page.evaluate(() => !!navigator.serviceWorker.controller)).toBe(true)
+  await expect.poll(() => page.evaluate(() => !!(navigator as unknown as SW).serviceWorker.controller)).toBe(true)
   await context.setOffline(true)
   await page.reload()
   await expect(page.getByRole('heading', { name: /Learn to read, speak and understand Persian/ })).toBeVisible()
