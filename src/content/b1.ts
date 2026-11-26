@@ -12,7 +12,7 @@ export const B1: Unit[] = [
     tip: 'Around <b>Nowruz</b>, the Persian New Year at the spring equinox (about 21 March), schools close for about two weeks and many Iranians travel or visit family, so trains, buses and flights fill up early.',
     words: [
       { fa: 'سفر', tr: 'safar', en: 'trip', alt: ['journey', 'travel'], note: 'Safar kardan = to travel. Safar bekheyr! = Have a good trip!' },
-      { fa: 'بلیت', tr: 'belit', en: 'ticket', note: 'Also often spelled بلیط.' },
+      { fa: 'بلیت', tr: 'belit', en: 'ticket', note: 'Also often spelled بلیط (same sound, belit).' },
       { fa: 'چمدان', tr: 'chamedân', en: 'suitcase' },
       { fa: 'فرودگاه', tr: 'forudgâh', en: 'airport', note: 'Literally "landing place".' },
       { fa: 'ایستگاه', tr: 'istgâh', en: 'station', alt: ['stop'], note: 'Istgâh-e ghatâr = train station, istgâh-e otobus = bus stop.' },
@@ -57,7 +57,7 @@ export const B1: Unit[] = [
     ],
     grammar: {
       title: 'The subjunctive after khâstan, tavânestan and bâyad',
-      body: 'After <span class="fa">خواستن</span> "to want", <span class="fa">توانستن</span> "to be able" and <span class="fa">باید</span> "must", the next verb is in the <b>subjunctive</b>: <i>be-</i> + present stem + ending, as in <i>beravam</i> "(that) I go" or <i>biâyam</i> "(that) I come". Both verbs carry the person: <i>mikhâham beravam</i> "I want to go", <i>mitavânim biâyim</i> "we can come". <i>Bâyad</i> never changes: <i>bâyad beravam, bâyad beravid</i>. Compound verbs with <i>kardan</i> usually drop <i>be-</i>: <i>rezerv konim</i>. In speech, <i>mikhâham beravam</i> becomes <i>mikhâm beram</i> and <i>mitavânam</i> becomes <i>mitunam</i>.',
+      body: 'After <span class="fa">خواستن</span> <i>khâstan</i> "to want", <span class="fa">توانستن</span> <i>tavânestan</i> "to be able" and <span class="fa">باید</span> <i>bâyad</i> "must", the next verb is in the <b>subjunctive</b>: <i>be-</i> + present stem + ending, as in <i>beravam</i> "(that) I go" or <i>biâyam</i> "(that) I come". Both verbs carry the person: <i>mikhâham beravam</i> "I want to go", <i>mitavânim biâyim</i> "we can come". <i>Bâyad</i> never changes: <i>bâyad beravam, bâyad beravid</i>. Compound verbs with <i>kardan</i> usually drop <i>be-</i>: <i>rezerv konim</i>. In speech, <i>mikhâham beravam</i> becomes <i>mikhâm beram</i> and <i>mitavânam</i> becomes <i>mitunam</i>.',
       examples: [
         { fa: 'می‌خواهم بروم.', tr: 'mikhâham beravam.', en: 'I want to go.' },
         { fa: 'می‌توانم فردا بیایم.', tr: 'mitavânam fardâ biâyam.', en: 'I can come tomorrow.' },
@@ -68,18 +68,21 @@ export const B1: Unit[] = [
         {
           q: 'Which means "I want to go"?',
           options: ['می‌خواهم بروم', 'می‌خواهم می‌روم', 'می‌خواهم رفتم', 'خواستم بروم'],
+          optionsTr: ['mikhâham beravam', 'mikhâham miravam', 'mikhâham raftam', 'khâstam beravam'],
           answer: 0,
           why: 'After khâstan the second verb is subjunctive: mikhâham beravam. Khâstam beravam would be "I wanted to go".',
         },
         {
           q: 'Which means "We can come"?',
           options: ['می‌توانیم بیایم', 'می‌توانیم بیاییم', 'می‌توانیم آمدن', 'می‌توانیم می‌آییم'],
+          optionsTr: ['mitavânim biâyam', 'mitavânim biâyim', 'mitavânim âmadan', 'mitavânim miâyim'],
           answer: 1,
           why: 'Both verbs agree with "we": mitavânim biâyim.',
         },
         {
           q: 'Which means "You (plural) must buy a ticket"?',
           options: ['بایدید بلیت بخرید', 'باید بلیت می‌خرید', 'باید بلیت بخرید', 'باید بلیت خریدید'],
+          optionsTr: ['bâyadid belit bekharid', 'bâyad belit mikharid', 'bâyad belit bekharid', 'bâyad belit kharidid'],
           answer: 2,
           why: 'Bâyad never takes an ending; the person goes on the subjunctive verb: bekharid.',
         },
@@ -130,7 +133,7 @@ export const B1: Unit[] = [
     fa: 'کار و تحصیل',
     tr: 'kâr va tahsil',
     can: 'You can talk about your studies and work experience and answer simple job-interview questions.',
-    tip: 'The Iranian university entrance exam, the <b>konkur</b> (<span class="fa">کنکور</span>), is a huge event: every year a very large number of students take it, and many spend a year or more preparing for it.',
+    tip: 'The Iranian university entrance exam, the <b>konkur</b> (<span class="fa">کنکور</span> <i>konkur</i>), is a huge event: every year a very large number of students take it, and many spend a year or more preparing for it.',
     words: [
       { fa: 'شغل', tr: 'shoghl', en: 'job', alt: ['occupation', 'profession'] },
       { fa: 'شرکت', tr: 'sherkat', en: 'company', alt: ['firm'], note: 'Sherkat kardan means "to take part".' },
@@ -178,7 +181,7 @@ export const B1: Unit[] = [
     ],
     grammar: {
       title: 'The present perfect: rafte-am "I have gone"',
-      body: 'The present perfect is the <b>past participle</b> (past stem + <i>-e</i>: <i>raft → rafte</i>) plus short endings: <span class="fa">رفته‌ام، رفته‌ای، رفته است، رفته‌ایم، رفته‌اید، رفته‌اند</span>. It is used for experience ("I have been to…") and for past actions that still matter now; with a fixed time such as <i>diruz</i> "yesterday", use the simple past. In compound verbs only the verb part changes, and <i>na-</i> goes on it: <i>kâr nakarde-am</i>. In spoken Tehran Persian the endings shrink: <i>rafte-am</i> → <i>raftam</i>, <i>rafte-i</i> → <i>rafti</i>, <i>rafte ast</i> → <i>rafte</i>. So spoken <i>raftam</i> can mean "I have gone" or "I went": the perfect is stressed at the end (<i>raftám</i>), the simple past at the start (<i>ráftam</i>).',
+      body: 'The present perfect is the <b>past participle</b> (past stem + <i>-e</i>: <i>raft → rafte</i>) plus short endings: <span class="fa">رفته‌ام، رفته‌ای، رفته است، رفته‌ایم، رفته‌اید، رفته‌اند</span> <i>rafte-am, rafte-i, rafte ast, rafte-im, rafte-id, rafte-and</i>. It is used for experience ("I have been to…") and for past actions that still matter now; with a fixed time such as <i>diruz</i> "yesterday", use the simple past. In compound verbs only the verb part changes, and <i>na-</i> goes on it: <i>kâr nakarde-am</i>. In spoken Tehran Persian the endings shrink: <i>rafte-am</i> → <i>raftam</i>, <i>rafte-i</i> → <i>rafti</i>, <i>rafte ast</i> → <i>rafte</i>. So spoken <i>raftam</i> can mean "I have gone" or "I went": the perfect is stressed at the end (<i>raftám</i>), the simple past at the start (<i>ráftam</i>).',
       examples: [
         { fa: 'این فیلم را دیده‌ام.', tr: 'in film râ dide-am.', en: "I've seen this film." },
         { fa: 'هرگز به شیراز نرفته‌ام.', tr: 'hargez be Shirâz narafte-am.', en: "I've never been to Shiraz." },
@@ -189,18 +192,21 @@ export const B1: Unit[] = [
         {
           q: 'Which means "I have seen"?',
           options: ['دیدم', 'دیده‌ام', 'می‌بینم', 'دیده بودم'],
+          optionsTr: ['didam', 'dide-am', 'mibinam', 'dide budam'],
           answer: 1,
           why: 'Participle dide + the ending -am. Didam is "I saw"; dide budam is "I had seen".',
         },
         {
           q: 'Which means "They have never worked here"?',
           options: ['هرگز اینجا کار نکرده‌اند', 'هرگز اینجا نکار کرده‌اند', 'هرگز اینجا کار کرده‌اند', 'هرگز اینجا کار نکرده‌ایم'],
+          optionsTr: ['hargez injâ kâr nakarde-and', 'hargez injâ nakâr karde-and', 'hargez injâ kâr karde-and', 'hargez injâ kâr nakarde-im'],
           answer: 0,
           why: 'Hargez needs a negative verb, and na- goes on the verb part of the compound: kâr nakarde-and.',
         },
         {
           q: 'In speech you hear "rafte" (he has gone). How is it written in standard Persian?',
           options: ['رفت', 'رفته است', 'رفته بود', 'می‌رود'],
+          optionsTr: ['raft', 'rafte ast', 'rafte bud', 'miravad'],
           answer: 1,
           why: 'Spoken rafte drops ast; the written form is rafte ast.',
         },
@@ -299,7 +305,7 @@ export const B1: Unit[] = [
     ],
     grammar: {
       title: 'Opinions, and the subjunctive after shâyad, momken ast, omidvâram',
-      body: '<span class="fa">فکر می‌کنم (که)…</span> "I think (that)…" and <span class="fa">به نظر من…</span> "in my opinion…" are followed by an ordinary verb: <i>fekr mikonam gerân ast</i> "I think it\'s expensive". Words of possibility and hope, <span class="fa">شاید</span> "maybe", <span class="fa">ممکن است</span> "it may be" and <span class="fa">امیدوارم</span> "I hope", take the <b>subjunctive</b>: <i>shâyad biâyad</i> "she might come". The subjunctive of <i>budan</i> is irregular: <i>bâsham, bâshi, bâshad, bâshim, bâshid, bâshand</i>. In speech, <i>momken ast</i> becomes <i>momkene</i>, <i>bâshad</i> becomes <i>bâshe</i>, and <i>ke</i> is often left out.',
+      body: '<span class="fa">فکر می‌کنم (که)…</span> <i>fekr mikonam (ke)…</i> "I think (that)…" and <span class="fa">به نظر من…</span> <i>be nazar-e man…</i> "in my opinion…" are followed by an ordinary verb: <i>fekr mikonam gerân ast</i> "I think it\'s expensive". Words of possibility and hope, <span class="fa">شاید</span> <i>shâyad</i> "maybe", <span class="fa">ممکن است</span> <i>momken ast</i> "it may be" and <span class="fa">امیدوارم</span> <i>omidvâram</i> "I hope", take the <b>subjunctive</b>: <i>shâyad biâyad</i> "she might come". The subjunctive of <i>budan</i> is irregular: <i>bâsham, bâshi, bâshad, bâshim, bâshid, bâshand</i>. In speech, <i>momken ast</i> becomes <i>momkene</i>, <i>bâshad</i> becomes <i>bâshe</i>, and <i>ke</i> is often left out.',
       examples: [
         { fa: 'فکر می‌کنم که حق با توست.', tr: 'fekr mikonam ke hagh bâ tost.', en: "I think you're right." },
         { fa: 'شاید امشب به سینما برویم.', tr: 'shâyad emshab be sinemâ beravim.', en: 'We might go to the cinema tonight.' },
@@ -310,18 +316,21 @@ export const B1: Unit[] = [
         {
           q: 'Which means "Maybe she will come"?',
           options: ['شاید آمد', 'شاید بیایم', 'شاید بیاید', 'شاید آمدن'],
+          optionsTr: ['shâyad âmad', 'shâyad biâyam', 'shâyad biâyad', 'shâyad âmadan'],
           answer: 2,
           why: 'Shâyad takes the subjunctive, with the ending for "she": biâyad.',
         },
         {
           q: 'Which means "I hope you are well"?',
           options: ['امیدوارم خوب باشی', 'امیدوارم خوب هستی', 'امیدوارم خوب بودی', 'امیدوارم خوب باشم'],
+          optionsTr: ['omidvâram khub bâshi', 'omidvâram khub hasti', 'omidvâram khub budi', 'omidvâram khub bâsham'],
           answer: 0,
           why: 'Omidvâram is followed by the subjunctive of budan: bâshi.',
         },
         {
           q: 'Which means "I think it\'s expensive"?',
           options: ['فکر می‌کنند گران است', 'فکر می‌کنم که گران هستم', 'به نظر تو گران است', 'فکر می‌کنم گران است'],
+          optionsTr: ['fekr mikonand gerân ast', 'fekr mikonam ke gerân hastam', 'be nazar-e to gerân ast', 'fekr mikonam gerân ast'],
           answer: 3,
           why: 'Fekr mikonam is followed by an ordinary verb; hastam would mean "I am expensive".',
         },
@@ -421,7 +430,7 @@ export const B1: Unit[] = [
     ],
     grammar: {
       title: 'Compound verbs: noun or adjective + kardan, shodan, dâdan, zadan',
-      body: 'Most Persian verbs are <b>compound</b>: a noun or adjective plus a light verb such as <span class="fa">کردن</span> "do", <span class="fa">شدن</span> "become", <span class="fa">دادن</span> "give" or <span class="fa">زدن</span> "hit", as in <i>komak kardan</i> "to help" and <i>telefon zadan</i> "to phone". Only the light verb changes, and <i>mi-</i>, <i>na-</i> and <i>be-</i> go on it: <i>komak mikonam, komak nakardam</i>; with <i>kardan</i> the subjunctive usually drops <i>be-</i> (<i>komak konam</i>). With an adjective, <i>kardan</i> means "make" and <i>shodan</i> "become": <i>bâz kardan</i> "to open (something)", <i>bâz shodan</i> "to open, come open". In the spoken dialogue the endings are shorter: written <i>befarmâyid</i> → <i>befarmâyin</i>, <i>nakonad</i> → <i>nakone</i>.',
+      body: 'Most Persian verbs are <b>compound</b>: a noun or adjective plus a light verb such as <span class="fa">کردن</span> <i>kardan</i> "do", <span class="fa">شدن</span> <i>shodan</i> "become", <span class="fa">دادن</span> <i>dâdan</i> "give" or <span class="fa">زدن</span> <i>zadan</i> "hit", as in <i>komak kardan</i> "to help" and <i>telefon zadan</i> "to phone". Only the light verb changes, and <i>mi-</i>, <i>na-</i> and <i>be-</i> go on it: <i>komak mikonam, komak nakardam</i>; with <i>kardan</i> the subjunctive usually drops <i>be-</i> (<i>komak konam</i>). With an adjective, <i>kardan</i> means "make" and <i>shodan</i> "become": <i>bâz kardan</i> "to open (something)", <i>bâz shodan</i> "to open, come open". In the spoken dialogue the endings are shorter: written <i>befarmâyid</i> → <i>befarmâyin</i>, <i>nakonad</i> → <i>nakone</i>.',
       examples: [
         { fa: 'به مادرم کمک کردم.', tr: 'be mâdaram komak kardam.', en: 'I helped my mother.' },
         { fa: 'امشب به تو زنگ می‌زنم.', tr: 'emshab be to zang mizanam.', en: "I'll call you tonight." },
@@ -432,18 +441,21 @@ export const B1: Unit[] = [
         {
           q: 'Which means "I didn\'t help"?',
           options: ['نکمک کردم', 'کمک نکردم', 'کمک نمی‌کنم', 'کمک نکنم'],
+          optionsTr: ['nakomak kardam', 'komak nakardam', 'komak nemikonam', 'komak nakonam'],
           answer: 1,
           why: 'Na- goes on the light verb, not on the noun: komak nakardam.',
         },
         {
           q: 'Which means "Please call me"?',
           options: ['لطفاً من را زنگ بزنید', 'لطفاً به من زنگ می‌زنید', 'لطفاً به من زنگ بزنید', 'لطفاً به من زنگ بکنید'],
+          optionsTr: ['lotfan man râ zang bezanid', 'lotfan be man zang mizanid', 'lotfan be man zang bezanid', 'lotfan be man zang bokonid'],
           answer: 2,
           why: 'Zang goes with zadan, the person called takes be, and a request uses the subjunctive: bezanid.',
         },
         {
           q: 'Which means "The door opened"?',
           options: ['در باز شد', 'در باز کرد', 'در را باز شد', 'در باز داد'],
+          optionsTr: ['dar bâz shod', 'dar bâz kard', 'dar râ bâz shod', 'dar bâz dâd'],
           answer: 0,
           why: 'Nobody opened it, it just opened: bâz shodan. Bâz kardan needs someone who opens it.',
         },
@@ -495,7 +507,7 @@ export const B1: Unit[] = [
     fa: 'فناوری و رسانه',
     tr: 'fanâvari va resâne',
     can: 'You can talk about phones, the internet and the media, and compare things.',
-    tip: 'On a standard Persian keyboard, <b>Shift + Space</b> types the half-space, <span class="fa">نیم‌فاصله</span> (<i>nimfâsele</i>), that keeps <span class="fa">می‌خواهم</span> or <span class="fa">بزرگ‌تر</span> together without joining the letters.',
+    tip: 'On a standard Persian keyboard, <b>Shift + Space</b> types the half-space, <span class="fa">نیم‌فاصله</span> (<i>nimfâsele</i>), that keeps <span class="fa">می‌خواهم</span> <i>mikhâham</i> or <span class="fa">بزرگ‌تر</span> <i>bozorgtar</i> together without joining the letters.',
     words: [
       { fa: 'گوشی', tr: 'gushi', en: 'mobile phone', alt: ['phone', 'cellphone', 'cell phone', 'smartphone'], note: 'Short for gushi-ye mobâyl; it also means the handset of a phone.' },
       { fa: 'اینترنت', tr: 'internet', en: 'internet', alt: ['the internet'] },
@@ -543,7 +555,7 @@ export const B1: Unit[] = [
     ],
     grammar: {
       title: 'Comparatives and superlatives: -tar and -tarin',
-      body: 'Add <span class="fa">ـتر</span> for "-er/more" and <span class="fa">ـترین</span> for "-est/most", written with a half-space: <i>bozorg, bozorgtar, bozorgtarin</i> (<span class="fa">بزرگ‌تر، بزرگ‌ترین</span>). "Than" is <span class="fa">از</span>: <i>Tehrân az Shirâz bozorgtar ast</i>. A comparative follows its noun with ezâfe (<i>shahr-e bozorgtar</i>), but a superlative comes <b>before</b> the noun with no ezâfe (<i>bozorgtarin shahr</i>). Learn <i>behtar, behtarin</i> "better, best" (from <i>khub</i>) and <i>bishtar</i> "more" (from <i>ziâd</i>). In speech, <i>arzântar ast</i> becomes <i>arzuntare</i>.',
+      body: 'Add <span class="fa">ـتر</span> <i>-tar</i> for "-er/more" and <span class="fa">ـترین</span> <i>-tarin</i> for "-est/most", written with a half-space: <i>bozorg, bozorgtar, bozorgtarin</i> (<span class="fa">بزرگ‌تر، بزرگ‌ترین</span> <i>bozorgtar, bozorgtarin</i>). "Than" is <span class="fa">از</span> <i>az</i>: <i>Tehrân az Shirâz bozorgtar ast</i>. A comparative follows its noun with ezâfe (<i>shahr-e bozorgtar</i>), but a superlative comes <b>before</b> the noun with no ezâfe (<i>bozorgtarin shahr</i>). Learn <i>behtar, behtarin</i> "better, best" (from <i>khub</i>) and <i>bishtar</i> "more" (from <i>ziâd</i>). In speech, <i>arzântar ast</i> becomes <i>arzuntare</i>.',
       examples: [
         { fa: 'تهران از شیراز بزرگ‌تر است.', tr: 'Tehrân az Shirâz bozorgtar ast.', en: 'Tehran is bigger than Shiraz.' },
         { fa: 'این گوشی ارزان‌تر است ولی آن یکی بهتر است.', tr: 'in gushi arzântar ast vali ân yeki behtar ast.', en: 'This phone is cheaper, but that one is better.' },
@@ -554,18 +566,21 @@ export const B1: Unit[] = [
         {
           q: 'Which means "the best film"?',
           options: ['فیلم بهترین', 'بهترین فیلم', 'خوب‌ترین فیلم', 'فیلم بهتر'],
+          optionsTr: ['film-e behtarin', 'behtarin film', 'khubtarin film', 'film-e behtar'],
           answer: 1,
           why: 'The superlative of khub is behtarin, and it comes before the noun.',
         },
         {
           q: 'Which means "My phone is older than yours"?',
           options: ['گوشی من با گوشی تو قدیمی‌تر است', 'گوشی من قدیمی‌تر گوشی تو است', 'گوشی من از گوشی تو قدیمی‌تر است', 'گوشی من از گوشی تو قدیمی‌ترین است'],
+          optionsTr: ['gushi-ye man bâ gushi-ye to ghadimitar ast', 'gushi-ye man ghadimitar gushi-ye to ast', 'gushi-ye man az gushi-ye to ghadimitar ast', 'gushi-ye man az gushi-ye to ghadimitarin ast'],
           answer: 2,
           why: '"Than" is az, and a comparison uses -tar, not -tarin.',
         },
         {
           q: 'Which means "a faster computer"?',
           options: ['یک کامپیوتر سریع‌تر', 'یک سریع‌تر کامپیوتر', 'یک کامپیوتر سریع‌ترین'],
+          optionsTr: ['yek kâmpyuter-e sari\'tar', 'yek sari\'tar kâmpyuter', 'yek kâmpyuter-e sari\'tarin'],
           answer: 0,
           why: 'A comparative goes after the noun, like any other adjective.',
         },
@@ -664,7 +679,7 @@ export const B1: Unit[] = [
     ],
     grammar: {
       title: 'The past continuous (miraftam) and the past perfect (rafte budam)',
-      body: 'The <b>past continuous</b> is <i>mi-</i> + past stem + ending: <i>miraftam</i> "I was going, I used to go". It sets the scene and describes habits; add <span class="fa">داشتن</span> for an action in progress at a moment: <i>dâshtam miraftam</i> "I was (just) going". The <b>past perfect</b> is the past participle + the past of <i>budan</i>: <i>rafte budam</i> "I had gone", for something that happened before another past event. <span class="fa">وقتی (که)</span> "when" links the two: <i>vaghti ke residam, rafte budand</i> "when I arrived, they had left". In speech <i>vaghti ke</i> is often just <i>vaghti</i>, and endings shorten: <i>budand</i> → <i>budan</i>, <i>miâmadam</i> → <i>miumadam</i>.',
+      body: 'The <b>past continuous</b> is <i>mi-</i> + past stem + ending: <i>miraftam</i> "I was going, I used to go". It sets the scene and describes habits; add <span class="fa">داشتن</span> <i>dâshtan</i> for an action in progress at a moment: <i>dâshtam miraftam</i> "I was (just) going". The <b>past perfect</b> is the past participle + the past of <i>budan</i>: <i>rafte budam</i> "I had gone", for something that happened before another past event. <span class="fa">وقتی (که)</span> <i>vaghti (ke)</i> "when" links the two: <i>vaghti ke residam, rafte budand</i> "when I arrived, they had left". In speech <i>vaghti ke</i> is often just <i>vaghti</i>, and endings shorten: <i>budand</i> → <i>budan</i>, <i>miâmadam</i> → <i>miumadam</i>.',
       examples: [
         { fa: 'وقتی بچه بودم، با دوچرخه به مدرسه می‌رفتم.', tr: 'vaghti bachche budam, bâ docharkhe be madrese miraftam.', en: 'When I was a child, I used to cycle to school.' },
         { fa: 'داشتیم فیلم می‌دیدیم که برق رفت.', tr: 'dâshtim film mididim ke bargh raft.', en: 'We were watching a film when the power went out.' },
@@ -675,18 +690,21 @@ export const B1: Unit[] = [
         {
           q: 'Which means "I had seen"?',
           options: ['دیده‌ام', 'می‌دیدم', 'دیده بودم', 'دیدم'],
+          optionsTr: ['dide-am', 'mididam', 'dide budam', 'didam'],
           answer: 2,
           why: 'Past perfect = participle dide + budam. Dide-am is "I have seen".',
         },
         {
           q: 'Which means "We were eating when he came"?',
           options: ['داشتیم غذا می‌خوردیم که او آمد', 'داشتیم غذا خوردیم که او آمد', 'داریم غذا می‌خوریم که او آمد', 'غذا خورده بودیم که او می‌آمد'],
+          optionsTr: ['dâshtim ghazâ mikhordim ke u âmad', 'dâshtim ghazâ khordim ke u âmad', 'dârim ghazâ mikhorim ke u âmad', 'ghazâ khorde budim ke u miâmad'],
           answer: 0,
           why: 'An action in progress in the past: dâshtim + past continuous mikhordim.',
         },
         {
           q: 'Complete «وقتی رسیدم، فیلم …» to mean "When I arrived, the film had started."',
           options: ['شروع می‌شود', 'شروع شده بود', 'شروع شده است', 'شروع بشود'],
+          optionsTr: ['shoru\' mishavad', 'shoru\' shode bud', 'shoru\' shode ast', 'shoru\' beshavad'],
           answer: 1,
           why: 'The film started before I arrived, so use the past perfect: shoru\' shode bud.',
         },

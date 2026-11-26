@@ -263,7 +263,7 @@ function wordsLesson(u: Unit, kind: LessonKind, o: LessonOptions): Ex[] {
 function grammarLesson(u: Unit): Ex[] {
   const g = u.grammar
   const checks: ChoiceEx[] = g.checks.map((c) => ({
-    kind: 'choice', title: c.q, prompt: {}, options: c.options.map((fa) => ({ fa })),
+    kind: 'choice', title: c.q, prompt: {}, options: c.options.map((fa, i) => ({ fa, tr: c.optionsTr[i] })),
     answer: c.answer, faOptions: true, note: c.why,
   }))
   const pool: Phrase[] = [...g.examples, ...u.sentences]
@@ -355,7 +355,7 @@ export function levelTest(level: Level): Ex[] {
     const w1 = pick(u.words, 2)
     ex.push(faToEn(w1[0], u.words), enToFa(w1[1], u.words))
     const c = pickOne(u.grammar.checks)
-    ex.push({ kind: 'choice', title: c.q, prompt: {}, options: c.options.map((fa) => ({ fa })), answer: c.answer, faOptions: true, note: c.why })
+    ex.push({ kind: 'choice', title: c.q, prompt: {}, options: c.options.map((fa, i) => ({ fa, tr: c.optionsTr[i] })), answer: c.answer, faOptions: true, note: c.why })
     const s = pickOne(u.sentences)
     ex.push(chance(0.5) ? buildToEn(s, u.sentences) : buildToFa(s, u.words))
   }

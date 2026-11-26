@@ -15,7 +15,8 @@ Bale (<span lang="fa">بله</span>, "yes") is a free web app that teaches Persi
 | **Level tests** | Test out of a level to unlock the next one. |
 | **Motivation** | XP, daily goal, streak on the Persian week (Saturday first), hearts or a relaxed mode. |
 | **Accounts** | Optional sign-in by email link; progress syncs across devices and merges with what is already on the device. |
-| **Settings** | Persian script, Latin transliteration, or both; light/dark; backup and restore progress. |
+| **Finglish** | Every Persian word, sentence, grammar answer and reading also comes in Finglish (Persian in English letters), so you can start before you can read the alphabet. |
+| **Settings** | Show Persian script + Finglish, Finglish only, or script only; light/dark; backup and restore progress. |
 
 Audio uses the browser's speech synthesis and needs a Persian (fa-IR) voice; Microsoft Edge ships one.
 

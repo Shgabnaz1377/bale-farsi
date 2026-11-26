@@ -4,7 +4,7 @@ import { P, exportProgress, importProgress, resetProgress } from '@/lib/store.ts
 import { faVoice } from '@/lib/speech.ts'
 import { account } from '@/lib/account.ts'
 
-const modes = [['both', 'Script + Latin'], ['script', 'Persian script only'], ['latin', 'Latin letters only']] as const
+const modes = [['both', 'Persian script + Finglish'], ['latin', 'Finglish only'], ['script', 'Persian script only']] as const
 const themes = [['system', 'Match system'], ['light', 'Light'], ['dark', 'Dark']] as const
 const goals = [10, 20, 30, 50] as const
 
@@ -38,7 +38,7 @@ function restore() {
           <label :for="'mode-' + v">{{ label }}</label>
         </template>
       </div>
-      <p class="muted small">Start with both. Switch to script only when you can read the letters, so you stop leaning on the Latin.</p>
+      <p class="muted small">Finglish is Persian written in English letters, like salâm for hello. Keep it on while you learn the alphabet. Switch to script only once you can read, so you stop leaning on it.</p>
     </section>
 
     <section class="card block">
@@ -70,7 +70,7 @@ function restore() {
     </section>
 
     <section class="card block">
-      <h2>Reading the Latin letters</h2>
+      <h2>How to read Finglish</h2>
       <dl class="key">
         <dt>â</dt><dd>long a, as in “father”</dd>
         <dt>a</dt><dd>short a, as in “cat”</dd>
