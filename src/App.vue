@@ -2,12 +2,14 @@
 import { computed, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import { P, rollDay, streakActiveToday } from '@/lib/store.ts'
+import { account, initAccount } from '@/lib/account.ts'
 import AppIcon from '@/components/AppIcon.vue'
 
 const route = useRoute()
 const inLesson = computed(() => route.name === 'lesson')
 
 rollDay()
+initAccount()
 
 watchEffect(() => {
   const root = document.documentElement
@@ -42,6 +44,10 @@ const nav = [
         <span class="stat hearts" :title="P.settings.relaxed ? 'Relaxed mode: no hearts' : 'Hearts left today'">
           <AppIcon name="heart" /><span>{{ P.settings.relaxed ? '∞' : P.hearts }}</span><span class="sr-only"> hearts</span>
         </span>
+        <RouterLink v-if="account.enabled" to="/account" class="stat acct" :class="{ on: account.user }" :aria-label="account.user ? `Account: ${account.user.email}` : 'Sign in to save your progress'" :title="account.user ? `Signed in as ${account.user.email}` : 'Sign in to save your progress'">
+          <span v-if="account.user" class="initial" aria-hidden="true">{{ account.user.email.charAt(0).toUpperCase() }}</span>
+          <AppIcon v-else name="user" /><span v-if="!account.user" class="acct-label">Sign in</span>
+        </RouterLink>
       </div>
     </div>
     <nav class="wrap tabs" aria-label="Main">
@@ -67,6 +73,10 @@ const nav = [
 .stat.xp .ico { color: var(--accent) }
 .stat.hearts .ico { color: var(--bad) }
 .stat.off { opacity: 0.55 }
+.acct { text-decoration: none; color: var(--lapis) }
+.acct:hover { border-color: var(--lapis) }
+.acct.on { padding: 2px; border-color: var(--lapis) }
+.initial { width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; background: var(--lapis); color: var(--lapis-ink); font-size: 0.8rem; font-weight: 700 }
 .tabs { display: flex; gap: 2px; overflow-x: auto; scrollbar-width: none; padding-bottom: 6px }
 .tab { display: inline-flex; align-items: center; gap: 6px; padding: 7px 12px; border-radius: 10px; color: var(--muted); text-decoration: none; font-weight: 500; font-size: 0.92rem; white-space: nowrap }
 .tab:hover { background: var(--sunk); color: var(--ink) }
@@ -75,6 +85,7 @@ const nav = [
   .brand-fa { display: none }
   .name { font-size: 1.25rem }
   .stat { padding: 3px 8px; font-size: 0.85rem }
+  .acct-label { display: none }
   .tabs { justify-content: space-between }
   .tab { flex-direction: column; gap: 2px; font-size: 0.72rem; padding: 6px 8px }
   .tab .ico { width: 20px; height: 20px }

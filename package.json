@@ -20,6 +20,7 @@
     "check:content": "node scripts/check-content.ts"
   },
   "dependencies": {
+    "@supabase/supabase-js": "2.119.0",
     "vue": "^3.5.46",
     "vue-router": "^5.5.2"
   },

@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 import { P, exportProgress, importProgress, resetProgress } from '@/lib/store.ts'
 import { faVoice } from '@/lib/speech.ts'
+import { account } from '@/lib/account.ts'
 
 const modes = [['both', 'Script + Latin'], ['script', 'Persian script only'], ['latin', 'Latin letters only']] as const
 const themes = [['system', 'Match system'], ['light', 'Light'], ['dark', 'Dark']] as const
@@ -86,7 +87,10 @@ function restore() {
 
     <section class="card block">
       <h2>Your progress</h2>
-      <p class="muted small">Progress is saved in this browser only. To move it to another device, copy a backup here and restore it there.</p>
+      <p class="muted small">
+        <template v-if="account.enabled"><RouterLink to="/account">Sign in</RouterLink> to keep your progress in sync on every device. Without an account, progress stays in this browser; you can also move it by hand with a backup.</template>
+        <template v-else>Progress is saved in this browser only. To move it to another device, copy a backup here and restore it there.</template>
+      </p>
       <div class="row">
         <button type="button" class="btn ghost sm" @click="copyBackup">Copy backup</button>
         <button type="button" class="btn ghost sm" :disabled="!backup.trim()" @click="restore">Restore from box</button>

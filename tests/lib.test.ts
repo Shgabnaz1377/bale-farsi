@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { acceptedForms, gradeTyped, lev, normEn } from '@/lib/grade.ts'
 import { INTERVALS, isDue, review } from '@/lib/srs.ts'
 import { freshProgress, parseProgress } from '@/lib/store.ts'
+import { mergeProgress, sameLearning } from '@/lib/merge.ts'
 
 describe('typed answers', () => {
   it('ignores case, punctuation, articles and contractions', () => {
@@ -49,5 +50,34 @@ describe('saved progress', () => {
     expect(p.xp).toBe(42)
     expect(p.settings.mode).toBe('latin')
     expect(p.settings.goal).toBe(30)
+  })
+})
+
+describe('merging this device with the cloud', () => {
+  const base = () => freshProgress()
+  it('keeps work from both sides', () => {
+    const local = { ...base(), done: { 'a1-greetings/words-1': true as const }, days: { 100: 15 }, xp: 15, lastDay: 100, streak: 1 }
+    const remote = { ...base(), done: { 'a1-family/words-1': true as const }, passed: { A1: true as const }, days: { 99: 10, 100: 5 }, xp: 15, lastDay: 99, streak: 3, bestStreak: 3 }
+    const m = mergeProgress(local, remote)
+    expect(Object.keys(m.done).sort()).toEqual(['a1-family/words-1', 'a1-greetings/words-1'])
+    expect(m.passed.A1).toBe(true)
+    expect(m.days).toEqual({ 99: 10, 100: 15 })
+    expect(m.xp).toBe(25)
+    expect(m.lastDay).toBe(100)
+    expect(m.streak).toBe(1)
+    expect(m.bestStreak).toBe(3)
+  })
+  it('keeps the more practised copy of each review card, and local settings', () => {
+    const local = { ...base(), cards: { k: { box: 2, due: 10, seen: 4, missed: 1 } }, settings: { ...base().settings, mode: 'latin' as const } }
+    const remote = { ...base(), cards: { k: { box: 3, due: 12, seen: 6, missed: 1 }, j: { box: 1, due: 5, seen: 1, missed: 0 } } }
+    const m = mergeProgress(local, remote)
+    expect(m.cards.k.seen).toBe(6)
+    expect(m.cards.j).toBeDefined()
+    expect(m.settings.mode).toBe('latin')
+  })
+  it('detects when nothing needs uploading', () => {
+    const a = base()
+    expect(sameLearning(a, { ...a, hearts: 2 })).toBe(true)
+    expect(sameLearning(a, { ...a, xp: 1 })).toBe(false)
   })
 })

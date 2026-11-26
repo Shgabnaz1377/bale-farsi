@@ -11,6 +11,7 @@ export const router = createRouter({
     { path: '/alphabet', name: 'alphabet', component: () => import('./views/AlphabetView.vue') },
     { path: '/words', name: 'words', component: () => import('./views/WordsView.vue') },
     { path: '/progress', name: 'progress', component: () => import('./views/ProgressView.vue') },
+    { path: '/account', name: 'account', component: () => import('./views/AccountView.vue') },
     { path: '/settings', name: 'settings', component: () => import('./views/SettingsView.vue') },
     { path: '/:pathMatch(.*)*', name: 'not-found', component: () => import('./views/NotFoundView.vue') },
   ],
