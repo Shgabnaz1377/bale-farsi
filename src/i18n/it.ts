@@ -260,4 +260,5 @@ export const IT: Record<string, string> = {
   "Most letters join the next one and change shape with their position. Seven never join forward:": "Quasi tutte le lettere si uniscono alla successiva e cambiano forma secondo la posizione. Sette non si uniscono mai alla lettera dopo:",
   "Short vowels (a, e, o) are usually not written.": "Le vocali brevi (a, e, o) di solito non si scrivono.",
   "New word": "Parola nuova",
+  "Hear the letter {name}": "Ascolta la lettera {name}",
 }

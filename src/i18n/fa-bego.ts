@@ -260,4 +260,5 @@ export const FA_BEGO: Record<string, string> = {
   "Most letters join the next one and change shape with their position. Seven never join forward:": "بیشتر حروف به حرف بعدی می‌چسبند و بسته به جایشان شکلشان عوض می‌شود. هفت حرف هیچ‌وقت به حرف بعدی نمی‌چسبند:",
   "Short vowels (a, e, o) are usually not written.": "مصوت‌های کوتاه (اَ، اِ، اُ) معمولاً نوشته نمی‌شوند.",
   "New word": "کلمهٔ جدید",
+  "Hear the letter {name}": "شنیدن حرف {name}",
 }

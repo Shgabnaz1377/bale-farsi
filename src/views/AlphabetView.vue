@@ -4,6 +4,7 @@ import { LETTERS, LETTER_GROUPS, letterForms } from '@/content/alphabet.ts'
 import { P, alphabetUnlocked } from '@/lib/store.ts'
 import { speak } from '@/lib/speech.ts'
 import StarNode from '@/components/StarNode.vue'
+import AppIcon from '@/components/AppIcon.vue'
 import MeowCat from '@/components/MeowCat.vue'
 import { t } from '@/i18n/index.ts'
 
@@ -39,15 +40,21 @@ function state(i: number) {
 
     <ul class="grid" :aria-label="t('All letters')">
       <li v-for="l in LETTERS" :key="l.fa">
-        <button type="button" class="card letter" :aria-label="t('{name}, sounds {sound}, as in {word}, {meaning}', { name: l.name, sound: l.sound, word: l.example.tr, meaning: l.example.en })" @click="speak(l.example.fa)">
-          <span class="big fa keep" lang="fa">{{ l.fa }}</span>
+        <div class="card letter">
+          <button type="button" class="hear-letter" :aria-label="t('Hear the letter {name}', { name: l.name })" @click="speak(l.fa)">
+            <span class="big fa keep" lang="fa">{{ l.fa }}</span>
+            <AppIcon name="speaker" class="hear-ico" />
+          </button>
           <span class="name">{{ l.name }} <span class="muted">· {{ l.sound }}</span></span>
           <span class="forms" aria-hidden="true">
             <span v-for="f in letterForms(l)" :key="f.label" class="form"><span class="fa keep" lang="fa">{{ f.text }}</span><small>{{ t(f.label) }}</small></span>
           </span>
-          <span class="example"><span class="fa keep" lang="fa">{{ l.example.fa }}</span> <span class="muted small">{{ l.example.tr }}, {{ l.example.en }}</span></span>
+          <button type="button" class="example" :aria-label="t('{name}, sounds {sound}, as in {word}, {meaning}', { name: l.name, sound: l.sound, word: l.example.tr, meaning: l.example.en })" @click="speak(l.example.fa)">
+            <AppIcon name="speaker" class="hear-ico small-ico" />
+            <span class="fa keep" lang="fa">{{ l.example.fa }}</span> <span class="muted small">{{ l.example.tr }}, {{ l.example.en }}</span>
+          </button>
           <span v-if="l.persian" class="chip saffron flag">{{ t('Persian only') }}</span>
-        </button>
+        </div>
       </li>
     </ul>
   </main>
@@ -61,8 +68,11 @@ function state(i: number) {
 .nodes { list-style: none; margin: 8px 0 0; padding: 0; display: flex; justify-content: space-between; gap: 4px }
 .nodes :deep(.label) .fa { font-size: 0.95rem }
 .grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px }
-.letter { position: relative; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 4px; cursor: pointer; text-align: center; padding: 12px 10px; font: inherit; color: var(--ink) }
-.letter:hover { border-color: var(--muted) }
+.letter { position: relative; width: 100%; display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center; padding: 12px 10px; color: var(--ink) }
+.hear-letter, .example { border: 0; background: none; font: inherit; color: inherit; cursor: pointer; border-radius: 12px; padding: 2px 8px; display: inline-flex; align-items: center; gap: 6px }
+.hear-letter:hover, .example:hover { background: var(--sunk) }
+.hear-ico { color: var(--lapis); width: 18px; height: 18px }
+.small-ico { width: 15px; height: 15px }
 .big { font-size: 2.6rem; font-weight: 700; line-height: 1.4; color: var(--accent) }
 .name { font-weight: 600; font-size: 0.9rem }
 .forms { display: flex; gap: 8px; direction: rtl; flex-wrap: wrap; justify-content: center }

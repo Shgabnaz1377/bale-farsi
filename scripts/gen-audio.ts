@@ -31,19 +31,30 @@ const xml = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replac
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
 
 async function synth(text: string, voice: Voice, key: string, region: string): Promise<Buffer> {
-  const ssml = `<speak version="1.0" xml:lang="${XML_LANG}"><voice name="${VOICES[voice]}"><prosody rate="-8%">${xml(normSpeech(text))}</prosody></voice></speak>`
+  const ssml = `<speak version="1.0" xml:lang="${XML_LANG}"><voice name="${VOICES[voice]}"><prosody rate="0%">${xml(normSpeech(text))}</prosody></voice></speak>`
   for (let attempt = 1; ; attempt++) {
-    const res = await fetch(`https://${region}.tts.speech.microsoft.com/cognitiveservices/v1`, {
-      method: 'POST',
-      headers: {
-        'Ocp-Apim-Subscription-Key': key,
-        'Content-Type': 'application/ssml+xml',
-        'X-Microsoft-OutputFormat': 'audio-24khz-48kbitrate-mono-mp3',
-        'User-Agent': `${APP.id}-audio`,
-      },
-      body: ssml,
-    })
-    if (res.ok) return Buffer.from(await res.arrayBuffer())
+    let res: Response
+    try {
+      res = await fetch(`https://${region}.tts.speech.microsoft.com/cognitiveservices/v1`, {
+        method: 'POST',
+        headers: {
+          'Ocp-Apim-Subscription-Key': key,
+          'Content-Type': 'application/ssml+xml',
+          'X-Microsoft-OutputFormat': 'audio-24khz-48kbitrate-mono-mp3',
+          'User-Agent': `${APP.id}-audio`,
+        },
+        body: ssml,
+      })
+      if (res.ok) return Buffer.from(await res.arrayBuffer())
+    } catch (err) {
+      // A dropped connection (ECONNRESET, timeout): wait and try again rather than stopping the whole run.
+      if (attempt < 10) {
+        console.log(`  network hiccup (${(err as Error).message}), retrying in ${5 * attempt}s`)
+        await sleep(5000 * attempt)
+        continue
+      }
+      throw err
+    }
     if ((res.status === 429 || res.status >= 500) && attempt < 8) {
       const wait = Number(res.headers.get('retry-after')) * 1000 || 4000 * attempt
       await sleep(wait)
