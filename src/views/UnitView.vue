@@ -8,6 +8,7 @@ import FaText from '@/components/FaText.vue'
 import SpeakButton from '@/components/SpeakButton.vue'
 import StarNode from '@/components/StarNode.vue'
 import MeowCat from '@/components/MeowCat.vue'
+import { t } from '@/i18n/index.ts'
 import RichText from '@/components/RichText.vue'
 import DialogueList from '@/components/DialogueList.vue'
 import PassageText from '@/components/PassageText.vue'
@@ -45,15 +46,15 @@ function go(key: string) {
           <MeowCat :mood="unitDone(unit) ? 'cheer' : unitUnlocked(unit) ? 'wave' : 'sleep'" :size="76" />
         </span>
       </div>
-      <RichText :html="'<b>Tip.</b> ' + unit.tip" class="tip" />
-      <p v-if="!unitUnlocked(unit)" class="tip"><b>Locked.</b> Finish the unit before this one, or pass the {{ unit.level }} level test. You can still read everything below.</p>
+      <RichText :html="'<b>' + t('Tip.') + '</b> ' + unit.tip" class="tip" />
+      <p v-if="!unitUnlocked(unit)" class="tip"><b>{{ t('Locked.') }}</b> {{ t('Finish the unit before this one, or pass the {level} level test. You can still read everything below.', { level: unit.level }) }}</p>
       <ol class="nodes">
-        <StarNode v-for="(l, i) in lessons" :key="l.key" :state="state(l.key)" :number="faNum(i + 1)" :label="`${l.name}${P.done[l.key] ? ', finished' : ''}`" @go="go(l.key)">{{ l.name }}</StarNode>
+        <StarNode v-for="(l, i) in lessons" :key="l.key" :state="state(l.key)" :number="faNum(i + 1)" :label="P.done[l.key] ? t('{name}, finished', { name: l.name }) : l.name" @go="go(l.key)">{{ l.name }}</StarNode>
       </ol>
     </section>
 
     <section class="card block">
-      <h2>Grammar: {{ unit.grammar.title }}</h2>
+      <h2>{{ t('Grammar') }}: {{ unit.grammar.title }}</h2>
       <RichText :html="unit.grammar.body" />
       <ul class="list">
         <li v-for="(e, i) in unit.grammar.examples" :key="i">
@@ -64,7 +65,7 @@ function go(key: string) {
     </section>
 
     <section class="card block">
-      <h2>Words</h2>
+      <h2>{{ t('Words') }}</h2>
       <ul class="words">
         <li v-for="w in unit.words" :key="w.fa">
           <span class="btns"><SpeakButton :text="w.fa" /><SpeakButton :text="w.fa" slow /></span>
@@ -77,7 +78,7 @@ function go(key: string) {
     </section>
 
     <section class="card block">
-      <h2>Sentences</h2>
+      <h2>{{ t('Sentences') }}</h2>
       <ul class="list">
         <li v-for="(s, i) in unit.sentences" :key="i">
           <SpeakButton :text="s.fa" />
@@ -87,18 +88,18 @@ function go(key: string) {
     </section>
 
     <section v-if="unit.dialogue?.length" class="card block">
-      <h2>Dialogue</h2>
+      <h2>{{ t('Dialogue') }}</h2>
       <DialogueList :lines="unit.dialogue" />
     </section>
 
     <section v-if="unit.reading" class="card block">
-      <h2>Reading: {{ unit.reading.title }}</h2>
+      <h2>{{ t('Reading') }}: {{ unit.reading.title }}</h2>
       <PassageText :paragraphs="unit.reading.paragraphs" />
     </section>
   </main>
   <main v-else class="wrap page">
-    <h1>Unit not found</h1>
-    <RouterLink to="/">Back to the course</RouterLink>
+    <h1>{{ t('Unit not found') }}</h1>
+    <RouterLink to="/">{{ t('Back to the course') }}</RouterLink>
   </main>
 </template>
 

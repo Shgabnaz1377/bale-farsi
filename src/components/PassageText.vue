@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import type { Phrase } from '@/content/types.ts'
 import SpeakButton from './SpeakButton.vue'
 import { P } from '@/lib/store.ts'
+import { t } from '@/i18n/index.ts'
 
 /** A Persian reading passage. Finglish shows by default (unless the learner chose script only); English opens per paragraph. */
 const props = withDefaults(defineProps<{ paragraphs: Phrase[]; compact?: boolean }>(), { compact: false })
@@ -16,8 +17,8 @@ const openEn = ref<Record<number, boolean>>({})
       <p class="fa keep" lang="fa" dir="rtl">{{ p.fa }}</p>
       <div class="tools">
         <SpeakButton :text="p.fa" />
-        <button type="button" class="btn ghost sm" :aria-expanded="!!openTr[i]" @click="openTr[i] = !openTr[i]">{{ openTr[i] ? 'Hide Finglish' : 'Finglish' }}</button>
-        <button type="button" class="btn ghost sm" :aria-expanded="!!openEn[i]" @click="openEn[i] = !openEn[i]">{{ openEn[i] ? 'Hide English' : 'English' }}</button>
+        <button type="button" class="btn ghost sm" :aria-expanded="!!openTr[i]" @click="openTr[i] = !openTr[i]">{{ openTr[i] ? t('Hide Finglish') : t('Finglish') }}</button>
+        <button type="button" class="btn ghost sm" :aria-expanded="!!openEn[i]" @click="openEn[i] = !openEn[i]">{{ openEn[i] ? t('Hide English') : t('English') }}</button>
       </div>
       <p v-if="openTr[i]" class="tr-p">{{ p.tr }}</p>
       <p v-if="openEn[i]" class="en-p">{{ p.en }}</p>

@@ -1,3 +1,23 @@
+import { lang } from '@/i18n/index.ts'
+
+/** Normalise a typed Italian answer: case, accents, punctuation and articles (il, lo, la, l', un, una…). */
+export function normIt(s: string): string {
+  return String(s ?? '')
+    .toLowerCase()
+    .normalize('NFKD')
+    .replace(/[̀-ͯ]/g, '')
+    .replace(/[’‘`]/g, "'")
+    .replace(/\(.*?\)/g, ' ')
+    .replace(/\b(l|un|dell|all|dall|nell|sull)'/g, ' ')
+    .replace(/[^a-z0-9' ]+/g, ' ')
+    .replace(/\b(il|lo|la|i|gli|le|un|uno|una)\b/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+}
+
+/** Normalise a typed answer in the learner's language. */
+export const normAnswer = (s: string) => (lang() === 'it' ? normIt(s) : normEn(s))
+
 /** Normalise a typed English answer: case, accents, punctuation, articles and contractions. */
 export function normEn(s: string): string {
   return String(s ?? '')
@@ -51,9 +71,9 @@ export interface TypedResult {
 
 /** Grade a typed English answer against every accepted form. */
 export function gradeTyped(answer: string, accepted: string[]): TypedResult {
-  const a = normEn(answer)
+  const a = normAnswer(answer)
   if (!a) return { ok: false }
-  const forms = accepted.map(normEn).filter(Boolean)
+  const forms = accepted.map(normAnswer).filter(Boolean)
   if (forms.includes(a)) return { ok: true }
   const allowed = (s: string) => (s.length >= 12 ? 2 : s.length >= 4 ? 1 : 0)
   const close = forms.find((f) => lev(f, a) <= allowed(f))

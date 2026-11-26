@@ -5,6 +5,7 @@ import { P, alphabetUnlocked } from '@/lib/store.ts'
 import { speak } from '@/lib/speech.ts'
 import StarNode from '@/components/StarNode.vue'
 import MeowCat from '@/components/MeowCat.vue'
+import { t } from '@/i18n/index.ts'
 
 const router = useRouter()
 const faNum = (n: number) => String(n).replace(/\d/g, (d) => '۰۱۲۳۴۵۶۷۸۹'[Number(d)])
@@ -19,9 +20,9 @@ function state(i: number) {
 <template>
   <main class="wrap page">
     <section class="card head">
-      <p class="eyebrow">The Persian alphabet · <span class="fa keep" lang="fa">الفبای فارسی</span></p>
+      <p class="eyebrow">{{ t('The Persian alphabet') }} · <span class="fa keep" lang="fa">الفبای فارسی</span></p>
       <div class="title-row">
-        <h1>32 letters, right to left</h1>
+        <h1>{{ t('32 letters, right to left') }}</h1>
         <MeowCat mood="think" :size="64" />
       </div>
       <p class="muted">
@@ -30,22 +31,22 @@ function state(i: number) {
         <span class="fa keep" lang="fa">ا د ذ ر ز ژ و</span>. Short vowels (a, e, o) are usually not written.
       </p>
       <ol class="nodes">
-        <StarNode v-for="(g, i) in LETTER_GROUPS" :key="i" :state="state(i)" :number="faNum(i + 1)" :label="`Letters ${g.title}`" @go="router.push({ name: 'lesson', query: { alpha: String(i) } })">
+        <StarNode v-for="(g, i) in LETTER_GROUPS" :key="i" :state="state(i)" :number="faNum(i + 1)" :label="t('Letters {letters}', { letters: g.title })" @go="router.push({ name: 'lesson', query: { alpha: String(i) } })">
           <span class="fa keep" lang="fa">{{ g.title }}</span>
         </StarNode>
       </ol>
     </section>
 
-    <ul class="grid" aria-label="All letters">
+    <ul class="grid" :aria-label="t('All letters')">
       <li v-for="l in LETTERS" :key="l.fa">
-        <button type="button" class="card letter" :aria-label="`${l.name}, sounds ${l.sound}, as in ${l.example.tr}, ${l.example.en}`" @click="speak(l.example.fa)">
+        <button type="button" class="card letter" :aria-label="t('{name}, sounds {sound}, as in {word}, {meaning}', { name: l.name, sound: l.sound, word: l.example.tr, meaning: l.example.en })" @click="speak(l.example.fa)">
           <span class="big fa keep" lang="fa">{{ l.fa }}</span>
           <span class="name">{{ l.name }} <span class="muted">· {{ l.sound }}</span></span>
           <span class="forms" aria-hidden="true">
-            <span v-for="f in letterForms(l)" :key="f.label" class="form"><span class="fa keep" lang="fa">{{ f.text }}</span><small>{{ f.label }}</small></span>
+            <span v-for="f in letterForms(l)" :key="f.label" class="form"><span class="fa keep" lang="fa">{{ f.text }}</span><small>{{ t(f.label) }}</small></span>
           </span>
           <span class="example"><span class="fa keep" lang="fa">{{ l.example.fa }}</span> <span class="muted small">{{ l.example.tr }}, {{ l.example.en }}</span></span>
-          <span v-if="l.persian" class="chip saffron flag">Persian only</span>
+          <span v-if="l.persian" class="chip saffron flag">{{ t('Persian only') }}</span>
         </button>
       </li>
     </ul>

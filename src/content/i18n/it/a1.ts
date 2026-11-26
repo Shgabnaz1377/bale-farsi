@@ -1,0 +1,261 @@
+import type { CourseTr } from '../types.ts'
+
+export const IT_A1: CourseTr = {
+  // ───────────────────────────── 1. Saluti ─────────────────────────────
+  'a1-greetings': {
+    title: 'Saluti e cortesia',
+    can: 'Sai salutare, chiedere come sta qualcuno, ringraziare e dire arrivederci.',
+    tip: 'Gli iraniani raramente si fermano a <i>salâm</i>: chiedere <span class="fa">خوبی؟</span> <i>khubi?</i> ("stai bene?") e rispondere <i>mersi, khubam</i> fa parte di ogni saluto. <i>Mersi</i> viene dal francese ed è il "grazie" di tutti i giorni; <i>mamnun</i> è un po\' più formale.',
+    words: [
+      { fa: 'سلام', it: 'ciao', alt: ['salve', 'buongiorno'], note: 'Va bene a qualsiasi ora del giorno, in situazioni formali e informali.' },
+      { fa: 'خداحافظ', it: 'arrivederci', alt: ['ciao', 'arrivederla'], note: 'Letteralmente "(che) Dio (ti sia) protettore".' },
+      { fa: 'مرسی', it: 'grazie', note: 'Dal francese "merci"; comunissimo nella lingua di tutti i giorni.' },
+      { fa: 'ممنون', it: 'grato', alt: ['grata', 'grazie', 'ti ringrazio', 'la ringrazio'], note: 'Letteralmente "grato", ma si usa per dire grazie, un po\' più formale di mersi. Kheyli mamnun = grazie mille.' },
+      { fa: 'لطفاً', it: 'per favore', alt: ['per piacere'] },
+      { fa: 'ببخشید', it: 'scusi', alt: ['scusa', 'mi scusi', 'scusate', 'permesso'], note: 'Si usa sia per attirare l\'attenzione sia per chiedere scusa.' },
+      { fa: 'خوب', it: 'buono', alt: ['buona', 'bene', 'bravo', 'ok'] },
+      { fa: 'بله', it: 'sì', alt: ['si'], note: 'Nel parlato informale sentirai anche âre.' },
+      { fa: 'نه', it: 'no' },
+      { fa: 'خیلی', it: 'molto', alt: ['tanto', 'moltissimo'] },
+      { fa: 'صبح بخیر', it: 'buongiorno', alt: ['buon giorno', 'buona mattina'] },
+      { fa: 'خواهش می‌کنم', it: 'prego', alt: ['di niente', 'di nulla', 'non c\'è di che', 'figurati'], note: 'La risposta classica a "grazie". Proprio come il nostro "prego", vuol dire anche "faccia pure, si accomodi".' },
+    ],
+    sentences: [
+      { fa: 'سلام، خوبی؟', it: 'Ciao, come stai?', alt: ['Ciao, stai bene?', 'Salve, come stai?'], note: 'Letteralmente "Ciao, (sei) bene?". Informale, con un amico.' },
+      { fa: 'مرسی، خوبم. تو چطوری؟', it: 'Grazie, sto bene. E tu come stai?', alt: ['Grazie, sto bene. E tu?', 'Grazie, sto bene. Tu come stai?', 'Grazie, bene. E tu come stai?'], note: 'Chetori? ("come stai?") è parlato e informale.' },
+      { fa: 'حالت چطوره؟', it: 'Come va?', alt: ['Come stai?'], note: 'Letteralmente "Com\'è il tuo stato?". Forma parlata; nella lingua scritta si dice chetor ast.' },
+      { fa: 'بله، خیلی ممنون.', it: 'Sì, grazie mille.', alt: ['Sì, grazie tante.', 'Sì, molte grazie.', 'Sì, ti ringrazio molto.'] },
+      { fa: 'خواهش می‌کنم، خداحافظ.', it: 'Prego, arrivederci.', alt: ['Prego. Arrivederci.', 'Di niente, arrivederci.', 'Prego, ciao.'] },
+    ],
+    grammar: {
+      title: 'Le desinenze personali: khubam, khubi, khube',
+      body: 'Il persiano indica <b>chi</b> con una breve desinenza, un po\' come l\'italiano con "sto, stai, sta". Aggiungi <b>-am</b> per "io", <b>-i</b> per "tu" e, nel parlato, <b>-e</b> per "lui, lei" o per una cosa: <span class="fa">خوبم</span> <i>khubam</i> "sto bene". Le stesse desinenze tornano sui verbi nelle prossime unità. Se dici <i>khubi?</i> con l\'intonazione che sale, diventa una domanda.',
+      examples: [
+        { fa: 'خوبم.', it: 'Sto bene.' },
+        { fa: 'خوبی؟', it: 'Stai bene?' },
+        { fa: 'خوبه.', it: 'Va bene.', alt: ['È buono.'] },
+        { fa: 'خوبیم.', it: 'Stiamo bene.' },
+      ],
+      checks: [
+        { q: 'Quale vuol dire "sto bene"?', why: '-am è la desinenza di "io".' },
+        { q: 'Come chiedi a un amico "stai bene?"', why: '-i è la desinenza di "tu"; con l\'intonazione che sale diventa una domanda.' },
+        { q: 'Quale vuol dire "va bene, è buono"?', why: 'Nel parlato -e vuol dire "è" per lui, lei o una cosa (scritto: khub ast).' },
+      ],
+    },
+  },
+
+  // ───────────────────────────── 2. Io e te ─────────────────────────────
+  'a1-me-and-you': {
+    title: 'Io e te',
+    can: 'Sai dire chi sei e da dove vieni, e chiederlo agli altri.',
+    tip: 'Usa <span class="fa">شما</span> <i>shomâ</i> con gli sconosciuti, le persone più grandi e nei negozi, e <span class="fa">تو</span> <i>to</i> solo con amici e familiari: è la stessa differenza tra "Lei" e "tu". <i>Shomâ</i> vuole il verbo al plurale (<i>hastid</i>) anche quando parli a una sola persona, come il "voi" di cortesia.',
+    words: [
+      { fa: 'من', it: 'io', alt: ['me'] },
+      { fa: 'تو', it: 'tu', alt: ['te', 'tu (informale)'], note: 'Per un amico o un familiare.' },
+      { fa: 'او', it: 'lui, lei', alt: ['lui', 'lei', 'lui/lei', 'lei/lui'], note: 'Il persiano ha una sola parola per "lui" e "lei". Nel parlato si dice spesso un.' },
+      { fa: 'ما', it: 'noi' },
+      { fa: 'شما', it: 'Lei, voi', alt: ['Lei', 'lei', 'voi', 'lei (formale)', 'Lei (formale)'], note: 'Il "Lei" di cortesia, e anche il "voi" per più persone.' },
+      { fa: 'آن‌ها', it: 'loro', note: 'Nel parlato: unâ.' },
+      { fa: 'اسم', it: 'nome' },
+      { fa: 'ایرانی', it: 'iraniano', alt: ['iraniana', 'persiano', 'persiana'] },
+      { fa: 'انگلیسی', it: 'inglese', alt: ['britannico', 'britannica'], note: 'Indica sia la lingua sia la nazionalità, come in italiano.' },
+      { fa: 'آمریکایی', it: 'americano', alt: ['americana', 'statunitense'] },
+      { fa: 'کجا', it: 'dove' },
+      { fa: 'اهل', it: 'originario di', alt: ['di', 'originario', 'originaria', 'originaria di', 'nativo di'], note: 'Si usa con l\'ezâfe: ahl-e kojâ? = di dove?' },
+    ],
+    sentences: [
+      { fa: 'من سارا هستم.', it: 'Sono Sara.', alt: ['Io sono Sara.', 'Mi chiamo Sara.'] },
+      { fa: 'اسمت چیه؟', it: 'Come ti chiami?', alt: ['Qual è il tuo nome?'], note: 'Parlato e informale; letteralmente "il tuo nome che cos\'è?". Esm + -et = il tuo nome; chiye = "che cos\'è". Forma cortese: esm-e shomâ chiye?' },
+      { fa: 'من ایرانی هستم.', it: 'Sono iraniano.', alt: ['Sono iraniana.', 'Io sono iraniano.', 'Io sono iraniana.'] },
+      { fa: 'شما اهل کجا هستید؟', it: 'Lei di dov\'è?', alt: ['Di dov\'è?', 'Di dove è Lei?', 'Di dove siete?', 'Di dove sei?', 'Da dove viene?'], note: 'Letteralmente "Lei è originario di dove?". La parola interrogativa sta dove andrebbe la risposta.' },
+      { fa: 'او آمریکایی است.', it: 'Lei è americana.', alt: ['Lui è americano.', 'È americana.', 'È americano.'], note: 'Forma scritta. Nel parlato: un âmrikâyiye.' },
+    ],
+    grammar: {
+      title: 'Il verbo "essere"',
+      body: 'Le forme complete sono <i>hastam, hasti, ast, hastim, hastid, hastand</i> (sono, sei, è, siamo, siete, sono). Nel parlato di tutti i giorni si riducono a desinenze: <i>-am, -i, -e, -im, -id, -an</i>, come in <span class="fa">خوبم</span> <i>khubam</i>. Il verbo va sempre <b>alla fine</b> della frase.',
+      examples: [
+        { fa: 'ما ایرانی هستیم.', it: 'Siamo iraniani.' },
+        { fa: 'آن‌ها انگلیسی هستند.', it: 'Sono inglesi.', alt: ['Loro sono inglesi.'] },
+        { fa: 'شما آمریکایی هستید؟', it: 'Lei è americano?', alt: ['Siete americani?'] },
+        { fa: 'او خوبه.', it: 'Lui sta bene.', alt: ['Lei sta bene.'] },
+      ],
+      checks: [
+        { q: 'Completa "mâ irâni ___" (siamo iraniani).', why: '-im va con mâ, "noi".' },
+        { q: 'Quale vuol dire "Lei è americano?" (forma di cortesia)', why: 'Shomâ vuole sempre -id, anche per una sola persona.' },
+        { q: 'Quale vuol dire "loro sono inglesi"?', why: 'Ânhâ, "loro", vuole hastand.' },
+      ],
+    },
+  },
+
+  // ───────────────────────────── 3. Numeri ─────────────────────────────
+  'a1-numbers': {
+    title: 'Numeri ed età',
+    can: 'Sai contare fino a 100, dire quanti anni hai e ordinare "tre tè".',
+    tip: 'Il persiano si scrive da destra a sinistra, ma i numeri si scrivono da sinistra a destra: <span class="fa">۲۵</span> è 25. Le cifre persiane 4, 5 e 6 (<span class="fa">۴ ۵ ۶</span>) hanno una forma diversa da quelle arabe.',
+    words: [
+      { fa: 'صفر', it: 'zero' },
+      { fa: 'یک', it: 'uno', alt: ['un', 'una'], note: 'Nel parlato spesso ye davanti a un nome: ye chây, "un tè".' },
+      { fa: 'دو', it: 'due' },
+      { fa: 'سه', it: 'tre' },
+      { fa: 'چهار', it: 'quattro', note: 'Nel parlato di solito châr.' },
+      { fa: 'پنج', it: 'cinque', note: '6–9: shesh, haft, hasht, noh (۶ ۷ ۸ ۹).' },
+      { fa: 'ده', it: 'dieci', note: '11–19: yâzdah, davâzdah, sizdah, chahârdah, pânzdah, shânzdah, hefdah, hejdah, nuzdah.' },
+      { fa: 'بیست', it: 'venti', note: '21 = bist-o yek ("venti e uno").' },
+      { fa: 'سی', it: 'trenta', note: 'Le decine: bist, si, chehel, panjâh, shast, haftâd, hashtâd, navad.' },
+      { fa: 'صد', it: 'cento' },
+      { fa: 'سال', it: 'anno' },
+      { fa: 'چند', it: 'quanti', alt: ['quante', 'quanto', 'qualche', 'alcuni'] },
+    ],
+    sentences: [
+      { fa: 'چند سالته؟', it: 'Quanti anni hai?', note: 'Parlato e informale; letteralmente "quanti anni è il tuo?". Forma cortese: chand sâl dârid?' },
+      { fa: 'من بیست سال دارم.', it: 'Ho vent\'anni.', alt: ['Ho venti anni.', 'Io ho vent\'anni.', 'Io ho venti anni.', 'Ho 20 anni.'], note: 'Letteralmente "ho venti anno": come in italiano l\'età si "ha", ma sâl resta al singolare.' },
+      { fa: 'سه تا چای، لطفاً.', it: 'Tre tè, per favore.', alt: ['Tre tè, per piacere.'] },
+      { fa: 'دو تا کتاب دارم.', it: 'Ho due libri.', alt: ['Io ho due libri.'], note: 'Come in italiano, non serve la parola per "io": la desinenza -am lo dice già.' },
+      { fa: 'تو سی سال داری؟', it: 'Hai trent\'anni?', alt: ['Hai trenta anni?', 'Hai 30 anni?', 'Tu hai trent\'anni?'] },
+    ],
+    grammar: {
+      title: 'Dopo un numero il nome resta al singolare',
+      body: 'Dopo un numero il persiano non usa mai il plurale: <span class="fa">سه کتاب</span> <i>se ketâb</i> è "tre libri", letteralmente "tre libro". Nel parlato si mette la parola di conteggio <b>tâ</b> tra il numero e il nome: <i>se tâ chây</i>. Con l\'età è lo stesso: <i>bist sâl</i>, mai <i>sâlhâ</i>.',
+      examples: [
+        { fa: 'سه کتاب', it: 'tre libri' },
+        { fa: 'دو تا چای', it: 'due tè' },
+        { fa: 'پنج سال', it: 'cinque anni' },
+        { fa: 'چند تا؟', it: 'Quanti?', alt: ['Quante?'] },
+      ],
+      checks: [
+        { q: 'Quale vuol dire "tre libri"?', why: 'Dopo un numero il nome resta al singolare e viene dopo il numero.' },
+        { q: 'Come ordini "due tè" al bar?', why: 'Numero + tâ + nome al singolare.' },
+        { q: 'Come si dice "ho dieci anni"?', why: 'Gli anni si "hanno" (dâram), come in italiano, e sâl resta al singolare.' },
+      ],
+    },
+  },
+
+  // ───────────────────────────── 4. Famiglia ─────────────────────────────
+  'a1-family': {
+    title: 'La famiglia',
+    can: 'Sai nominare i membri della tua famiglia e dire "mia madre", "tua sorella", "suo fratello".',
+    tip: 'Dove l\'italiano ha solo "zio" e "zia", il persiano ha quattro parole: <i>amu</i> (fratello del padre), <i>dâyi</i> (fratello della madre), <i>amme</i> (sorella del padre) e <i>khâle</i> (sorella della madre).',
+    words: [
+      { fa: 'مادر', it: 'madre', alt: ['mamma'], note: 'In casa si dice mâmân.' },
+      { fa: 'پدر', it: 'padre', alt: ['papà', 'papa', 'babbo'], note: 'In casa si dice bâbâ.' },
+      { fa: 'برادر', it: 'fratello' },
+      { fa: 'خواهر', it: 'sorella', note: 'La و (vâv) è muta: si scrive khvâhar ma si pronuncia khâhar.' },
+      { fa: 'پسر', it: 'figlio', alt: ['ragazzo', 'figlio maschio'] },
+      { fa: 'دختر', it: 'figlia', alt: ['ragazza'] },
+      { fa: 'شوهر', it: 'marito' },
+      { fa: 'زن', it: 'moglie', alt: ['donna'], note: 'Zan vuol dire sia "donna" sia "moglie".' },
+      { fa: 'پدربزرگ', it: 'nonno', note: 'Letteralmente "padre grande".' },
+      { fa: 'مادربزرگ', it: 'nonna' },
+      { fa: 'بچه', it: 'bambino', alt: ['bambina', 'bambini', 'bimbo', 'figli'] },
+      { fa: 'خانواده', it: 'famiglia' },
+    ],
+    sentences: [
+      { fa: 'این مادر من است.', it: 'Questa è mia madre.', alt: ['Questa è mia mamma.', 'Lei è mia madre.'], note: 'Letteralmente "questa madre-di me è". La -e si pronuncia ma non si scrive.' },
+      { fa: 'اسم پدرم علی است.', it: 'Mio padre si chiama Ali.', alt: ['Il nome di mio padre è Ali.', 'Mio papà si chiama Ali.'], note: 'Letteralmente "nome-di mio-padre Ali è".' },
+      { fa: 'خواهرت کجاست؟', it: 'Dov\'è tua sorella?', alt: ['Dove è tua sorella?', 'Dove si trova tua sorella?'], note: 'Kojâst = kojâ ("dove") + ast ("è").' },
+      { fa: 'برادرش دو تا بچه داره.', it: 'Suo fratello ha due figli.', alt: ['Suo fratello ha due bambini.', 'Il fratello di lei ha due figli.', 'Il fratello di lui ha due figli.'], note: 'Forma parlata; scritto: do bache dârad. -esh può voler dire "di lui" o "di lei", proprio come il nostro "suo".' },
+      { fa: 'خانواده‌ی من بزرگ است.', it: 'La mia famiglia è grande.', alt: ['La mia famiglia è numerosa.'], note: 'Dopo una -e finale l\'ezâfe diventa -ye, e qui si scrive: خانواده‌ی (khânevâde-ye).' },
+    ],
+    grammar: {
+      title: 'L\'ezâfe: mâdar-e man',
+      body: 'Per dire "mia madre" metti prima la cosa e poi il possessore, uniti da <b>-e</b>: <span class="fa">مادر من</span> <i>mâdar-e man</i>, letteralmente "madre di me". Dopo una vocale il legame è <b>-ye</b>: <i>khânevâde-ye man</i>. Di solito la -e non si scrive, quindi devi aggiungerla tu quando leggi. Ancora più brevi sono le desinenze <b>-am</b> (mio), <b>-et</b> (tuo) e <b>-esh</b> (suo): <i>mâdaram, mâdaret, mâdaresh</i>. Non ci sono articoli né genere: <i>barâdaram</i> è "mio fratello", <i>khâharam</i> "mia sorella".',
+      examples: [
+        { fa: 'پدر من', it: 'mio padre' },
+        { fa: 'خواهر تو', it: 'tua sorella' },
+        { fa: 'مادرم', it: 'mia madre' },
+        { fa: 'برادرش', it: 'suo fratello' },
+      ],
+      checks: [
+        { q: 'Quale vuol dire "mia sorella"?', why: '-am vuol dire "mio, mia".' },
+        { q: 'Quale vuol dire "suo fratello" (il fratello di lei)?', why: '-esh vuol dire "suo, sua", sia di lui sia di lei.' },
+        { q: 'Quale vuol dire "la mia famiglia"?', why: 'Prima la cosa, poi il possessore, uniti da -ye; usa man oppure -am, non tutti e due.' },
+      ],
+    },
+  },
+
+  // ───────────────────────────── 5. Cibo ─────────────────────────────
+  'a1-food': {
+    title: 'Cibo e bevande',
+    can: 'Sai ordinare al bar, dire cosa vuoi e chiedere cosa hanno.',
+    tip: 'Il tè nero, <i>chây</i>, è la bevanda nazionale. Spesso si sorseggia attraverso una zolletta di zucchero, <span class="fa">قند</span> <i>ghand</i>, tenuta tra i denti.',
+    words: [
+      { fa: 'چای', it: 'tè', alt: ['te', 'il tè'] },
+      { fa: 'قهوه', it: 'caffè', alt: ['caffe', 'il caffè'] },
+      { fa: 'آب', it: 'acqua', alt: ['l\'acqua'] },
+      { fa: 'نان', it: 'pane', alt: ['il pane'], note: 'Nel parlato: nun.' },
+      { fa: 'غذا', it: 'cibo', alt: ['pasto', 'piatto', 'mangiare', 'il cibo'] },
+      { fa: 'برنج', it: 'riso', alt: ['il riso'], note: 'Il riso cotto servito a tavola di solito si chiama polo o chelo.' },
+      { fa: 'کباب', it: 'kebab', alt: ['kebap', 'spiedino'] },
+      { fa: 'شیر', it: 'latte', alt: ['il latte'], note: 'La stessa parola vuol dire anche "leone" e "rubinetto".' },
+      { fa: 'شکر', it: 'zucchero', alt: ['lo zucchero'] },
+      { fa: 'آب‌میوه', it: 'succo', alt: ['succo di frutta', 'il succo'], note: 'Letteralmente "acqua di frutta".' },
+      { fa: 'سالاد', it: 'insalata', alt: ['l\'insalata'] },
+      { fa: 'گرسنه', it: 'affamato', alt: ['affamata'] },
+    ],
+    sentences: [
+      { fa: 'یک چای می‌خوام، لطفاً.', it: 'Vorrei un tè, per favore.', alt: ['Voglio un tè, per favore.', 'Un tè, per favore.', 'Vorrei un tè, per piacere.'], note: 'Mikhâm è la forma parlata; nella lingua scritta si dice mikhâham.' },
+      { fa: 'قهوه دارید؟', it: 'Avete del caffè?', alt: ['Avete caffè?', 'Avete il caffè?', 'Ha del caffè?'] },
+      { fa: 'نه، قهوه نداریم.', it: 'No, non abbiamo caffè.', alt: ['No, non abbiamo il caffè.', 'No, non abbiamo del caffè.'] },
+      { fa: 'من شکر نمی‌خوام.', it: 'Non voglio zucchero.', alt: ['Io non voglio zucchero.', 'Non voglio lo zucchero.', 'Niente zucchero per me.'], note: 'Na- + mi- diventa nemi-. Scritto: nemikhâham.' },
+      { fa: 'من گرسنه‌ام، کباب می‌خوام.', it: 'Ho fame, voglio un kebab.', alt: ['Ho fame. Voglio un kebab.', 'Ho fame, vorrei un kebab.', 'Ho fame, voglio il kebab.', 'Sono affamato, voglio un kebab.'], note: 'Gorosne + -am ("sono") si scrive گرسنه‌ام e si pronuncia gorosname. Letteralmente "sono affamato": in persiano la fame non si "ha", si "è".' },
+    ],
+    grammar: {
+      title: 'Il presente di "volere" e "avere", e la negazione con na-',
+      body: '<b>Dâshtan</b> (avere) non prende mi-: <i>dâram, dâri, dâre, dârim, dârid, dâran</i>. <b>Khâstan</b> (volere) invece sì: scritto <i>mikhâham</i>, parlato <span class="fa">می‌خوام</span> <i>mikhâm</i>, <i>mikhây, mikhâd, mikhâim, mikhâin, mikhân</i>. Per dire "non", metti <b>na-</b> davanti al verbo, attaccato: <i>nadâram</i>. Davanti a mi- diventa <b>ne-</b>: <i>nemikhâm</i>.',
+      examples: [
+        { fa: 'آب دارم.', it: 'Ho dell\'acqua.', alt: ['Ho l\'acqua.', 'Ho acqua.'] },
+        { fa: 'نان نداریم.', it: 'Non abbiamo pane.', alt: ['Non abbiamo il pane.'] },
+        { fa: 'چای می‌خوای؟', it: 'Vuoi del tè?', alt: ['Vuoi un tè?'] },
+        { fa: 'من شیر نمی‌خوام.', it: 'Non voglio latte.', alt: ['Io non voglio il latte.', 'Non voglio il latte.'] },
+      ],
+      checks: [
+        { q: 'Quale vuol dire "non ho"?', why: 'Dâshtan non prende mi-, quindi il negativo è semplicemente na- + dâram.' },
+        { q: 'Quale vuol dire "non voglio"?', why: 'Na- va prima di mi- e diventa ne-, tutto in una parola.' },
+        { q: 'Quale vuol dire "Ha del succo?" (forma di cortesia)', why: 'Shomâ, il "Lei" di cortesia, vuole -id.' },
+      ],
+    },
+  },
+
+  // ───────────────────────────── 6. Vita quotidiana ─────────────────────────────
+  'a1-daily-life': {
+    title: 'I giorni e la vita quotidiana',
+    can: 'Sai dire i giorni della settimana e cosa fai la mattina, a mezzogiorno e la sera.',
+    tip: 'La settimana iraniana comincia il sabato, <i>shanbe</i>. I giorni seguenti si contano da lì: <i>yekshanbe</i> ("uno dopo shanbe") è la domenica, <i>doshanbe</i> il lunedì, e così via fino a <i>panjshanbe</i>, il giovedì. Il venerdì, <i>jom\'e</i>, è il giorno di riposo settimanale.',
+    words: [
+      { fa: 'شنبه', it: 'sabato', note: 'Il primo giorno della settimana iraniana.' },
+      { fa: 'یکشنبه', it: 'domenica' },
+      { fa: 'دوشنبه', it: 'lunedì', alt: ['lunedi'] },
+      { fa: 'سه‌شنبه', it: 'martedì', alt: ['martedi'] },
+      { fa: 'چهارشنبه', it: 'mercoledì', alt: ['mercoledi'], note: 'Nel parlato: chârshanbe.' },
+      { fa: 'پنجشنبه', it: 'giovedì', alt: ['giovedi'] },
+      { fa: 'جمعه', it: 'venerdì', alt: ['venerdi'], note: 'In Iran è il giorno di riposo settimanale, come da noi la domenica.' },
+      { fa: 'صبح', it: 'mattina', alt: ['mattino', 'la mattina', 'di mattina'] },
+      { fa: 'ظهر', it: 'mezzogiorno', alt: ['a mezzogiorno'] },
+      { fa: 'شب', it: 'notte', alt: ['sera', 'la sera', 'di sera', 'la notte', 'di notte'] },
+      { fa: 'هفته', it: 'settimana' },
+      { fa: 'کار', it: 'lavoro', alt: ['impiego'] },
+    ],
+    sentences: [
+      { fa: 'من صبح چای می‌خورم.', it: 'La mattina bevo il tè.', alt: ['Bevo il tè la mattina.', 'Di mattina bevo il tè.', 'La mattina prendo il tè.', 'Bevo tè la mattina.', 'La mattina bevo tè.'], note: 'Khordan vuol dire sia "mangiare" sia "bere".' },
+      { fa: 'شنبه کار می‌کنم.', it: 'Il sabato lavoro.', alt: ['Sabato lavoro.', 'Lavoro il sabato.', 'Lavoro sabato.'], note: 'Letteralmente "faccio lavoro". Molti verbi si formano così con kardan, "fare".' },
+      { fa: 'جمعه کجا می‌ری؟', it: 'Dove vai venerdì?', alt: ['Venerdì dove vai?', 'Dove vai il venerdì?'], note: 'Forma parlata; scritto: miravi. Il presente si usa anche per i programmi, come in italiano.' },
+      { fa: 'ظهر می‌رم خونه.', it: 'A mezzogiorno vado a casa.', alt: ['Vado a casa a mezzogiorno.', 'A mezzogiorno torno a casa.'], note: 'Nel parlato il luogo viene spesso dopo il verbo. Scritto: zohr be khâne miravam.' },
+      { fa: 'شب ساعت ده می‌خوابم.', it: 'La sera vado a letto alle dieci.', alt: ['Vado a letto alle dieci di sera.', 'Vado a dormire alle dieci di sera.', 'Dormo alle dieci di sera.', 'Vado a letto alle 22.'], note: 'Sâ\'at-e dah = le dieci, letteralmente "ora-di dieci".' },
+    ],
+    grammar: {
+      title: 'Il presente con mi-',
+      body: 'Quasi tutti i verbi formano il presente così: <b>mi- + radice + desinenza</b>: <span class="fa">می‌خورم</span> <i>mi-khor-am</i> "mangio". Nel parlato le desinenze sono <i>-am, -i, -e, -im, -id, -an</i> (nello scritto <i>-ad</i> e <i>-and</i> per lui/lei e loro). Mi- si scrive staccato dalla radice con un mezzo spazio (ZWNJ). Per dire "non" usa <b>nemi-</b>: <i>nemikhoram</i>.',
+      examples: [
+        { fa: 'می‌خورم.', it: 'Mangio.' },
+        { fa: 'کجا می‌ری؟', it: 'Dove vai?' },
+        { fa: 'او کار می‌کنه.', it: 'Lei lavora.', alt: ['Lui lavora.'] },
+        { fa: 'من صبح قهوه نمی‌خورم.', it: 'La mattina non bevo caffè.', alt: ['Non bevo caffè la mattina.', 'La mattina non bevo il caffè.'] },
+      ],
+      checks: [
+        { q: 'Quale vuol dire "(io) lavoro"?', why: 'Mi- + kon + -am: "faccio (lavoro)".' },
+        { q: 'Quale vuol dire "mangiamo"?', why: '-im è "noi", e il presente vuole mi-.' },
+        { q: 'Quale vuol dire "non vado"?', why: 'La negazione va davanti: nemi- + ram.' },
+      ],
+    },
+  },
+}

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { canSpeak, speak } from '@/lib/speech.ts'
 import AppIcon from './AppIcon.vue'
+import { t } from '@/i18n/index.ts'
 
 withDefaults(defineProps<{ text: string; big?: boolean; slow?: boolean }>(), { big: false, slow: false })
 </script>
@@ -11,7 +12,7 @@ withDefaults(defineProps<{ text: string; big?: boolean; slow?: boolean }>(), { b
     type="button"
     class="spk"
     :class="{ big }"
-    :aria-label="slow ? 'Play slowly' : 'Play audio'"
+    :aria-label="slow ? t('Play slowly') : t('Play audio')"
     @click.stop="speak(text, slow)"
   >
     <AppIcon :name="slow ? 'slow' : 'speaker'" />

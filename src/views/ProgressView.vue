@@ -3,6 +3,7 @@ import { computed } from 'vue'
 import { ALL_WORDS, LEVELS } from '@/content/course.ts'
 import { P, learnedCount, seenCount, today, unitDone, streakActiveToday } from '@/lib/store.ts'
 import MeowCat from '@/components/MeowCat.vue'
+import { t, tn } from '@/i18n/index.ts'
 
 const WEEKS = 12
 const days = computed(() => {
@@ -23,33 +24,33 @@ const dateOf = (d: number) => new Date(d * 86400000).toLocaleDateString(undefine
 <template>
   <main class="wrap page">
     <div class="title-row">
-      <h1>Progress</h1>
+      <h1>{{ t('Progress') }}</h1>
       <MeowCat :mood="streakActiveToday() ? 'cheer' : P.streak ? 'sad' : 'sleep'" :size="72" :bubble="streakActiveToday() ? 'âfarin!' : ''" bubble-fa="آفرین!" />
     </div>
     <div class="tiles">
-      <div class="card tile"><span class="eyebrow">Streak</span><b>{{ P.streak }}</b><span class="muted small">best {{ P.bestStreak }}</span></div>
-      <div class="card tile"><span class="eyebrow">Total XP</span><b>{{ P.xp }}</b><span class="muted small">{{ activeDays }} active day{{ activeDays === 1 ? '' : 's' }}</span></div>
-      <div class="card tile"><span class="eyebrow">Words learned</span><b>{{ learnedCount() }}</b><span class="muted small">{{ seenCount() }} met of {{ ALL_WORDS.length }}</span></div>
+      <div class="card tile"><span class="eyebrow">{{ t('Streak') }}</span><b>{{ P.streak }}</b><span class="muted small">{{ t('best {n}', { n: P.bestStreak }) }}</span></div>
+      <div class="card tile"><span class="eyebrow">{{ t('Total XP') }}</span><b>{{ P.xp }}</b><span class="muted small">{{ tn(activeDays, '{n} active day', '{n} active days') }}</span></div>
+      <div class="card tile"><span class="eyebrow">{{ t('Words learned') }}</span><b>{{ learnedCount() }}</b><span class="muted small">{{ t('{n} met of {total}', { n: seenCount(), total: ALL_WORDS.length }) }}</span></div>
     </div>
 
     <section class="card">
-      <h2>Last {{ WEEKS }} weeks</h2>
-      <p class="muted small">Each square is a day, Saturday to Friday down each column.</p>
+      <h2>{{ t('Last {n} weeks', { n: WEEKS }) }}</h2>
+      <p class="muted small">{{ t('Each square is a day, Saturday to Friday down each column.') }}</p>
       <div class="cal-wrap">
-        <div class="cal" role="img" :aria-label="`Activity over the last ${WEEKS} weeks: ${activeDays} active days`">
+        <div class="cal" role="img" :aria-label="t('Activity over the last {weeks} weeks: {n} active days', { weeks: WEEKS, n: activeDays })">
           <span v-for="x in days" :key="x.d" class="day" :class="['l' + x.level, { future: x.future }]" :title="`${dateOf(x.d)}: ${x.xp} XP`"></span>
         </div>
       </div>
-      <div class="legend small muted">Less <span class="day l0"></span><span class="day l1"></span><span class="day l2"></span><span class="day l3"></span> More</div>
+      <div class="legend small muted">{{ t('Less') }} <span class="day l0"></span><span class="day l1"></span><span class="day l2"></span><span class="day l3"></span> {{ t('More') }}</div>
     </section>
 
     <section class="card">
-      <h2>Levels</h2>
+      <h2>{{ t('Levels') }}</h2>
       <ul class="levels">
         <li v-for="lv in LEVELS" :key="lv.level">
           <span class="lv">{{ lv.level }}</span>
           <span class="meter accent"><i :style="{ width: Math.round((lv.units.filter(unitDone).length / lv.units.length) * 100) + '%' }"></i></span>
-          <span class="small muted">{{ lv.units.filter(unitDone).length }}/{{ lv.units.length }} units<template v-if="P.passed[lv.level]"> · test passed</template></span>
+          <span class="small muted">{{ lv.units.filter(unitDone).length }}/{{ lv.units.length }} {{ t('units') }}<template v-if="P.passed[lv.level]"> · {{ t('test passed') }}</template></span>
         </li>
       </ul>
     </section>

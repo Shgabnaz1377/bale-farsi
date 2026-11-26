@@ -4,6 +4,7 @@ import type { DialogueLine } from '@/content/types.ts'
 import { hasVoice, speak, stopSpeech } from '@/lib/speech.ts'
 import SpeakButton from './SpeakButton.vue'
 import FaText from './FaText.vue'
+import { t } from '@/i18n/index.ts'
 
 const props = defineProps<{ lines: DialogueLine[] }>()
 const showEn = ref(false)
@@ -26,8 +27,8 @@ async function playAll() {
 <template>
   <div class="dlg">
     <div class="tools">
-      <button v-if="hasVoice()" type="button" class="btn ghost sm" @click="playAll">{{ playing ? 'Stop' : 'Play the whole conversation' }}</button>
-      <label class="check"><input v-model="showEn" type="checkbox" /> Show English</label>
+      <button v-if="hasVoice()" type="button" class="btn ghost sm" @click="playAll">{{ playing ? t('Stop') : t('Play the whole conversation') }}</button>
+      <label class="check"><input v-model="showEn" type="checkbox" /> {{ t('Show English') }}</label>
     </div>
     <ol class="lines">
       <li v-for="(l, i) in lines" :key="i" :class="speakers.indexOf(l.who) % 2 ? 'b' : 'a'">

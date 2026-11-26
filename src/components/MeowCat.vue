@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import { catSvg, type Mood } from '@/lib/cat.ts'
 import { canSpeak, speak } from '@/lib/speech.ts'
+import { t } from '@/i18n/index.ts'
 
 /** Pishi, the PersianMeow cat. Decorative unless a label is given. */
 const props = withDefaults(defineProps<{ mood?: Mood; size?: number | string; face?: boolean; label?: string; bubble?: string; bubbleFa?: string }>(), {
@@ -20,7 +21,7 @@ const px = computed(() => (typeof props.size === 'number' ? `${props.size}px` : 
       v-if="bubble"
       class="bubble"
       :type="bubbleFa && canSpeak(bubbleFa) ? 'button' : undefined"
-      :aria-label="bubbleFa && canSpeak(bubbleFa) ? `Hear Pishi say: ${bubble}` : undefined"
+      :aria-label="bubbleFa && canSpeak(bubbleFa) ? t('Hear Pishi say: {text}', { text: bubble }) : undefined"
       @click="bubbleFa && canSpeak(bubbleFa) && speak(bubbleFa)"
     >
       <span v-if="bubbleFa" class="fa keep b-fa" lang="fa" dir="rtl">{{ bubbleFa }}</span>

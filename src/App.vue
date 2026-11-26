@@ -5,12 +5,20 @@ import { P, rollDay, streakActiveToday } from '@/lib/store.ts'
 import { account, initAccount } from '@/lib/account.ts'
 import AppIcon from '@/components/AppIcon.vue'
 import MeowCat from '@/components/MeowCat.vue'
+import { setLang, t } from '@/i18n/index.ts'
+import { applyCourseLang } from '@/content/localize.ts'
 
 const route = useRoute()
 const inLesson = computed(() => route.name === 'lesson')
 
 rollDay()
 initAccount()
+
+watchEffect(() => {
+  setLang(P.settings.lang)
+  applyCourseLang(P.settings.lang)
+  document.documentElement.lang = P.settings.lang
+})
 
 watchEffect(() => {
   const root = document.documentElement
@@ -20,44 +28,44 @@ watchEffect(() => {
   else root.setAttribute('data-theme', P.settings.theme)
 })
 
-const nav = [
-  { to: '/', label: 'Learn', icon: 'path' },
-  { to: '/alphabet', label: 'Alphabet', icon: 'letter' },
-  { to: '/words', label: 'Words', icon: 'book' },
-  { to: '/progress', label: 'Progress', icon: 'chart' },
-  { to: '/settings', label: 'Settings', icon: 'gear' },
-] as const
+const nav = computed(() => [
+  { to: '/', label: t('Learn'), icon: 'path' },
+  { to: '/alphabet', label: t('Alphabet'), icon: 'letter' },
+  { to: '/words', label: t('Words'), icon: 'book' },
+  { to: '/progress', label: t('Progress'), icon: 'chart' },
+  { to: '/settings', label: t('Settings'), icon: 'gear' },
+])
 </script>
 
 <template>
   <header v-if="!inLesson" class="top">
     <div class="wrap top-in">
-      <RouterLink to="/" class="brand" aria-label="PersianMeow, home">
+      <RouterLink to="/" class="brand" :aria-label="t('PersianMeow, home')">
         <MeowCat face :size="34" class="mark" />
         <span class="name">Persian<span class="name-2">Meow</span></span>
         <span class="fa keep brand-fa" lang="fa">میو</span>
       </RouterLink>
-      <div class="stats" aria-label="Your stats">
-        <span class="stat streak" :class="{ off: !streakActiveToday() }" :title="streakActiveToday() ? 'Day streak' : 'Finish a lesson today to keep your streak'">
-          <AppIcon name="flame" /><span>{{ P.streak }}</span><span class="sr-only"> day streak</span>
+      <div class="stats" :aria-label="t('Your stats')">
+        <span class="stat streak" :class="{ off: !streakActiveToday() }" :title="streakActiveToday() ? t('Day streak') : t('Finish a lesson today to keep your streak')">
+          <AppIcon name="flame" /><span>{{ P.streak }}</span><span class="sr-only"> {{ t('day streak') }}</span>
         </span>
-        <span class="stat xp" title="Total XP"><AppIcon name="star" /><span>{{ P.xp }}</span><span class="sr-only"> XP</span></span>
-        <span class="stat hearts" :title="P.settings.relaxed ? 'Relaxed mode: no hearts' : 'Hearts left today'">
-          <AppIcon name="heart" /><span>{{ P.settings.relaxed ? '∞' : P.hearts }}</span><span class="sr-only"> hearts</span>
+        <span class="stat xp" :title="t('Total XP')"><AppIcon name="star" /><span>{{ P.xp }}</span><span class="sr-only"> XP</span></span>
+        <span class="stat hearts" :title="P.settings.relaxed ? t('Relaxed mode: no hearts') : t('Hearts left today')">
+          <AppIcon name="heart" /><span>{{ P.settings.relaxed ? '∞' : P.hearts }}</span><span class="sr-only"> {{ t('hearts') }}</span>
         </span>
-        <RouterLink v-if="account.enabled" to="/account" class="stat acct" :class="{ on: account.user }" :aria-label="account.user ? `Account: ${account.user.email}` : 'Sign in to save your progress'" :title="account.user ? `Signed in as ${account.user.email}` : 'Sign in to save your progress'">
+        <RouterLink v-if="account.enabled" to="/account" class="stat acct" :class="{ on: account.user }" :aria-label="account.user ? t('Account: {email}', { email: account.user.email }) : t('Sign in to save your progress')" :title="account.user ? t('Signed in as {email}', { email: account.user.email }) : t('Sign in to save your progress')">
           <span v-if="account.user" class="initial" aria-hidden="true">{{ account.user.email.charAt(0).toUpperCase() }}</span>
-          <AppIcon v-else name="user" /><span v-if="!account.user" class="acct-label">Sign in</span>
+          <AppIcon v-else name="user" /><span v-if="!account.user" class="acct-label">{{ t('Sign in') }}</span>
         </RouterLink>
       </div>
     </div>
-    <nav class="wrap tabs" aria-label="Main">
+    <nav class="wrap tabs" :aria-label="t('Main')">
       <RouterLink v-for="n in nav" :key="n.to" :to="n.to" class="tab" :aria-label="n.label">
         <AppIcon :name="n.icon" /><span>{{ n.label }}</span>
       </RouterLink>
     </nav>
   </header>
-  <RouterView :key="route.fullPath" />
+  <RouterView :key="route.fullPath + P.settings.lang" />
 </template>
 
 <style scoped>

@@ -6,6 +6,8 @@ import { dayNumber, isDue, isLearned, review, type Card } from './srs.ts'
 
 export type ScriptMode = 'both' | 'script' | 'latin'
 export type Theme = 'system' | 'light' | 'dark'
+export type { Lang } from '@/i18n/index.ts'
+import { detectLang, type Lang } from '@/i18n/index.ts'
 
 export interface Settings {
   mode: ScriptMode
@@ -14,6 +16,8 @@ export interface Settings {
   goal: number
   relaxed: boolean
   theme: Theme
+  /** The learner's own language: meanings, explanations and buttons. */
+  lang: Lang
 }
 
 export interface Progress {
@@ -43,7 +47,7 @@ export function freshProgress(): Progress {
   return {
     v: 1, xp: 0, streak: 0, bestStreak: 0, lastDay: 0, hearts: MAX_HEARTS, heartsDay: 0,
     days: {}, done: {}, passed: {}, cards: {},
-    settings: { mode: 'both', sfx: true, autoplay: true, goal: 30, relaxed: false, theme: 'system' },
+    settings: { mode: 'both', sfx: true, autoplay: true, goal: 30, relaxed: false, theme: 'system', lang: detectLang() },
   }
 }
 

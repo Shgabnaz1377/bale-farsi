@@ -4,6 +4,7 @@ import type { TypeEx } from '@/lib/exercises.ts'
 import { speak } from '@/lib/speech.ts'
 import { P } from '@/lib/store.ts'
 import PromptBox from './PromptBox.vue'
+import { t } from '@/i18n/index.ts'
 
 const props = defineProps<{ ex: TypeEx; locked: boolean }>()
 const answer = defineModel<string | null>({ default: null })
@@ -17,13 +18,13 @@ onMounted(() => {
 
 <template>
   <PromptBox :prompt="ex.prompt" />
-  <label class="sr-only" for="type-answer">Your answer in English</label>
+  <label class="sr-only" for="type-answer">{{ t('Your answer in English') }}</label>
   <textarea
     id="type-answer"
     ref="input"
     class="type-in"
     rows="2"
-    placeholder="Type in English"
+    :placeholder="t('Type in English')"
     autocomplete="off"
     autocapitalize="off"
     spellcheck="false"

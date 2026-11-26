@@ -9,6 +9,7 @@ import {
   P, dueCount, levelUnlocked, nextLesson, seenCount, unitDone, unitProgress, unitUnlocked, xpToday, alphabetDone, streakActiveToday as streakToday,
 } from '@/lib/store.ts'
 import { account } from '@/lib/account.ts'
+import { LANGS, t, tn } from '@/i18n/index.ts'
 import AppIcon from '@/components/AppIcon.vue'
 import InstallCard from '@/components/InstallCard.vue'
 import MeowCat from '@/components/MeowCat.vue'
@@ -26,10 +27,10 @@ const fresh = computed(() => Object.keys(P.done).length === 0 && !Object.keys(P.
 
 /** What Pishi says on the home screen, from today's state. */
 const greet = computed(() => {
-  if (xpToday() >= P.settings.goal) return { mood: 'cheer' as const, fa: 'آفرین!', tr: 'âfarin! Daily goal done.' }
-  if (due.value > 0) return { mood: 'think' as const, fa: 'مرور کنیم؟', tr: `morur konim? ${due.value} word${due.value > 1 ? 's' : ''} to review.` }
-  if (P.streak > 0 && !streakToday()) return { mood: 'sad' as const, fa: 'دلم تنگ شد!', tr: `delam tang shod! Keep your ${P.streak}-day streak.` }
-  return { mood: 'wave' as const, fa: 'بزن بریم!', tr: "bezan berim! Let's go." }
+  if (xpToday() >= P.settings.goal) return { mood: 'cheer' as const, fa: 'آفرین!', tr: t('âfarin! Daily goal done.') }
+  if (due.value > 0) return { mood: 'think' as const, fa: 'مرور کنیم؟', tr: tn(due.value, 'morur konim? {n} word to review.', 'morur konim? {n} words to review.') }
+  if (P.streak > 0 && !streakToday()) return { mood: 'sad' as const, fa: 'دلم تنگ شد!', tr: t('delam tang shod! Keep your {n}-day streak.', { n: P.streak }) }
+  return { mood: 'wave' as const, fa: 'بزن بریم!', tr: t("bezan berim! Let's go.") }
 })
 
 const wotd = (() => {
@@ -52,15 +53,19 @@ function goNext() {
   <main class="wrap page">
     <section v-if="fresh" class="card hero">
       <div class="hero-text">
-        <p class="eyebrow">Persian for English speakers · A1 to B2</p>
-        <h1>Learn to read, speak and understand Persian.</h1>
-        <p class="muted">You don't need to read the Persian alphabet: every word comes with Finglish, Persian in English letters (salâm = hello). Short lessons, grammar, dialogues, readings and spaced review. {{ account.enabled ? 'Sign in to keep your progress on every device.' : 'Your progress stays in this browser.' }}</p>
+        <div class="speak" role="radiogroup" :aria-label="t('I speak')">
+          <span class="muted small">{{ t('I speak') }}</span>
+          <button v-for="l in LANGS" :key="l.code" type="button" class="chip-btn" :class="{ on: P.settings.lang === l.code }" role="radio" :aria-checked="P.settings.lang === l.code" @click="P.settings.lang = l.code">{{ l.name }}</button>
+        </div>
+        <p class="eyebrow">{{ t('Persian for English speakers · A1 to B2') }}</p>
+        <h1>{{ t('Learn to read, speak and understand Persian.') }}</h1>
+        <p class="muted">{{ t("You don't need to read the Persian alphabet: every word comes with Finglish, Persian in English letters (salâm = hello). Short lessons, grammar, dialogues, readings and spaced review.") }} {{ account.enabled ? t('Sign in to keep your progress on every device.') : t('Your progress stays in this browser.') }}</p>
         <div class="row">
-          <button type="button" class="btn primary" @click="goNext">Start at A1</button>
-          <RouterLink class="btn ghost" :to="{ name: 'lesson', query: { test: 'A1' } }">I know some Persian: test out of A1</RouterLink>
+          <button type="button" class="btn primary" @click="goNext">{{ t('Start at A1') }}</button>
+          <RouterLink class="btn ghost" :to="{ name: 'lesson', query: { test: 'A1' } }">{{ t('I know some Persian: test out of A1') }}</RouterLink>
         </div>
       </div>
-      <MeowCat mood="wave" :size="170" class="hero-cat" bubble="salâm! man Pishi-am." bubble-fa="سلام! من پیشی‌ام" />
+      <MeowCat mood="wave" :size="170" class="hero-cat" :bubble="t('salâm! man Pishi-am.')" bubble-fa="سلام! من پیشی‌ام" />
     </section>
 
     <div v-if="!fresh" class="greet">
@@ -69,13 +74,13 @@ function goNext() {
 
     <div class="today">
       <div class="card">
-        <p class="eyebrow">Daily goal</p>
+        <p class="eyebrow">{{ t('Daily goal') }}</p>
         <p class="goal-num">{{ xpToday() }}<small> / {{ P.settings.goal }} XP</small></p>
-        <div class="meter" role="progressbar" aria-label="Daily goal" :aria-valuenow="goalPct" aria-valuemin="0" aria-valuemax="100"><i :style="{ width: goalPct + '%' }"></i></div>
-        <p class="small muted gap">{{ goalPct >= 100 ? 'Goal reached today. آفرین!' : 'One lesson is 10 to 15 XP.' }}</p>
+        <div class="meter" role="progressbar" :aria-label="t('Daily goal')" :aria-valuenow="goalPct" aria-valuemin="0" aria-valuemax="100"><i :style="{ width: goalPct + '%' }"></i></div>
+        <p class="small muted gap">{{ goalPct >= 100 ? t('Goal reached today. آفرین!') : t('One lesson is 10 to 15 XP.') }}</p>
       </div>
       <div class="card">
-        <p class="eyebrow">Word of the day</p>
+        <p class="eyebrow">{{ t('Word of the day') }}</p>
         <div class="wotd">
           <FaText :fa="wotd.word.fa" :tr="wotd.word.tr" size="lg" keep-tr />
           <SpeakButton :text="wotd.word.fa" />
@@ -87,21 +92,21 @@ function goNext() {
     <div class="actions-row">
       <button v-if="next && !fresh" type="button" class="card action" @click="goNext">
         <span class="a-ico lapis"><AppIcon name="arrow" class="flip" /></span>
-        <span><b>Continue</b><span class="muted small block">{{ next.unit.title }} · {{ next.name }}</span></span>
+        <span><b>{{ t('Continue') }}</b><span class="muted small block">{{ next.unit.title }} · {{ next.name }}</span></span>
       </button>
       <RouterLink v-if="seenCount() > 0" class="card action" :to="{ name: 'lesson', query: { review: '1' } }">
         <span class="a-ico saffron"><AppIcon name="review" /></span>
-        <span><b>{{ due > 0 ? 'Review' : 'Practice' }}</b><span class="muted small block">{{ due > 0 ? `${due} word${due > 1 ? 's' : ''} due today` : 'Nothing due. Practise your weakest words.' }}</span></span>
+        <span><b>{{ due > 0 ? t('Review') : t('Practice') }}</b><span class="muted small block">{{ due > 0 ? tn(due, '{n} word due today', '{n} words due today') : t('Nothing due. Practise your weakest words.') }}</span></span>
       </RouterLink>
       <RouterLink v-if="!alphabetDone()" class="card action" to="/alphabet">
         <span class="a-ico accent fa keep" lang="fa">ب</span>
-        <span><b>Alphabet</b><span class="muted small block">32 letters, six short lessons. Open any time.</span></span>
+        <span><b>{{ t('Alphabet') }}</b><span class="muted small block">{{ t('32 letters, six short lessons. Open any time.') }}</span></span>
       </RouterLink>
     </div>
 
     <InstallCard dismissible />
 
-    <nav class="levels" aria-label="Levels">
+    <nav class="levels" :aria-label="t('Levels')">
       <button
         v-for="lv in LEVELS" :key="lv.level" type="button" class="lv"
         :class="{ on: tab === lv.level, locked: !levelUnlocked(lv.level) }" :aria-pressed="tab === lv.level" @click="tab = lv.level"
@@ -119,13 +124,13 @@ function goNext() {
         <p class="muted">{{ level.blurb }}</p>
       </div>
       <RouterLink v-if="levelUnlocked(level.level) && !P.passed[level.level]" class="btn ghost sm" :to="{ name: 'lesson', query: { test: level.level } }">
-        Test out of {{ level.level }}
+        {{ t('Test out of {level}', { level: level.level }) }}
       </RouterLink>
-      <span v-else-if="P.passed[level.level]" class="chip accent">Test passed</span>
+      <span v-else-if="P.passed[level.level]" class="chip accent">{{ t('Test passed') }}</span>
     </section>
 
     <p v-if="!levelUnlocked(level.level)" class="tip">
-      <b>Locked.</b> Finish every unit of the level before, or pass its level test, to open {{ level.level }}.
+      <b>{{ t('Locked.') }}</b> {{ t('Finish every unit of the level before, or pass its level test, to open {level}.', { level: level.level }) }}
     </p>
 
     <ol class="units">
@@ -155,6 +160,9 @@ function goNext() {
 .hero-cat { flex-direction: column-reverse; align-items: center; gap: 4px }
 .hero-cat :deep(.bubble::before) { left: 50%; top: auto; bottom: -9px; transform: translateX(-50%) rotate(-45deg) }
 .greet { display: flex }
+.speak { display: flex; align-items: center; gap: 6px; flex-wrap: wrap }
+.chip-btn { border: 1.5px solid var(--line); background: var(--surface); border-radius: 999px; padding: 4px 12px; font-size: 0.85rem; font-weight: 600; cursor: pointer }
+.chip-btn.on { border-color: var(--accent); background: var(--accent-soft); color: var(--accent) }
 .row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px }
 .today { display: grid; grid-template-columns: 1fr 1fr; gap: 12px }
 .goal-num { font-family: var(--f-display); font-size: 1.6rem; font-weight: 800; margin: 4px 0 8px; font-variant-numeric: tabular-nums }
