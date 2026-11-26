@@ -23,8 +23,8 @@ jobs:
           node-version-file: .nvmrc
           cache: npm
       - run: npm ci
-      - name: Content rules (PersianMeow, its Italian translation, and Bego Ciao)
-        run: npm run check:content && npm run check:italian && npm run check:bego
+      - name: Content rules (PersianMeow, its Italian translation, its spoken audio forms, and Bego Ciao)
+        run: npm run check:content && npm run check:italian && npm run check:bego && npm run check:spoken
       - run: npm run lint
       - run: npm run typecheck
       - name: Unit tests, PersianMeow

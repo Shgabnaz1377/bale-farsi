@@ -2,7 +2,8 @@ import { LEVELS } from './course.ts'
 import { LETTERS } from './alphabet.ts'
 import { APP } from '../app.ts'
 
-export type Voice = 'female' | 'male'
+/** The app's main voice, and a second one for the other speaker in dialogues. */
+export type Voice = 'main' | 'second'
 
 export interface SpeechItem {
   text: string
@@ -18,14 +19,14 @@ export const PISHI_LINES = Object.values(APP.pishi).map((l) => ({ text: l.fa, tr
 
 /**
  * Every Persian text the app can read aloud, once each.
- * Dialogue speakers alternate between the female and male voice so conversations sound like two people.
+ * Dialogue speakers alternate between the main and the second voice so conversations sound like two people.
  */
 export function allSpeech(): SpeechItem[] {
   const out = new Map<string, SpeechItem>()
   const add = (text: string, where: string, extra: Partial<SpeechItem> = {}) => {
     const t = text.trim()
     if (!t || out.has(t)) return
-    out.set(t, { text: t, voice: 'female', where, ...extra })
+    out.set(t, { text: t, voice: 'main', where, ...extra })
   }
 
   if (APP.alphabet) for (const l of LETTERS) {
@@ -46,7 +47,7 @@ export function allSpeech(): SpeechItem[] {
       for (const e of u.grammar.examples) add(e.fa, `${at} · grammar`, { tr: e.tr, en: e.en })
       const speakers = [...new Set((u.dialogue ?? []).map((d) => d.who))]
       for (const d of u.dialogue ?? []) {
-        add(d.fa, `${at} · dialogue`, { tr: d.tr, en: d.en, voice: speakers.indexOf(d.who) % 2 ? 'male' : 'female' })
+        add(d.fa, `${at} · dialogue`, { tr: d.tr, en: d.en, voice: speakers.indexOf(d.who) % 2 ? 'second' : 'main' })
       }
       for (const p of u.reading?.paragraphs ?? []) add(p.fa, `${at} · reading`, { tr: p.tr, en: p.en })
     }

@@ -26,7 +26,8 @@
     "build:bego": "npm run check:bego && vue-tsc --build && vite build --mode begociao",
     "dev:bego": "vite --mode begociao",
     "test:bego": "vitest run --mode begociao",
-    "preview:bego": "vite preview --mode begociao"
+    "preview:bego": "vite preview --mode begociao",
+    "check:spoken": "node scripts/check-spoken.ts"
   },
   "dependencies": {
     "@capacitor-community/text-to-speech": "8.0.2",
