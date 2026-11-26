@@ -1,0 +1,41 @@
+{
+  "name": "bale-farsi",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Learn Persian (Farsi) from A1 to B2: bite-sized lessons, spaced review, grammar, dialogues and readings.",
+  "license": "MIT",
+  "author": "Shabnaz Ghaffari",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "npm run check:content && vue-tsc --build && vite build",
+    "preview": "vite preview",
+    "typecheck": "vue-tsc --build --force",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "check:content": "node scripts/check-content.ts"
+  },
+  "dependencies": {
+    "vue": "^3.5.46",
+    "vue-router": "^5.5.2"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.65.1",
+    "@types/node": "^24.19.4",
+    "@vitejs/plugin-vue": "^6.0.11",
+    "@vue/eslint-config-typescript": "^14.9.0",
+    "@vue/tsconfig": "^0.9.1",
+    "eslint": "^10.15.0",
+    "eslint-plugin-vue": "^10.12.1",
+    "jiti": "^2.7.0",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.74.0",
+    "vite": "^8.4.0",
+    "vitest": "^5.1.2",
+    "vue-tsc": "^3.3.14"
+  }
+}

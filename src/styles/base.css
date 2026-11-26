@@ -1,0 +1,98 @@
+/* Bale: lapis ink, turquoise tile (firuzeh) accent, saffron for rewards. One 680px learning column. */
+:root {
+  --bg: #eef3f6; --surface: #ffffff; --sunk: #e2eaf0; --ink: #13213a; --muted: #55667e; --line: #d3dee7;
+  --accent: #0a7b7a; --accent-ink: #ffffff; --accent-soft: #d6efee;
+  --lapis: #2a4a9e; --lapis-ink: #ffffff; --lapis-soft: #dfe6f8;
+  --saffron: #a86f00; --saffron-bright: #e2a21b; --saffron-soft: #fbefd3;
+  --good: #17804a; --good-ink: #ffffff; --good-bg: #ddf3e6;
+  --bad: #b8323a; --bad-ink: #ffffff; --bad-bg: #fbe3e4;
+  --scrim: rgba(19, 33, 58, 0.45);
+  --shadow: 0 1px 0 rgba(19, 33, 58, 0.05), 0 8px 20px -14px rgba(19, 33, 58, 0.35);
+  --f-display: 'Bricolage Grotesque', 'Segoe UI', system-ui, sans-serif;
+  --f-body: 'Lexend', 'Segoe UI', system-ui, sans-serif;
+  --f-fa: 'Vazirmatn', 'Tahoma', 'Segoe UI', sans-serif;
+  --radius: 18px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #0c1524; --surface: #142036; --sunk: #1b2944; --ink: #e6edf6; --muted: #97a8c0; --line: #263752;
+    --accent: #3ec3be; --accent-ink: #06201f; --accent-soft: #123a3b;
+    --lapis: #8ea6f0; --lapis-ink: #0c1524; --lapis-soft: #1d2b4e;
+    --saffron: #f0b53a; --saffron-bright: #f0b53a; --saffron-soft: #3a2c0e;
+    --good: #4cc985; --good-ink: #06210f; --good-bg: #0f2e1e;
+    --bad: #f2777c; --bad-ink: #2a0b0d; --bad-bg: #3a1619;
+    --scrim: rgba(0, 0, 0, 0.6);
+    --shadow: 0 1px 0 rgba(0, 0, 0, 0.3), 0 10px 24px -14px rgba(0, 0, 0, 0.7);
+    color-scheme: dark;
+  }
+}
+:root[data-theme='dark'] {
+  --bg: #0c1524; --surface: #142036; --sunk: #1b2944; --ink: #e6edf6; --muted: #97a8c0; --line: #263752;
+  --accent: #3ec3be; --accent-ink: #06201f; --accent-soft: #123a3b;
+  --lapis: #8ea6f0; --lapis-ink: #0c1524; --lapis-soft: #1d2b4e;
+  --saffron: #f0b53a; --saffron-bright: #f0b53a; --saffron-soft: #3a2c0e;
+  --good: #4cc985; --good-ink: #06210f; --good-bg: #0f2e1e;
+  --bad: #f2777c; --bad-ink: #2a0b0d; --bad-bg: #3a1619;
+  --scrim: rgba(0, 0, 0, 0.6);
+  --shadow: 0 1px 0 rgba(0, 0, 0, 0.3), 0 10px 24px -14px rgba(0, 0, 0, 0.7);
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box }
+html, body { margin: 0 }
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased }
+body::before { content: ''; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 30; background: var(--bg) }
+button, input, textarea, select { font: inherit; color: inherit }
+a { color: var(--lapis) }
+:focus-visible { outline: 3px solid var(--lapis); outline-offset: 2px }
+h1, h2, h3, h4 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.15 }
+p { margin: 0 }
+[hidden] { display: none !important }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap }
+
+.wrap { max-width: 680px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)) }
+.page { padding-block: 20px 72px; display: flex; flex-direction: column; gap: 18px }
+
+/* Persian text */
+.fa { font-family: var(--f-fa); direction: rtl; unicode-bidi: isolate; font-weight: 500 }
+html.mode-script .tr:not(.keep) { display: none }
+html.mode-latin .fa:not(.keep) { display: none }
+
+/* Cards and labels */
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; box-shadow: var(--shadow); min-width: 0 }
+.eyebrow { font-size: 0.72rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--muted); font-weight: 600 }
+.muted { color: var(--muted) }
+.small { font-size: 0.88rem }
+.tip { font-size: 0.92rem; color: var(--muted); background: var(--sunk); border-radius: 12px; padding: 10px 12px }
+.tip b { color: var(--ink); font-weight: 600 }
+.tip .fa, .rich .fa { color: var(--ink); font-size: 1.08em }
+.chip { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 9px; border-radius: 999px; background: var(--sunk); color: var(--muted); white-space: nowrap }
+.chip.saffron { background: var(--saffron-soft); color: var(--saffron) }
+.chip.accent { background: var(--accent-soft); color: var(--accent) }
+.chip.lapis { background: var(--lapis-soft); color: var(--lapis) }
+
+/* Buttons */
+.btn { border: 0; border-radius: 14px; padding: 12px 22px; font-weight: 600; font-size: 1rem; cursor: pointer; letter-spacing: 0.01em; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; gap: 8px; transition: transform 0.08s, filter 0.15s }
+.btn:active:not(:disabled) { transform: translateY(1px) }
+.btn.primary { background: var(--accent); color: var(--accent-ink); box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.18) }
+.btn.primary:hover:not(:disabled) { filter: brightness(1.06) }
+.btn.lapis { background: var(--lapis); color: var(--lapis-ink); box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.18) }
+.btn:disabled { background: var(--sunk); color: var(--muted); box-shadow: none; cursor: not-allowed }
+.btn.ghost { background: transparent; border: 1.5px solid var(--line); color: var(--ink) }
+.btn.ghost:hover { border-color: var(--muted) }
+.btn.danger { background: var(--bad); color: var(--bad-ink) }
+.btn.sm { padding: 8px 14px; font-size: 0.9rem; border-radius: 11px }
+.icon-btn { width: 40px; height: 40px; border-radius: 12px; border: 0; background: transparent; display: grid; place-items: center; cursor: pointer; color: var(--muted); flex: none }
+.icon-btn:hover { background: var(--sunk); color: var(--ink) }
+
+.ico { display: inline-flex; width: 1.15em; height: 1.15em; flex: none }
+.ico svg { width: 100%; height: 100% }
+
+.meter { height: 10px; border-radius: 999px; background: var(--sunk); overflow: hidden }
+.meter > i { display: block; height: 100%; background: var(--saffron-bright); border-radius: 999px; transition: width 0.4s }
+.meter.accent > i { background: var(--accent) }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important }
+}
