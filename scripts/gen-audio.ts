@@ -10,11 +10,17 @@ import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 
 import { allSpeech, type Voice } from '../src/content/speech.ts'
 import { audioKey, normSpeech } from '../src/lib/audioKey.ts'
 import { APP } from '../src/app.ts'
+import { SPOKEN } from '../src/content/spoken/index.ts'
+
+// Persian is read the way people say it (everyday forms); the file is still named after the displayed text.
+const sayable = (text: string) => (APP.target === 'fa' ? SPOKEN[text] ?? text : text)
 
 // Run with APP=begociao for the Italian clips of Bego Ciao.
+// Persian: Farid (chosen by ear by a native speaker), with Dilara as the second dialogue voice.
+// Italian: Elsa, with Diego as the second dialogue voice.
 const VOICES: Record<Voice, string> = APP.target === 'it'
-  ? { female: 'it-IT-ElsaNeural', male: 'it-IT-DiegoNeural' }
-  : { female: 'fa-IR-DilaraNeural', male: 'fa-IR-FaridNeural' }
+  ? { main: 'it-IT-ElsaNeural', second: 'it-IT-DiegoNeural' }
+  : { main: 'fa-IR-FaridNeural', second: 'fa-IR-DilaraNeural' }
 const OUT = APP.id === 'begociao' ? 'public-begociao/audio' : 'public/audio'
 const INDEX = APP.id === 'begociao' ? 'src/courses/begociao/audio-index.json' : 'src/content/audio-index.json'
 const XML_LANG = APP.target === 'it' ? 'it-IT' : 'fa-IR'
@@ -31,7 +37,7 @@ const xml = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replac
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
 
 async function synth(text: string, voice: Voice, key: string, region: string): Promise<Buffer> {
-  const ssml = `<speak version="1.0" xml:lang="${XML_LANG}"><voice name="${VOICES[voice]}"><prosody rate="0%">${xml(normSpeech(text))}</prosody></voice></speak>`
+  const ssml = `<speak version="1.0" xml:lang="${XML_LANG}"><voice name="${VOICES[voice]}"><prosody rate="0%">${xml(normSpeech(sayable(text)))}</prosody></voice></speak>`
   for (let attempt = 1; ; attempt++) {
     let res: Response
     try {
