@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { P, exportProgress, importProgress, resetProgress } from '@/lib/store.ts'
 import { faVoice } from '@/lib/speech.ts'
 import { account } from '@/lib/account.ts'
+import InstallCard from '@/components/InstallCard.vue'
 
 const modes = [['both', 'Persian script + Finglish'], ['latin', 'Finglish only'], ['script', 'Persian script only']] as const
 const themes = [['system', 'Match system'], ['light', 'Light'], ['dark', 'Dark']] as const
@@ -29,6 +30,7 @@ function restore() {
 <template>
   <main class="wrap page">
     <h1>Settings</h1>
+    <InstallCard />
 
     <section class="card block">
       <h2>Show Persian as</h2>

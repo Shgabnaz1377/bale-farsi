@@ -10,6 +10,7 @@ import {
 } from '@/lib/store.ts'
 import { account } from '@/lib/account.ts'
 import AppIcon from '@/components/AppIcon.vue'
+import InstallCard from '@/components/InstallCard.vue'
 import FaText from '@/components/FaText.vue'
 import SpeakButton from '@/components/SpeakButton.vue'
 
@@ -84,6 +85,8 @@ function goNext() {
         <span><b>Alphabet</b><span class="muted small block">32 letters, six short lessons. Open any time.</span></span>
       </RouterLink>
     </div>
+
+    <InstallCard dismissible />
 
     <nav class="levels" aria-label="Levels">
       <button

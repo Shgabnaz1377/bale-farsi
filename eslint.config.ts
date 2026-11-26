@@ -8,7 +8,7 @@ export default defineConfigWithVueTs(
   },
   {
     name: 'app/files-to-ignore',
-    ignores: ['dist/**', 'coverage/**', 'node_modules/**'],
+    ignores: ['dist/**', 'coverage/**', 'node_modules/**', 'android/**', 'ios/**'],
   },
   pluginVue.configs['flat/recommended'],
   vueTsConfigs.recommended,

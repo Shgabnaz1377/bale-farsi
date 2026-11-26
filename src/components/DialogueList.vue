@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import type { DialogueLine } from '@/content/types.ts'
-import { faVoice, speak } from '@/lib/speech.ts'
+import { faVoice, speak, stopSpeech } from '@/lib/speech.ts'
 import SpeakButton from './SpeakButton.vue'
 import FaText from './FaText.vue'
 
@@ -12,16 +12,12 @@ const speakers = computed(() => [...new Set(props.lines.map((l) => l.who))])
 let stop = false
 const playing = ref(false)
 async function playAll() {
-  if (playing.value) { stop = true; return }
+  if (playing.value) { stop = true; stopSpeech(); return }
   playing.value = true
   stop = false
   for (const l of props.lines) {
     if (stop) break
-    await new Promise<void>((res) => {
-      speak(l.fa)
-      const synth = window.speechSynthesis
-      const t = setInterval(() => { if (!synth.speaking) { clearInterval(t); res() } }, 250)
-    })
+    await speak(l.fa)
   }
   playing.value = false
 }

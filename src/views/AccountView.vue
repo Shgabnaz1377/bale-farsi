@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import { account, deleteCloudProgress, sendSignInLink, signOut, syncNow } from '@/lib/account.ts'
+import { account, deleteCloudProgress, sendSignInLink, signOut, syncNow, verifyCode } from '@/lib/account.ts'
+import { isNative } from '@/lib/platform.ts'
 import { P } from '@/lib/store.ts'
 
 const email = ref('')
@@ -9,6 +10,21 @@ const sentTo = ref('')
 const error = ref('')
 const confirmDelete = ref(false)
 const notice = ref('')
+const code = ref('')
+const verifying = ref(false)
+async function useCode() {
+  error.value = ''
+  if (!/^\d{6,8}$/.test(code.value.replace(/\s/g, ''))) { error.value = 'Type the code from the email: 6 digits.'; return }
+  verifying.value = true
+  const err = await verifyCode(sentTo.value, code.value)
+  verifying.value = false
+  if (err) error.value = err
+}
+function restart() {
+  sentTo.value = ''
+  code.value = ''
+  error.value = ''
+}
 
 const statusText = computed(() => {
   switch (account.status) {
@@ -71,18 +87,26 @@ async function removeCloud() {
     <section v-else id="account" class="card block">
       <template v-if="!sentTo">
         <h2>Save your progress to an account</h2>
-        <p class="muted">Sign in with your email and your progress follows you to every device. No password: we email you a sign-in link. Progress you already have on this device is kept and added to your account.</p>
+        <p class="muted">Sign in with your email and your progress follows you to every device. No password: we email you a sign-in link and a code. Progress you already have on this device is kept and added to your account.</p>
         <form class="signin" @submit.prevent="send">
           <label for="email" class="sr-only">Email address</label>
           <input id="email" v-model="email" type="email" autocomplete="email" placeholder="name@example.com" required />
-          <button type="submit" class="btn primary" :disabled="sending">{{ sending ? 'Sending…' : 'Email me a sign-in link' }}</button>
+          <button type="submit" class="btn primary" :disabled="sending">{{ sending ? 'Sending…' : 'Email me a sign-in code' }}</button>
         </form>
         <p v-if="error" class="err small" role="alert">{{ error }}</p>
       </template>
       <template v-else>
         <h2>Check your inbox</h2>
-        <p>We sent a sign-in link to <b>{{ sentTo }}</b>. Open it <b>in this browser</b> and you are signed in. It can take a minute; check spam too.</p>
-        <button type="button" class="btn ghost sm" @click="sentTo = ''">Use a different email</button>
+        <p>We emailed <b>{{ sentTo }}</b>. It can take a minute; check spam too.</p>
+        <p v-if="!isNative" class="muted small">Open the link in the email <b>in this browser</b>, or type the code from the email here:</p>
+        <p v-else class="muted small">Type the code from the email here:</p>
+        <form class="signin" @submit.prevent="useCode">
+          <label for="code" class="sr-only">Code from the email</label>
+          <input id="code" v-model="code" inputmode="numeric" autocomplete="one-time-code" placeholder="123456" maxlength="10" />
+          <button type="submit" class="btn primary" :disabled="verifying">{{ verifying ? 'Checking…' : 'Sign in' }}</button>
+        </form>
+        <p v-if="error" class="err small" role="alert">{{ error }}</p>
+        <button type="button" class="btn ghost sm" @click="restart">Use a different email</button>
       </template>
     </section>
 
