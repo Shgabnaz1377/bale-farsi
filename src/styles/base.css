@@ -54,6 +54,15 @@ p { margin: 0 }
 .wrap { max-width: 680px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)) }
 .page { padding-block: 20px 72px; display: flex; flex-direction: column; gap: 18px }
 
+/* Bego Ciao: Persian interface (right to left, Vazirmatn), Italian is the learned text (left to right, Latin font). */
+html.app-begociao body, html.app-begociao h1, html.app-begociao h2, html.app-begociao h3 { font-family: var(--f-fa) }
+html.app-begociao .fa { font-family: var(--f-body); direction: ltr; font-weight: 500 }
+html.app-begociao .tr { font-family: var(--f-fa) }
+html.app-begociao .eyebrow, html.app-begociao .chip { letter-spacing: 0 }
+.fa-brand { font-family: var(--f-fa) }
+[dir='rtl'] .back .ico { transform: scaleX(-1) }
+[dir='rtl'] .flip { transform: none }
+
 /* Persian text */
 .fa { font-family: var(--f-fa); direction: rtl; unicode-bidi: isolate; font-weight: 500 }
 html.mode-script .tr:not(.keep) { display: none }

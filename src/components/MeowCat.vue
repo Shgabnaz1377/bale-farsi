@@ -2,13 +2,14 @@
 import { computed } from 'vue'
 import { catSvg, type Mood } from '@/lib/cat.ts'
 import { canSpeak, speak } from '@/lib/speech.ts'
+import { APP } from '@/app.ts'
 import { t } from '@/i18n/index.ts'
 
-/** Pishi, the PersianMeow cat. Decorative unless a label is given. */
+/** Pishi, the app's cat. Decorative unless a label is given. */
 const props = withDefaults(defineProps<{ mood?: Mood; size?: number | string; face?: boolean; label?: string; bubble?: string; bubbleFa?: string }>(), {
   mood: 'idle', size: 96, face: false, label: '', bubble: '', bubbleFa: '',
 })
-const svg = computed(() => catSvg(props.mood, { face: props.face, title: props.label || undefined }))
+const svg = computed(() => catSvg(props.mood, { face: props.face, title: props.label || undefined, collar: APP.target === 'it' ? 'italian' : 'persian' }))
 const px = computed(() => (typeof props.size === 'number' ? `${props.size}px` : props.size))
 </script>
 
@@ -24,7 +25,7 @@ const px = computed(() => (typeof props.size === 'number' ? `${props.size}px` : 
       :aria-label="bubbleFa && canSpeak(bubbleFa) ? t('Hear Pishi say: {text}', { text: bubble }) : undefined"
       @click="bubbleFa && canSpeak(bubbleFa) && speak(bubbleFa)"
     >
-      <span v-if="bubbleFa" class="fa keep b-fa" lang="fa" dir="rtl">{{ bubbleFa }}</span>
+      <span v-if="bubbleFa" class="fa keep b-fa" :lang="APP.target" :dir="APP.targetDir">{{ bubbleFa }}</span>
       <span class="b-tr">{{ bubble }}</span>
     </component>
   </span>
@@ -34,7 +35,7 @@ const px = computed(() => (typeof props.size === 'number' ? `${props.size}px` : 
 .meow { display: inline-flex; align-items: center; gap: 10px; flex: none }
 .art { display: inline-block; flex: none }
 .art :deep(svg) { width: 100%; height: 100%; overflow: visible }
-.bubble { font: inherit; color: var(--ink); text-align: left; position: relative; background: var(--surface); border: 2px solid var(--line); border-radius: 16px; padding: 8px 12px; display: flex; flex-direction: column; line-height: 1.3; box-shadow: var(--shadow) }
+.bubble { font: inherit; color: var(--ink); text-align: start; position: relative; background: var(--surface); border: 2px solid var(--line); border-radius: 16px; padding: 8px 12px; display: flex; flex-direction: column; line-height: 1.3; box-shadow: var(--shadow) }
 .bubble::before { content: ''; position: absolute; left: -9px; top: 50%; width: 14px; height: 14px; background: var(--surface); border-left: 2px solid var(--line); border-bottom: 2px solid var(--line); transform: translateY(-50%) rotate(45deg) }
 button.bubble { cursor: pointer }
 button.bubble:hover { border-color: var(--accent) }
@@ -59,4 +60,9 @@ button.bubble:hover { border-color: var(--accent) }
 @keyframes drip { 0% { transform: translateY(0); opacity: 1 } 100% { transform: translateY(12px); opacity: 0 } }
 @keyframes hop { 0% { transform: translateY(0) } 40% { transform: translateY(-10%) } 100% { transform: translateY(0) } }
 @media (prefers-reduced-motion: reduce) { .art, .art :deep(*) { animation: none !important } }
+</style>
+
+<style>
+/* Right-to-left interface: the bubble sits on the other side of Pishi, so its tail flips. Unscoped on purpose (needs <html dir>). */
+[dir='rtl'] .meow:not(.hero-cat) > .bubble::before { left: auto; right: -9px; transform: translateY(-50%) rotate(-135deg) }
 </style>

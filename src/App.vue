@@ -7,6 +7,7 @@ import AppIcon from '@/components/AppIcon.vue'
 import MeowCat from '@/components/MeowCat.vue'
 import { setLang, t } from '@/i18n/index.ts'
 import { applyCourseLang } from '@/content/localize.ts'
+import { APP } from '@/app.ts'
 
 const route = useRoute()
 const inLesson = computed(() => route.name === 'lesson')
@@ -18,6 +19,8 @@ watchEffect(() => {
   setLang(P.settings.lang)
   applyCourseLang(P.settings.lang)
   document.documentElement.lang = P.settings.lang
+  document.documentElement.dir = APP.uiDir
+  document.documentElement.classList.add(`app-${APP.id}`)
 })
 
 watchEffect(() => {
@@ -30,7 +33,7 @@ watchEffect(() => {
 
 const nav = computed(() => [
   { to: '/', label: t('Learn'), icon: 'path' },
-  { to: '/alphabet', label: t('Alphabet'), icon: 'letter' },
+  ...(APP.alphabet ? [{ to: '/alphabet', label: t('Alphabet'), icon: 'letter' }] : []),
   { to: '/words', label: t('Words'), icon: 'book' },
   { to: '/progress', label: t('Progress'), icon: 'chart' },
   { to: '/settings', label: t('Settings'), icon: 'gear' },
@@ -40,10 +43,10 @@ const nav = computed(() => [
 <template>
   <header v-if="!inLesson" class="top">
     <div class="wrap top-in">
-      <RouterLink to="/" class="brand" :aria-label="t('PersianMeow, home')">
+      <RouterLink to="/" class="brand" :aria-label="t('{app}, home', { app: APP.fullName })">
         <MeowCat face :size="34" class="mark" />
-        <span class="name">Persian<span class="name-2">Meow</span></span>
-        <span class="fa keep brand-fa" lang="fa">میو</span>
+        <span class="name" dir="ltr">{{ APP.name[0] }}<span class="name-2">{{ APP.name[1] }}</span></span>
+        <span class="fa-brand brand-fa" lang="fa" dir="rtl">{{ APP.brandFa }}</span>
       </RouterLink>
       <div class="stats" :aria-label="t('Your stats')">
         <span class="stat streak" :class="{ off: !streakActiveToday() }" :title="streakActiveToday() ? t('Day streak') : t('Finish a lesson today to keep your streak')">
@@ -75,7 +78,7 @@ const nav = computed(() => [
 .mark { background: var(--accent); border-radius: 11px; padding: 1px }
 .name-2 { color: var(--accent) }
 .name { font-family: var(--f-display); font-size: 1.45rem; font-weight: 800; letter-spacing: -0.01em }
-.brand-fa { font-size: 1.2rem; color: var(--accent); font-weight: 700 }
+.brand-fa { font-family: var(--f-fa); font-size: 1.2rem; color: var(--accent); font-weight: 700 }
 .stats { display: flex; gap: 6px }
 .stat { display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px; border-radius: 999px; background: var(--surface); border: 1px solid var(--line); font-weight: 600; font-size: 0.9rem; font-variant-numeric: tabular-nums }
 .stat.streak .ico { color: var(--saffron) }

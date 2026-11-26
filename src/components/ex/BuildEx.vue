@@ -3,6 +3,7 @@ import { computed, onMounted } from 'vue'
 import type { BuildEx } from '@/lib/exercises.ts'
 import { speak } from '@/lib/speech.ts'
 import { P } from '@/lib/store.ts'
+import { APP } from '@/app.ts'
 import FaText from '../FaText.vue'
 import SpeakButton from '../SpeakButton.vue'
 import { t } from '@/i18n/index.ts'
@@ -10,7 +11,8 @@ import { t } from '@/i18n/index.ts'
 const props = defineProps<{ ex: BuildEx; locked: boolean }>()
 const answer = defineModel<number[] | null>({ default: null })
 const chosen = computed(() => answer.value ?? [])
-const rtl = computed(() => props.ex.to === 'fa')
+// Tiles run in the direction of their language: the learned language (to: 'fa') or the learner's (to: 'en').
+const rtl = computed(() => (props.ex.to === 'fa' ? APP.targetDir : APP.uiDir) === 'rtl')
 
 onMounted(() => {
   if (props.ex.to === 'en' && P.settings.autoplay) speak(props.ex.sentence.fa)

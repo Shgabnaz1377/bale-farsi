@@ -3,10 +3,14 @@ import type { Level, Unit } from './types.ts'
 const PUNCT = /[،؟.!:«»؛,?"()]/g
 export const stripPunct = (s: string) => s.replace(PUNCT, ' ').replace(/\s+/g, ' ').trim()
 const PERSIAN = /^[؀-ۿ‌\s،؟.!:«»؛\-]+$/
+/** Italian (Bego Ciao): Latin letters with Italian accents, digits and punctuation. */
+const LATIN = /^[\p{Script=Latin}0-9\s'’.,!?:;«»"()\-]+$/u
 const ALLOWED_HTML = /<(?!\/?(b|i)>|span class="fa">|\/span>)[^>]*>/
 
 /** Returns a list of problems; an empty list means the units are valid. */
-export function validateUnits(units: Unit[], level: Level): string[] {
+export function validateUnits(units: Unit[], level: Level, target: 'fa' | 'it' = 'fa'): string[] {
+  const SCRIPT = target === 'it' ? LATIN : PERSIAN
+  const scriptName = target === 'it' ? 'Italian' : 'Persian'
   const errs: string[] = []
   const ids = new Set<string>()
   for (const u of units) {
@@ -15,7 +19,7 @@ export function validateUnits(units: Unit[], level: Level): string[] {
     if (!u.id.startsWith(level.toLowerCase() + '-')) at('id must start with the level prefix')
     if (ids.has(u.id)) at('duplicate id')
     ids.add(u.id)
-    if (!PERSIAN.test(u.fa)) at(`unit fa has non-Persian characters: ${u.fa}`)
+    if (!SCRIPT.test(u.fa)) at(`unit fa has non-${scriptName} characters: ${u.fa}`)
     for (const f of ['title', 'tr', 'can', 'tip'] as const) if (!u[f]?.trim()) at(`missing ${f}`)
     for (const html of [u.tip, u.grammar.body]) if (ALLOWED_HTML.test(html)) at(`disallowed HTML in: ${html.slice(0, 60)}`)
     for (const html of [u.tip, u.grammar.body]) {
@@ -31,7 +35,7 @@ export function validateUnits(units: Unit[], level: Level): string[] {
     const fas = new Set<string>(), ens = new Set<string>()
     for (const w of u.words) {
       if (!w.fa || !w.tr || !w.en) at(`incomplete word ${JSON.stringify(w)}`)
-      if (!PERSIAN.test(w.fa)) at(`word fa has non-Persian characters: ${w.fa}`)
+      if (!SCRIPT.test(w.fa)) at(`word fa has non-${scriptName} characters: ${w.fa}`)
       if (fas.has(w.fa)) at(`duplicate word fa ${w.fa}`)
       if (ens.has(w.en)) at(`duplicate word en ${w.en}`)
       fas.add(w.fa); ens.add(w.en)
@@ -39,7 +43,7 @@ export function validateUnits(units: Unit[], level: Level): string[] {
 
     if (u.sentences.length < 4) at(`only ${u.sentences.length} sentences (want 5)`)
     for (const s of u.sentences) {
-      if (!PERSIAN.test(s.fa)) at(`sentence has non-Persian characters: ${s.fa}`)
+      if (!SCRIPT.test(s.fa)) at(`sentence has non-${scriptName} characters: ${s.fa}`)
       if (s.tiles.join(' ') !== stripPunct(s.fa)) at(`tiles do not rebuild the sentence: "${s.tiles.join(' ')}" vs "${stripPunct(s.fa)}"`)
       if (s.tiles.length !== s.trTiles.length) at(`tiles/trTiles length differ in: ${s.fa}`)
       if (s.tiles.length < 2) at(`sentence needs at least 2 tiles: ${s.fa}`)

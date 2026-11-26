@@ -17,6 +17,10 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      # Public Supabase project URL and anon key (safe in the browser; data is protected by row level security).
+      VITE_SUPABASE_URL: ${{ vars.SUPABASE_URL }}
+      VITE_SUPABASE_ANON_KEY: ${{ vars.SUPABASE_ANON_KEY }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -24,11 +28,11 @@ jobs:
           node-version-file: .nvmrc
           cache: npm
       - run: npm ci
-      - run: npm run build
-        env:
-          # Public Supabase project URL and anon key (safe in the browser; data is protected by row level security).
-          VITE_SUPABASE_URL: ${{ vars.SUPABASE_URL }}
-          VITE_SUPABASE_ANON_KEY: ${{ vars.SUPABASE_ANON_KEY }}
+      - name: Build PersianMeow (site root) and Bego Ciao (/begociao/)
+        run: |
+          npm run build
+          npm run build:bego
+          cp -r dist-begociao dist/begociao
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

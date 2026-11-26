@@ -1,6 +1,8 @@
 import { ref } from 'vue'
 import { TextToSpeech } from '@capacitor-community/text-to-speech'
-import AUDIO_INDEX from '@/content/audio-index.json'
+import FA_INDEX from '@/content/audio-index.json'
+import IT_INDEX from '@/courses/begociao/audio-index.json'
+import { APP } from '@/app.ts'
 import { audioKey } from './audioKey.ts'
 import { isNative } from './platform.ts'
 
@@ -10,7 +12,10 @@ import { isNative } from './platform.ts'
  *    They play on every browser and phone, and inside the apps they are bundled, so they work offline.
  * 2. Fallback for anything without a clip: the browser's Persian voice (web) or the phone's speech engine (apps).
  */
-const CLIPS = new Set<string>(AUDIO_INDEX as string[])
+const CLIPS = new Set<string>((APP.id === 'begociao' ? IT_INDEX : FA_INDEX) as string[])
+/** Fallback voices must speak the language being learned (Persian or Italian). */
+const VOICE_LANG = APP.ttsLang.split('-')[0]
+const VOICE_RE = new RegExp(`^${VOICE_LANG}([-_]|$)`, 'i')
 const clipUrl = (key: string) => `${import.meta.env.BASE_URL}audio/${key}.mp3`
 
 /** The fallback voice in use, if any (shown in Settings). */
@@ -23,8 +28,8 @@ function loadWebVoices() {
   try {
     const voices = synth?.getVoices() ?? []
     webVoice =
-      voices.find((v) => /^fa[-_]IR/i.test(v.lang) && /natural|online/i.test(v.name)) ??
-      voices.find((v) => /^fa([-_]|$)/i.test(v.lang)) ??
+      voices.find((v) => VOICE_RE.test(v.lang) && /natural|online/i.test(v.name)) ??
+      voices.find((v) => VOICE_RE.test(v.lang)) ??
       null
   } catch {
     webVoice = null
@@ -35,7 +40,7 @@ function loadWebVoices() {
 async function loadNativeVoice() {
   try {
     const { languages } = await TextToSpeech.getSupportedLanguages()
-    if (languages.some((l) => /^fa([-_]|$)/i.test(l))) faVoice.value = { name: 'your phone’s Persian voice' }
+    if (languages.some((l) => VOICE_RE.test(l))) faVoice.value = { name: APP.ttsLang }
   } catch {
     faVoice.value = null
   }
@@ -86,7 +91,7 @@ export function speak(text: string, slow = false): Promise<void> {
   if (isNative) {
     return TextToSpeech.stop()
       .catch(() => undefined)
-      .then(() => TextToSpeech.speak({ text, lang: 'fa-IR', rate: slow ? 0.6 : 0.9, category: 'playback' }))
+      .then(() => TextToSpeech.speak({ text, lang: APP.ttsLang, rate: slow ? 0.6 : 0.9, category: 'playback' }))
       .catch(() => undefined)
   }
   return new Promise((resolve) => {

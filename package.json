@@ -21,7 +21,12 @@
     "cap:sync": "npm run build && cap sync",
     "icons": "node scripts/make-art.ts && node scripts/render-icons.mjs && capacitor-assets generate --iconBackgroundColor #0a7b7a --iconBackgroundColorDark #0a7b7a --splashBackgroundColor #eef3f6 --splashBackgroundColorDark #0c1524",
     "audio": "node scripts/gen-audio.ts",
-    "check:italian": "node scripts/check-italian.ts"
+    "check:italian": "node scripts/check-italian.ts",
+    "check:bego": "node scripts/check-bego.ts",
+    "build:bego": "npm run check:bego && vue-tsc --build && vite build --mode begociao",
+    "dev:bego": "vite --mode begociao",
+    "test:bego": "vitest run --mode begociao",
+    "preview:bego": "vite preview --mode begociao"
   },
   "dependencies": {
     "@capacitor-community/text-to-speech": "8.0.2",

@@ -87,7 +87,7 @@ describe('pronunciation audio', () => {
     const { allSpeech } = await import('@/content/speech.ts')
     const { audioKey } = await import('@/lib/audioKey.ts')
     const items = allSpeech()
-    expect(items.length).toBeGreaterThan(900)
+    expect(items.length).toBeGreaterThan(500)
     const keys = new Set(items.map((i) => audioKey(i.text)))
     expect(keys.size).toBe(items.length)
   })

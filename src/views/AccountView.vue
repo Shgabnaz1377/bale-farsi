@@ -3,6 +3,7 @@ import { computed, ref } from 'vue'
 import { account, deleteCloudProgress, sendSignInLink, signOut, syncNow, verifyCode } from '@/lib/account.ts'
 import { isNative } from '@/lib/platform.ts'
 import MeowCat from '@/components/MeowCat.vue'
+import { APP } from '@/app.ts'
 import { t } from '@/i18n/index.ts'
 import { P } from '@/lib/store.ts'
 
@@ -62,7 +63,7 @@ async function removeCloud() {
     </div>
 
     <section v-if="!account.enabled" class="card block">
-      <p>{{ t('Accounts are not switched on for this copy of PersianMeow. Your progress is saved in this browser.') }}</p>
+      <p>{{ t('Accounts are not switched on for this copy of {app}. Your progress is saved in this browser.', { app: APP.fullName }) }}</p>
     </section>
 
     <section v-else-if="!account.ready" class="card block"><p class="muted">{{ t('Checking…') }}</p></section>

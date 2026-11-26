@@ -5,6 +5,7 @@ import { clipCount, faVoice } from '@/lib/speech.ts'
 import { account } from '@/lib/account.ts'
 import { LANGS, t } from '@/i18n/index.ts'
 import InstallCard from '@/components/InstallCard.vue'
+import { APP } from '@/app.ts'
 
 const modes = computed(() => [['both', t('Persian script + Finglish')], ['latin', t('Finglish only')], ['script', t('Persian script only')]] as const)
 const themes = computed(() => [['system', t('Match system')], ['light', t('Light')], ['dark', t('Dark')]] as const)
@@ -37,7 +38,7 @@ async function copyBackup() {
   }
 }
 function restore() {
-  backupMsg.value = importProgress(backup.value) ? t('Progress restored.') : t('That text is not a PersianMeow backup. Copy it again from the other device.')
+  backupMsg.value = importProgress(backup.value) ? t('Progress restored.') : t('That text is not a {app} backup. Copy it again from the other device.', { app: APP.fullName })
 }
 </script>
 
@@ -46,7 +47,7 @@ function restore() {
     <h1>{{ t('Settings') }}</h1>
     <InstallCard />
 
-    <section class="card block">
+    <section v-if="LANGS.length > 1" class="card block">
       <h2>{{ t('I speak') }}</h2>
       <div class="seg" role="radiogroup" :aria-label="t('I speak')">
         <template v-for="l in LANGS" :key="l.code">
@@ -97,7 +98,7 @@ function restore() {
       </div>
     </section>
 
-    <section class="card block">
+    <section v-if="APP.target === 'fa'" class="card block">
       <h2>{{ t('How to read Finglish') }}</h2>
       <dl class="key">
         <template v-for="[k, d] in keyRows" :key="k"><dt>{{ k }}</dt><dd>{{ d }}</dd></template>
@@ -130,7 +131,7 @@ function restore() {
     </section>
 
     <p class="muted small about">
-      {{ t('PersianMeow is free and open source. The course content was written with AI help and is being reviewed by native speakers; if you spot a mistake,') }}
+      {{ t('{app} is free and open source. The course content was written with AI help and is being reviewed by native speakers; if you spot a mistake,', { app: APP.fullName }) }}
       <a href="https://github.com/Shgabnaz1377/persianmeow/issues" target="_blank" rel="noopener">{{ t('open an issue on GitHub') }}</a>.
     </p>
   </main>

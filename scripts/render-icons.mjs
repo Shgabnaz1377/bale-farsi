@@ -1,18 +1,22 @@
-// Renders assets/*.svg to the PNGs used by the web app manifest and by @capacitor/assets.
-// Usage: node scripts/render-icons.mjs   (needs Playwright's Chromium: npx playwright install chromium)
+// Renders assets*/ SVGs to the PNGs used by the web app manifest and by @capacitor/assets.
+// Usage: node scripts/render-icons.mjs  (PersianMeow)  ·  APP=begociao node scripts/render-icons.mjs  (Bego Ciao)
+// Needs Playwright's Chromium: npx playwright install chromium
 import { chromium } from '@playwright/test'
 import { readFileSync } from 'node:fs'
 
+const bego = process.env.APP === 'begociao'
+const A = bego ? 'assets-begociao' : 'assets'
+const P = bego ? 'public-begociao' : 'public'
 const fonts = '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Vazirmatn:wght@700&display=block">'
 const jobs = [
-  ['assets/icon.svg', 1024, 'assets/icon-only.png'],
-  ['assets/icon.svg', 1024, 'assets/icon-foreground.png'],
-  ['assets/icon-background.svg', 1024, 'assets/icon-background.png'],
-  ['assets/splash.svg', 2732, 'assets/splash.png'],
-  ['assets/splash-dark.svg', 2732, 'assets/splash-dark.png'],
-  ['assets/icon.svg', 512, 'public/icon-512.png'],
-  ['assets/icon.svg', 192, 'public/icon-192.png'],
-  ['assets/icon.svg', 180, 'public/apple-touch-icon.png'],
+  [`${A}/icon.svg`, 1024, `${A}/icon-only.png`],
+  [`${A}/icon.svg`, 1024, `${A}/icon-foreground.png`],
+  [`${A}/icon-background.svg`, 1024, `${A}/icon-background.png`],
+  [`${A}/splash.svg`, 2732, `${A}/splash.png`],
+  [`${A}/splash-dark.svg`, 2732, `${A}/splash-dark.png`],
+  [`${A}/icon.svg`, 512, `${P}/icon-512.png`],
+  [`${A}/icon.svg`, 192, `${P}/icon-192.png`],
+  [`${A}/icon.svg`, 180, `${P}/apple-touch-icon.png`],
 ]
 const browser = await chromium.launch()
 for (const [src, size, out] of jobs) {

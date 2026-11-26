@@ -4,6 +4,7 @@ import { LETTERS, LETTER_GROUPS } from '@/content/alphabet.ts'
 import { validateUnits } from '@/content/validate.ts'
 import { alphabetLesson, grade, levelTest, reviewLesson, unitLesson, type Ex } from '@/lib/exercises.ts'
 import { mulberry32, setRng } from '@/lib/random.ts'
+import { APP } from '@/app.ts'
 
 beforeAll(() => setRng(mulberry32(1377)))
 
@@ -45,7 +46,7 @@ function checkSolvable(ex: Ex, where: string) {
 describe('course content', () => {
   for (const lv of LEVELS) {
     it(`${lv.level} passes the content rules`, () => {
-      expect(validateUnits(lv.units, lv.level)).toEqual([])
+      expect(validateUnits(lv.units, lv.level, APP.target)).toEqual([])
     })
   }
 
@@ -54,7 +55,7 @@ describe('course content', () => {
     expect(new Set(ALL_WORDS.map((w) => w.key)).size).toBe(ALL_WORDS.length)
   })
 
-  it('has every letter of the Persian alphabet exactly once', () => {
+  it.runIf(APP.alphabet)('has every letter of the Persian alphabet exactly once', () => {
     expect(LETTERS).toHaveLength(32)
     expect(LETTER_GROUPS.flatMap((g) => g.letters).sort()).toEqual(LETTERS.map((l) => l.fa).sort())
   })
@@ -73,7 +74,7 @@ describe('every lesson can be finished', () => {
     }
   }
 
-  LETTER_GROUPS.forEach((g, i) => {
+  if (APP.alphabet) LETTER_GROUPS.forEach((g, i) => {
     it(`alphabet/${i} ${g.title}`, () => {
       const ex = alphabetLesson(i)
       expect(ex[0].kind).toBe('card')

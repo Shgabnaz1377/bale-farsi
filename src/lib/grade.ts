@@ -15,8 +15,20 @@ export function normIt(s: string): string {
     .trim()
 }
 
+/** Normalise a typed Persian answer: Arabic letter variants, diacritics, ZWNJ, tatweel, punctuation and را. */
+export function normFa(s: string): string {
+  return String(s ?? '')
+    .replace(/ي/g, 'ی').replace(/ى/g, 'ی').replace(/ك/g, 'ک').replace(/ة/g, 'ه').replace(/[أإ]/g, 'ا')
+    .replace(/[\u064B-\u065F\u0670\u0640]/g, '')
+    .replace(/[\u200C\u200D]/g, ' ')
+    .replace(/[^\p{L}\p{N}\s]/gu, ' ')
+    .replace(/(^|\s)را(?=\s|$)/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+}
+
 /** Normalise a typed answer in the learner's language. */
-export const normAnswer = (s: string) => (lang() === 'it' ? normIt(s) : normEn(s))
+export const normAnswer = (s: string) => (lang() === 'it' ? normIt(s) : lang() === 'fa' ? normFa(s) : normEn(s))
 
 /** Normalise a typed English answer: case, accents, punctuation, articles and contractions. */
 export function normEn(s: string): string {

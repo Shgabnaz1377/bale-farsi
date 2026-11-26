@@ -9,6 +9,7 @@ import {
   P, dueCount, levelUnlocked, nextLesson, seenCount, unitDone, unitProgress, unitUnlocked, xpToday, alphabetDone, streakActiveToday as streakToday,
 } from '@/lib/store.ts'
 import { account } from '@/lib/account.ts'
+import { APP } from '@/app.ts'
 import { LANGS, t, tn } from '@/i18n/index.ts'
 import AppIcon from '@/components/AppIcon.vue'
 import InstallCard from '@/components/InstallCard.vue'
@@ -27,10 +28,11 @@ const fresh = computed(() => Object.keys(P.done).length === 0 && !Object.keys(P.
 
 /** What Pishi says on the home screen, from today's state. */
 const greet = computed(() => {
-  if (xpToday() >= P.settings.goal) return { mood: 'cheer' as const, fa: 'آفرین!', tr: t('âfarin! Daily goal done.') }
-  if (due.value > 0) return { mood: 'think' as const, fa: 'مرور کنیم؟', tr: tn(due.value, 'morur konim? {n} word to review.', 'morur konim? {n} words to review.') }
-  if (P.streak > 0 && !streakToday()) return { mood: 'sad' as const, fa: 'دلم تنگ شد!', tr: t('delam tang shod! Keep your {n}-day streak.', { n: P.streak }) }
-  return { mood: 'wave' as const, fa: 'بزن بریم!', tr: t("bezan berim! Let's go.") }
+  const say = (line: { fa: string; tr: string }, msg: string) => ({ fa: line.fa, tr: `${line.tr} ${msg}` })
+  if (xpToday() >= P.settings.goal) return { mood: 'cheer' as const, ...say(APP.pishi.cheer, t('Daily goal done.')) }
+  if (due.value > 0) return { mood: 'think' as const, ...say(APP.pishi.review, tn(due.value, '{n} word to review.', '{n} words to review.')) }
+  if (P.streak > 0 && !streakToday()) return { mood: 'sad' as const, ...say(APP.pishi.missed, t('Keep your {n}-day streak.', { n: P.streak })) }
+  return { mood: 'wave' as const, ...say(APP.pishi.go, t("Let's go.")) }
 })
 
 const wotd = (() => {
@@ -53,7 +55,7 @@ function goNext() {
   <main class="wrap page">
     <section v-if="fresh" class="card hero">
       <div class="hero-text">
-        <div class="speak" role="radiogroup" :aria-label="t('I speak')">
+        <div v-if="LANGS.length > 1" class="speak" role="radiogroup" :aria-label="t('I speak')">
           <span class="muted small">{{ t('I speak') }}</span>
           <button v-for="l in LANGS" :key="l.code" type="button" class="chip-btn" :class="{ on: P.settings.lang === l.code }" role="radio" :aria-checked="P.settings.lang === l.code" @click="P.settings.lang = l.code">{{ l.name }}</button>
         </div>
@@ -65,7 +67,7 @@ function goNext() {
           <RouterLink class="btn ghost" :to="{ name: 'lesson', query: { test: 'A1' } }">{{ t('I know some Persian: test out of A1') }}</RouterLink>
         </div>
       </div>
-      <MeowCat mood="wave" :size="170" class="hero-cat" :bubble="t('salâm! man Pishi-am.')" bubble-fa="سلام! من پیشی‌ام" />
+      <MeowCat mood="wave" :size="170" class="hero-cat" :bubble="`${APP.pishi.hello.tr} ${t('(Hello! I am Pishi.)')}`" :bubble-fa="APP.pishi.hello.fa" />
     </section>
 
     <div v-if="!fresh" class="greet">
@@ -77,7 +79,7 @@ function goNext() {
         <p class="eyebrow">{{ t('Daily goal') }}</p>
         <p class="goal-num">{{ xpToday() }}<small> / {{ P.settings.goal }} XP</small></p>
         <div class="meter" role="progressbar" :aria-label="t('Daily goal')" :aria-valuenow="goalPct" aria-valuemin="0" aria-valuemax="100"><i :style="{ width: goalPct + '%' }"></i></div>
-        <p class="small muted gap">{{ goalPct >= 100 ? t('Goal reached today. آفرین!') : t('One lesson is 10 to 15 XP.') }}</p>
+        <p class="small muted gap">{{ goalPct >= 100 ? t('Goal reached today.') + ' ' + APP.pishi.cheer.fa : t('One lesson is 10 to 15 XP.') }}</p>
       </div>
       <div class="card">
         <p class="eyebrow">{{ t('Word of the day') }}</p>
@@ -98,8 +100,8 @@ function goNext() {
         <span class="a-ico saffron"><AppIcon name="review" /></span>
         <span><b>{{ due > 0 ? t('Review') : t('Practice') }}</b><span class="muted small block">{{ due > 0 ? tn(due, '{n} word due today', '{n} words due today') : t('Nothing due. Practise your weakest words.') }}</span></span>
       </RouterLink>
-      <RouterLink v-if="!alphabetDone()" class="card action" to="/alphabet">
-        <span class="a-ico accent fa keep" lang="fa">ب</span>
+      <RouterLink v-if="APP.alphabet && !alphabetDone()" class="card action" to="/alphabet">
+        <span class="a-ico accent fa-brand" lang="fa">ب</span>
         <span><b>{{ t('Alphabet') }}</b><span class="muted small block">{{ t('32 letters, six short lessons. Open any time.') }}</span></span>
       </RouterLink>
     </div>
@@ -172,7 +174,7 @@ function goNext() {
 .wotd :deep(.fw) { align-items: flex-start }
 .en { font-weight: 600; margin-top: 4px }
 .actions-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px }
-.action { display: flex; gap: 12px; align-items: center; text-align: left; cursor: pointer; color: var(--ink); text-decoration: none; border: 1px solid var(--line); font: inherit }
+.action { display: flex; gap: 12px; align-items: center; text-align: start; cursor: pointer; color: var(--ink); text-decoration: none; border: 1px solid var(--line); font: inherit }
 .action:hover { border-color: var(--muted) }
 .block { display: block }
 .a-ico { width: 44px; height: 44px; border-radius: 14px; display: grid; place-items: center; flex: none; font-size: 1.4rem; font-weight: 700 }
@@ -182,14 +184,14 @@ function goNext() {
 .a-ico.accent { background: var(--accent-soft); color: var(--accent) }
 .flip { transform: scaleX(-1) }
 .levels { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px }
-.lv { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 2px; padding: 10px 12px; border-radius: 14px; border: 2px solid var(--line); background: var(--surface); cursor: pointer; text-align: left; min-width: 0 }
+.lv { position: relative; display: flex; flex-direction: column; align-items: flex-start; gap: 2px; padding: 10px 12px; border-radius: 14px; border: 2px solid var(--line); background: var(--surface); cursor: pointer; text-align: start; min-width: 0 }
 .lv.on { border-color: var(--accent); background: var(--accent-soft) }
 .lv.locked { opacity: 0.65 }
 .lv-code { font-family: var(--f-display); font-weight: 800; font-size: 1.3rem }
 .lv-name { font-size: 0.75rem; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100% }
 .lv-bar { width: 100%; height: 5px; border-radius: 9px; background: var(--sunk); overflow: hidden; margin-top: 4px }
 .lv-bar i { display: block; height: 100%; background: var(--accent) }
-.lv-trophy { position: absolute; top: 9px; right: 9px; color: var(--saffron) }
+.lv-trophy { position: absolute; top: 9px; inset-inline-end: 9px; color: var(--saffron) }
 .level-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; flex-wrap: wrap }
 .level-head h2 { font-size: 1.4rem; font-weight: 800; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap }
 .lvl-fa :deep(.fa) { color: var(--accent) }
