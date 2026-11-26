@@ -18,7 +18,7 @@ const dry = process.argv.includes('--dry')
 function env(name: string): string | undefined {
   if (process.env[name]) return process.env[name]
   if (!existsSync('.env.local')) return undefined
-  const line = readFileSync('.env.local', 'utf8').split(/\r?\n/).find((l) => l.startsWith(name + '='))
+  const line = readFileSync('.env.local', 'utf8').replace(/^﻿/, '').split(/\r?\n/).find((l) => l.startsWith(name + '='))
   return line?.slice(name.length + 1).trim()
 }
 
