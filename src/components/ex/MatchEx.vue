@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import type { MatchEx } from '@/lib/exercises.ts'
 import { shuffle } from '@/lib/random.ts'
 import { speak } from '@/lib/speech.ts'
-import { chime } from '@/lib/sfx.ts'
+import { meow } from '@/lib/sfx.ts'
 import FaText from '../FaText.vue'
 
 const props = defineProps<{ ex: MatchEx; locked: boolean }>()
@@ -28,10 +28,10 @@ function tap(side: 'L' | 'R', i: number) {
   if (other.i === i) {
     matched.value = new Set([...matched.value, i])
     if (matched.value.size === props.ex.pairs.length) emit('complete', misses)
-    else chime(true)
+    else meow('mew')
   } else {
     misses++
-    chime(false)
+    meow('sad')
     wrong.value = side === 'L' ? { L: i, R: other.i } : { L: other.i, R: i }
     setTimeout(() => (wrong.value = null), 450)
   }

@@ -14,6 +14,7 @@ defineProps<{ ex: CardEx }>()
     <RichText v-if="ex.html" :html="ex.html" class="lead" />
     <ul v-if="ex.examples?.length" class="examples">
       <li v-for="(e, i) in ex.examples" :key="i">
+        <SpeakButton v-if="e.fa.includes('·')" :text="e.fa.split('·')[0].trim()" />
         <SpeakButton :text="e.fa.split('·').pop()!.trim()" />
         <div class="ex-text">
           <FaText :fa="e.fa" :tr="e.tr" inline keep-tr />
