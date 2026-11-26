@@ -2,6 +2,10 @@ import { reactive, watch } from 'vue'
 import { createClient, type Session, type SupabaseClient } from '@supabase/supabase-js'
 import { P, freshProgress, parseProgress, type Progress } from './store.ts'
 import { mergeProgress, sameLearning } from './merge.ts'
+import { isNative } from './platform.ts'
+
+/** Where email links land when sent from inside the phone apps. */
+const WEB_URL = 'https://shgabnaz1377.github.io/bale-farsi/'
 
 /**
  * Optional accounts: sign in by email link, and progress syncs to Supabase
@@ -126,9 +130,17 @@ export async function sendSignInLink(email: string): Promise<string | null> {
   if (!sb) return 'Accounts are not available right now.'
   const { error } = await sb.auth.signInWithOtp({
     email: email.trim(),
-    options: { emailRedirectTo: location.origin + location.pathname, shouldCreateUser: true },
+    options: { emailRedirectTo: isNative ? WEB_URL : location.origin + location.pathname, shouldCreateUser: true },
   })
   return error ? friendly(error.message) : null
+}
+
+/** Sign in with the code from the email (works inside the phone apps too, where the link opens the browser). */
+export async function verifyCode(email: string, code: string): Promise<string | null> {
+  if (!sb) return 'Accounts are not available right now.'
+  const { error } = await sb.auth.verifyOtp({ email: email.trim(), token: code.replace(/\s/g, ''), type: 'email' })
+  if (error) return /expired|invalid/i.test(error.message) ? 'That code is wrong or has expired. Check the email, or send a new one.' : friendly(error.message)
+  return null
 }
 
 export async function signOut() {

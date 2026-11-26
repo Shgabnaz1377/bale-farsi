@@ -91,3 +91,31 @@ test('a full lesson can be completed', async ({ page }) => {
   await expect(page).toHaveURL(/#\/alphabet/)
   expect(ignoreFonts(problems)).toEqual([])
 })
+
+/** The browser's service worker container (typed here because the e2e tsconfig has no DOM lib). */
+type SW = { serviceWorker: { ready: Promise<unknown>; controller: unknown } }
+
+test('works offline after the first visit', async ({ page, context }) => {
+  const problems = watchConsole(page)
+  await page.goto('/')
+  await page.evaluate(async () => { await (navigator as unknown as SW).serviceWorker.ready })
+  await page.reload()
+  await expect.poll(() => page.evaluate(() => !!(navigator as unknown as SW).serviceWorker.controller)).toBe(true)
+  await context.setOffline(true)
+  await page.reload()
+  await expect(page.getByRole('heading', { name: /Learn to read, speak and understand Persian/ })).toBeVisible()
+  await page.goto('/#/unit/b2-news')
+  await expect(page.locator('main h1').first()).toBeVisible()
+  await page.goto('/#/lesson?u=a1-food&k=words-1')
+  await expect(page.getByRole('button', { name: 'Check' })).toBeVisible()
+  await context.setOffline(false)
+  expect(ignoreFonts(problems).filter((p) => !/ERR_INTERNET_DISCONNECTED|Failed to load resource/.test(p))).toEqual([])
+})
+
+test('has a valid web app manifest', async ({ request }) => {
+  const res = await request.get('/manifest.webmanifest')
+  expect(res.ok()).toBe(true)
+  const m = await res.json()
+  expect(m.name).toContain('Bale')
+  expect(m.icons.map((i: { sizes: string }) => i.sizes)).toEqual(expect.arrayContaining(['192x192', '512x512']))
+})
