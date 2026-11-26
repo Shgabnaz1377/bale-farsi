@@ -5,6 +5,7 @@ import { speak } from '@/lib/speech.ts'
 import { P } from '@/lib/store.ts'
 import FaText from '../FaText.vue'
 import SpeakButton from '../SpeakButton.vue'
+import { t } from '@/i18n/index.ts'
 
 const props = defineProps<{ ex: BuildEx; locked: boolean }>()
 const answer = defineModel<number[] | null>({ default: null })
@@ -37,16 +38,16 @@ function remove(pos: number) {
     </template>
     <p v-else class="en-s">{{ ex.sentence.en }}</p>
   </div>
-  <div class="answer" :dir="rtl ? 'rtl' : 'ltr'" aria-label="Your answer" aria-live="polite">
+  <div class="answer" :dir="rtl ? 'rtl' : 'ltr'" :aria-label="t('Your answer')" aria-live="polite">
     <button v-for="(i, pos) in chosen" :key="'a' + i" type="button" class="tile" :disabled="locked" @click="remove(pos)">
       <FaText v-if="ex.tiles[i].fa" :fa="ex.tiles[i].fa!" :tr="ex.tiles[i].tr" size="sm" />
       <span v-else>{{ ex.tiles[i].en }}</span>
     </button>
   </div>
-  <div class="bank" :dir="rtl ? 'rtl' : 'ltr'" role="group" aria-label="Word tiles">
-    <button v-for="(t, i) in ex.tiles" :key="'b' + i" type="button" class="tile" :class="{ used: chosen.includes(i) }" :disabled="locked || chosen.includes(i)" @click="add(i)">
-      <FaText v-if="t.fa" :fa="t.fa" :tr="t.tr" size="sm" />
-      <span v-else>{{ t.en }}</span>
+  <div class="bank" :dir="rtl ? 'rtl' : 'ltr'" role="group" :aria-label="t('Word tiles')">
+    <button v-for="(tile, i) in ex.tiles" :key="'b' + i" type="button" class="tile" :class="{ used: chosen.includes(i) }" :disabled="locked || chosen.includes(i)" @click="add(i)">
+      <FaText v-if="tile.fa" :fa="tile.fa" :tr="tile.tr" size="sm" />
+      <span v-else>{{ tile.en }}</span>
     </button>
   </div>
 </template>

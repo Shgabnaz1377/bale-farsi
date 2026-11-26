@@ -1,13 +1,27 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { P, exportProgress, importProgress, resetProgress } from '@/lib/store.ts'
 import { clipCount, faVoice } from '@/lib/speech.ts'
 import { account } from '@/lib/account.ts'
+import { LANGS, t } from '@/i18n/index.ts'
 import InstallCard from '@/components/InstallCard.vue'
 
-const modes = [['both', 'Persian script + Finglish'], ['latin', 'Finglish only'], ['script', 'Persian script only']] as const
-const themes = [['system', 'Match system'], ['light', 'Light'], ['dark', 'Dark']] as const
+const modes = computed(() => [['both', t('Persian script + Finglish')], ['latin', t('Finglish only')], ['script', t('Persian script only')]] as const)
+const themes = computed(() => [['system', t('Match system')], ['light', t('Light')], ['dark', t('Dark')]] as const)
 const goals = [10, 20, 30, 50] as const
+const keyRows = computed(() => [
+  ['â', t('long a, as in “father”')],
+  ['a', t('short a, as in “cat”')],
+  ['e', t('as in “bed”')],
+  ['o', t('short o, as in “go” said quickly')],
+  ['u / i', t('as in “food” / “see”')],
+  ['sh / ch', t('as in “shop” / “church”')],
+  ['kh', t('rough throat sound, as in Scottish “loch”')],
+  ['gh', t('a gargled g, deep in the throat')],
+  ['zh', t('the s in “measure”')],
+  ["'", t('a short catch in the voice (glottal stop)')],
+  ['-e / -ye', t('the ezâfe, linking words: ketâb-e man, “my book”')],
+])
 
 const backup = ref('')
 const backupMsg = ref('')
@@ -17,54 +31,65 @@ async function copyBackup() {
   backup.value = exportProgress()
   try {
     await navigator.clipboard.writeText(backup.value)
-    backupMsg.value = 'Copied. Paste it into the box on another device and press Restore.'
+    backupMsg.value = t('Copied. Paste it into the box on another device and press Restore.')
   } catch {
-    backupMsg.value = 'Copy the text in the box below by hand.'
+    backupMsg.value = t('Copy the text in the box below by hand.')
   }
 }
 function restore() {
-  backupMsg.value = importProgress(backup.value) ? 'Progress restored.' : 'That text is not a PersianMeow backup. Copy it again from the other device.'
+  backupMsg.value = importProgress(backup.value) ? t('Progress restored.') : t('That text is not a PersianMeow backup. Copy it again from the other device.')
 }
 </script>
 
 <template>
   <main class="wrap page">
-    <h1>Settings</h1>
+    <h1>{{ t('Settings') }}</h1>
     <InstallCard />
 
     <section class="card block">
-      <h2>Show Persian as</h2>
-      <div class="seg" role="radiogroup" aria-label="Show Persian as">
+      <h2>{{ t('I speak') }}</h2>
+      <div class="seg" role="radiogroup" :aria-label="t('I speak')">
+        <template v-for="l in LANGS" :key="l.code">
+          <input :id="'lang-' + l.code" v-model="P.settings.lang" type="radio" name="lang" :value="l.code" />
+          <label :for="'lang-' + l.code">{{ l.name }}</label>
+        </template>
+      </div>
+      <p class="muted small">{{ t('Meanings, explanations and buttons appear in this language. The Persian stays the same.') }}</p>
+    </section>
+
+    <section class="card block">
+      <h2>{{ t('Show Persian as') }}</h2>
+      <div class="seg" role="radiogroup" :aria-label="t('Show Persian as')">
         <template v-for="[v, label] in modes" :key="v">
           <input :id="'mode-' + v" v-model="P.settings.mode" type="radio" name="mode" :value="v" />
           <label :for="'mode-' + v">{{ label }}</label>
         </template>
       </div>
-      <p class="muted small">Finglish is Persian written in English letters, like salâm for hello. Keep it on while you learn the alphabet. Switch to script only once you can read, so you stop leaning on it.</p>
+      <p class="muted small">{{ t('Finglish is Persian written in English letters, like salâm for hello. Keep it on while you learn the alphabet. Switch to script only once you can read, so you stop leaning on it.') }}</p>
     </section>
 
     <section class="card block">
-      <h2>Lessons</h2>
-      <p class="eyebrow">Daily goal</p>
-      <div class="seg" role="radiogroup" aria-label="Daily goal">
+      <h2>{{ t('Lessons') }}</h2>
+      <p class="eyebrow">{{ t('Daily goal') }}</p>
+      <div class="seg" role="radiogroup" :aria-label="t('Daily goal')">
         <template v-for="g in goals" :key="g">
           <input :id="'goal-' + g" v-model="P.settings.goal" type="radio" name="goal" :value="g" />
           <label :for="'goal-' + g">{{ g }} XP</label>
         </template>
       </div>
-      <label class="check"><input id="relaxed" v-model="P.settings.relaxed" type="checkbox" /> Relaxed mode: no hearts, mistakes cost nothing</label>
-      <label class="check"><input id="sfx" v-model="P.settings.sfx" type="checkbox" /> Sound effects</label>
-      <label class="check"><input id="autoplay" v-model="P.settings.autoplay" type="checkbox" /> Read Persian aloud automatically</label>
+      <label class="check"><input id="relaxed" v-model="P.settings.relaxed" type="checkbox" /> {{ t('Relaxed mode: no hearts, mistakes cost nothing') }}</label>
+      <label class="check"><input id="sfx" v-model="P.settings.sfx" type="checkbox" /> {{ t('Sound effects') }}</label>
+      <label class="check"><input id="autoplay" v-model="P.settings.autoplay" type="checkbox" /> {{ t('Read Persian aloud automatically') }}</label>
       <p class="muted small">
-        <template v-if="clipCount">Every word, sentence, dialogue and reading has recorded Persian audio ({{ clipCount }} clips). Tap any speaker button to hear it; the smaller button next to it plays it slowly.</template>
-        <template v-else-if="faVoice">Audio uses the voice “{{ faVoice.name }}”.</template>
-        <template v-else>Audio needs a Persian (fa-IR) voice. Microsoft Edge has one built in. Elsewhere, add a Persian voice in your system's speech settings and reload.</template>
+        <template v-if="clipCount">{{ t('Every word, sentence, dialogue and reading has recorded Persian audio ({n} clips). Tap any speaker button to hear it; the smaller button next to it plays it slowly.', { n: clipCount }) }}</template>
+        <template v-else-if="faVoice">{{ t('Audio uses the voice “{name}”.', { name: faVoice.name }) }}</template>
+        <template v-else>{{ t("Audio needs a Persian (fa-IR) voice. Microsoft Edge has one built in. Elsewhere, add a Persian voice in your system's speech settings and reload.") }}</template>
       </p>
     </section>
 
     <section class="card block">
-      <h2>Appearance</h2>
-      <div class="seg" role="radiogroup" aria-label="Theme">
+      <h2>{{ t('Appearance') }}</h2>
+      <div class="seg" role="radiogroup" :aria-label="t('Theme')">
         <template v-for="[v, label] in themes" :key="v">
           <input :id="'theme-' + v" v-model="P.settings.theme" type="radio" name="theme" :value="v" />
           <label :for="'theme-' + v">{{ label }}</label>
@@ -73,49 +98,40 @@ function restore() {
     </section>
 
     <section class="card block">
-      <h2>How to read Finglish</h2>
+      <h2>{{ t('How to read Finglish') }}</h2>
       <dl class="key">
-        <dt>â</dt><dd>long a, as in “father”</dd>
-        <dt>a</dt><dd>short a, as in “cat”</dd>
-        <dt>e</dt><dd>as in “bed”</dd>
-        <dt>o</dt><dd>short o, as in “go” said quickly</dd>
-        <dt>u / i</dt><dd>as in “food” / “see”</dd>
-        <dt>kh</dt><dd>rough throat sound, as in Scottish “loch”</dd>
-        <dt>gh</dt><dd>a gargled g, deep in the throat</dd>
-        <dt>zh</dt><dd>the s in “measure”</dd>
-        <dt>'</dt><dd>a short catch in the voice (glottal stop)</dd>
-        <dt>-e / -ye</dt><dd>the ezâfe, linking words: ketâb-e man, “my book”</dd>
+        <template v-for="[k, d] in keyRows" :key="k"><dt>{{ k }}</dt><dd>{{ d }}</dd></template>
       </dl>
     </section>
 
     <section class="card block">
-      <h2>Your progress</h2>
+      <h2>{{ t('Your progress') }}</h2>
       <p class="muted small">
-        <template v-if="account.enabled"><RouterLink to="/account">Sign in</RouterLink> to keep your progress in sync on every device. Without an account, progress stays in this browser; you can also move it by hand with a backup.</template>
-        <template v-else>Progress is saved in this browser only. To move it to another device, copy a backup here and restore it there.</template>
+        <template v-if="account.enabled"><RouterLink to="/account">{{ t('Sign in') }}</RouterLink> {{ t('to keep your progress in sync on every device. Without an account, progress stays in this browser; you can also move it by hand with a backup.') }}</template>
+        <template v-else>{{ t('Progress is saved in this browser only. To move it to another device, copy a backup here and restore it there.') }}</template>
       </p>
       <div class="row">
-        <button type="button" class="btn ghost sm" @click="copyBackup">Copy backup</button>
-        <button type="button" class="btn ghost sm" :disabled="!backup.trim()" @click="restore">Restore from box</button>
+        <button type="button" class="btn ghost sm" @click="copyBackup">{{ t('Copy backup') }}</button>
+        <button type="button" class="btn ghost sm" :disabled="!backup.trim()" @click="restore">{{ t('Restore from box') }}</button>
       </div>
-      <label class="sr-only" for="backup">Backup text</label>
-      <textarea id="backup" v-model="backup" rows="3" placeholder="Paste a backup here to restore it"></textarea>
+      <label class="sr-only" for="backup">{{ t('Backup text') }}</label>
+      <textarea id="backup" v-model="backup" rows="3" :placeholder="t('Paste a backup here to restore it')"></textarea>
       <p v-if="backupMsg" class="small" role="status">{{ backupMsg }}</p>
       <div class="row">
         <template v-if="!confirmReset">
-          <button type="button" class="btn ghost sm" @click="confirmReset = true">Reset progress</button>
+          <button type="button" class="btn ghost sm" @click="confirmReset = true">{{ t('Reset progress') }}</button>
         </template>
         <template v-else>
-          <span class="small">This erases XP, streak, finished lessons and review history.</span>
-          <button type="button" class="btn danger sm" @click="resetProgress(); confirmReset = false">Erase progress</button>
-          <button type="button" class="btn ghost sm" @click="confirmReset = false">Keep it</button>
+          <span class="small">{{ t('This erases XP, streak, finished lessons and review history.') }}</span>
+          <button type="button" class="btn danger sm" @click="resetProgress(); confirmReset = false">{{ t('Erase progress') }}</button>
+          <button type="button" class="btn ghost sm" @click="confirmReset = false">{{ t('Keep it') }}</button>
         </template>
       </div>
     </section>
 
     <p class="muted small about">
-      PersianMeow is free and open source. The course content was written with AI help and is being reviewed by native speakers; if you spot a mistake,
-      <a href="https://github.com/Shgabnaz1377/persianmeow/issues" target="_blank" rel="noopener">open an issue on GitHub</a>.
+      {{ t('PersianMeow is free and open source. The course content was written with AI help and is being reviewed by native speakers; if you spot a mistake,') }}
+      <a href="https://github.com/Shgabnaz1377/persianmeow/issues" target="_blank" rel="noopener">{{ t('open an issue on GitHub') }}</a>.
     </p>
   </main>
 </template>

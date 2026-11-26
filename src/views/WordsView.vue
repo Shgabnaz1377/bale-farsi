@@ -4,6 +4,7 @@ import type { Level } from '@/content/types.ts'
 import { ALL_WORDS, LEVELS } from '@/content/course.ts'
 import { P } from '@/lib/store.ts'
 import { isLearned } from '@/lib/srs.ts'
+import { t } from '@/i18n/index.ts'
 import FaText from '@/components/FaText.vue'
 import SpeakButton from '@/components/SpeakButton.vue'
 
@@ -30,21 +31,21 @@ const status = (key: string) => {
 <template>
   <main class="wrap page">
     <div>
-      <h1>Words</h1>
-      <p class="muted">{{ ALL_WORDS.length }} words across A1 to B2. Search in English, Finglish or Persian.</p>
+      <h1>{{ t('Words') }}</h1>
+      <p class="muted">{{ t('{n} words across A1 to B2. Search in English, Finglish or Persian.', { n: ALL_WORDS.length }) }}</p>
     </div>
     <div class="filters card">
-      <label class="sr-only" for="word-search">Search words</label>
-      <input id="word-search" v-model="query" type="search" placeholder="Search: water, âb, آب" autocomplete="off" />
-      <div class="seg" role="radiogroup" aria-label="Level">
+      <label class="sr-only" for="word-search">{{ t('Search words') }}</label>
+      <input id="word-search" v-model="query" type="search" :placeholder="t('Search: water, âb, آب')" autocomplete="off" />
+      <div class="seg" role="radiogroup" :aria-label="t('Level')">
         <template v-for="l in ['all', ...LEVELS.map((x) => x.level)]" :key="l">
           <input :id="'lvl-' + l" v-model="level" type="radio" name="lvl" :value="l" />
-          <label :for="'lvl-' + l">{{ l === 'all' ? 'All' : l }}</label>
+          <label :for="'lvl-' + l">{{ l === 'all' ? t('All') : l }}</label>
         </template>
       </div>
-      <label class="check"><input id="only-mine" v-model="onlyMine" type="checkbox" /> Only words I have met</label>
+      <label class="check"><input id="only-mine" v-model="onlyMine" type="checkbox" /> {{ t('Only words I have met') }}</label>
     </div>
-    <p class="muted small">{{ rows.length }} shown</p>
+    <p class="muted small">{{ t('{n} shown', { n: rows.length }) }}</p>
     <ul class="list">
       <li v-for="r in rows" :key="r.key" class="row">
         <SpeakButton :text="r.word.fa" />
@@ -52,7 +53,7 @@ const status = (key: string) => {
         <span class="w-en">{{ r.word.en }}</span>
         <span class="w-meta">
           <span class="chip">{{ r.unit.level }}</span>
-          <span v-if="status(r.key)" class="chip" :class="status(r.key) === 'learned' ? 'accent' : 'saffron'">{{ status(r.key) }}</span>
+          <span v-if="status(r.key)" class="chip" :class="status(r.key) === 'learned' ? 'accent' : 'saffron'">{{ t(status(r.key)!) }}</span>
         </span>
       </li>
     </ul>

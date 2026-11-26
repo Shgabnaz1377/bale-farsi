@@ -5,6 +5,7 @@ import { speak } from '@/lib/speech.ts'
 import { P } from '@/lib/store.ts'
 import FaText from '../FaText.vue'
 import PromptBox from './PromptBox.vue'
+import { t } from '@/i18n/index.ts'
 
 const props = defineProps<{ ex: ChoiceEx; locked: boolean }>()
 const answer = defineModel<number | null>({ default: null })
@@ -25,7 +26,7 @@ defineExpose({ choose })
 
 <template>
   <PromptBox :prompt="ex.prompt" />
-  <div class="choices" :class="{ 'fa-opts': ex.faOptions }" role="group" aria-label="Answers">
+  <div class="choices" :class="{ 'fa-opts': ex.faOptions }" role="group" :aria-label="t('Answers')">
     <button
       v-for="(o, i) in ex.options"
       :key="i"

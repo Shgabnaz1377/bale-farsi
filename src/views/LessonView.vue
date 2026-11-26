@@ -21,6 +21,7 @@ import BuildEx from '@/components/ex/BuildEx.vue'
 import TypeEx from '@/components/ex/TypeEx.vue'
 import CardEx from '@/components/ex/CardEx.vue'
 import MeowCat from '@/components/MeowCat.vue'
+import { t, tn } from '@/i18n/index.ts'
 
 type Mode = 'lesson' | 'review' | 'test'
 const route = useRoute()
@@ -44,10 +45,10 @@ const opts = { hasVoice: hasVoice(), seen: hasSeen }
 if (mode === 'review') {
   const due = dueWords(12)
   queue = reviewLesson(due.length ? due : weakWords(10), opts)
-  title = due.length ? 'Review' : 'Practice'
+  title = due.length ? t('Review') : t('Practice')
 } else if (mode === 'test') {
   queue = levelTest(testLevel)
-  title = `${testLevel} level test`
+  title = t('{level} level test', { level: testLevel })
 } else if (unit && LESSON_NAMES[kind]) {
   queue = unitLesson(unit, kind, opts)
   doneKey = `${unit.id}/${kind}`
@@ -55,7 +56,7 @@ if (mode === 'review') {
 } else if (!Number.isNaN(alpha) && LETTER_GROUPS[alpha]) {
   queue = alphabetLesson(alpha)
   doneKey = `alphabet/${alpha}`
-  title = `Alphabet · ${LETTER_GROUPS[alpha].title}`
+  title = `${t('Alphabet')} · ${LETTER_GROUPS[alpha].title}`
 }
 const usesHearts = mode === 'lesson'
 const total = queue.length
@@ -192,7 +193,7 @@ onMounted(() => {
 })
 onBeforeUnmount(() => { window.removeEventListener('keydown', onKey); stopSpeech() })
 
-const praise = ['Correct.', 'Nice work.', 'Exactly right.', 'Well done.']
+const praise = [t('Correct.'), t('Nice work.'), t('Exactly right.'), t('Well done.')]
 const praiseLine = computed(() => praise[renderKey.value % praise.length])
 const showAnswer = computed(() => {
   const ex = current.value
@@ -218,7 +219,7 @@ const notes = computed(() => {
   return out
 })
 const endFa = computed(() => (mode === 'test' && !summary.value.passed ? 'اشکالی ندارد' : 'آفرین!'))
-const endTr = computed(() => (mode === 'test' && !summary.value.passed ? 'eshkâli nadârad, “no problem”' : 'âfarin, “well done”'))
+const endTr = computed(() => (mode === 'test' && !summary.value.passed ? t('eshkâli nadârad, “no problem”') : t('âfarin, “well done”')))
 const testLevelName = LEVELS.find((l) => l.level === testLevel)?.name
 </script>
 
@@ -226,10 +227,10 @@ const testLevelName = LEVELS.find((l) => l.level === testLevel)?.name
   <div class="lesson">
     <header class="top">
       <div class="wrap bar-top">
-        <button type="button" class="icon-btn" aria-label="Quit" @click="askQuit"><AppIcon name="x" /></button>
-        <div class="progress" role="progressbar" :aria-label="`${title} progress`" aria-valuemin="0" aria-valuemax="100" :aria-valuenow="progress"><i :style="{ width: progress + '%' }"></i></div>
-        <span v-if="usesHearts" class="stat hearts" title="Hearts left today"><AppIcon name="heart" />{{ P.settings.relaxed ? '∞' : P.hearts }}</span>
-        <span v-else class="chip lapis">{{ mode === 'test' ? 'Test' : 'Review' }}</span>
+        <button type="button" class="icon-btn" :aria-label="t('Quit')" @click="askQuit"><AppIcon name="x" /></button>
+        <div class="progress" role="progressbar" :aria-label="t('{title} progress', { title })" aria-valuemin="0" aria-valuemax="100" :aria-valuenow="progress"><i :style="{ width: progress + '%' }"></i></div>
+        <span v-if="usesHearts" class="stat hearts" :title="t('Hearts left today')"><AppIcon name="heart" />{{ P.settings.relaxed ? '∞' : P.hearts }}</span>
+        <span v-else class="chip lapis">{{ mode === 'test' ? t('Test') : t('Review') }}</span>
       </div>
     </header>
 
@@ -257,7 +258,7 @@ const testLevelName = LEVELS.find((l) => l.level === testLevel)?.name
         <div v-if="result" class="fb" aria-live="polite">
           <h2>
             <AppIcon :name="result.ok ? 'check' : 'x'" />
-            {{ current.kind === 'match' ? 'All pairs matched.' : result.ok ? praiseLine : 'Not quite. The answer is:' }}
+            {{ current.kind === 'match' ? t('All pairs matched.') : result.ok ? praiseLine : t('Not quite. The answer is:') }}
           </h2>
           <div v-if="showAnswer && reveal" class="ans">
             <FaText v-if="reveal.fa" :fa="reveal.fa" :tr="reveal.tr" inline keep-tr keep-fa />
@@ -273,7 +274,7 @@ const testLevelName = LEVELS.find((l) => l.level === testLevel)?.name
           :disabled="!result && !ready"
           @click="primary"
         >
-          {{ result || current.kind === 'card' ? 'Continue' : 'Check' }}
+          {{ result || current.kind === 'card' ? t('Continue') : t('Check') }}
         </button>
       </div>
     </footer>
@@ -282,52 +283,52 @@ const testLevelName = LEVELS.find((l) => l.level === testLevel)?.name
       <MeowCat :mood="mode === 'test' && !summary.passed ? 'sad' : 'cheer'" :size="150" />
       <div class="big-fa fa keep" lang="fa" dir="rtl" :class="{ bad: mode === 'test' && !summary.passed }">{{ endFa }}</div>
       <p class="muted">{{ endTr }}</p>
-      <h1 v-if="mode === 'test'">{{ summary.passed ? `You passed ${testLevel}` : `${summary.score}%: not yet` }}</h1>
-      <h1 v-else>{{ mode === 'review' ? `${title} complete` : 'Lesson complete' }}</h1>
+      <h1 v-if="mode === 'test'">{{ summary.passed ? t('You passed {level}', { level: testLevel }) : t('{score}%: not yet', { score: summary.score }) }}</h1>
+      <h1 v-else>{{ mode === 'review' ? t('{title} complete', { title }) : t('Lesson complete') }}</h1>
       <div class="tiles3">
-        <div class="t3 xp"><span>XP</span><b>+{{ summary.xp }}</b></div>
-        <div class="t3 acc"><span>{{ mode === 'test' ? 'Score' : 'Accuracy' }}</span><b>{{ mode === 'test' ? summary.score : summary.acc }}%</b></div>
-        <div class="t3 time"><span>Time</span><b>{{ summary.time }}</b></div>
+        <div class="t3 xp"><span>{{ t('XP') }}</span><b>+{{ summary.xp }}</b></div>
+        <div class="t3 acc"><span>{{ mode === 'test' ? t('Score') : t('Accuracy') }}</span><b>{{ mode === 'test' ? summary.score : summary.acc }}%</b></div>
+        <div class="t3 time"><span>{{ t('Time') }}</span><b>{{ summary.time }}</b></div>
       </div>
       <p class="muted msg">
         <template v-if="mode === 'test'">
-          {{ summary.passed ? `Every ${testLevel} unit is open, and the next level is unlocked.` : `You need ${Math.round(TEST_PASS * 100)}% to pass. The ${testLevelName ?? ''} units will get you there.` }}
+          {{ summary.passed ? t('Every {level} unit is open, and the next level is unlocked.', { level: testLevel }) : t('You need {pct}% to pass. The {name} units will get you there.', { pct: Math.round(TEST_PASS * 100), name: testLevelName ?? '' }) }}
         </template>
         <template v-else>
-          <span v-if="summary.streakUp">Streak: {{ P.streak }} day{{ P.streak > 1 ? 's' : '' }}. </span>
-          <span v-if="summary.heartBack">You won back a heart. </span>
-          <span v-if="mode === 'lesson' && mistakes === 0">No mistakes, so you earned 5 bonus XP.</span>
+          <span v-if="summary.streakUp">{{ tn(P.streak, 'Streak: {n} day.', 'Streak: {n} days.') }} </span>
+          <span v-if="summary.heartBack">{{ t('You won back a heart.') }} </span>
+          <span v-if="mode === 'lesson' && mistakes === 0">{{ t('No mistakes, so you earned 5 bonus XP.') }}</span>
         </template>
       </p>
-      <button type="button" class="btn primary" @click="leave">Continue</button>
+      <button type="button" class="btn primary" @click="leave">{{ t('Continue') }}</button>
     </main>
 
     <main v-if="phase === 'hearts'" class="wrap end">
       <MeowCat mood="sleep" :size="150" />
       <div class="big-fa bad fa keep" lang="fa" dir="rtl">ای وای!</div>
-      <p class="muted">ey vây, “oh no”</p>
-      <h1>You are out of hearts</h1>
-      <p class="muted msg">Hearts refill tomorrow. A review round uses no hearts and wins one back. You can also switch on relaxed mode in Settings.</p>
+      <p class="muted">{{ t('ey vây, “oh no”') }}</p>
+      <h1>{{ t('You are out of hearts') }}</h1>
+      <p class="muted msg">{{ t('Hearts refill tomorrow. A review round uses no hearts and wins one back. You can also switch on relaxed mode in Settings.') }}</p>
       <div class="actions">
-        <button type="button" class="btn ghost" @click="leave">Back</button>
-        <RouterLink class="btn primary" :to="{ name: 'lesson', query: { review: '1' } }" replace>Review to win a heart</RouterLink>
+        <button type="button" class="btn ghost" @click="leave">{{ t('Back') }}</button>
+        <RouterLink class="btn primary" :to="{ name: 'lesson', query: { review: '1' } }" replace>{{ t('Review to win a heart') }}</RouterLink>
       </div>
     </main>
 
     <main v-if="phase === 'empty'" class="wrap end">
       <MeowCat mood="think" :size="130" />
-      <h1>Nothing to practise yet</h1>
-      <p class="muted msg">Finish a lesson first. Words you learn come back here for review.</p>
-      <RouterLink class="btn primary" to="/">Go to the course</RouterLink>
+      <h1>{{ t('Nothing to practise yet') }}</h1>
+      <p class="muted msg">{{ t('Finish a lesson first. Words you learn come back here for review.') }}</p>
+      <RouterLink class="btn primary" to="/">{{ t('Go to the course') }}</RouterLink>
     </main>
 
     <div v-if="quitOpen" class="scrim" @click.self="quitOpen = false">
       <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="quit-title">
-        <h2 id="quit-title">Quit this {{ mode === 'test' ? 'test' : 'lesson' }}?</h2>
-        <p class="muted">Your progress in it will be lost. Hearts already lost stay lost.</p>
+        <h2 id="quit-title">{{ mode === 'test' ? t('Quit this test?') : t('Quit this lesson?') }}</h2>
+        <p class="muted">{{ t('Your progress in it will be lost. Hearts already lost stay lost.') }}</p>
         <div class="actions end-row">
-          <button type="button" class="btn ghost sm" @click="quitOpen = false">Keep going</button>
-          <button type="button" class="btn danger sm" @click="leave">Quit</button>
+          <button type="button" class="btn ghost sm" @click="quitOpen = false">{{ t('Keep going') }}</button>
+          <button type="button" class="btn danger sm" @click="leave">{{ t('Quit') }}</button>
         </div>
       </div>
     </div>

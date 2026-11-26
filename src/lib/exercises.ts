@@ -4,6 +4,7 @@ import { LETTERS, LETTER_GROUPS, letterByFa, letterForms, type Letter } from '@/
 import { stripPunct } from '@/content/validate.ts'
 import { acceptedForms, gradeTyped } from './grade.ts'
 import { chance, pick, pickOne, shuffle } from './random.ts'
+import { t } from '@/i18n/index.ts'
 
 /** Something shown on screen: Persian with transliteration, English, or both. */
 export interface Shown {
@@ -99,7 +100,7 @@ export function grade(ex: Ex, answer: Answer): Grade {
       return { ok: true }
     case 'type': {
       const r = gradeTyped(typeof answer === 'string' ? answer : '', ex.accepted)
-      return r.typo ? { ok: true, note: `Watch the spelling: “${r.typo}”.` } : { ok: r.ok }
+      return r.typo ? { ok: true, note: t('Watch the spelling: “{w}”.', { w: r.typo }) } : { ok: r.ok }
     }
     case 'build': {
       const picked = Array.isArray(answer) ? answer.map((i) => ex.tiles[i]?.key ?? '') : []
@@ -139,7 +140,7 @@ const srsKey = (u: Unit, w: Word) => `${u.id}:${w.fa}`
 export function faToEn(w: Word, pool: readonly Word[], opts: { srs?: string; isNew?: boolean } = {}): ChoiceEx {
   const options = optionsFor(w, pool)
   return {
-    kind: 'choice', title: 'What does this mean?', prompt: { fa: w.fa, tr: w.tr, audio: w.fa },
+    kind: 'choice', title: t('What does this mean?'), prompt: { fa: w.fa, tr: w.tr, audio: w.fa },
     options: options.map((o) => ({ en: o.en })), answer: options.indexOf(w), faOptions: false,
     reveal: show(w), note: w.note, ...opts,
   }
@@ -148,7 +149,7 @@ export function faToEn(w: Word, pool: readonly Word[], opts: { srs?: string; isN
 export function enToFa(w: Word, pool: readonly Word[], opts: { srs?: string } = {}): ChoiceEx {
   const options = optionsFor(w, pool)
   return {
-    kind: 'choice', title: `Which one means “${w.en}”?`, prompt: {},
+    kind: 'choice', title: t('Which one means “{w}”?', { w: w.en }), prompt: {},
     options: options.map((o) => ({ fa: o.fa, tr: o.tr })), answer: options.indexOf(w), faOptions: true,
     reveal: show(w), note: w.note, ...opts,
   }
@@ -157,7 +158,7 @@ export function enToFa(w: Word, pool: readonly Word[], opts: { srs?: string } = 
 export function listenEx(w: Word, pool: readonly Word[], opts: { srs?: string } = {}): ChoiceEx {
   const options = optionsFor(w, pool)
   return {
-    kind: 'choice', title: 'Listen, then pick the meaning', prompt: { audio: w.fa, listen: true },
+    kind: 'choice', title: t('Listen, then pick the meaning'), prompt: { audio: w.fa, listen: true },
     options: options.map((o) => ({ en: o.en })), answer: options.indexOf(w), faOptions: false,
     reveal: show(w), ...opts,
   }
@@ -167,36 +168,36 @@ export function digitEx(w: Word, pool: readonly Word[]): ChoiceEx {
   const numbers = pool.filter((p) => p.digit)
   const options = optionsFor(w, numbers.length >= 4 ? numbers : pool)
   return {
-    kind: 'choice', title: 'Which number is this?', prompt: { digit: w.digit },
+    kind: 'choice', title: t('Which number is this?'), prompt: { digit: w.digit },
     options: options.map((o) => ({ en: o.en })), answer: options.indexOf(w), faOptions: false, reveal: show(w),
   }
 }
 
 export function typeEx(w: Word, opts: { srs?: string } = {}): TypeEx {
   return {
-    kind: 'type', title: 'Write this in English', prompt: { fa: w.fa, tr: w.tr, audio: w.fa },
+    kind: 'type', title: t('Write this in English'), prompt: { fa: w.fa, tr: w.tr, audio: w.fa },
     accepted: acceptedForms(w.en, w.alt), reveal: show(w), note: w.note, ...opts,
   }
 }
 
 export function matchEx(items: readonly Phrase[], opts: { hideTr?: boolean } = {}): MatchEx {
   const pairs = uniqBy(uniqBy(shuffle(items), (p) => p.fa), (p) => p.en).slice(0, 5)
-  return { kind: 'match', title: 'Tap the matching pairs', pairs: pairs.map(show) as MatchEx['pairs'], ...opts }
+  return { kind: 'match', title: t('Tap the matching pairs'), pairs: pairs.map(show) as MatchEx['pairs'], ...opts }
 }
 
 /* ---------- Sentence exercises ---------- */
 
-const enWords = (en: string) => en.replace(/[^A-Za-z0-9' -]/g, ' ').split(/\s+/).filter(Boolean)
+const enWords = (en: string) => en.replace(/[^\p{L}\p{N}'’ -]/gu, ' ').split(/\s+/).filter(Boolean)
 
 export function buildToEn(s: Sentence, pool: readonly Phrase[]): BuildEx {
   const target = enWords(s.en)
   const inTarget = new Set(target.map((w) => w.toLowerCase()))
   const extras = uniqBy(
-    shuffle(pool.flatMap((p) => enWords(p.en))).filter((w) => !inTarget.has(w.toLowerCase()) && /^[a-z']+$/i.test(w)),
+    shuffle(pool.flatMap((p) => enWords(p.en))).filter((w) => !inTarget.has(w.toLowerCase()) && /^[\p{L}'’]+$/u.test(w)),
     (w) => w.toLowerCase(),
   ).slice(0, Math.min(4, Math.max(2, Math.ceil(target.length / 2))))
   return {
-    kind: 'build', title: 'Translate this sentence', to: 'en', sentence: s,
+    kind: 'build', title: t('Translate this sentence'), to: 'en', sentence: s,
     tiles: shuffle([...target, ...extras].map((w) => ({ key: w, en: w }))), target, note: s.note,
   }
 }
@@ -207,12 +208,12 @@ export function buildToFa(s: Sentence, pool: readonly Word[]): BuildEx {
     .slice(0, Math.min(3, Math.max(2, Math.ceil(s.tiles.length / 2))))
     .map((w) => ({ key: w.fa, fa: w.fa, tr: w.tr }))
   return {
-    kind: 'build', title: 'Write this in Persian', to: 'fa', sentence: s,
+    kind: 'build', title: t('Write this in Persian'), to: 'fa', sentence: s,
     tiles: shuffle([...real, ...extras]), target: s.tiles, note: s.note,
   }
 }
 
-export function sentenceMeaning(s: Phrase, pool: readonly Phrase[], title = 'What does this mean?'): ChoiceEx {
+export function sentenceMeaning(s: Phrase, pool: readonly Phrase[], title = t('What does this mean?')): ChoiceEx {
   const options = optionsFor(s, pool, pool)
   return {
     kind: 'choice', title, prompt: { fa: s.fa, tr: s.tr, audio: s.fa },
@@ -280,7 +281,7 @@ function sentencesLesson(u: Unit, o: LessonOptions): Ex[] {
     const s = pickOne(u.sentences)
     const options = optionsFor(s, u.sentences, ALL_UNITS.flatMap((x) => x.sentences))
     ex.push({
-      kind: 'choice', title: 'Listen, then pick the meaning', prompt: { audio: s.fa, listen: true },
+      kind: 'choice', title: t('Listen, then pick the meaning'), prompt: { audio: s.fa, listen: true },
       options: options.map((x) => ({ en: x.en })), answer: options.indexOf(s), faOptions: false, reveal: show(s),
     })
   }
@@ -289,10 +290,10 @@ function sentencesLesson(u: Unit, o: LessonOptions): Ex[] {
 
 function dialogueLesson(u: Unit, o: LessonOptions): Ex[] {
   const d = u.dialogue ?? []
-  const ex: Ex[] = [{ kind: 'card', title: 'Read the conversation', dialogue: d }]
+  const ex: Ex[] = [{ kind: 'card', title: t('Read the conversation'), dialogue: d }]
   const lines: Phrase[] = d
   pick(d, Math.min(4, d.length)).forEach((line) => {
-    const e = sentenceMeaning(line, lines, `What does ${line.who} say?`)
+    const e = sentenceMeaning(line, lines, t('What does {who} say?', { who: line.who }))
     e.prompt.who = line.who
     ex.push(e)
   })
@@ -300,7 +301,7 @@ function dialogueLesson(u: Unit, o: LessonOptions): Ex[] {
   pick(replies, Math.min(3, replies.length)).forEach(({ line, next }) => {
     const options = optionsFor(next, lines, lines)
     ex.push({
-      kind: 'choice', title: `What does ${next.who} answer?`, prompt: { fa: line.fa, tr: line.tr, en: line.en, who: line.who, audio: line.fa },
+      kind: 'choice', title: t('What does {who} answer?', { who: next.who }), prompt: { fa: line.fa, tr: line.tr, en: line.en, who: line.who, audio: line.fa },
       options: options.map((x) => ({ fa: x.fa, tr: x.tr })), answer: options.indexOf(next), faOptions: true, reveal: show(next),
     })
   })
@@ -308,7 +309,7 @@ function dialogueLesson(u: Unit, o: LessonOptions): Ex[] {
     const line = pickOne(d)
     const options = optionsFor(line, lines, lines)
     ex.push({
-      kind: 'choice', title: 'Listen, then pick the meaning', prompt: { audio: line.fa, listen: true },
+      kind: 'choice', title: t('Listen, then pick the meaning'), prompt: { audio: line.fa, listen: true },
       options: options.map((x) => ({ en: x.en })), answer: options.indexOf(line), faOptions: false, reveal: show(line),
     })
   }
@@ -378,14 +379,14 @@ export function alphabetLesson(groupIndex: number): Ex[] {
     return shuffle(out)
   }
   const ex: Ex[] = [{
-    kind: 'card', title: `Letters ${group.title}`,
-    html: 'Tap a letter to hear its example word. Each letter changes shape depending on where it sits in a word. Persian is read from right to left.',
+    kind: 'card', title: t('Letters {letters}', { letters: group.title }),
+    html: t('Tap a letter to hear its example word. Each letter changes shape depending on where it sits in a word. Persian is read from right to left.'),
     examples: letters.map((l) => ({ fa: `${l.fa}  ·  ${l.example.fa}`, tr: `${l.name} (${l.sound}) · ${l.example.tr}`, en: l.example.en })),
   }]
   letters.forEach((l) => {
     const opts = soundOptions(l)
     ex.push({
-      kind: 'choice', title: 'What sound does this letter make?', prompt: { fa: l.fa, hideTr: true },
+      kind: 'choice', title: t('What sound does this letter make?'), prompt: { fa: l.fa, hideTr: true },
       options: opts.map((o) => ({ en: o.sound })), answer: opts.indexOf(l), faOptions: false, reveal: letterShown(l),
       note: sameSoundNote(l),
     })
@@ -393,7 +394,7 @@ export function alphabetLesson(groupIndex: number): Ex[] {
   pick(letters, 3).forEach((l) => {
     const opts = soundOptions(l)
     ex.push({
-      kind: 'choice', title: `Which letter makes the sound “${l.sound}”?`, prompt: {},
+      kind: 'choice', title: t('Which letter makes the sound “{s}”?', { s: l.sound }), prompt: {},
       options: opts.map((o) => ({ fa: o.fa, hideTr: true })), answer: opts.indexOf(l), faOptions: true, reveal: letterShown(l),
     })
   })
@@ -401,7 +402,7 @@ export function alphabetLesson(groupIndex: number): Ex[] {
     const form = pickOne(letterForms(l).slice(1))
     const opts = shuffle([l, ...pick(LETTERS.filter((x) => x.fa !== l.fa), 3)])
     ex.push({
-      kind: 'choice', title: `This is a letter in its “${form.label}” shape. Which letter is it?`, prompt: { fa: form.text, hideTr: true },
+      kind: 'choice', title: t('This is a letter in its “{shape}” shape. Which letter is it?', { shape: t(form.label) }), prompt: { fa: form.text, hideTr: true },
       options: opts.map((o) => ({ fa: o.fa, hideTr: true })), answer: opts.indexOf(l), faOptions: true, reveal: letterShown(l),
     })
   })
@@ -409,7 +410,7 @@ export function alphabetLesson(groupIndex: number): Ex[] {
   words.slice(0, 3).forEach((w) => {
     const opts = optionsFor(w, words, LETTERS.map((l) => l.example))
     ex.push({
-      kind: 'choice', title: 'How do you read this word?', prompt: { fa: w.fa, hideTr: true, audio: w.fa },
+      kind: 'choice', title: t('How do you read this word?'), prompt: { fa: w.fa, hideTr: true, audio: w.fa },
       options: opts.map((o) => ({ en: `${o.tr} (${o.en})` })), answer: opts.indexOf(w), faOptions: false, reveal: show(w),
     })
   })
@@ -421,7 +422,7 @@ export function alphabetLesson(groupIndex: number): Ex[] {
 function sameSoundNote(l: Letter): string | undefined {
   const same = LETTERS.filter((x) => x.sound === l.sound && x.fa !== l.fa)
   if (!same.length) return undefined
-  return `${[l, ...same].map((x) => x.fa).join(' ')} all sound “${l.sound}”. You learn which one a word uses by reading it.`
+  return t('{letters} all sound “{s}”. You learn which one a word uses by reading it.', { letters: [l, ...same].map((x) => x.fa).join(' '), s: l.sound })
 }
 
 /* ---------- Misc ---------- */

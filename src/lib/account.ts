@@ -3,6 +3,7 @@ import { createClient, type Session, type SupabaseClient } from '@supabase/supab
 import { P, freshProgress, parseProgress, type Progress } from './store.ts'
 import { mergeProgress, sameLearning } from './merge.ts'
 import { isNative } from './platform.ts'
+import { t } from '@/i18n/index.ts'
 
 /** Where email links land when sent from inside the phone apps. */
 const WEB_URL = 'https://shgabnaz1377.github.io/persianmeow/'
@@ -127,7 +128,7 @@ export function initAccount() {
 
 /** Send a one-time sign-in link. Returns an error message, or null on success. */
 export async function sendSignInLink(email: string): Promise<string | null> {
-  if (!sb) return 'Accounts are not available right now.'
+  if (!sb) return t('Accounts are not available right now.')
   const { error } = await sb.auth.signInWithOtp({
     email: email.trim(),
     options: { emailRedirectTo: isNative ? WEB_URL : location.origin + location.pathname, shouldCreateUser: true },
@@ -137,9 +138,9 @@ export async function sendSignInLink(email: string): Promise<string | null> {
 
 /** Sign in with the code from the email (works inside the phone apps too, where the link opens the browser). */
 export async function verifyCode(email: string, code: string): Promise<string | null> {
-  if (!sb) return 'Accounts are not available right now.'
+  if (!sb) return t('Accounts are not available right now.')
   const { error } = await sb.auth.verifyOtp({ email: email.trim(), token: code.replace(/\s/g, ''), type: 'email' })
-  if (error) return /expired|invalid/i.test(error.message) ? 'That code is wrong or has expired. Check the email, or send a new one.' : friendly(error.message)
+  if (error) return /expired|invalid/i.test(error.message) ? t('That code is wrong or has expired. Check the email, or send a new one.') : friendly(error.message)
   return null
 }
 
@@ -154,7 +155,7 @@ export async function signOut() {
 
 /** Delete this learner's saved progress from the cloud (the account itself stays). */
 export async function deleteCloudProgress(): Promise<string | null> {
-  if (!sb || !account.user) return 'You are not signed in.'
+  if (!sb || !account.user) return t('You are not signed in.')
   const { error } = await sb.from('progress').delete().eq('user_id', account.user.id)
   return error ? friendly(error.message) : null
 }
@@ -162,8 +163,8 @@ export async function deleteCloudProgress(): Promise<string | null> {
 export const syncNow = () => pull()
 
 function friendly(msg: string) {
-  if (/rate limit|too many/i.test(msg)) return 'Too many sign-in emails were sent. Wait a few minutes and try again.'
-  if (/invalid.*email|email.*invalid/i.test(msg)) return 'That email address does not look right. Check it and try again.'
-  if (/fetch|network/i.test(msg)) return 'Could not reach the server. Check your connection and try again.'
+  if (/rate limit|too many/i.test(msg)) return t('Too many sign-in emails were sent. Wait a few minutes and try again.')
+  if (/invalid.*email|email.*invalid/i.test(msg)) return t('That email address does not look right. Check it and try again.')
+  if (/fetch|network/i.test(msg)) return t('Could not reach the server. Check your connection and try again.')
   return msg
 }

@@ -11,7 +11,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "npm run check:content && vue-tsc --build && vite build",
+    "build": "npm run check:content && npm run check:italian && vue-tsc --build && vite build",
     "preview": "vite preview",
     "typecheck": "vue-tsc --build --force",
     "lint": "eslint .",
@@ -20,7 +20,8 @@
     "check:content": "node scripts/check-content.ts",
     "cap:sync": "npm run build && cap sync",
     "icons": "node scripts/make-art.ts && node scripts/render-icons.mjs && capacitor-assets generate --iconBackgroundColor #0a7b7a --iconBackgroundColorDark #0a7b7a --splashBackgroundColor #eef3f6 --splashBackgroundColorDark #0c1524",
-    "audio": "node scripts/gen-audio.ts"
+    "audio": "node scripts/gen-audio.ts",
+    "check:italian": "node scripts/check-italian.ts"
   },
   "dependencies": {
     "@capacitor-community/text-to-speech": "8.0.2",
