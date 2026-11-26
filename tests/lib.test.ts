@@ -81,3 +81,18 @@ describe('merging this device with the cloud', () => {
     expect(sameLearning(a, { ...a, xp: 1 })).toBe(false)
   })
 })
+
+describe('pronunciation audio', () => {
+  it('gives every speakable text its own audio file name', async () => {
+    const { allSpeech } = await import('@/content/speech.ts')
+    const { audioKey } = await import('@/lib/audioKey.ts')
+    const items = allSpeech()
+    expect(items.length).toBeGreaterThan(900)
+    const keys = new Set(items.map((i) => audioKey(i.text)))
+    expect(keys.size).toBe(items.length)
+  })
+  it('ignores spacing differences when naming a clip', async () => {
+    const { audioKey } = await import('@/lib/audioKey.ts')
+    expect(audioKey(' سلام  خوبی؟ ')).toBe(audioKey('سلام خوبی؟'))
+  })
+})

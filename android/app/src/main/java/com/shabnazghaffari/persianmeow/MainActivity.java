@@ -1,4 +1,4 @@
-package com.shabnazghaffari.meowfarsi;
+package com.shabnazghaffari.persianmeow;
 
 import com.getcapacitor.BridgeActivity;
 

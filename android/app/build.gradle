@@ -1,10 +1,10 @@
 apply plugin: 'com.android.application'
 
 android {
-    namespace = "com.shabnazghaffari.meowfarsi"
+    namespace = "com.shabnazghaffari.persianmeow"
     compileSdk = rootProject.ext.compileSdkVersion
     defaultConfig {
-        applicationId "com.shabnazghaffari.meowfarsi"
+        applicationId "com.shabnazghaffari.persianmeow"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

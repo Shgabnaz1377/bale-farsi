@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import type { DialogueLine } from '@/content/types.ts'
-import { faVoice, speak, stopSpeech } from '@/lib/speech.ts'
+import { hasVoice, speak, stopSpeech } from '@/lib/speech.ts'
 import SpeakButton from './SpeakButton.vue'
 import FaText from './FaText.vue'
 
@@ -26,7 +26,7 @@ async function playAll() {
 <template>
   <div class="dlg">
     <div class="tools">
-      <button v-if="faVoice" type="button" class="btn ghost sm" @click="playAll">{{ playing ? 'Stop' : 'Play the whole conversation' }}</button>
+      <button v-if="hasVoice()" type="button" class="btn ghost sm" @click="playAll">{{ playing ? 'Stop' : 'Play the whole conversation' }}</button>
       <label class="check"><input v-model="showEn" type="checkbox" /> Show English</label>
     </div>
     <ol class="lines">

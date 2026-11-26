@@ -22,7 +22,7 @@ defineProps<{ prompt: Prompt }>()
   </div>
   <div v-else-if="prompt.fa || prompt.en" class="prompt" :class="{ long: (prompt.fa?.length ?? 0) > 18 }">
     <span v-if="prompt.who" class="who chip lapis">{{ prompt.who }}</span>
-    <SpeakButton v-if="prompt.audio" :text="prompt.audio" />
+    <span v-if="prompt.audio" class="btns"><SpeakButton :text="prompt.audio" /><SpeakButton :text="prompt.audio" slow /></span>
     <div class="texts">
       <FaText v-if="prompt.fa" :fa="prompt.fa" :tr="prompt.tr" :size="(prompt.fa.length > 18 ? 'lg' : 'xl')" :hide-tr="prompt.hideTr" :keep-fa="prompt.hideTr" />
       <p v-if="prompt.en" class="en">{{ prompt.en }}</p>
@@ -34,6 +34,8 @@ defineProps<{ prompt: Prompt }>()
 .prompt { position: relative; display: flex; align-items: center; justify-content: center; gap: 16px; padding: 26px 16px 22px; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; min-height: 150px; flex-wrap: wrap; text-align: center }
 .texts { display: flex; flex-direction: column; align-items: center; gap: 6px; min-width: 0 }
 .en { color: var(--muted); font-size: 0.95rem }
+.btns { display: flex; flex-direction: column; gap: 6px }
+.btns :deep(.spk + .spk) { height: 32px }
 .who { position: absolute; top: 10px; left: 12px }
 .listen { display: flex; align-items: center; gap: 14px }
 .digit { font-size: 4.5rem; font-weight: 700; line-height: 1.2 }

@@ -5,7 +5,7 @@ import { mergeProgress, sameLearning } from './merge.ts'
 import { isNative } from './platform.ts'
 
 /** Where email links land when sent from inside the phone apps. */
-const WEB_URL = 'https://shgabnaz1377.github.io/meowfarsi/'
+const WEB_URL = 'https://shgabnaz1377.github.io/persianmeow/'
 
 /**
  * Optional accounts: sign in by email link, and progress syncs to Supabase

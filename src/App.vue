@@ -32,9 +32,9 @@ const nav = [
 <template>
   <header v-if="!inLesson" class="top">
     <div class="wrap top-in">
-      <RouterLink to="/" class="brand" aria-label="MeowFarsi, home">
+      <RouterLink to="/" class="brand" aria-label="PersianMeow, home">
         <MeowCat face :size="34" class="mark" />
-        <span class="name">Meow<span class="name-2">Farsi</span></span>
+        <span class="name">Persian<span class="name-2">Meow</span></span>
         <span class="fa keep brand-fa" lang="fa">میو</span>
       </RouterLink>
       <div class="stats" aria-label="Your stats">

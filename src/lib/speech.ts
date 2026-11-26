@@ -1,12 +1,19 @@
 import { ref } from 'vue'
 import { TextToSpeech } from '@capacitor-community/text-to-speech'
+import AUDIO_INDEX from '@/content/audio-index.json'
+import { audioKey } from './audioKey.ts'
 import { isNative } from './platform.ts'
 
 /**
- * Persian text-to-speech.
- * Web: the browser's speech synthesis, if it has a Persian (fa) voice (Edge ships one).
- * Native apps: the phone's own speech engine through Capacitor, if it supports Persian.
+ * Persian pronunciation.
+ * 1. Recorded clips (public/audio/<key>.mp3): every word, sentence, dialogue line and reading in the course.
+ *    They play on every browser and phone, and inside the apps they are bundled, so they work offline.
+ * 2. Fallback for anything without a clip: the browser's Persian voice (web) or the phone's speech engine (apps).
  */
+const CLIPS = new Set<string>(AUDIO_INDEX as string[])
+const clipUrl = (key: string) => `${import.meta.env.BASE_URL}audio/${key}.mp3`
+
+/** The fallback voice in use, if any (shown in Settings). */
 export const faVoice = ref<{ name: string } | null>(null)
 
 const synth: SpeechSynthesis | null = !isNative && typeof window !== 'undefined' && 'speechSynthesis' in window ? window.speechSynthesis : null
@@ -40,11 +47,42 @@ else if (synth) {
   synth.addEventListener?.('voiceschanged', loadWebVoices)
 }
 
-export const hasVoice = () => !!faVoice.value
+/** Number of recorded clips in this build. */
+export const clipCount = CLIPS.size
+export const hasClip = (text: string) => CLIPS.has(audioKey(text))
+/** Can this exact text be read aloud? */
+export const canSpeak = (text: string) => !!text && (hasClip(text) || !!faVoice.value)
+/** Can the app read Persian aloud at all (used to include listening exercises)? */
+export const hasVoice = () => CLIPS.size > 0 || !!faVoice.value
 
-/** Speak Persian text. Resolves when it finishes (or straight away if there is no voice). */
+let current: HTMLAudioElement | null = null
+
+function playClip(key: string, slow: boolean): Promise<void> {
+  return new Promise((resolve) => {
+    try {
+      current?.pause()
+      const a = new Audio(clipUrl(key))
+      current = a
+      a.playbackRate = slow ? 0.7 : 1
+      a.preservesPitch = true
+      a.onended = () => resolve()
+      a.onerror = () => resolve()
+      a.play().catch(() => resolve())
+    } catch {
+      resolve()
+    }
+  })
+}
+
+/** Speak Persian text. Resolves when it finishes (or straight away if nothing can say it). */
 export function speak(text: string, slow = false): Promise<void> {
-  if (!text || !faVoice.value) return Promise.resolve()
+  if (!text) return Promise.resolve()
+  const key = audioKey(text)
+  if (CLIPS.has(key)) {
+    stopSpeech()
+    return playClip(key, slow)
+  }
+  if (!faVoice.value) return Promise.resolve()
   if (isNative) {
     return TextToSpeech.stop()
       .catch(() => undefined)
@@ -69,6 +107,8 @@ export function speak(text: string, slow = false): Promise<void> {
 
 export function stopSpeech() {
   try {
+    current?.pause()
+    current = null
     if (isNative) void TextToSpeech.stop()
     else synth?.cancel()
   } catch {

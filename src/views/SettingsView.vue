@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { P, exportProgress, importProgress, resetProgress } from '@/lib/store.ts'
-import { faVoice } from '@/lib/speech.ts'
+import { clipCount, faVoice } from '@/lib/speech.ts'
 import { account } from '@/lib/account.ts'
 import InstallCard from '@/components/InstallCard.vue'
 
@@ -23,7 +23,7 @@ async function copyBackup() {
   }
 }
 function restore() {
-  backupMsg.value = importProgress(backup.value) ? 'Progress restored.' : 'That text is not a MeowFarsi backup. Copy it again from the other device.'
+  backupMsg.value = importProgress(backup.value) ? 'Progress restored.' : 'That text is not a PersianMeow backup. Copy it again from the other device.'
 }
 </script>
 
@@ -56,7 +56,8 @@ function restore() {
       <label class="check"><input id="sfx" v-model="P.settings.sfx" type="checkbox" /> Sound effects</label>
       <label class="check"><input id="autoplay" v-model="P.settings.autoplay" type="checkbox" /> Read Persian aloud automatically</label>
       <p class="muted small">
-        <template v-if="faVoice">Audio uses the voice “{{ faVoice.name }}”.</template>
+        <template v-if="clipCount">Every word, sentence, dialogue and reading has recorded Persian audio ({{ clipCount }} clips). Tap any speaker button to hear it; the smaller button next to it plays it slowly.</template>
+        <template v-else-if="faVoice">Audio uses the voice “{{ faVoice.name }}”.</template>
         <template v-else>Audio needs a Persian (fa-IR) voice. Microsoft Edge has one built in. Elsewhere, add a Persian voice in your system's speech settings and reload.</template>
       </p>
     </section>
@@ -113,8 +114,8 @@ function restore() {
     </section>
 
     <p class="muted small about">
-      MeowFarsi is free and open source. The course content was written with AI help and is being reviewed by native speakers; if you spot a mistake,
-      <a href="https://github.com/Shgabnaz1377/meowfarsi/issues" target="_blank" rel="noopener">open an issue on GitHub</a>.
+      PersianMeow is free and open source. The course content was written with AI help and is being reviewed by native speakers; if you spot a mistake,
+      <a href="https://github.com/Shgabnaz1377/persianmeow/issues" target="_blank" rel="noopener">open an issue on GitHub</a>.
     </p>
   </main>
 </template>
