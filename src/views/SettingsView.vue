@@ -23,7 +23,7 @@ async function copyBackup() {
   }
 }
 function restore() {
-  backupMsg.value = importProgress(backup.value) ? 'Progress restored.' : 'That text is not a Bale backup. Copy it again from the other device.'
+  backupMsg.value = importProgress(backup.value) ? 'Progress restored.' : 'That text is not a MeowFarsi backup. Copy it again from the other device.'
 }
 </script>
 
@@ -113,8 +113,8 @@ function restore() {
     </section>
 
     <p class="muted small about">
-      Bale is free and open source. The course content was written with AI help and is being reviewed by native speakers; if you spot a mistake,
-      <a href="https://github.com/Shgabnaz1377/bale-farsi/issues" target="_blank" rel="noopener">open an issue on GitHub</a>.
+      MeowFarsi is free and open source. The course content was written with AI help and is being reviewed by native speakers; if you spot a mistake,
+      <a href="https://github.com/Shgabnaz1377/meowfarsi/issues" target="_blank" rel="noopener">open an issue on GitHub</a>.
     </p>
   </main>
 </template>

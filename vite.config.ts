@@ -15,8 +15,8 @@ export default defineConfig({
       includeAssets: ['favicon.svg', 'apple-touch-icon.png'],
       manifest: {
         id: './',
-        name: 'Bale · Learn Persian',
-        short_name: 'Bale',
+        name: 'MeowFarsi · Learn Persian',
+        short_name: 'MeowFarsi',
         description: 'Learn Persian (Farsi) from A1 to B2, with Finglish for every word.',
         lang: 'en',
         start_url: './',

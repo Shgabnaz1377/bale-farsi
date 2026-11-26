@@ -7,6 +7,7 @@ const fonts = '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?fa
 const jobs = [
   ['assets/icon.svg', 1024, 'assets/icon-only.png'],
   ['assets/icon.svg', 1024, 'assets/icon-foreground.png'],
+  ['assets/icon-background.svg', 1024, 'assets/icon-background.png'],
   ['assets/splash.svg', 2732, 'assets/splash.png'],
   ['assets/splash-dark.svg', 2732, 'assets/splash-dark.png'],
   ['assets/icon.svg', 512, 'public/icon-512.png'],

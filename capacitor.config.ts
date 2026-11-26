@@ -1,8 +1,8 @@
 import type { CapacitorConfig } from '@capacitor/cli'
 
 const config: CapacitorConfig = {
-  appId: 'com.shabnazghaffari.bale',
-  appName: 'Bale',
+  appId: 'com.shabnazghaffari.meowfarsi',
+  appName: 'MeowFarsi',
   // The same production build as the website; every lesson is bundled, so the apps work offline.
   webDir: 'dist',
   backgroundColor: '#eef3f6',

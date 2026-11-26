@@ -20,6 +20,7 @@ import MatchEx from '@/components/ex/MatchEx.vue'
 import BuildEx from '@/components/ex/BuildEx.vue'
 import TypeEx from '@/components/ex/TypeEx.vue'
 import CardEx from '@/components/ex/CardEx.vue'
+import MeowCat from '@/components/MeowCat.vue'
 
 type Mode = 'lesson' | 'review' | 'test'
 const route = useRoute()
@@ -235,10 +236,13 @@ const testLevelName = LEVELS.find((l) => l.level === testLevel)?.name
     <main v-if="phase === 'run' && current" class="wrap stage">
       <p class="crumb">{{ title }}</p>
       <div class="ex" :class="{ locked: !!result }">
-        <h1 class="kicker">
-          {{ current.title }}
-          <span v-if="current.kind === 'choice' && current.isNew" class="chip saffron">New word</span>
-        </h1>
+        <div class="ask">
+          <MeowCat :mood="result ? (result.ok ? 'happy' : 'sad') : 'think'" :size="58" class="ask-cat" />
+          <h1 class="kicker">
+            {{ current.title }}
+            <span v-if="current.kind === 'choice' && current.isNew" class="chip saffron">New word</span>
+          </h1>
+        </div>
         <ChoiceEx v-if="current.kind === 'choice'" :key="'c' + renderKey" ref="choiceRef" v-model="(answer as number | null)" :ex="current" :locked="!!result" />
         <MatchEx v-else-if="current.kind === 'match'" :key="'m' + renderKey" :ex="current" :locked="!!result" @complete="onMatchComplete" />
         <BuildEx v-else-if="current.kind === 'build'" :key="'b' + renderKey" v-model="(answer as number[] | null)" :ex="current" :locked="!!result" />
@@ -249,6 +253,7 @@ const testLevelName = LEVELS.find((l) => l.level === testLevel)?.name
 
     <footer v-if="phase === 'run' && current" class="foot" :class="result ? (result.ok ? 'good' : 'bad') : ''">
       <div class="wrap foot-in">
+        <MeowCat v-if="result" :key="'fb' + renderKey" :mood="result.ok ? 'cheer' : 'sad'" :size="64" class="fb-cat" />
         <div v-if="result" class="fb" aria-live="polite">
           <h2>
             <AppIcon :name="result.ok ? 'check' : 'x'" />
@@ -274,6 +279,7 @@ const testLevelName = LEVELS.find((l) => l.level === testLevel)?.name
     </footer>
 
     <main v-if="phase === 'done'" class="wrap end">
+      <MeowCat :mood="mode === 'test' && !summary.passed ? 'sad' : 'cheer'" :size="150" />
       <div class="big-fa fa keep" lang="fa" dir="rtl" :class="{ bad: mode === 'test' && !summary.passed }">{{ endFa }}</div>
       <p class="muted">{{ endTr }}</p>
       <h1 v-if="mode === 'test'">{{ summary.passed ? `You passed ${testLevel}` : `${summary.score}%: not yet` }}</h1>
@@ -297,6 +303,7 @@ const testLevelName = LEVELS.find((l) => l.level === testLevel)?.name
     </main>
 
     <main v-if="phase === 'hearts'" class="wrap end">
+      <MeowCat mood="sleep" :size="150" />
       <div class="big-fa bad fa keep" lang="fa" dir="rtl">ای وای!</div>
       <p class="muted">ey vây, “oh no”</p>
       <h1>You are out of hearts</h1>
@@ -308,6 +315,7 @@ const testLevelName = LEVELS.find((l) => l.level === testLevel)?.name
     </main>
 
     <main v-if="phase === 'empty'" class="wrap end">
+      <MeowCat mood="think" :size="130" />
       <h1>Nothing to practise yet</h1>
       <p class="muted msg">Finish a lesson first. Words you learn come back here for review.</p>
       <RouterLink class="btn primary" to="/">Go to the course</RouterLink>
@@ -336,6 +344,9 @@ const testLevelName = LEVELS.find((l) => l.level === testLevel)?.name
 .stage { padding-block: 18px 220px }
 .crumb { font-size: 0.8rem; color: var(--muted); margin-bottom: 8px }
 .ex { display: flex; flex-direction: column; gap: 18px }
+.ask { display: flex; align-items: center; gap: 12px }
+.ask-cat { margin-block: -6px }
+.fb-cat { flex: none }
 .kicker { font-size: 1.45rem; font-weight: 800; display: flex; align-items: center; gap: 10px; flex-wrap: wrap }
 .foot { position: fixed; left: 0; right: 0; bottom: 0; z-index: 25; background: var(--surface); border-top: 1px solid var(--line); padding-block: 14px calc(14px + env(safe-area-inset-bottom, 0px)) }
 .foot-in { display: flex; align-items: center; gap: 16px; flex-wrap: wrap }
@@ -367,5 +378,5 @@ const testLevelName = LEVELS.find((l) => l.level === testLevel)?.name
 .end-row { justify-content: flex-end }
 .scrim { position: fixed; inset: 0; background: var(--scrim); z-index: 40; display: grid; place-items: end center; padding: 16px max(16px, env(safe-area-inset-right, 0px)) calc(16px + env(safe-area-inset-bottom, 0px)) max(16px, env(safe-area-inset-left, 0px)) }
 .sheet { background: var(--surface); border-radius: 20px; padding: 22px; max-width: 440px; width: 100%; display: flex; flex-direction: column; gap: 12px; box-shadow: var(--shadow) }
-@media (max-width: 520px) { .go { width: 100%; margin-left: 0 } .kicker { font-size: 1.22rem } }
+@media (max-width: 520px) { .go { width: 100%; margin-left: 0 } .kicker { font-size: 1.22rem } .fb-cat { display: none } }
 </style>

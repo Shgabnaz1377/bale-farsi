@@ -4,6 +4,7 @@ import { useRoute } from 'vue-router'
 import { P, rollDay, streakActiveToday } from '@/lib/store.ts'
 import { account, initAccount } from '@/lib/account.ts'
 import AppIcon from '@/components/AppIcon.vue'
+import MeowCat from '@/components/MeowCat.vue'
 
 const route = useRoute()
 const inLesson = computed(() => route.name === 'lesson')
@@ -31,10 +32,10 @@ const nav = [
 <template>
   <header v-if="!inLesson" class="top">
     <div class="wrap top-in">
-      <RouterLink to="/" class="brand" aria-label="Bale, home">
-        <span class="mark" aria-hidden="true"></span>
-        <span class="name">Bale</span>
-        <span class="fa keep brand-fa" lang="fa">بله</span>
+      <RouterLink to="/" class="brand" aria-label="MeowFarsi, home">
+        <MeowCat face :size="34" class="mark" />
+        <span class="name">Meow<span class="name-2">Farsi</span></span>
+        <span class="fa keep brand-fa" lang="fa">میو</span>
       </RouterLink>
       <div class="stats" aria-label="Your stats">
         <span class="stat streak" :class="{ off: !streakActiveToday() }" :title="streakActiveToday() ? 'Day streak' : 'Finish a lesson today to keep your streak'">
@@ -63,8 +64,8 @@ const nav = [
 .top { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--bg); border-bottom: 1px solid var(--line) }
 .top-in { display: flex; align-items: center; gap: 12px; padding-block: 10px 6px }
 .brand { display: flex; align-items: center; gap: 8px; margin-right: auto; text-decoration: none; color: var(--ink) }
-.mark { width: 26px; height: 26px; background: var(--accent);
-  clip-path: polygon(50% 0%,65.31% 13.04%,85.36% 14.64%,86.96% 34.69%,100% 50%,86.96% 65.31%,85.36% 85.36%,65.31% 86.96%,50% 100%,34.69% 86.96%,14.64% 85.36%,13.04% 65.31%,0% 50%,13.04% 34.69%,14.64% 14.64%,34.69% 13.04%) }
+.mark { background: var(--accent); border-radius: 11px; padding: 1px }
+.name-2 { color: var(--accent) }
 .name { font-family: var(--f-display); font-size: 1.45rem; font-weight: 800; letter-spacing: -0.01em }
 .brand-fa { font-size: 1.2rem; color: var(--accent); font-weight: 700 }
 .stats { display: flex; gap: 6px }

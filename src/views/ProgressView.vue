@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { ALL_WORDS, LEVELS } from '@/content/course.ts'
-import { P, learnedCount, seenCount, today, unitDone } from '@/lib/store.ts'
+import { P, learnedCount, seenCount, today, unitDone, streakActiveToday } from '@/lib/store.ts'
+import MeowCat from '@/components/MeowCat.vue'
 
 const WEEKS = 12
 const days = computed(() => {
@@ -21,7 +22,10 @@ const dateOf = (d: number) => new Date(d * 86400000).toLocaleDateString(undefine
 
 <template>
   <main class="wrap page">
-    <h1>Progress</h1>
+    <div class="title-row">
+      <h1>Progress</h1>
+      <MeowCat :mood="streakActiveToday() ? 'cheer' : P.streak ? 'sad' : 'sleep'" :size="72" :bubble="streakActiveToday() ? 'âfarin!' : ''" bubble-fa="آفرین!" />
+    </div>
     <div class="tiles">
       <div class="card tile"><span class="eyebrow">Streak</span><b>{{ P.streak }}</b><span class="muted small">best {{ P.bestStreak }}</span></div>
       <div class="card tile"><span class="eyebrow">Total XP</span><b>{{ P.xp }}</b><span class="muted small">{{ activeDays }} active day{{ activeDays === 1 ? '' : 's' }}</span></div>
@@ -54,6 +58,7 @@ const dateOf = (d: number) => new Date(d * 86400000).toLocaleDateString(undefine
 
 <style scoped>
 h1 { font-size: 1.7rem; font-weight: 800 }
+.title-row { display: flex; align-items: center; justify-content: space-between; gap: 12px }
 h2 { font-size: 1.15rem; font-weight: 800; margin-bottom: 4px }
 .tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px }
 .tile { display: flex; flex-direction: column; gap: 2px }

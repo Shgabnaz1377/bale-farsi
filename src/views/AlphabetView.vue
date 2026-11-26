@@ -4,6 +4,7 @@ import { LETTERS, LETTER_GROUPS, letterForms } from '@/content/alphabet.ts'
 import { P, alphabetUnlocked } from '@/lib/store.ts'
 import { speak } from '@/lib/speech.ts'
 import StarNode from '@/components/StarNode.vue'
+import MeowCat from '@/components/MeowCat.vue'
 
 const router = useRouter()
 const faNum = (n: number) => String(n).replace(/\d/g, (d) => '۰۱۲۳۴۵۶۷۸۹'[Number(d)])
@@ -19,7 +20,10 @@ function state(i: number) {
   <main class="wrap page">
     <section class="card head">
       <p class="eyebrow">The Persian alphabet · <span class="fa keep" lang="fa">الفبای فارسی</span></p>
-      <h1>32 letters, right to left</h1>
+      <div class="title-row">
+        <h1>32 letters, right to left</h1>
+        <MeowCat mood="think" :size="64" />
+      </div>
       <p class="muted">
         Persian uses the Arabic script plus four letters of its own: <span class="fa keep" lang="fa">پ چ ژ گ</span>.
         Most letters join the next one and change shape with their position. Seven never join forward:
@@ -51,6 +55,7 @@ function state(i: number) {
 <style scoped>
 .head { display: flex; flex-direction: column; gap: 10px }
 .head h1 { font-size: 1.7rem; font-weight: 800 }
+.title-row { display: flex; align-items: center; justify-content: space-between; gap: 12px }
 .head .fa { font-size: 1.15em; color: var(--ink) }
 .nodes { list-style: none; margin: 8px 0 0; padding: 0; display: flex; justify-content: space-between; gap: 4px }
 .nodes :deep(.label) .fa { font-size: 0.95rem }

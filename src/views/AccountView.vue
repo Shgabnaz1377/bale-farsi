@@ -2,6 +2,7 @@
 import { computed, ref } from 'vue'
 import { account, deleteCloudProgress, sendSignInLink, signOut, syncNow, verifyCode } from '@/lib/account.ts'
 import { isNative } from '@/lib/platform.ts'
+import MeowCat from '@/components/MeowCat.vue'
 import { P } from '@/lib/store.ts'
 
 const email = ref('')
@@ -54,10 +55,13 @@ async function removeCloud() {
 
 <template>
   <main class="wrap page">
-    <h1>Your account</h1>
+    <div class="title-row">
+      <h1>Your account</h1>
+      <MeowCat :mood="account.user ? 'happy' : sentTo ? 'think' : 'wave'" :size="72" />
+    </div>
 
     <section v-if="!account.enabled" class="card block">
-      <p>Accounts are not switched on for this copy of Bale. Your progress is saved in this browser.</p>
+      <p>Accounts are not switched on for this copy of MeowFarsi. Your progress is saved in this browser.</p>
     </section>
 
     <section v-else-if="!account.ready" class="card block"><p class="muted">Checking…</p></section>
@@ -116,6 +120,7 @@ async function removeCloud() {
 
 <style scoped>
 h1 { font-size: 1.7rem; font-weight: 800 }
+.title-row { display: flex; align-items: center; justify-content: space-between; gap: 12px }
 .block { display: flex; flex-direction: column; gap: 12px }
 .block h2 { font-size: 1.15rem; font-weight: 800 }
 .who { font-family: var(--f-display); font-size: 1.3rem; font-weight: 800; overflow-wrap: anywhere }

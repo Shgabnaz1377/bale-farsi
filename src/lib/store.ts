@@ -36,6 +36,7 @@ export interface Progress {
 }
 
 export const MAX_HEARTS = 5
+// Storage keys keep the app's first name so progress saved before the rename is not lost.
 const STORE_KEY = 'bale-farsi:v1'
 
 export function freshProgress(): Progress {
