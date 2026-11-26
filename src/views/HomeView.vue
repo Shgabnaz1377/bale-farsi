@@ -8,6 +8,7 @@ import { dayNumber } from '@/lib/srs.ts'
 import {
   P, dueCount, levelUnlocked, nextLesson, seenCount, unitDone, unitProgress, unitUnlocked, xpToday, alphabetDone,
 } from '@/lib/store.ts'
+import { account } from '@/lib/account.ts'
 import AppIcon from '@/components/AppIcon.vue'
 import FaText from '@/components/FaText.vue'
 import SpeakButton from '@/components/SpeakButton.vue'
@@ -43,7 +44,7 @@ function goNext() {
       <div class="hero-text">
         <p class="eyebrow">Persian for English speakers · A1 to B2</p>
         <h1>Learn to read, speak and understand Persian.</h1>
-        <p class="muted">Short lessons with the alphabet, grammar, real dialogues and readings, and spaced review so words stick. Your progress stays in this browser.</p>
+        <p class="muted">Short lessons with the alphabet, grammar, real dialogues and readings, and spaced review so words stick. {{ account.enabled ? 'Sign in to keep your progress on every device.' : 'Your progress stays in this browser.' }}</p>
         <div class="row">
           <button type="button" class="btn primary" @click="goNext">Start at A1</button>
           <RouterLink class="btn ghost" :to="{ name: 'lesson', query: { test: 'A1' } }">I know some Persian: test out of A1</RouterLink>

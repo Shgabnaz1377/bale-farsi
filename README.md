@@ -14,9 +14,21 @@ Bale (<span lang="fa">بله</span>, "yes") is a free web app that teaches Persi
 | **Review** | Leitner spaced repetition: every word you meet comes back when it is due. |
 | **Level tests** | Test out of a level to unlock the next one. |
 | **Motivation** | XP, daily goal, streak on the Persian week (Saturday first), hearts or a relaxed mode. |
+| **Accounts** | Optional sign-in by email link; progress syncs across devices and merges with what is already on the device. |
 | **Settings** | Persian script, Latin transliteration, or both; light/dark; backup and restore progress. |
 
 Audio uses the browser's speech synthesis and needs a Persian (fa-IR) voice; Microsoft Edge ships one.
+
+## Accounts (optional)
+
+Without configuration Bale is fully offline and keeps progress in the browser. To let learners sign in and sync:
+
+1. Create a [Supabase](https://supabase.com) project.
+2. In its SQL editor, run [`supabase/schema.sql`](supabase/schema.sql): one `progress` row per learner, with row level security so each learner can only read and write their own row.
+3. Under Authentication → URL Configuration, add the site URL (e.g. `https://shgabnaz1377.github.io/bale-farsi/`) to the redirect URLs.
+4. Set the repository variables `SUPABASE_URL` and `SUPABASE_ANON_KEY` (Settings → Secrets and variables → Actions → Variables). Both are public by design. Locally, put them in `.env.local` as `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`.
+
+Sign-in uses a one-time email link (PKCE). Signing out clears the device so the next learner starts fresh.
 
 ## Content quality
 
