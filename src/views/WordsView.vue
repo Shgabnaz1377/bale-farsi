@@ -31,7 +31,7 @@ const status = (key: string) => {
   <main class="wrap page">
     <div>
       <h1>Words</h1>
-      <p class="muted">{{ ALL_WORDS.length }} words across A1 to B2. Search in English, Latin letters or Persian.</p>
+      <p class="muted">{{ ALL_WORDS.length }} words across A1 to B2. Search in English, Finglish or Persian.</p>
     </div>
     <div class="filters card">
       <label class="sr-only" for="word-search">Search words</label>

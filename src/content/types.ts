@@ -46,7 +46,10 @@ export interface Sentence extends Phrase {
 export interface GrammarPoint {
   /** e.g. 'The ezâfe: linking words with -e'. */
   title: string
-  /** 2–5 short plain-English sentences. May use <b>, <i> and <span class="fa">…</span>. No other HTML. */
+  /**
+   * 2–5 short plain-English sentences. May use <b>, <i> and <span class="fa">…</span>. No other HTML.
+   * Every <span class="fa"> must be followed by its Finglish: <i>…</i> or (…).
+   */
   body: string
   /** 3–4 examples that show the point. */
   examples: Phrase[]
@@ -59,6 +62,11 @@ export interface GrammarCheck {
   q: string
   /** 3–4 Persian options. */
   options: string[]
+  /**
+   * Finglish (transliteration) of each option, same order and length as options.
+   * Learners who cannot read the script yet must be able to answer from these alone.
+   */
+  optionsTr: string[]
   /** Index into options of the correct one. */
   answer: number
   /** One-line explanation shown after answering. */

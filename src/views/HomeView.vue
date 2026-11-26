@@ -44,7 +44,7 @@ function goNext() {
       <div class="hero-text">
         <p class="eyebrow">Persian for English speakers · A1 to B2</p>
         <h1>Learn to read, speak and understand Persian.</h1>
-        <p class="muted">Short lessons with the alphabet, grammar, real dialogues and readings, and spaced review so words stick. {{ account.enabled ? 'Sign in to keep your progress on every device.' : 'Your progress stays in this browser.' }}</p>
+        <p class="muted">You don't need to read the Persian alphabet: every word comes with Finglish, Persian in English letters (salâm = hello). Short lessons, grammar, dialogues, readings and spaced review. {{ account.enabled ? 'Sign in to keep your progress on every device.' : 'Your progress stays in this browser.' }}</p>
         <div class="row">
           <button type="button" class="btn primary" @click="goNext">Start at A1</button>
           <RouterLink class="btn ghost" :to="{ name: 'lesson', query: { test: 'A1' } }">I know some Persian: test out of A1</RouterLink>

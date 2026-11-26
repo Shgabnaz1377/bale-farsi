@@ -18,6 +18,14 @@ export function validateUnits(units: Unit[], level: Level): string[] {
     if (!PERSIAN.test(u.fa)) at(`unit fa has non-Persian characters: ${u.fa}`)
     for (const f of ['title', 'tr', 'can', 'tip'] as const) if (!u[f]?.trim()) at(`missing ${f}`)
     for (const html of [u.tip, u.grammar.body]) if (ALLOWED_HTML.test(html)) at(`disallowed HTML in: ${html.slice(0, 60)}`)
+    for (const html of [u.tip, u.grammar.body]) {
+      const re = /<span class="fa">([^<]*)<\/span>(\s*.{0,4})/g
+      let m: RegExpExecArray | null
+      while ((m = re.exec(html))) {
+        const digitsOnly = /^[۰-۹\s]+$/.test(m[1])
+        if (!digitsOnly && !/^\s*(\(|<i>|\s*[,.;:]?\s*\()/.test(m[2])) at(`Persian without Finglish after it: ${m[1]}`)
+      }
+    }
 
     if (u.words.length < 10) at(`only ${u.words.length} words (want 12)`)
     const fas = new Set<string>(), ens = new Set<string>()
@@ -46,6 +54,9 @@ export function validateUnits(units: Unit[], level: Level): string[] {
       if (c.options.length < 3) at(`grammar check needs 3+ options: ${c.q}`)
       if (c.answer < 0 || c.answer >= c.options.length) at(`grammar check answer out of range: ${c.q}`)
       if (new Set(c.options).size !== c.options.length) at(`grammar check has duplicate options: ${c.q}`)
+      if (!Array.isArray(c.optionsTr) || c.optionsTr.length !== c.options.length || c.optionsTr.some((t) => !t?.trim()))
+        at(`grammar check needs optionsTr (Finglish for every option): ${c.q}`)
+      else if (new Set(c.optionsTr).size !== c.optionsTr.length) at(`grammar check has duplicate Finglish options: ${c.q}`)
     }
 
     if ((level !== 'A1') && (!u.dialogue || u.dialogue.length < 6)) at('A2+ units need a dialogue of 6+ lines')
