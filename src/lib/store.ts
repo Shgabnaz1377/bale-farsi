@@ -8,6 +8,7 @@ export type ScriptMode = 'both' | 'script' | 'latin'
 export type Theme = 'system' | 'light' | 'dark'
 export type { Lang } from '@/i18n/index.ts'
 import { detectLang, type Lang } from '@/i18n/index.ts'
+import { APP } from '@/app.ts'
 
 export interface Settings {
   mode: ScriptMode
@@ -40,8 +41,8 @@ export interface Progress {
 }
 
 export const MAX_HEARTS = 5
-// Storage keys keep the app's first name so progress saved before the rename is not lost.
-const STORE_KEY = 'bale-farsi:v1'
+// One storage key per app (PersianMeow keeps its first name, so progress saved before the renames is not lost).
+const STORE_KEY = `${APP.storage}:v1`
 
 export function freshProgress(): Progress {
   return {

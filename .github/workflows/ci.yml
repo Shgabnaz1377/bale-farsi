@@ -23,13 +23,16 @@ jobs:
           node-version-file: .nvmrc
           cache: npm
       - run: npm ci
-      - name: Content rules
-        run: npm run check:content
+      - name: Content rules (PersianMeow, its Italian translation, and Bego Ciao)
+        run: npm run check:content && npm run check:italian && npm run check:bego
       - run: npm run lint
       - run: npm run typecheck
-      - run: npm test
-      - name: Build
-        run: npm run build
+      - name: Unit tests, PersianMeow
+        run: npm test
+      - name: Unit tests, Bego Ciao
+        run: npm run test:bego
+      - name: Build both apps
+        run: npm run build && npm run build:bego
       - name: Install Chromium
         run: npx playwright install --with-deps chromium
       - name: Browser smoke tests (console must stay clean)

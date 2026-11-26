@@ -1,5 +1,6 @@
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 import { extractKeys } from '@/i18n/keys.ts'
+import { untranslatedText } from '@/i18n/untranslated.ts'
 import { IT } from '@/i18n/it.ts'
 import { setLang } from '@/i18n/index.ts'
 import { ALL_UNITS, LEVELS, lessonsOf } from '@/content/course.ts'
@@ -13,6 +14,9 @@ import { IT_B2 } from '@/content/i18n/it/b2.ts'
 import { grade, unitLesson } from '@/lib/exercises.ts'
 import { gradeTyped } from '@/lib/grade.ts'
 import { mulberry32, setRng } from '@/lib/random.ts'
+import { APP } from '@/app.ts'
+import { FA_BEGO } from '@/i18n/fa-bego.ts'
+import { normFa } from '@/lib/grade.ts'
 
 const IT_COURSE = { A1: IT_A1, A2: IT_A2, B1: IT_B1, B2: IT_B2 }
 
@@ -21,7 +25,32 @@ const SOURCES = Object.entries(import.meta.glob(['/src/**/*.vue', '/src/**/*.ts'
   .map(([, s]) => s as string)
 const uiKeys = () => extractKeys(SOURCES)
 
-describe('Italian interface', () => {
+describe('every screen is translatable', () => {
+  it('has no English written straight into a template (it must go through t())', () => {
+    const vue = Object.entries(import.meta.glob('/src/**/*.vue', { query: '?raw', import: 'default', eager: true }))
+    const left = vue.map(([file, src]) => [file, untranslatedText(src as string)] as const).filter(([, l]) => l.length)
+    expect(left).toEqual([])
+  })
+})
+
+describe.runIf(APP.id === 'begociao')('Bego Ciao Persian interface', () => {
+  it('has a Persian string for every English string in the app', () => {
+    expect(uiKeys().filter((k) => !FA_BEGO[k]?.trim())).toEqual([])
+  })
+  it('keeps every {placeholder} in the translation', () => {
+    const ph = (s: string) => (s.match(/\{\w+\}/g) ?? []).sort().join()
+    expect(Object.entries(FA_BEGO).filter(([en, fa]) => ph(en) !== ph(fa)).map(([en]) => en)).toEqual([])
+  })
+  it('grades typed Persian answers fairly', () => {
+    setLang('fa')
+    expect(gradeTyped('سلام', ['سلام']).ok).toBe(true)
+    expect(gradeTyped('مي‌خواهم', ['می‌خواهم']).ok).toBe(true)
+    expect(normFa('كتاب را')).toBe(normFa('کتاب'))
+    setLang('en')
+  })
+})
+
+describe.runIf(APP.id === 'persianmeow')('Italian interface', () => {
   it('has an Italian string for every English string in the app', () => {
     const missing = uiKeys().filter((k) => !(k in IT))
     expect(missing).toEqual([])
@@ -35,7 +64,7 @@ describe('Italian interface', () => {
   })
 })
 
-describe('Italian course', () => {
+describe.runIf(APP.id === 'persianmeow')('Italian course', () => {
   for (const lv of LEVELS) {
     it(`${lv.level} translation is complete and matches the course`, () => {
       expect(validateTranslation(lv.units, IT_COURSE[lv.level])).toEqual([])

@@ -15,8 +15,18 @@ permissions:
 
 jobs:
   android:
-    name: Android (debug APK)
+    name: Android ${{ matrix.app.name }} (debug APK)
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        app:
+          - { id: persianmeow, name: PersianMeow, build: build, project: android }
+          - { id: begociao, name: Bego Ciao, build: 'build:bego', project: native/begociao/android }
+    env:
+      APP: ${{ matrix.app.id }}
+      VITE_SUPABASE_URL: ${{ vars.SUPABASE_URL }}
+      VITE_SUPABASE_ANON_KEY: ${{ vars.SUPABASE_ANON_KEY }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -30,23 +40,30 @@ jobs:
           cache: gradle
       - run: npm ci
       - name: Build the web app
-        run: npm run build
-        env:
-          VITE_SUPABASE_URL: ${{ vars.SUPABASE_URL }}
-          VITE_SUPABASE_ANON_KEY: ${{ vars.SUPABASE_ANON_KEY }}
+        run: npm run ${{ matrix.app.build }}
       - run: npx cap sync android
       - name: Build APK
-        working-directory: android
-        run: ./gradlew assembleDebug --no-daemon
+        working-directory: ${{ matrix.app.project }}
+        run: chmod +x gradlew && ./gradlew assembleDebug --no-daemon
       - uses: actions/upload-artifact@v4
         with:
-          name: bale-android-debug-apk
-          path: android/app/build/outputs/apk/debug/app-debug.apk
+          name: ${{ matrix.app.id }}-android-debug-apk
+          path: ${{ matrix.app.project }}/app/build/outputs/apk/debug/app-debug.apk
           retention-days: 30
 
   ios:
-    name: iOS (simulator build, unsigned)
+    name: iOS ${{ matrix.app.name }} (simulator build, unsigned)
     runs-on: macos-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        app:
+          - { id: persianmeow, name: PersianMeow, build: build, project: ios/App }
+          - { id: begociao, name: Bego Ciao, build: 'build:bego', project: native/begociao/ios/App }
+    env:
+      APP: ${{ matrix.app.id }}
+      VITE_SUPABASE_URL: ${{ vars.SUPABASE_URL }}
+      VITE_SUPABASE_ANON_KEY: ${{ vars.SUPABASE_ANON_KEY }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -55,14 +72,11 @@ jobs:
           cache: npm
       - run: npm ci
       - name: Build the web app
-        run: npm run build
-        env:
-          VITE_SUPABASE_URL: ${{ vars.SUPABASE_URL }}
-          VITE_SUPABASE_ANON_KEY: ${{ vars.SUPABASE_ANON_KEY }}
+        run: npm run ${{ matrix.app.build }}
       - run: npx cap sync ios
       - name: Build for the iOS simulator
         run: |
-          xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Debug \
+          xcodebuild -project ${{ matrix.app.project }}/App.xcodeproj -scheme App -configuration Debug \
             -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' \
             CODE_SIGNING_ALLOWED=NO build | tail -n 40
           test "${PIPESTATUS[0]}" -eq 0

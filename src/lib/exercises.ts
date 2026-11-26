@@ -187,13 +187,14 @@ export function matchEx(items: readonly Phrase[], opts: { hideTr?: boolean } = {
 
 /* ---------- Sentence exercises ---------- */
 
-const enWords = (en: string) => en.replace(/[^\p{L}\p{N}'’ -]/gu, ' ').split(/\s+/).filter(Boolean)
+// Words of a meaning sentence (English, Italian or Persian; ZWNJ keeps Persian words like می‌خواهم whole).
+const enWords = (en: string) => en.replace(/[^\p{L}\p{M}\p{N}‌'’ -]/gu, ' ').split(/\s+/).filter(Boolean)
 
 export function buildToEn(s: Sentence, pool: readonly Phrase[]): BuildEx {
   const target = enWords(s.en)
   const inTarget = new Set(target.map((w) => w.toLowerCase()))
   const extras = uniqBy(
-    shuffle(pool.flatMap((p) => enWords(p.en))).filter((w) => !inTarget.has(w.toLowerCase()) && /^[\p{L}'’]+$/u.test(w)),
+    shuffle(pool.flatMap((p) => enWords(p.en))).filter((w) => !inTarget.has(w.toLowerCase()) && /^[\p{L}\p{M}‌'’]+$/u.test(w)),
     (w) => w.toLowerCase(),
   ).slice(0, Math.min(4, Math.max(2, Math.ceil(target.length / 2))))
   return {

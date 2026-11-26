@@ -1,5 +1,6 @@
 import { LEVELS } from './course.ts'
 import { LETTERS } from './alphabet.ts'
+import { APP } from '../app.ts'
 
 export type Voice = 'female' | 'male'
 
@@ -12,17 +13,8 @@ export interface SpeechItem {
   en?: string
 }
 
-/** Short lines Pishi says on screen. */
-export const PISHI_LINES = [
-  { text: 'سلام! من پیشی‌ام', tr: 'salâm! man Pishi-am.', en: 'Hello! I am Pishi.' },
-  { text: 'آفرین!', tr: 'âfarin!', en: 'Well done!' },
-  { text: 'مرور کنیم؟', tr: 'morur konim?', en: 'Shall we review?' },
-  { text: 'دلم تنگ شد!', tr: 'delam tang shod!', en: 'I missed you!' },
-  { text: 'بزن بریم!', tr: 'bezan berim!', en: "Let's go!" },
-  { text: 'ای وای!', tr: 'ey vây!', en: 'Oh no!' },
-  { text: 'اشکالی ندارد', tr: 'eshkâli nadârad', en: 'No problem' },
-  { text: 'پیدا نشد', tr: 'peydâ nashod', en: 'Not found' },
-]
+/** Short lines Pishi says on screen, in the language being learned. */
+export const PISHI_LINES = Object.values(APP.pishi).map((l) => ({ text: l.fa, tr: l.tr, en: '' }))
 
 /**
  * Every Persian text the app can read aloud, once each.
@@ -36,7 +28,7 @@ export function allSpeech(): SpeechItem[] {
     out.set(t, { text: t, voice: 'female', where, ...extra })
   }
 
-  for (const l of LETTERS) {
+  if (APP.alphabet) for (const l of LETTERS) {
     add(l.fa, 'Alphabet', { tr: l.name })
     add(l.example.fa, 'Alphabet', { tr: l.example.tr, en: l.example.en })
   }

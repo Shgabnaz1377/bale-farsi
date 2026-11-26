@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Bego Ciao</string>
+    <string name="title_activity_main">Bego Ciao</string>
+    <string name="package_name">com.shabnazghaffari.begociao</string>
+    <string name="custom_url_scheme">com.shabnazghaffari.begociao</string>
+</resources>

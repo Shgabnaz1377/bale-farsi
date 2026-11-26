@@ -47,9 +47,9 @@ defineExpose({ choose })
 <style scoped>
 .choices { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px }
 .choices.fa-opts { grid-template-columns: repeat(2, minmax(0, 1fr)) }
-.choice { display: flex; align-items: center; gap: 12px; text-align: left; background: var(--surface); border: 2px solid var(--line); border-radius: 16px; padding: 12px 14px; cursor: pointer; min-height: 60px; min-width: 0 }
+.choice { display: flex; align-items: center; gap: 12px; text-align: start; background: var(--surface); border: 2px solid var(--line); border-radius: 16px; padding: 12px 14px; cursor: pointer; min-height: 60px; min-width: 0 }
 .fa-opts .choice { justify-content: center; position: relative; min-height: 84px; padding: 14px 10px }
-.fa-opts .choice .kbd { position: absolute; top: 8px; left: 8px }
+.fa-opts .choice .kbd { position: absolute; top: 8px; inset-inline-start: 8px }
 .choice:hover:not(:disabled) { border-color: var(--muted) }
 .kbd { flex: none; width: 24px; height: 24px; border-radius: 7px; border: 1.5px solid var(--line); display: grid; place-items: center; font-size: 0.75rem; color: var(--muted); font-weight: 600 }
 .en { font-weight: 500; min-width: 0; overflow-wrap: anywhere }

@@ -22,6 +22,16 @@ const ORIGINAL = structuredClone({
   letters: LETTERS.map((l) => ({ sound: l.sound, en: l.example.en })),
 })
 
+/** Lesson names for a Persian interface (Bego Ciao). */
+const FA_LESSON_NAMES: Record<string, string> = {
+  'words-1': 'کلمه‌ها ۱',
+  'words-2': 'کلمه‌ها ۲',
+  grammar: 'دستور زبان',
+  sentences: 'جمله‌ها',
+  dialogue: 'گفت‌وگو',
+  reading: 'خواندن',
+}
+
 let applied: Lang | null = null
 
 function copyPhrases(dst: (Phrase & { alt?: string[]; note?: string })[], src: (Phrase & { alt?: string[]; note?: string })[]) {
@@ -94,8 +104,9 @@ export function applyCourseLang(lang: Lang) {
       if (lang === 'it') translate(u, IT[u.id])
     })
   })
+  const names = lang === 'it' ? IT_LESSON_NAMES : lang === 'fa' ? FA_LESSON_NAMES : {}
   for (const k of Object.keys(LESSON_NAMES) as (keyof typeof LESSON_NAMES)[]) {
-    LESSON_NAMES[k] = lang === 'it' ? IT_LESSON_NAMES[k] ?? ORIGINAL.lessonNames[k] : ORIGINAL.lessonNames[k]
+    LESSON_NAMES[k] = names[k] ?? ORIGINAL.lessonNames[k]
   }
   LETTERS.forEach((l, i) => {
     l.example.en = lang === 'it' ? IT_LETTER_EXAMPLES[l.example.fa] ?? ORIGINAL.letters[i].en : ORIGINAL.letters[i].en

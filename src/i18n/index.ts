@@ -1,15 +1,17 @@
 import { ref } from 'vue'
 import { IT } from './it.ts'
+import { FA_BEGO } from './fa-bego.ts'
+import { APP_ID } from '@/app.ts'
 
 /** Languages a learner can use the app in (the language of meanings, explanations and buttons). */
-export type Lang = 'en' | 'it'
-export const LANGS: { code: Lang; name: string }[] = [
-  { code: 'en', name: 'English' },
-  { code: 'it', name: 'Italiano' },
-]
+export type Lang = 'en' | 'it' | 'fa'
+/** Interface languages offered by this app (Bego Ciao is in Persian only). */
+export const LANGS: { code: Lang; name: string }[] = APP_ID === 'begociao'
+  ? [{ code: 'fa', name: 'فارسی' }]
+  : [{ code: 'en', name: 'English' }, { code: 'it', name: 'Italiano' }]
 
 /** Reactive, so every template using t() re-renders when the learner switches language. */
-const current = ref<Lang>('en')
+const current = ref<Lang>(APP_ID === 'begociao' ? 'fa' : 'en')
 export const setLang = (l: Lang) => { current.value = l }
 export const lang = () => current.value
 
@@ -19,7 +21,7 @@ export const lang = () => current.value
  * tests/i18n.test.ts fails if any t('…') in the code has no Italian entry.
  */
 export function t(en: string, params?: Record<string, string | number>): string {
-  const s = current.value === 'it' ? IT[en] ?? en : en
+  const s = current.value === 'it' ? IT[en] ?? en : current.value === 'fa' ? FA_BEGO[en] ?? en : en
   return params ? s.replace(/\{(\w+)\}/g, (_, k) => String(params[k] ?? `{${k}}`)) : s
 }
 
@@ -28,6 +30,7 @@ export const tn = (n: number, one: string, many: string) => t(n === 1 ? one : ma
 
 /** The browser's preferred language, for a learner's first visit. */
 export function detectLang(): Lang {
+  if (APP_ID === 'begociao') return 'fa'
   try {
     return (navigator.languages ?? [navigator.language]).some((l) => /^it\b/i.test(l)) ? 'it' : 'en'
   } catch {

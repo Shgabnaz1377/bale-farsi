@@ -26,9 +26,9 @@ function state(i: number) {
         <MeowCat mood="think" :size="64" />
       </div>
       <p class="muted">
-        Persian uses the Arabic script plus four letters of its own: <span class="fa keep" lang="fa">پ چ ژ گ</span>.
-        Most letters join the next one and change shape with their position. Seven never join forward:
-        <span class="fa keep" lang="fa">ا د ذ ر ز ژ و</span>. Short vowels (a, e, o) are usually not written.
+        {{ t('Persian uses the Arabic script plus four letters of its own:') }} <span class="fa keep" lang="fa">پ چ ژ گ</span>.
+        {{ t('Most letters join the next one and change shape with their position. Seven never join forward:') }}
+        <span class="fa keep" lang="fa">ا د ذ ر ز ژ و</span>. {{ t('Short vowels (a, e, o) are usually not written.') }}
       </p>
       <ol class="nodes">
         <StarNode v-for="(g, i) in LETTER_GROUPS" :key="i" :state="state(i)" :number="faNum(i + 1)" :label="t('Letters {letters}', { letters: g.title })" @go="router.push({ name: 'lesson', query: { alpha: String(i) } })">
@@ -70,5 +70,5 @@ function state(i: number) {
 .form .fa { font-size: 1.3rem; line-height: 1.5 }
 .form small { font-size: 0.62rem; color: var(--muted) }
 .example .fa { font-size: 1.1rem }
-.flag { position: absolute; top: 8px; right: 8px; font-size: 0.58rem; padding: 2px 6px }
+.flag { position: absolute; top: 8px; inset-inline-end: 8px; font-size: 0.58rem; padding: 2px 6px }
 </style>

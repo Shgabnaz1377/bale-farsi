@@ -3,6 +3,7 @@ import { computed } from 'vue'
 import { ALL_WORDS, LEVELS } from '@/content/course.ts'
 import { P, learnedCount, seenCount, today, unitDone, streakActiveToday } from '@/lib/store.ts'
 import MeowCat from '@/components/MeowCat.vue'
+import { APP } from '@/app.ts'
 import { t, tn } from '@/i18n/index.ts'
 
 const WEEKS = 12
@@ -25,7 +26,7 @@ const dateOf = (d: number) => new Date(d * 86400000).toLocaleDateString(undefine
   <main class="wrap page">
     <div class="title-row">
       <h1>{{ t('Progress') }}</h1>
-      <MeowCat :mood="streakActiveToday() ? 'cheer' : P.streak ? 'sad' : 'sleep'" :size="72" :bubble="streakActiveToday() ? 'âfarin!' : ''" bubble-fa="آفرین!" />
+      <MeowCat :mood="streakActiveToday() ? 'cheer' : P.streak ? 'sad' : 'sleep'" :size="72" :bubble="streakActiveToday() ? APP.pishi.cheer.tr : ''" :bubble-fa="APP.pishi.cheer.fa" />
     </div>
     <div class="tiles">
       <div class="card tile"><span class="eyebrow">{{ t('Streak') }}</span><b>{{ P.streak }}</b><span class="muted small">{{ t('best {n}', { n: P.bestStreak }) }}</span></div>

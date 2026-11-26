@@ -36,7 +36,7 @@ defineProps<{ prompt: Prompt }>()
 .en { color: var(--muted); font-size: 0.95rem }
 .btns { display: flex; flex-direction: column; gap: 6px }
 .btns :deep(.spk + .spk) { height: 32px }
-.who { position: absolute; top: 10px; left: 12px }
+.who { position: absolute; top: 10px; inset-inline-start: 12px }
 .listen { display: flex; align-items: center; gap: 14px }
 .digit { font-size: 4.5rem; font-weight: 700; line-height: 1.2 }
 .passage-wrap { max-height: 38vh; overflow: auto; border: 1px solid var(--line); border-radius: 16px; background: var(--surface); padding: 14px 16px }

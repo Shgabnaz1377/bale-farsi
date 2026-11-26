@@ -117,7 +117,17 @@ function paws(mood: Mood): string {
   return feet
 }
 
-export function catSvg(mood: Mood = 'idle', opts: { face?: boolean; title?: string } = {}): string {
+/** The collar: turquoise for PersianMeow, the Italian tricolour for Bego Ciao. */
+function collar(style: 'persian' | 'italian'): string {
+  const d = 'M64 128 Q100 146 136 128'
+  if (style === 'persian') return `<path d="${d}" fill="none" stroke="${C.collar}" stroke-width="8" stroke-linecap="round"/>`
+  const seg = 26.5
+  return ['#1E8A4C', '#FFFFFF', '#CD2E3A']
+    .map((c, i) => `<path d="${d}" fill="none" stroke="${c}" stroke-width="8" stroke-linecap="${i === 1 ? 'butt' : 'round'}" stroke-dasharray="${seg} 200" stroke-dashoffset="${-seg * i}"/>`)
+    .join('')
+}
+
+export function catSvg(mood: Mood = 'idle', opts: { face?: boolean; title?: string; collar?: 'persian' | 'italian' } = {}): string {
   const view = opts.face ? '30 16 140 140' : '0 0 200 200'
   const title = opts.title ? `<title>${opts.title}</title>` : ''
   const body = opts.face
@@ -141,7 +151,7 @@ ${eyes(mood)}
 ${mouth(mood)}
 <path d="M80 103 L54 99 M80 108 L55 112 M120 103 L146 99 M120 108 L145 112" fill="none" stroke="${C.line}" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
 </g>
-<path d="M64 128 Q100 146 136 128" fill="none" stroke="${C.collar}" stroke-width="8" stroke-linecap="round"/>
+${collar(opts.collar ?? 'persian')}
 <polygon points="${star(100, 141, 9, 7)}" fill="${C.tag}" stroke="${C.line}" stroke-width="2"/>
 ${opts.face ? '' : paws(mood)}
 ${extras(mood)}

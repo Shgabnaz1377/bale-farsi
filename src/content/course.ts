@@ -3,6 +3,11 @@ import { A1 } from './a1.ts'
 import { A2 } from './a2.ts'
 import { B1 } from './b1.ts'
 import { B2 } from './b2.ts'
+import { A1 as IT_A1 } from '../courses/begociao/a1.ts'
+import { A2 as IT_A2 } from '../courses/begociao/a2.ts'
+import { B1 as IT_B1 } from '../courses/begociao/b1.ts'
+import { B2 as IT_B2 } from '../courses/begociao/b2.ts'
+import { APP_ID } from '../app.ts'
 
 export interface LevelInfo {
   level: Level
@@ -13,7 +18,7 @@ export interface LevelInfo {
   units: Unit[]
 }
 
-export const LEVELS: LevelInfo[] = [
+const PERSIAN_COURSE: LevelInfo[] = [
   { level: 'A1', name: 'Beginner', fa: 'مبتدی', tr: 'mobtadi', units: A1,
     blurb: 'Greet people, introduce yourself, count, talk about family, food and your day.' },
   { level: 'A2', name: 'Elementary', fa: 'مقدماتی', tr: 'moghaddamâti', units: A2,
@@ -23,6 +28,20 @@ export const LEVELS: LevelInfo[] = [
   { level: 'B2', name: 'Upper intermediate', fa: 'فوق متوسط', tr: 'fogh-e motevasset', units: B2,
     blurb: 'Read the news, switch between written and spoken Persian, meet poetry and argue a point.' },
 ]
+
+/** Bego Ciao: Italian for Persian speakers. `fa`/`tr` hold the Italian level name and its Persian-letter pronunciation. */
+const ITALIAN_COURSE: LevelInfo[] = [
+  { level: 'A1', name: 'مبتدی', fa: 'Principiante', tr: 'پرینچیپیانته', units: IT_A1,
+    blurb: 'سلام و احوال‌پرسی، معرفی خودت، اعداد، خانواده، غذا و برنامهٔ روزانه.' },
+  { level: 'A2', name: 'مقدماتی', fa: 'Elementare', tr: 'اِلِمِنتاره', units: IT_A2,
+    blurb: 'خرید، پیدا کردن راه، خانه، گذشته، آب‌وهوا و سلامتی.' },
+  { level: 'B1', name: 'متوسط', fa: 'Intermedio', tr: 'اینتِرمِدیو', units: IT_B1,
+    blurb: 'سفر، کار و تحصیل، بیان نظر، فرهنگ ایتالیا و تعریف کردن ماجرا.' },
+  { level: 'B2', name: 'فوق متوسط', fa: 'Intermedio superiore', tr: 'اینتِرمِدیو سوپِریوره', units: IT_B2,
+    blurb: 'محیط زیست، زبان رسمی و محاوره، ادبیات، جمله‌های شرطی و خواندن اخبار.' },
+]
+
+export const LEVELS: LevelInfo[] = APP_ID === 'begociao' ? ITALIAN_COURSE : PERSIAN_COURSE
 
 export const ALL_UNITS: Unit[] = LEVELS.flatMap((l) => l.units)
 export const unitById = new Map(ALL_UNITS.map((u) => [u.id, u]))

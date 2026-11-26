@@ -3,10 +3,11 @@ import { createClient, type Session, type SupabaseClient } from '@supabase/supab
 import { P, freshProgress, parseProgress, type Progress } from './store.ts'
 import { mergeProgress, sameLearning } from './merge.ts'
 import { isNative } from './platform.ts'
+import { APP } from '@/app.ts'
 import { t } from '@/i18n/index.ts'
 
 /** Where email links land when sent from inside the phone apps. */
-const WEB_URL = 'https://shgabnaz1377.github.io/persianmeow/'
+const WEB_URL = APP.webUrl
 
 /**
  * Optional accounts: sign in by email link, and progress syncs to Supabase
@@ -15,7 +16,7 @@ const WEB_URL = 'https://shgabnaz1377.github.io/persianmeow/'
  */
 const URL_ = import.meta.env.VITE_SUPABASE_URL as string | undefined
 const KEY = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined
-const OWNER_KEY = 'bale-farsi:owner'
+const OWNER_KEY = `${APP.storage}:owner`
 
 export type SyncStatus = 'idle' | 'syncing' | 'synced' | 'offline' | 'error'
 
@@ -101,7 +102,7 @@ function setSession(session: Session | null) {
 export function initAccount() {
   if (!account.enabled || sb) { account.ready = true; return }
   sb = createClient(URL_!, KEY!, {
-    auth: { flowType: 'pkce', persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, storageKey: 'bale-farsi:auth' },
+    auth: { flowType: 'pkce', persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, storageKey: `${APP.storage}:auth` },
   })
   // Supabase may call back synchronously; defer work out of the callback.
   sb.auth.onAuthStateChange((event, session) => {

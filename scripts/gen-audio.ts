@@ -9,10 +9,15 @@
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
 import { allSpeech, type Voice } from '../src/content/speech.ts'
 import { audioKey, normSpeech } from '../src/lib/audioKey.ts'
+import { APP } from '../src/app.ts'
 
-const VOICES: Record<Voice, string> = { female: 'fa-IR-DilaraNeural', male: 'fa-IR-FaridNeural' }
-const OUT = 'public/audio'
-const INDEX = 'src/content/audio-index.json'
+// Run with APP=begociao for the Italian clips of Bego Ciao.
+const VOICES: Record<Voice, string> = APP.target === 'it'
+  ? { female: 'it-IT-ElsaNeural', male: 'it-IT-DiegoNeural' }
+  : { female: 'fa-IR-DilaraNeural', male: 'fa-IR-FaridNeural' }
+const OUT = APP.id === 'begociao' ? 'public-begociao/audio' : 'public/audio'
+const INDEX = APP.id === 'begociao' ? 'src/courses/begociao/audio-index.json' : 'src/content/audio-index.json'
+const XML_LANG = APP.target === 'it' ? 'it-IT' : 'fa-IR'
 const dry = process.argv.includes('--dry')
 
 function env(name: string): string | undefined {
@@ -26,7 +31,7 @@ const xml = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replac
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
 
 async function synth(text: string, voice: Voice, key: string, region: string): Promise<Buffer> {
-  const ssml = `<speak version="1.0" xml:lang="fa-IR"><voice name="${VOICES[voice]}"><prosody rate="-8%">${xml(normSpeech(text))}</prosody></voice></speak>`
+  const ssml = `<speak version="1.0" xml:lang="${XML_LANG}"><voice name="${VOICES[voice]}"><prosody rate="-8%">${xml(normSpeech(text))}</prosody></voice></speak>`
   for (let attempt = 1; ; attempt++) {
     const res = await fetch(`https://${region}.tts.speech.microsoft.com/cognitiveservices/v1`, {
       method: 'POST',
@@ -34,7 +39,7 @@ async function synth(text: string, voice: Voice, key: string, region: string): P
         'Ocp-Apim-Subscription-Key': key,
         'Content-Type': 'application/ssml+xml',
         'X-Microsoft-OutputFormat': 'audio-24khz-48kbitrate-mono-mp3',
-        'User-Agent': 'persianmeow-audio',
+        'User-Agent': `${APP.id}-audio`,
       },
       body: ssml,
     })

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { APP } from '@/app.ts'
 /** Persian text with its transliteration underneath (or beside, when inline). */
 withDefaults(defineProps<{
   fa: string
@@ -15,8 +16,8 @@ withDefaults(defineProps<{
 
 <template>
   <span class="fw" :class="[size, { inline }]">
-    <span class="fa" :class="{ keep: keepFa || hideTr || !tr }" lang="fa" dir="rtl" :title="hideTr ? undefined : tr">{{ fa }}</span>
-    <span v-if="tr && !hideTr" class="tr" :class="{ keep: keepTr }">{{ tr }}</span>
+    <span class="fa" :class="{ keep: keepFa || hideTr || !tr }" :lang="APP.target" :dir="APP.targetDir" :title="hideTr ? undefined : tr">{{ fa }}</span>
+    <span v-if="tr && !hideTr" class="tr" :class="{ keep: keepTr }" :dir="APP.uiDir">{{ tr }}</span>
   </span>
 </template>
 
@@ -29,7 +30,11 @@ withDefaults(defineProps<{
 .md .fa { font-size: 1.35rem; line-height: 1.6 } .md .tr { font-size: 0.95rem }
 .lg .fa { font-size: 1.9rem; line-height: 1.6; font-weight: 600 } .lg .tr { font-size: 1.1rem }
 .xl .fa { font-size: 2.8rem; line-height: 1.5; font-weight: 700 } .xl .tr { font-size: 1.3rem }
-:global(html.mode-latin) .fw .tr:not(.keep) { color: var(--ink); font-size: 1.05rem }
-:global(html.mode-latin) .fw.xl .tr:not(.keep), :global(html.mode-latin) .fw.lg .tr:not(.keep) { font-size: 1.7rem; font-weight: 500 }
 @media (max-width: 520px) { .xl .fa { font-size: 2.2rem } .lg .fa { font-size: 1.6rem } }
+</style>
+
+<style>
+/* Finglish-only mode: the transliteration becomes the main text. Unscoped on purpose (needs the <html> class). */
+html.mode-latin .fw .tr:not(.keep) { color: var(--ink); font-size: 1.05rem }
+html.mode-latin .fw.xl .tr:not(.keep), html.mode-latin .fw.lg .tr:not(.keep) { font-size: 1.7rem; font-weight: 500 }
 </style>
