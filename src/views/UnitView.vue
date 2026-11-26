@@ -2,11 +2,12 @@
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { lessonsOf, levelOf, unitById } from '@/content/course.ts'
-import { P, lessonUnlocked, unitUnlocked } from '@/lib/store.ts'
+import { P, lessonUnlocked, unitDone, unitUnlocked } from '@/lib/store.ts'
 import AppIcon from '@/components/AppIcon.vue'
 import FaText from '@/components/FaText.vue'
 import SpeakButton from '@/components/SpeakButton.vue'
 import StarNode from '@/components/StarNode.vue'
+import MeowCat from '@/components/MeowCat.vue'
 import RichText from '@/components/RichText.vue'
 import DialogueList from '@/components/DialogueList.vue'
 import PassageText from '@/components/PassageText.vue'
@@ -39,7 +40,10 @@ function go(key: string) {
           <h1>{{ unit.title }}</h1>
           <p class="muted">{{ unit.can }}</p>
         </div>
-        <FaText :fa="unit.fa" :tr="unit.tr" size="lg" keep-tr class="u-fa" />
+        <span class="head-side">
+          <FaText :fa="unit.fa" :tr="unit.tr" size="lg" keep-tr class="u-fa" />
+          <MeowCat :mood="unitDone(unit) ? 'cheer' : unitUnlocked(unit) ? 'wave' : 'sleep'" :size="76" />
+        </span>
       </div>
       <RichText :html="'<b>Tip.</b> ' + unit.tip" class="tip" />
       <p v-if="!unitUnlocked(unit)" class="tip"><b>Locked.</b> Finish the unit before this one, or pass the {{ unit.level }} level test. You can still read everything below.</p>
@@ -105,6 +109,7 @@ function go(key: string) {
 .head-row { display: flex; justify-content: space-between; gap: 12px; align-items: flex-start; flex-wrap: wrap }
 .head h1 { font-size: 1.8rem; font-weight: 800 }
 .u-fa :deep(.fa) { color: var(--accent) }
+.head-side { display: flex; align-items: center; gap: 12px }
 .nodes { list-style: none; margin: 0; padding: 6px 0 0; display: flex; justify-content: space-between; gap: 4px }
 .block { display: flex; flex-direction: column; gap: 12px }
 .block h2 { font-size: 1.15rem; font-weight: 800 }

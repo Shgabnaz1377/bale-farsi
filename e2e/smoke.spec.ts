@@ -116,6 +116,6 @@ test('has a valid web app manifest', async ({ request }) => {
   const res = await request.get('/manifest.webmanifest')
   expect(res.ok()).toBe(true)
   const m = await res.json()
-  expect(m.name).toContain('Bale')
+  expect(m.name).toContain('MeowFarsi')
   expect(m.icons.map((i: { sizes: string }) => i.sizes)).toEqual(expect.arrayContaining(['192x192', '512x512']))
 })

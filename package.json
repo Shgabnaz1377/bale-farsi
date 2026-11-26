@@ -1,8 +1,8 @@
 {
-  "name": "bale-farsi",
+  "name": "meowfarsi",
   "version": "1.0.0",
   "private": true,
-  "description": "Learn Persian (Farsi) from A1 to B2: bite-sized lessons, spaced review, grammar, dialogues and readings.",
+  "description": "Learn Persian (Farsi) from A1 to B2 with Pishi the Persian cat: Finglish for every word, alphabet, grammar, dialogues, readings and spaced review.",
   "license": "MIT",
   "author": "Shabnaz Ghaffari",
   "type": "module",
@@ -19,7 +19,7 @@
     "test:e2e": "playwright test",
     "check:content": "node scripts/check-content.ts",
     "cap:sync": "npm run build && cap sync",
-    "icons": "node scripts/render-icons.mjs && capacitor-assets generate --iconBackgroundColor #0a7b7a --iconBackgroundColorDark #0a7b7a --splashBackgroundColor #eef3f6 --splashBackgroundColorDark #0c1524"
+    "icons": "node scripts/make-art.ts && node scripts/render-icons.mjs && capacitor-assets generate --iconBackgroundColor #0a7b7a --iconBackgroundColorDark #0a7b7a --splashBackgroundColor #eef3f6 --splashBackgroundColorDark #0c1524"
   },
   "dependencies": {
     "@capacitor-community/text-to-speech": "8.0.2",

@@ -6,11 +6,12 @@ import { ALL_WORDS, LEVELS } from '@/content/course.ts'
 import { mulberry32 } from '@/lib/random.ts'
 import { dayNumber } from '@/lib/srs.ts'
 import {
-  P, dueCount, levelUnlocked, nextLesson, seenCount, unitDone, unitProgress, unitUnlocked, xpToday, alphabetDone,
+  P, dueCount, levelUnlocked, nextLesson, seenCount, unitDone, unitProgress, unitUnlocked, xpToday, alphabetDone, streakActiveToday as streakToday,
 } from '@/lib/store.ts'
 import { account } from '@/lib/account.ts'
 import AppIcon from '@/components/AppIcon.vue'
 import InstallCard from '@/components/InstallCard.vue'
+import MeowCat from '@/components/MeowCat.vue'
 import FaText from '@/components/FaText.vue'
 import SpeakButton from '@/components/SpeakButton.vue'
 
@@ -22,6 +23,14 @@ const goalPct = computed(() => Math.min(100, Math.round((xpToday() / P.settings.
 const next = computed(() => nextLesson())
 const due = computed(() => dueCount())
 const fresh = computed(() => Object.keys(P.done).length === 0 && !Object.keys(P.passed).length)
+
+/** What Pishi says on the home screen, from today's state. */
+const greet = computed(() => {
+  if (xpToday() >= P.settings.goal) return { mood: 'cheer' as const, fa: 'آفرین!', tr: 'âfarin! Daily goal done.' }
+  if (due.value > 0) return { mood: 'think' as const, fa: 'مرور کنیم؟', tr: `morur konim? ${due.value} word${due.value > 1 ? 's' : ''} to review.` }
+  if (P.streak > 0 && !streakToday()) return { mood: 'sad' as const, fa: 'دلم تنگ شد!', tr: `delam tang shod! Keep your ${P.streak}-day streak.` }
+  return { mood: 'wave' as const, fa: 'بزن بریم!', tr: "bezan berim! Let's go." }
+})
 
 const wotd = (() => {
   const r = mulberry32(dayNumber())
@@ -51,8 +60,12 @@ function goNext() {
           <RouterLink class="btn ghost" :to="{ name: 'lesson', query: { test: 'A1' } }">I know some Persian: test out of A1</RouterLink>
         </div>
       </div>
-      <div class="hero-fa fa keep" lang="fa" dir="rtl" aria-hidden="true">سلام</div>
+      <MeowCat mood="wave" :size="170" class="hero-cat" bubble="salâm! man Pishi-am." bubble-fa="سلام! من پیشی‌ام" />
     </section>
+
+    <div v-if="!fresh" class="greet">
+      <MeowCat :mood="greet.mood" :size="88" :bubble="greet.tr" :bubble-fa="greet.fa" />
+    </div>
 
     <div class="today">
       <div class="card">
@@ -139,7 +152,9 @@ function goNext() {
 .hero { display: flex; gap: 20px; align-items: center; justify-content: space-between; padding: 22px; background: linear-gradient(135deg, var(--surface), var(--accent-soft)) }
 .hero-text { display: flex; flex-direction: column; gap: 10px; max-width: 46ch }
 .hero h1 { font-size: 1.9rem; font-weight: 800 }
-.hero-fa { font-size: 5rem; font-weight: 700; color: var(--accent); line-height: 1; opacity: 0.9 }
+.hero-cat { flex-direction: column-reverse; align-items: center; gap: 4px }
+.hero-cat :deep(.bubble::before) { left: 50%; top: auto; bottom: -9px; transform: translateX(-50%) rotate(-45deg) }
+.greet { display: flex }
 .row { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 4px }
 .today { display: grid; grid-template-columns: 1fr 1fr; gap: 12px }
 .goal-num { font-family: var(--f-display); font-size: 1.6rem; font-weight: 800; margin: 4px 0 8px; font-variant-numeric: tabular-nums }
@@ -184,7 +199,8 @@ function goNext() {
 .u-fa :deep(.fa) { color: var(--accent) }
 @media (max-width: 560px) {
   .today { grid-template-columns: 1fr }
-  .hero-fa { display: none }
+  .hero { flex-direction: column-reverse; align-items: flex-start }
+  .hero-cat { align-self: center }
   .hero h1 { font-size: 1.5rem }
   .u-fa { display: none }
   .levels { gap: 6px }
