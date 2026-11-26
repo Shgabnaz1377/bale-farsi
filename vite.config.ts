@@ -15,8 +15,8 @@ export default defineConfig({
       includeAssets: ['favicon.svg', 'apple-touch-icon.png'],
       manifest: {
         id: './',
-        name: 'MeowFarsi · Learn Persian',
-        short_name: 'MeowFarsi',
+        name: 'PersianMeow · Learn Persian',
+        short_name: 'PersianMeow',
         description: 'Learn Persian (Farsi) from A1 to B2, with Finglish for every word.',
         lang: 'en',
         start_url: './',
@@ -38,6 +38,12 @@ export default defineConfig({
         navigateFallback: 'index.html',
         cleanupOutdatedCaches: true,
         runtimeCaching: [
+          {
+            // Pronunciation clips: cached as they are played, so words you have heard work offline.
+            urlPattern: ({ url }) => url.pathname.includes('/audio/') && url.pathname.endsWith('.mp3'),
+            handler: 'CacheFirst',
+            options: { cacheName: 'audio', rangeRequests: true, expiration: { maxEntries: 2000, maxAgeSeconds: 60 * 60 * 24 * 365 }, cacheableResponse: { statuses: [0, 200] } },
+          },
           {
             urlPattern: ({ url }) => url.origin === 'https://fonts.googleapis.com',
             handler: 'StaleWhileRevalidate',

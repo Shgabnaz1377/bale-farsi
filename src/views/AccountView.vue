@@ -61,7 +61,7 @@ async function removeCloud() {
     </div>
 
     <section v-if="!account.enabled" class="card block">
-      <p>Accounts are not switched on for this copy of MeowFarsi. Your progress is saved in this browser.</p>
+      <p>Accounts are not switched on for this copy of PersianMeow. Your progress is saved in this browser.</p>
     </section>
 
     <section v-else-if="!account.ready" class="card block"><p class="muted">Checking…</p></section>

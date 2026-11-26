@@ -67,7 +67,7 @@ function go(key: string) {
       <h2>Words</h2>
       <ul class="words">
         <li v-for="w in unit.words" :key="w.fa">
-          <SpeakButton :text="w.fa" />
+          <span class="btns"><SpeakButton :text="w.fa" /><SpeakButton :text="w.fa" slow /></span>
           <span class="col">
             <FaText :fa="w.fa" :tr="w.tr" inline keep-tr size="sm" />
             <span class="small">{{ w.en }}<span v-if="w.digit" class="fa keep digit" lang="fa"> {{ w.digit }}</span></span>
@@ -119,4 +119,6 @@ function go(key: string) {
 .words { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px 16px }
 .words :deep(.spk), .list :deep(.spk) { width: 36px; height: 36px; border-radius: 10px }
 .digit { font-size: 1.05em }
+.btns { display: flex; flex-direction: column; gap: 4px }
+.btns :deep(.spk + .spk) { width: 36px; height: 26px; border-radius: 8px; opacity: 0.85 }
 </style>

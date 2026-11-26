@@ -1,5 +1,5 @@
 /**
- * Pishi (پیشی, "kitty"), the MeowFarsi mascot: a cream Persian cat with a flat face, copper eyes,
+ * Pishi (پیشی, "kitty"), the PersianMeow mascot: a cream Persian cat with a flat face, copper eyes,
  * a big ruff and a turquoise collar with a saffron eight-point star tag.
  * Pure SVG strings so the same drawing serves the app, the favicon and the store icons.
  */

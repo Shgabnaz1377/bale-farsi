@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { faVoice, speak } from '@/lib/speech.ts'
+import { canSpeak, speak } from '@/lib/speech.ts'
 import AppIcon from './AppIcon.vue'
 
 withDefaults(defineProps<{ text: string; big?: boolean; slow?: boolean }>(), { big: false, slow: false })
@@ -7,7 +7,7 @@ withDefaults(defineProps<{ text: string; big?: boolean; slow?: boolean }>(), { b
 
 <template>
   <button
-    v-if="faVoice"
+    v-if="canSpeak(text)"
     type="button"
     class="spk"
     :class="{ big }"

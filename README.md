@@ -1,10 +1,10 @@
-# MeowFarsi · Learn Persian (Farsi), A1 to B2
+# PersianMeow · Learn Persian (Farsi), A1 to B2
 
-<img src="public/icon-192.png" width="96" alt="Pishi, the MeowFarsi cat" align="right" />
+<img src="public/icon-192.png" width="96" alt="Pishi, the PersianMeow cat" align="right" />
 
-**Live:** https://shgabnaz1377.github.io/meowfarsi/ · **Android test build:** see [Releases](https://github.com/Shgabnaz1377/meowfarsi/releases)
+**Live:** https://shgabnaz1377.github.io/persianmeow/ · **Android test build:** see [Releases](https://github.com/Shgabnaz1377/persianmeow/releases)
 
-MeowFarsi is a free app that teaches Persian to English speakers, from first letters to upper-intermediate reading, with **Pishi** (<span lang="fa">پیشی</span>, "kitty"), a Persian cat who cheers you on. It runs entirely in the browser; progress is saved locally.
+PersianMeow is a free app that teaches Persian to English speakers, from first letters to upper-intermediate reading, with **Pishi** (<span lang="fa">پیشی</span>, "kitty"), a Persian cat who cheers you on. It runs entirely in the browser; progress is saved locally.
 
 ## What's in it
 
@@ -20,17 +20,18 @@ MeowFarsi is a free app that teaches Persian to English speakers, from first let
 | **Finglish** | Every Persian word, sentence, grammar answer and reading also comes in Finglish (Persian in English letters), so you can start before you can read the alphabet. |
 | **Pishi** | An original Persian-cat mascot (drawn in code, `src/lib/cat.ts`) who waves, thinks, cheers, gets sad and falls asleep with you. |
 | **Apps** | Installable and fully offline on the web; Android and iPhone apps from the same code with Capacitor (`android/`, `ios/`). |
+| **Audio** | Recorded Persian audio for every word, sentence, dialogue line and reading (Azure neural voices, `npm run audio`), with slow playback; your own recordings can replace any clip. |
 | **Settings** | Show Persian script + Finglish, Finglish only, or script only; light/dark; backup and restore progress. |
 
 Audio uses the browser's speech synthesis and needs a Persian (fa-IR) voice; Microsoft Edge ships one.
 
 ## Accounts (optional)
 
-Without configuration MeowFarsi is fully offline and keeps progress in the browser. To let learners sign in and sync:
+Without configuration PersianMeow is fully offline and keeps progress in the browser. To let learners sign in and sync:
 
 1. Create a [Supabase](https://supabase.com) project.
 2. In its SQL editor, run [`supabase/schema.sql`](supabase/schema.sql): one `progress` row per learner, with row level security so each learner can only read and write their own row.
-3. Under Authentication → URL Configuration, add the site URL (e.g. `https://shgabnaz1377.github.io/meowfarsi/`) to the redirect URLs.
+3. Under Authentication → URL Configuration, add the site URL (e.g. `https://shgabnaz1377.github.io/persianmeow/`) to the redirect URLs.
 4. Set the repository variables `SUPABASE_URL` and `SUPABASE_ANON_KEY` (Settings → Secrets and variables → Actions → Variables). Both are public by design. Locally, put them in `.env.local` as `VITE_SUPABASE_URL` and `VITE_SUPABASE_ANON_KEY`.
 
 Sign-in uses a one-time email link (PKCE). Signing out clears the device so the next learner starts fresh.

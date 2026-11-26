@@ -28,7 +28,7 @@ function dismiss() {
   <section v-if="!installed && !hidden && (canPrompt || isIOS || !dismissible)" class="card install" aria-label="Install the app">
     <img :src="iconUrl" alt="" width="52" height="52" class="app-icon" />
     <div class="body">
-      <b>Install MeowFarsi on your phone</b>
+      <b>Install PersianMeow on your phone</b>
       <p v-if="canPrompt" class="muted small">It gets its own icon, and every lesson works offline.</p>
       <p v-else-if="isIOS" class="muted small">In Safari, tap <b>Share</b>, then <b>Add to Home Screen</b>. Every lesson then works offline.</p>
       <p v-else class="muted small">In your browser menu, choose <b>Install app</b> or <b>Add to Home screen</b>. Every lesson then works offline.</p>

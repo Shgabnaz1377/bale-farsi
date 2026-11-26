@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources>
-    <string name="app_name">MeowFarsi</string>
-    <string name="title_activity_main">MeowFarsi</string>
-    <string name="package_name">com.shabnazghaffari.meowfarsi</string>
-    <string name="custom_url_scheme">com.shabnazghaffari.meowfarsi</string>
+    <string name="app_name">PersianMeow</string>
+    <string name="title_activity_main">PersianMeow</string>
+    <string name="package_name">com.shabnazghaffari.persianmeow</string>
+    <string name="custom_url_scheme">com.shabnazghaffari.persianmeow</string>
 </resources>
