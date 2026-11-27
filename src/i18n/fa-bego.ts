@@ -457,4 +457,5 @@ export const FA_BEGO: Record<string, string> = {
   "yesterday": "دیروز",
   "{n} days ago": "{n} روز پیش",
   "{n} lessons": "{n} درس",
+  "Word list": "فهرست واژه‌ها",
 }

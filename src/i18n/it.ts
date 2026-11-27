@@ -457,4 +457,5 @@ export const IT: Record<string, string> = {
   "yesterday": "ieri",
   "{n} days ago": "{n} giorni fa",
   "{n} lessons": "{n} lezioni",
+  "Word list": "Elenco delle parole",
 }
