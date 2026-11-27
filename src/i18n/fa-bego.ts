@@ -499,4 +499,5 @@ export const FA_BEGO: Record<string, string> = {
   "{n} marked wrong": "{n} نادرست",
   "{n} open reports": "{n} گزارش باز",
   "{n} reviewed": "{n} بازبینی‌شده",
+  "Language": "زبان",
 }

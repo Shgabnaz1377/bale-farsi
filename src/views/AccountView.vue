@@ -7,7 +7,7 @@ import {
 import MeowCat from '@/components/MeowCat.vue'
 import { flagOn } from '@/lib/pron.ts'
 import { APP } from '@/app.ts'
-import { t } from '@/i18n/index.ts'
+import { LANGS, t } from '@/i18n/index.ts'
 import { P } from '@/lib/store.ts'
 
 const route = useRoute()
@@ -94,6 +94,14 @@ const statusText = computed(() => {
 
 <template>
   <main class="wrap page">
+    <div v-if="LANGS.length > 1" class="langs" role="radiogroup" :aria-label="t('Language')">
+      <button
+        v-for="l in LANGS" :key="l.code" type="button" role="radio" class="chip-btn"
+        :class="{ on: P.settings.lang === l.code }" :aria-checked="P.settings.lang === l.code" :lang="l.code" @click="P.settings.lang = l.code"
+      >
+        {{ l.name }}
+      </button>
+    </div>
     <div class="title-row">
       <h1>{{ account.user ? t('Your account') : mode === 'signup' ? t('Create your free account') : t('Sign in') }}</h1>
       <MeowCat :mood="account.user ? 'happy' : gated ? 'cheer' : 'wave'" :size="72" />
@@ -201,6 +209,7 @@ const statusText = computed(() => {
 
 <style scoped>
 h1 { font-size: 1.7rem; font-weight: 800 }
+.langs { display: flex; gap: 6px; justify-content: flex-end }
 .title-row { display: flex; align-items: center; justify-content: space-between; gap: 12px }
 .block { display: flex; flex-direction: column; gap: 12px }
 .block h2 { font-size: 1.15rem; font-weight: 800 }
