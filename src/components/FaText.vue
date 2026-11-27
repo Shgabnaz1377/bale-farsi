@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import { APP } from '@/app.ts'
+import { useMarkedText } from '@/lib/vowelMarks.ts'
 /** Persian text with its transliteration underneath (or beside, when inline). */
-withDefaults(defineProps<{
+const props = withDefaults(defineProps<{
   fa: string
   tr?: string
   size?: 'sm' | 'md' | 'lg' | 'xl'
@@ -12,11 +13,13 @@ withDefaults(defineProps<{
   keepTr?: boolean
   hideTr?: boolean
 }>(), { tr: '', size: 'md', inline: false, keepFa: false, keepTr: false, hideTr: false })
+// Vowel marks for beginners; never when the Finglish is hidden, since the marks would give the answer away.
+const shown = useMarkedText(() => props.fa, () => (props.hideTr ? '' : props.tr))
 </script>
 
 <template>
   <span class="fw" :class="[size, { inline }]">
-    <span class="fa" :class="{ keep: keepFa || hideTr || !tr }" :lang="APP.target" :dir="APP.targetDir" :title="hideTr ? undefined : tr">{{ fa }}</span>
+    <span class="fa" :class="{ keep: keepFa || hideTr || !tr }" :lang="APP.target" :dir="APP.targetDir" :title="hideTr ? undefined : tr">{{ shown }}</span>
     <span v-if="tr && !hideTr" class="tr" :class="{ keep: keepTr }" :dir="APP.uiDir">{{ tr }}</span>
   </span>
 </template>

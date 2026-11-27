@@ -1,5 +1,6 @@
 import { LEVELS } from './course.ts'
 import { LETTERS } from './alphabet.ts'
+import { VOWELS, VOWEL_PAIRS } from './vowels.ts'
 import { APP } from '../app.ts'
 
 /** The app's main voice, and a second one for the other speaker in dialogues. */
@@ -33,6 +34,11 @@ export function allSpeech(): SpeechItem[] {
     add(l.fa, 'Alphabet', { tr: l.name })
     add(l.example.fa, 'Alphabet', { tr: l.example.tr, en: l.example.en })
   }
+  if (APP.alphabet) for (const v of VOWELS) {
+    if (!v.long) add(v.fa, 'Vowels', { tr: `b${v.tr}` })
+    for (const e of v.examples) add(e.fa, 'Vowels', { tr: e.tr, en: e.en })
+  }
+  if (APP.alphabet) for (const pair of VOWEL_PAIRS) for (const e of pair) add(e.fa, 'Vowels', { tr: e.tr, en: e.en })
   for (const p of PISHI_LINES) add(p.text, 'Pishi', { tr: p.tr, en: p.en })
 
   for (const lv of LEVELS) {

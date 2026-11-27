@@ -12,10 +12,12 @@ import { t } from '@/i18n/index.ts'
 import RichText from '@/components/RichText.vue'
 import DialogueList from '@/components/DialogueList.vue'
 import PassageText from '@/components/PassageText.vue'
+import { provideFaLevel } from '@/lib/vowelMarks.ts'
 
 const props = defineProps<{ id: string }>()
 const router = useRouter()
 const unit = computed(() => unitById.get(props.id))
+provideFaLevel(computed(() => unit.value?.level))
 const lessons = computed(() => (unit.value ? lessonsOf(unit.value) : []))
 const faNum = (n: number) => String(n).replace(/\d/g, (d) => '۰۱۲۳۴۵۶۷۸۹'[Number(d)])
 
