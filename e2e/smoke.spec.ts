@@ -119,3 +119,22 @@ test('has a valid web app manifest', async ({ request }) => {
   expect(m.name).toContain('PersianMeow')
   expect(m.icons.map((i: { sizes: string }) => i.sizes)).toEqual(expect.arrayContaining(['192x192', '512x512']))
 })
+
+test('the 3-second challenge runs out and reveals the answer', async ({ page }) => {
+  const problems = watchConsole(page)
+  await page.goto('/#/quick?mode=guess')
+  await page.getByRole('button', { name: 'Start' }).click()
+  await expect(page.locator('.opt')).toHaveCount(3)
+  await expect(page.getByText('Time is up!')).toBeVisible({ timeout: 6000 })
+  await page.getByRole('button', { name: 'Continue' }).click()
+  await expect(page.getByText(/^2 of 10/)).toBeVisible()
+  expect(ignoreFonts(problems)).toEqual([])
+})
+
+test('visitors from Instagram get the "Comment MEOW" welcome, once dismissed it stays hidden', async ({ page }) => {
+  await page.goto('/?from=instagram#/')
+  await expect(page.getByText('“Comment MEOW” brought you here 🐱')).toBeVisible()
+  await page.getByRole('button', { name: 'Hide this' }).click()
+  await page.goto('/#/')
+  await expect(page.getByText('“Comment MEOW” brought you here 🐱')).toHaveCount(0)
+})

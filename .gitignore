@@ -9,3 +9,4 @@ coverage
 .vercel
 dist-begociao
 audio-compare/
+.claude/

@@ -1,6 +1,7 @@
 import { LEVELS } from './course.ts'
 import { LETTERS } from './alphabet.ts'
 import { VOWELS, VOWEL_PAIRS } from './vowels.ts'
+import { HOMOGRAPHS } from './homographs.ts'
 import { APP } from '../app.ts'
 import { dialogueVoices, type VoiceId } from './speakers.ts'
 import { NARRATOR, clipKey } from './voices.ts'
@@ -47,6 +48,11 @@ export function allSpeech(): SpeechItem[] {
     for (const e of v.examples) add(e.fa, 'Vowels', { tr: e.tr, en: e.en })
   }
   if (APP.alphabet) for (const pair of VOWEL_PAIRS) for (const e of pair) add(e.fa, 'Vowels', { tr: e.tr, en: e.en })
+  // The homograph game: each vowelled reading and its context sentence.
+  if (APP.alphabet) for (const h of HOMOGRAPHS) for (const f of h.forms) {
+    add(f.fa, 'Vowels · homographs', { tr: f.tr, en: f.en })
+    add(f.context.fa, 'Vowels · homographs', { tr: f.context.tr, en: f.context.en })
+  }
   for (const p of PISHI_LINES) add(p.text, 'Pishi', { tr: p.tr, en: p.en })
 
   const groups = [...LEVELS.map((lv) => ({ label: lv.level, units: lv.units })), ...TRACKS.map((t) => ({ label: t.name, units: t.units }))]

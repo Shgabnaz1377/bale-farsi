@@ -13,6 +13,7 @@ export const router = createRouter({
     { path: '/progress', name: 'progress', component: () => import('./views/ProgressView.vue') },
     { path: '/account', name: 'account', component: () => import('./views/AccountView.vue') },
     { path: '/settings', name: 'settings', component: () => import('./views/SettingsView.vue') },
+    { path: '/quick', name: 'quick', component: () => import('./views/QuickQuizView.vue') },
     { path: '/:pathMatch(.*)*', name: 'not-found', component: () => import('./views/NotFoundView.vue') },
   ],
   scrollBehavior: () => ({ top: 0 }),
