@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, watchEffect } from 'vue'
+import { computed, defineAsyncComponent, watchEffect } from 'vue'
 import { useRoute } from 'vue-router'
 import { P, rollDay, streakActiveToday } from '@/lib/store.ts'
 import { account, initAccount } from '@/lib/account.ts'
@@ -9,6 +9,8 @@ import { setLang, t } from '@/i18n/index.ts'
 import { applyCourseLang } from '@/content/localize.ts'
 import { APP } from '@/app.ts'
 import { welcomeOpen } from '@/lib/welcome.ts'
+// Only signed-in people can flag pronunciation, so guests never download it.
+const PronFlag = defineAsyncComponent(() => import('@/components/PronFlag.vue'))
 
 const route = useRoute()
 
@@ -91,6 +93,7 @@ const nav = computed(() => [
     </div>
   </header>
   <RouterView :key="route.fullPath + P.settings.lang" />
+  <PronFlag v-if="account.user" />
 </template>
 
 <style scoped>

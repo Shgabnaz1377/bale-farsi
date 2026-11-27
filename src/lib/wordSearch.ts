@@ -41,8 +41,15 @@ export interface Indexed {
   row: SearchRow
   fa: string
   tr: string
-  /** English meanings, folded, plus the verb without "to ". */
+  /** Meanings, folded, plus the verb without "to ". */
   en: string[]
+  /**
+   * Every field folded for a Latin-letter query and for a Persian-letter query. In PersianMeow the word is
+   * Persian and the meaning English; in Bego Ciao the word is Italian and its pronunciation and meaning are
+   * Persian. Comparing each query with all fields in its own script makes search work both ways in both apps.
+   */
+  latin: string[]
+  persian: string[]
 }
 
 const enForms = (en: string[]) =>
@@ -51,12 +58,15 @@ const enForms = (en: string[]) =>
     return f.startsWith('to ') ? [f, f.slice(3)] : [f]
   })
 
-const index = (row: SearchRow): Indexed => ({
-  row,
-  fa: foldFa(row.fa),
-  tr: foldLatin(row.tr),
-  en: enForms([row.en, ...(row.alt ?? [])]),
-})
+function index(row: SearchRow): Indexed {
+  const meanings = [row.en, ...(row.alt ?? [])]
+  const fa = foldFa(row.fa)
+  const tr = foldLatin(row.tr)
+  const en = enForms(meanings)
+  const latin = [...en, tr, foldLatin(row.fa)].filter((f) => f && !isPersianQuery(f))
+  const persian = [fa, foldFa(row.tr), ...meanings.map(foldFa)].filter((f) => f && isPersianQuery(f))
+  return { row, fa, tr, en, latin, persian }
+}
 
 /**
  * Join course words and the dictionary. A dictionary entry with the same Persian and an overlapping
@@ -109,7 +119,7 @@ export function searchRows(rows: Indexed[], query: string, keep: (r: SearchRow) 
   const hits: { row: SearchRow; s: number; i: number }[] = []
   rows.forEach((r, i) => {
     if (!keep(r.row)) return
-    const s = fa ? score(r.fa, qf) : best([...r.en.map((m) => score(m, qf)), score(r.tr, qf)])
+    const s = best((fa ? r.persian : r.latin).map((f) => score(f, qf)))
     if (s !== null) hits.push({ row: r.row, s, i })
   })
   hits.sort((a, b) => a.s - b.s || Number(a.row.dict) - Number(b.row.dict) || a.i - b.i)

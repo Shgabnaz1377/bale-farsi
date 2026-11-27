@@ -14,6 +14,7 @@ export const router = createRouter({
     { path: '/words', name: 'words', component: () => import('./views/WordsView.vue') },
     { path: '/progress', name: 'progress', component: () => import('./views/ProgressView.vue') },
     { path: '/account', name: 'account', component: () => import('./views/AccountView.vue') },
+    { path: '/review', name: 'review', component: () => import('./views/ReviewView.vue') },
     { path: '/admin', name: 'admin', component: () => import('./views/AdminView.vue') },
     { path: '/settings', name: 'settings', component: () => import('./views/SettingsView.vue') },
     { path: '/persian-not-arabic', name: 'not-arabic', component: () => import('./views/NotArabicView.vue') },
@@ -27,9 +28,9 @@ export const router = createRouter({
 
 // Guests get one free lesson, then sign up to go on; the owner page needs a signed-in account.
 router.beforeEach(async (to) => {
-  if (to.name !== 'lesson' && to.name !== 'admin') return true
+  if (to.name !== 'lesson' && to.name !== 'admin' && to.name !== 'review') return true
   await accountReady()
   if (to.name === 'lesson' && needsAccount()) return { name: 'account', query: { gate: '1', next: to.fullPath } }
-  if (to.name === 'admin' && account.enabled && !account.user) return { name: 'account', query: { next: to.fullPath } }
+  if ((to.name === 'admin' || to.name === 'review') && account.enabled && !account.user) return { name: 'account', query: { next: to.fullPath } }
   return true
 })
