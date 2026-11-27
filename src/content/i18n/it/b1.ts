@@ -842,7 +842,7 @@ export const IT_B1: CourseTr = {
     tip: "Gli iraniani più anziani cominciano spesso un ricordo con <span class=\"fa\">یادش بخیر</span> (<i>yâdesh bekheyr</i>, \"che il suo ricordo sia buono\"), un affettuoso e nostalgico \"bei tempi\".",
     words: [
       { fa: "قدیم", it: "i tempi antichi", alt: ["una volta", "il passato", "i vecchi tempi"], note: "Ghadimhâ = una volta, ai vecchi tempi. Ghadimi = vecchio (di cose)." },
-      { fa: "آن موقع", it: "allora", alt: ["a quel tempo", "a quell'epoca"], note: "Nel parlato: un moghe'." },
+      { fa: "آن موقع", it: "allora", alt: ["a quel tempo", "a quell'epoca"], note: "Nel parlato: un mowghe'." },
       { fa: "عادت داشتن", it: "avere l'abitudine di", alt: ["essere abituato a", "solere"], note: "Âdat dâshtam sobh zud bidâr shavam = avevo l'abitudine di alzarmi presto." },
       { fa: "روستا", it: "villaggio", alt: ["paese"] },
       { fa: "کوچه", it: "vicolo", alt: ["viuzza", "stradina", "strada"], note: "Per tradizione i bambini giocavano nel kuche davanti a casa." },
@@ -903,7 +903,7 @@ export const IT_B1: CourseTr = {
   "b1-time-clauses": {
     title: "Prima, dopo e quando",
     can: "Sai dire in che ordine succedono le cose, con \"quando\", \"prima che\", \"dopo che\" e \"appena\".",
-    tip: "Quando l'evento è già chiaro, chi parla accorcia spesso <i>ghabl az inke…</i> e <i>ba'd az inke…</i> in <span class=\"fa\">قبلش</span> <i>ghablesh</i> \"prima\" e <span class=\"fa\">بعدش</span> <i>ba'desh</i> \"dopo\": <i>ba'desh raftim sinemâ</i> \"poi siamo andati al cinema\".",
+    tip: "Quando l'evento è già chiaro, chi parla accorcia spesso <i>ghabl az inke…</i> e <i>ba'd az inke…</i> in <span class=\"fa\">قبلش</span> <i>ghablesh</i> \"prima\" e <span class=\"fa\">بعدش</span> <i>ba'desh</i> \"dopo\": <i>ba'desh raftim sinamâ</i> \"poi siamo andati al cinema\".",
     words: [
       { fa: "وقتی", it: "quando", note: "Vaghti (ke) introduce una frase. Per chiedere \"quando?\" si usa key?" },
       { fa: "قبل از اینکه", it: "prima che", alt: ["prima di", "prima"], note: "È sempre seguito dal congiuntivo." },

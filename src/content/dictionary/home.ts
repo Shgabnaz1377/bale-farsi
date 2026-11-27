@@ -44,7 +44,7 @@ export default `
 کمد | komod | wardrobe; cupboard | n | | لباس\u200cهایم در کمد است. | lebâshâyam dar komod ast. | My clothes are in the wardrobe.
 پرده | parde | curtain | n | | پرده\u200cها را کنار بزن. | pardehâ râ kenâr bezan. | Open the curtains.
 چراغ | cherâgh | light; lamp | n | | لطفاً چراغ را خاموش کن. | lotfan cherâgh râ khâmush kon. | Please turn off the light.
-آینه | âyene | mirror | n | | آینه بالای روشویی است. | âyene bâlâ-ye rushuyi ast. | The mirror is above the washbasin.
+آینه | âyne | mirror | n | | آینه بالای روشویی است. | âyne bâlâ-ye rushuyi ast. | The mirror is above the washbasin.
 پتو | patu | blanket | n | | یک پتوی دیگر می\u200cخواهم. | yek patu-ye digar mikhâham. | I want another blanket.
 قالی | ghâli | handwoven rug; carpet | n
 قفسه | ghafase | shelf; shelves | n
@@ -100,7 +100,7 @@ export default `
 بند رخت | band-e rakht | clothesline | n
 
 # Kitchen utensils
-بشقاب | boshghâb | plate | n | | بشقاب\u200cها را روی میز بگذار. | boshghâbhâ râ ru-ye miz bogzâr. | Put the plates on the table.
+بشقاب | boshghâb | plate | n | | بشقاب\u200cها را روی میز بگذار. | boshghâbhâ râ ru-ye miz begozâr. | Put the plates on the table.
 لیوان | livân | glass (for drinking) | n | | یک لیوان آب می\u200cخواهم. | yek livân âb mikhâham. | I want a glass of water.
 استکان | estekân | tea glass | n | | یک استکان چای بخور. | yek estekân chây bokhor. | Have a glass of tea.
 قاشق | ghâshogh | spoon | n | | قاشق و چنگال کجاست؟ | ghâshogh o changâl kojâst? | Where are the spoon and fork?
@@ -269,7 +269,7 @@ export default `
 # Fruit
 میوه | mive | fruit | n | | بعد از ناهار میوه می\u200cخوریم. | ba'd az nâhâr mive mikhorim. | We eat fruit after lunch.
 سیب | sib | apple | n | | این سیب خیلی شیرین است. | in sib kheyli shirin ast. | This apple is very sweet.
-پرتقال | porteghâl | orange | n | | یک کیلو پرتقال بدهید. | yek kilu porteghâl bedahid. | A kilo of oranges, please.
+پرتقال | porteghâl | orange | n | | یک کیلو پرتقال بدهید. | yek kilo porteghâl bedahid. | A kilo of oranges, please.
 هندوانه | hendevâne | watermelon | n | | در تابستان هندوانه می\u200cخوریم. | dar tâbestân hendevâne mikhorim. | In summer we eat watermelon.
 انار | anâr | pomegranate | n | | انار میوه پاییز است. | anâr mive-ye pâyiz ast. | Pomegranate is an autumn fruit.
 موز | moz | banana | n | | یک موز در کیفم دارم. | yek moz dar kifam dâram. | I have a banana in my bag.
@@ -508,7 +508,7 @@ export default `
 سبد | sabad | basket | n
 سبد خرید | sabad-e kharid | shopping basket; shopping cart | n
 ترازو | tarâzu | scales (for weighing) | n
-کیلو | kilu | kilo | n | | نیم کیلو پنیر می\u200cخواهم. | nim kilu panir mikhâham. | I'd like half a kilo of cheese.
+کیلو | kilo | kilo | n | | نیم کیلو پنیر می\u200cخواهم. | nim kilo panir mikhâham. | I'd like half a kilo of cheese.
 گرم | geram | gram | n
 لیتر | litr | litre | n
 گارانتی | gârânti | warranty; guarantee | n

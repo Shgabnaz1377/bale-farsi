@@ -234,7 +234,7 @@ export default `
 هضم | hazm | digestion | n
 # --- health and medicine ---
 سلامتی | salâmati | health | n | | سلامتی از همه چیز مهم\u200cتر است. | salâmati az hame chiz mohemtar ast. | Health is more important than anything.
-حال | hâl | state; how one is | n | | حال مادرت چطور است؟ | hâl-e mâdarat chetowr ast? | How is your mother?
+حال | hâl | state; how one is | n | | حال مادرت چطور است؟ | hâl-e mâdarat chetor ast? | How is your mother?
 درد | dard | pain | n | | این قرص درد را کم می\u200cکند. | in ghors dard râ kam mikonad. | This pill reduces the pain.
 بیماری | bimâri | illness; disease | n | | این بیماری خطرناک نیست. | in bimâri khatarnâk nist. | This illness is not dangerous.
 دارو | dâru | medicine; drug | n | | این دارو را هر هشت ساعت بخورید. | in dâru râ har hasht sâ'at bokhorid. | Take this medicine every eight hours.
@@ -315,7 +315,7 @@ export default `
 جراحی | jarrâhi | surgery | n
 اتاق عمل | otâgh-e amal | operating room | n
 بخش | bakhsh | ward (in a hospital) | n
-معاینه | mo'âyene | examination; check-up | n
+معاینه | mo'âyne | examination; check-up | n
 چکاپ | chekâp | check-up | n
 بهبودی | behbudi | recovery | n
 مراقبت | morâghebat | care | n

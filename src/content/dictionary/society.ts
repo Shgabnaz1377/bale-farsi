@@ -79,7 +79,7 @@ export default `
 بیمه | bime | insurance | n | | همه کارمندها بیمه دارند. | hame-ye kârmandhâ bime dârand. | All the employees have insurance.
 رزومه | rezume | résumé; CV | n
 مهارت | mahârat | skill | n
-پروژه | poruzhe | project | n | | پروژه ما ماه بعد تمام می\u200cشود. | poruzhe-ye mâ mâh-e ba'd tamâm mishavad. | Our project finishes next month.
+پروژه | porozhe | project | n | | پروژه ما ماه بعد تمام می\u200cشود. | porozhe-ye mâ mâh-e ba'd tamâm mishavad. | Our project finishes next month.
 گزارش | gozâresh | report | n | | گزارش را برای مدیر فرستادم. | gozâresh râ barâ-ye modir ferestâdam. | I sent the report to the manager.
 پرونده | parvande | file; case; dossier | n
 نامه | nâme | letter | n | | یک نامه رسمی برای اداره نوشتم. | yek nâme-ye rasmi barâ-ye edâre neveshtam. | I wrote an official letter to the office.
@@ -255,7 +255,7 @@ export default `
 نرم\u200cافزار | narm-afzâr | software | n
 برنامه\u200cنویسی | barnâme-nevisi | programming | n
 داده | dâde | data | n
-جستجو | josteju | search | n
+جستجو | jostoju | search | n
 لینک | link | link | n
 کد | kod | code | n
 کانال | kânâl | channel | n
@@ -352,7 +352,7 @@ export default `
 سلاح | salâh | weapon | n
 بمب | bomb | bomb | n
 شهید | shahid | martyr | n
-جامعه | jâme'e | society; community | n | | زنان در جامعه نقش مهمی دارند. | zanân dar jâme'e naghsh-e mohemi dârand. | Women have an important role in society.
+جامعه | jâme'e | society; community | n | | زنان در جامعه نقش مهمی دارند. | zanân dar jâme'e naghsh-e mohemmi dârand. | Women have an important role in society.
 مهاجرت | mohâjerat | emigration; immigration | n | | خیلی از جوان\u200cها به مهاجرت فکر می\u200cکنند. | kheyli az javânhâ be mohâjerat fekr mikonand. | Many young people think about emigrating.
 مهاجر | mohâjer | immigrant; emigrant | n
 پناهنده | panâhande | refugee | n

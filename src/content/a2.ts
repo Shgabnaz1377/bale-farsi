@@ -19,7 +19,7 @@ export const A2: Unit[] = [
       { fa: 'مبل', tr: 'mobl', en: 'sofa', alt: ['couch', 'armchair'] },
       { fa: 'فرش', tr: 'farsh', en: 'carpet', alt: ['rug'] },
       { fa: 'یخچال', tr: 'yakhchâl', en: 'fridge', alt: ['refrigerator'], note: 'Literally "ice pit", the name of the old Persian ice houses.' },
-      { fa: 'پنجره', tr: 'panjere', en: 'window', note: 'Often pronounced panjare in speech.' },
+      { fa: 'پنجره', tr: 'panjare', en: 'window', note: 'Often pronounced panjare in speech.' },
       { fa: 'روی', tr: 'ru', en: 'on', alt: ['on top of'], note: 'Written with ezâfe: ru-ye miz. In speech often just ru miz.' },
       { fa: 'زیر', tr: 'zir', en: 'under', alt: ['below', 'underneath'], note: 'With ezâfe before a noun: zir-e miz.' },
       { fa: 'پشت', tr: 'posht', en: 'behind', alt: ['back'], note: 'With ezâfe before a noun: posht-e khâne.' },
@@ -45,11 +45,11 @@ export const A2: Unit[] = [
       },
       {
         fa: 'یخچال کنار پنجره است.',
-        tr: 'yakhchâl kenâr-e panjere ast.',
+        tr: 'yakhchâl kenâr-e panjare ast.',
         en: 'The fridge is next to the window.',
         alt: ['The fridge is by the window.'],
         tiles: ['یخچال', 'کنار', 'پنجره', 'است'],
-        trTiles: ['yakhchâl', 'kenâr-e', 'panjere', 'ast'],
+        trTiles: ['yakhchâl', 'kenâr-e', 'panjare', 'ast'],
         note: 'kenâr-e: "next to", literally "the side of".',
       },
       {
@@ -1529,7 +1529,7 @@ export const A2: Unit[] = [
       { fa: 'بهش', tr: 'behesh', en: 'to him', alt: ['to her', 'to it'], note: 'Spoken be + -esh. Written: be u.' },
       { fa: 'بهت', tr: 'behet', en: 'to you', note: 'Spoken be + -et. Written: be to.' },
       { fa: 'کیف پول', tr: 'kif-e pul', en: 'wallet', alt: ['purse'], note: 'Literally "money bag".' },
-      { fa: 'هدیه', tr: 'hadiye', en: 'present', alt: ['gift'], note: 'In speech also kâdo, from French "cadeau".' },
+      { fa: 'هدیه', tr: 'hediye', en: 'present', alt: ['gift'], note: 'In speech also kâdo, from French "cadeau".' },
     ],
     sentences: [
       {
@@ -1756,7 +1756,7 @@ export const A2: Unit[] = [
       { fa: 'نگران', tr: 'negarân', en: 'worried', alt: ['anxious'], note: 'Spoken: negarun. negarân-e … : worried about …' },
       { fa: 'هیجان\u200cزده', tr: 'hayajânzade', en: 'excited', note: 'Literally "struck by excitement".' },
       { fa: 'ترسیدن', tr: 'tarsidan', en: 'to be afraid', alt: ['to fear', 'to be scared'], note: 'az … tarsidan: "to be afraid of". Present: mitarsam.' },
-      { fa: 'حوصله', tr: 'hosele', en: 'patience', note: 'hosele nadâram: "I\'m not in the mood". hoselam sar rafte: "I\'m bored".' },
+      { fa: 'حوصله', tr: 'howsele', en: 'patience', note: 'howsele nadâram: "I\'m not in the mood". howselam sar rafte: "I\'m bored".' },
       { fa: 'چون', tr: 'chon', en: 'because', alt: ['since', 'as'], note: 'Starts the reason clause. Used in speech and writing.' },
       { fa: 'برای اینکه', tr: 'barâ-ye inke', en: 'for the reason that', alt: ['because'], note: 'Means "because", often in answer to cherâ? ("why?").' },
       { fa: 'چرا', tr: 'cherâ', en: 'why', note: 'Also "yes, of course" when answering a negative question.' },
@@ -1960,7 +1960,7 @@ export const A2: Unit[] = [
       { who: 'Sasan', fa: 'سارا، دیروز چی کار کردی؟', tr: 'Sârâ, diruz chi kâr kardi?', en: 'Sara, what did you do yesterday?' },
       { who: 'Sara', fa: 'صبح رفتم سر کار، بعد از کار رفتم باشگاه.', tr: "sobh raftam sar-e kâr, ba'd az kâr raftam bâshgâh.", en: 'In the morning I went to work, and after work I went to the gym.' },
       { who: 'Sasan', fa: 'شام خونه خوردی یا بیرون؟', tr: 'shâm khune khordi yâ birun?', en: 'Did you have dinner at home or out?' },
-      { who: 'Sara', fa: 'اول رفتم رستوران، ولی خیلی شلوغ بود.', tr: 'avval raftam rasturân, vali kheyli sholugh bud.', en: 'First I went to a restaurant, but it was really crowded.' },
+      { who: 'Sara', fa: 'اول رفتم رستوران، ولی خیلی شلوغ بود.', tr: 'avval raftam restorân, vali kheyli sholugh bud.', en: 'First I went to a restaurant, but it was really crowded.' },
       { who: 'Sasan', fa: 'پس چی کار کردی؟', tr: 'pas chi kâr kardi?', en: 'So what did you do?' },
       { who: 'Sara', fa: 'یه پیتزا خریدم و رفتم خونه.', tr: 'ye pitzâ kharidam o raftam khune.', en: 'I bought a pizza and went home.' },
       { who: 'Sasan', fa: 'قبل از خواب فیلم دیدی؟', tr: 'ghabl az khâb film didi?', en: 'Did you watch a film before bed?' },
@@ -2101,7 +2101,7 @@ export const A2: Unit[] = [
       { fa: 'آزاد', tr: 'âzâd', en: 'free', alt: ['available'], note: 'Also "free" as in freedom: âzâdi.' },
       { fa: 'گرفتار', tr: 'gereftâr', en: 'busy', alt: ['tied up'], note: 'Literally "caught". A soft, polite way to say you can\'t come.' },
       { fa: 'حتماً', tr: 'hatman', en: 'definitely', alt: ['of course', 'certainly', 'sure'] },
-      { fa: 'متأسفانه', tr: "mote'assefâne", en: 'unfortunately', alt: ['sadly', "I'm afraid"], note: 'Most polite refusals start with it.' },
+      { fa: 'متأسفانه', tr: "mota'assefâne", en: 'unfortunately', alt: ['sadly', "I'm afraid"], note: 'Most polite refusals start with it.' },
       { fa: 'با کمال میل', tr: 'bâ kamâl-e meyl', en: 'with pleasure', alt: ['gladly'], note: 'Literally "with complete desire". A warm, slightly formal yes.' },
       { fa: 'قبول کردن', tr: 'ghabul kardan', en: 'to accept', alt: ['accept', 'to agree'] },
       { fa: 'زحمت نکش', tr: 'zahmat nakesh', en: "don't go to any trouble", alt: ["don't bother", "don't trouble yourself"], note: 'To a friend. Polite: zahmat nakeshid.' },
@@ -2128,11 +2128,11 @@ export const A2: Unit[] = [
       },
       {
         fa: 'متأسفانه این هفته خیلی گرفتارم.',
-        tr: "mote'assefâne in hafte kheyli gereftâram.",
+        tr: "mota'assefâne in hafte kheyli gereftâram.",
         en: "Unfortunately I'm very busy this week.",
         alt: ["I'm afraid I'm very busy this week.", 'Unfortunately I am very busy this week.'],
         tiles: ['متأسفانه', 'این', 'هفته', 'خیلی', 'گرفتارم'],
-        trTiles: ["mote'assefâne", 'in', 'hafte', 'kheyli', 'gereftâram'],
+        trTiles: ["mota'assefâne", 'in', 'hafte', 'kheyli', 'gereftâram'],
         note: 'gereftâr + -am, "I am busy". A reason after mote\'assefâne makes a refusal polite.',
       },
       {
@@ -2156,12 +2156,12 @@ export const A2: Unit[] = [
     ],
     grammar: {
       title: "Inviting: miyâi …? and berim …!",
-      body: "To invite someone, simply ask with the present tense: <i>jom'e miyâi khune-ye mâ?</i>, \"Will you come to ours on Friday?\". For \"let's\", use <b>be- + present stem + -im</b>: <i>berim</i> \"let's go\", <i>bekhorim</i> \"let's eat\". To say yes, use <i>hatman</i> or <i>bâ kamâl-e meyl</i>. To say no politely, start with <b>mote'assefâne</b> and give a reason: <i>mote'assefâne nemitunam, gereftâram</i>.",
+      body: "To invite someone, simply ask with the present tense: <i>jom'e miyâi khune-ye mâ?</i>, \"Will you come to ours on Friday?\". For \"let's\", use <b>be- + present stem + -im</b>: <i>berim</i> \"let's go\", <i>bekhorim</i> \"let's eat\". To say yes, use <i>hatman</i> or <i>bâ kamâl-e meyl</i>. To say no politely, start with <b>mota'assefâne</b> and give a reason: <i>mota'assefâne nemitunam, gereftâram</i>.",
       examples: [
         { fa: 'شنبه میای خونه\u200cی ما؟', tr: 'shanbe miyâi khune-ye mâ?', en: 'Will you come to our place on Saturday? (spoken)' },
         { fa: 'بریم پارک!', tr: 'berim pârk!', en: "Let's go to the park! (spoken)" },
         { fa: 'بفرمایید شام.', tr: 'befarmâyid shâm.', en: 'Dinner is served, please come to the table.' },
-        { fa: 'متأسفانه نمی\u200cتوانم بیایم.', tr: "mote'assefâne nemitavânam biâyam.", en: "Unfortunately I can't come." },
+        { fa: 'متأسفانه نمی\u200cتوانم بیایم.', tr: "mota'assefâne nemitavânam biâyam.", en: "Unfortunately I can't come." },
       ],
       checks: [
         {
@@ -2174,9 +2174,9 @@ export const A2: Unit[] = [
         {
           q: 'Politely decline: "Unfortunately I can\'t."',
           options: ['حتماً میام.', 'متأسفانه نمی\u200cتونم.', 'با کمال میل.'],
-          optionsTr: ['hatman miyâm.', "mote'assefâne nemitunam.", 'bâ kamâl-e meyl.'],
+          optionsTr: ['hatman miyâm.', "mota'assefâne nemitunam.", 'bâ kamâl-e meyl.'],
           answer: 1,
-          why: "mote'assefâne nemitunam is a polite no. The other two both mean yes.",
+          why: "mota'assefâne nemitunam is a polite no. The other two both mean yes.",
         },
         {
           q: 'A friend asks "jom\'e miyâi?". Which answer means "Yes, definitely!"?',

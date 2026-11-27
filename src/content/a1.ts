@@ -158,7 +158,7 @@ export const A1: Unit[] = [
       { fa: 'میز', tr: 'miz', en: 'table', alt: ['desk'] },
       { fa: 'صندلی', tr: 'sandali', en: 'chair' },
       { fa: 'در', tr: 'dar', en: 'door', note: 'The same word also means "in": dar khâne = in the house.' },
-      { fa: 'پنجره', tr: 'panjere', en: 'window' },
+      { fa: 'پنجره', tr: 'panjare', en: 'window' },
       { fa: 'کیف', tr: 'kif', en: 'bag', alt: ['handbag', 'wallet'] },
       { fa: 'گوشی', tr: 'gushi', en: 'phone', alt: ['mobile', 'mobile phone', 'cell phone'], note: 'The everyday word for a mobile phone.' },
       { fa: 'کلید', tr: 'kelid', en: 'key' },
@@ -303,7 +303,7 @@ export const A1: Unit[] = [
       { fa: 'زن‌ها', tr: 'zanhâ', en: 'women', note: 'Formal: zanân.' },
       { fa: 'گل', tr: 'gol', en: 'flower' },
       { fa: 'گل‌ها', tr: 'golhâ', en: 'flowers' },
-      { fa: 'بچه‌ها', tr: 'bachehâ', en: 'children', alt: ['kids'], note: 'Also the friendly way to address a group: bachehâ! = guys!' },
+      { fa: 'بچه‌ها', tr: 'bachchehâ', en: 'children', alt: ['kids'], note: 'Also the friendly way to address a group: bachchehâ! = guys!' },
       { fa: 'خانه‌ها', tr: 'khânehâ', en: 'houses', alt: ['homes'] },
     ],
     sentences: [
@@ -324,10 +324,10 @@ export const A1: Unit[] = [
         note: 'After a number the noun stays singular: se tâ dust, not se tâ dustân.',
       },
       {
-        fa: 'بچه‌ها کجا هستند؟', tr: 'bachehâ kojâ hastand?', en: 'Where are the children?',
+        fa: 'بچه‌ها کجا هستند؟', tr: 'bachchehâ kojâ hastand?', en: 'Where are the children?',
         alt: ['Where are the kids?'],
-        tiles: ['بچه‌ها', 'کجا', 'هستند'], trTiles: ['bachehâ', 'kojâ', 'hastand'],
-        note: 'In speech: bachehâ kojân?',
+        tiles: ['بچه‌ها', 'کجا', 'هستند'], trTiles: ['bachchehâ', 'kojâ', 'hastand'],
+        note: 'In speech: bachchehâ kojân?',
       },
       {
         fa: 'این درخت‌ها خیلی بلند هستند.', tr: 'in derakhthâ kheyli boland hastand.', en: 'These trees are very tall.',
@@ -369,11 +369,11 @@ export const A1: Unit[] = [
       { fa: 'خواهر', tr: 'khâhar', en: 'sister', note: 'The و (vâv) is silent: you write khvâhar but say khâhar.' },
       { fa: 'پسر', tr: 'pesar', en: 'son', alt: ['boy'] },
       { fa: 'دختر', tr: 'dokhtar', en: 'daughter', alt: ['girl'] },
-      { fa: 'شوهر', tr: 'shohar', en: 'husband' },
+      { fa: 'شوهر', tr: 'showhar', en: 'husband' },
       { fa: 'زن', tr: 'zan', en: 'wife', alt: ['woman'], note: 'Zan means both "woman" and "wife".' },
       { fa: 'پدربزرگ', tr: 'pedarbozorg', en: 'grandfather', alt: ['grandpa'], note: 'Literally "big father".' },
       { fa: 'مادربزرگ', tr: 'mâdarbozorg', en: 'grandmother', alt: ['grandma'] },
-      { fa: 'بچه', tr: 'bache', en: 'child', alt: ['kid', 'children'] },
+      { fa: 'بچه', tr: 'bachche', en: 'child', alt: ['kid', 'children'] },
       { fa: 'خانواده', tr: 'khânevâde', en: 'family' },
     ],
     sentences: [
@@ -396,10 +396,10 @@ export const A1: Unit[] = [
         note: 'Kojâst = kojâ ("where") + ast ("is").',
       },
       {
-        fa: 'برادرش دو تا بچه داره.', tr: 'barâdaresh do tâ bache dâre.', en: 'Her brother has two children.',
+        fa: 'برادرش دو تا بچه داره.', tr: 'barâdaresh do tâ bachche dâre.', en: 'Her brother has two children.',
         alt: ['His brother has two children.', 'Her brother has two kids.', 'His brother has two kids.'],
-        tiles: ['برادرش', 'دو', 'تا', 'بچه', 'داره'], trTiles: ['barâdaresh', 'do', 'tâ', 'bache', 'dâre'],
-        note: 'Spoken form; written: do bache dârad. -esh can mean "his" or "her".',
+        tiles: ['برادرش', 'دو', 'تا', 'بچه', 'داره'], trTiles: ['barâdaresh', 'do', 'tâ', 'bachche', 'dâre'],
+        note: 'Spoken form; written: do bachche dârad. -esh can mean "his" or "her".',
       },
       {
         fa: 'خانواده‌ی من بزرگ است.', tr: 'khânevâde-ye man bozorg ast.', en: 'My family is big.',
@@ -1115,7 +1115,7 @@ export const A1: Unit[] = [
       body: 'The main question words are <i>ki</i> who, <i>chi</i> what, <i>kojâ</i> where, <i>key</i> when, <i>cherâ</i> why, <i>chand</i> how many, <i>chetor</i> how and <i>kodum</i> which. They stand where the answer would be, usually just before the verb: <span class="fa">کجا می‌ری؟</span> <i>kojâ miri?</i> "where are you going?". For a yes/no question keep the sentence as it is and raise your voice at the end; in writing you can begin with <b>âyâ</b>.',
       examples: [
         { fa: 'کدوم کتابو می‌خوای؟', tr: 'kodum ketâbo mikhây?', en: 'Which book do you want?' },
-        { fa: 'چند تا بچه دارید؟', tr: 'chand tâ bache dârid?', en: 'How many children do you have?' },
+        { fa: 'چند تا بچه دارید؟', tr: 'chand tâ bachche dârid?', en: 'How many children do you have?' },
         { fa: 'این غذا چطوره؟', tr: 'in ghazâ chetore?', en: 'How is this food?' },
         { fa: 'شما ایرانی هستید؟', tr: 'shomâ irâni hastid?', en: 'Are you Iranian?' },
       ],
@@ -1543,7 +1543,7 @@ export const A1: Unit[] = [
         { fa: 'من کت می‌پوشم.', tr: 'man kot mipusham.', en: 'I put on a jacket.' },
         { fa: 'سارا روسری سبز پوشیده.', tr: 'Sârâ rusari-ye sabz pushide.', en: 'Sara is wearing a green headscarf.' },
         { fa: 'کفش سفید می‌خوام.', tr: 'kafsh-e sefid mikhâm.', en: 'I want white shoes.' },
-        { fa: 'بچه‌ها جوراب نپوشیدن.', tr: 'bachehâ jurâb napushidan.', en: "The children aren't wearing socks." },
+        { fa: 'بچه‌ها جوراب نپوشیدن.', tr: 'bachchehâ jurâb napushidan.', en: "The children aren't wearing socks." },
       ],
       checks: [
         { q: 'Which means "I wear"?', options: ['می‌پوشی', 'پوشیدی', 'می‌پوشم'], optionsTr: ['mipushi', 'pushidi', 'mipusham'], answer: 2, why: 'Mi- + push + -am.' },
@@ -1612,7 +1612,7 @@ export const A1: Unit[] = [
         { fa: 'ما شنا می‌کنیم.', tr: 'mâ shenâ mikonim.', en: 'We swim.' },
         { fa: 'آرش موسیقی دوست داره.', tr: 'Ârash musighi dust dâre.', en: 'Arash likes music.' },
         { fa: 'من فیلم ترسناک دوست ندارم.', tr: 'man film-e tarsnâk dust nadâram.', en: "I don't like horror films." },
-        { fa: 'بچه‌ها توی پارک بازی می‌کنن.', tr: 'bachehâ tu-ye pârk bâzi mikonan.', en: 'The children are playing in the park.' },
+        { fa: 'بچه‌ها توی پارک بازی می‌کنن.', tr: 'bachchehâ tu-ye pârk bâzi mikonan.', en: 'The children are playing in the park.' },
       ],
       checks: [
         { q: 'Which means "I play"?', options: ['بازی دارم', 'می‌بازی کنم', 'بازی می‌کنم'], optionsTr: ['bâzi dâram', 'mibâzi konam', 'bâzi mikonam'], answer: 2, why: 'Only the verb part takes mi- and the ending: bâzi mi-kon-am.' },

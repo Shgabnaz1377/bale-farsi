@@ -141,7 +141,7 @@ export const COUPLES: Unit[] = [
       { fa: 'عمو', tr: 'amu', en: "uncle (father's brother)", alt: ['uncle'], note: 'Children call any friendly older man amu.' },
       { fa: 'دایی', tr: 'dâyi', en: "uncle (mother's brother)", alt: ['uncle'] },
       { fa: 'مادرزن', tr: 'mâdarzan', en: "mother-in-law (wife's mother)", alt: ['mother-in-law'], note: 'Literally "wife-mother". Aria\'s word for Sara\'s mum.' },
-      { fa: 'مادرشوهر', tr: 'mâdarshohar', en: "mother-in-law (husband's mother)", alt: ['mother-in-law'], note: 'Literally "husband-mother". Venus\'s word for Arash\'s mum.' },
+      { fa: 'مادرشوهر', tr: 'mâdarshowhar', en: "mother-in-law (husband's mother)", alt: ['mother-in-law'], note: 'Literally "husband-mother". Venus\'s word for Arash\'s mum.' },
       { fa: 'جان', tr: 'jân', en: 'dear', alt: ['dear (after a name)'], note: 'Put after a name or title for warmth: Sârâ jân, khâle jân. Spoken also jun.' },
       { fa: 'خانم', tr: 'khânom', en: 'Mrs', alt: ['madam', 'lady', 'Ms', 'Miss'], note: 'After a first name it is warm and respectful: Maryam khânom.' },
       { fa: 'آقا', tr: 'âghâ', en: 'Mr', alt: ['sir', 'gentleman'] },
@@ -439,7 +439,7 @@ export const COUPLES: Unit[] = [
         { fa: 'فردا میام.', tr: 'fardâ miyâm.', en: "I'm coming tomorrow." },
         { fa: 'سارا کی میاد؟', tr: 'Sârâ key miyâd?', en: 'When is Sara coming?' },
         { fa: 'شما کی میاید؟', tr: 'shomâ key miyâid?', en: 'When are you coming? (shomâ)' },
-        { fa: 'بچه‌ها تابستون میان.', tr: 'bachehâ tâbestun miyân.', en: 'The kids are coming in the summer.' },
+        { fa: 'بچه‌ها تابستون میان.', tr: 'bachchehâ tâbestun miyân.', en: 'The kids are coming in the summer.' },
       ],
       checks: [
         {
