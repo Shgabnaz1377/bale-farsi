@@ -272,13 +272,13 @@ export const B2: Unit[] = [
       ],
     },
     dialogue: [
-      { who: 'Tom', fa: 'لیلا، این پیامو می\u200cخونی؟ نوشته: «جلسه فردا ساعت ده برگزار می\u200cشود.»', tr: 'Leylâ, in payâmo mikhuni? neveshte: «jalase fardâ sâ\'at-e dah bargozâr mishavad.»', en: 'Leila, can you read this message? It says: "The meeting will be held tomorrow at ten."' },
+      { who: 'Atoosa', fa: 'لیلا، این پیامو می\u200cخونی؟ نوشته: «جلسه فردا ساعت ده برگزار می\u200cشود.»', tr: 'Leylâ, in payâmo mikhuni? neveshte: «jalase fardâ sâ\'at-e dah bargozâr mishavad.»', en: 'Leila, can you read this message? It says: "The meeting will be held tomorrow at ten."' },
       { who: 'Leila', fa: 'یعنی فردا ساعت ده جلسه داریم.', tr: "ya'ni fardâ sâ'at-e dah jalase dârim.", en: 'It means we have a meeting tomorrow at ten.' },
-      { who: 'Tom', fa: 'پس چرا تو پیام «می\u200cشود» نوشته، ولی تو می\u200cگی «می\u200cشه»؟', tr: 'pas cherâ tu payâm «mishavad» neveshte, vali to migi «mishe»?', en: 'So why does the message say "mishavad" when you say "mishe"?' },
+      { who: 'Atoosa', fa: 'پس چرا تو پیام «می\u200cشود» نوشته، ولی تو می\u200cگی «می\u200cشه»؟', tr: 'pas cherâ tu payâm «mishavad» neveshte, vali to migi «mishe»?', en: 'So why does the message say "mishavad" when you say "mishe"?' },
       { who: 'Leila', fa: 'چون وقتی حرف می\u200cزنیم، کلمه\u200cها رو کوتاه می\u200cکنیم.', tr: 'chon vaghti harf mizanim, kalamehâ ro kutâh mikonim.', en: 'Because when we talk, we shorten the words.' },
-      { who: 'Tom', fa: 'یعنی «خانه» هم می\u200cشه «خونه»؟', tr: "ya'ni «khâne» ham mishe «khune»?", en: 'So "khâne" becomes "khune" too?' },
+      { who: 'Atoosa', fa: 'یعنی «خانه» هم می\u200cشه «خونه»؟', tr: "ya'ni «khâne» ham mishe «khune»?", en: 'So "khâne" becomes "khune" too?' },
       { who: 'Leila', fa: 'دقیقاً. ولی تو نامه\u200cی اداری همیشه «خانه» بنویس.', tr: 'daghighan. vali tu nâme-ye edâri hamishe «khâne» benevis.', en: 'Exactly. But in an official letter, always write "khâne".' },
-      { who: 'Tom', fa: 'اگه تو چت «خونه» بنویسم چی؟', tr: 'age tu chat «khune» benevisam chi?', en: 'What if I write "khune" in a chat?' },
+      { who: 'Atoosa', fa: 'اگه تو چت «خونه» بنویسم چی؟', tr: 'age tu chat «khune» benevisam chi?', en: 'What if I write "khune" in a chat?' },
       { who: 'Leila', fa: 'اشکالی نداره. تو پیامای دوستانه همه همین\u200cطوری می\u200cنویسن.', tr: 'eshkâli nadâre. tu payâmâ-ye dustâne hame hamintowri minevisan.', en: "That's fine. Everyone writes like that in messages to friends." },
     ],
     reading: {
