@@ -85,10 +85,9 @@ describe('merging this device with the cloud', () => {
 describe('pronunciation audio', () => {
   it('gives every speakable text its own audio file name', async () => {
     const { allSpeech } = await import('@/content/speech.ts')
-    const { audioKey } = await import('@/lib/audioKey.ts')
     const items = allSpeech()
     expect(items.length).toBeGreaterThan(500)
-    const keys = new Set(items.map((i) => audioKey(i.text)))
+    const keys = new Set(items.map((i) => i.key))
     expect(keys.size).toBe(items.length)
   })
   it('ignores spacing differences when naming a clip', async () => {

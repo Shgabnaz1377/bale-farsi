@@ -4,6 +4,8 @@ import FA_INDEX from '@/content/audio-index.json'
 import IT_INDEX from '@/courses/begociao/audio-index.json'
 import { APP } from '@/app.ts'
 import { audioKey } from './audioKey.ts'
+import { clipKey } from '@/content/voices.ts'
+import type { VoiceId } from '@/content/speakers.ts'
 import { isNative } from './platform.ts'
 
 /**
@@ -54,9 +56,16 @@ else if (synth) {
 
 /** Number of recorded clips in this build. */
 export const clipCount = CLIPS.size
-export const hasClip = (text: string) => CLIPS.has(audioKey(text))
+/** The clip for a text in a voice: the speaker's own recording, else the narrator's while it is being recorded. */
+function clipFor(text: string, voice?: VoiceId): string | null {
+  const own = clipKey(text, voice)
+  if (CLIPS.has(own)) return own
+  const narrator = audioKey(text)
+  return CLIPS.has(narrator) ? narrator : null
+}
+export const hasClip = (text: string, voice?: VoiceId) => clipFor(text, voice) !== null
 /** Can this exact text be read aloud? */
-export const canSpeak = (text: string) => !!text && (hasClip(text) || !!faVoice.value)
+export const canSpeak = (text: string, voice?: VoiceId) => !!text && (hasClip(text, voice) || !!faVoice.value)
 /** Can the app read Persian aloud at all (used to include listening exercises)? */
 export const hasVoice = () => CLIPS.size > 0 || !!faVoice.value
 
@@ -80,10 +89,11 @@ function playClip(key: string, slow: boolean): Promise<void> {
 }
 
 /** Speak Persian text. Resolves when it finishes (or straight away if nothing can say it). */
-export function speak(text: string, slow = false): Promise<void> {
+/** Speak text: in a dialogue speaker's voice when given, otherwise the narrator's. */
+export function speak(text: string, slow = false, voice?: VoiceId): Promise<void> {
   if (!text) return Promise.resolve()
-  const key = audioKey(text)
-  if (CLIPS.has(key)) {
+  const key = clipFor(text, voice)
+  if (key) {
     stopSpeech()
     return playClip(key, slow)
   }

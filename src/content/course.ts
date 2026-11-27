@@ -8,6 +8,7 @@ import { A2 as IT_A2 } from '../courses/begociao/a2.ts'
 import { B1 as IT_B1 } from '../courses/begociao/b1.ts'
 import { B2 as IT_B2 } from '../courses/begociao/b2.ts'
 import { APP_ID } from '../app.ts'
+import { TRACK_UNITS } from './tracks/index.ts'
 
 export interface LevelInfo {
   level: Level
@@ -43,7 +44,8 @@ const ITALIAN_COURSE: LevelInfo[] = [
 
 export const LEVELS: LevelInfo[] = APP_ID === 'begociao' ? ITALIAN_COURSE : PERSIAN_COURSE
 
-export const ALL_UNITS: Unit[] = LEVELS.flatMap((l) => l.units)
+// Level units plus the always-open Culture and For-couples tracks (src/content/tracks).
+export const ALL_UNITS: Unit[] = [...LEVELS.flatMap((l) => l.units), ...TRACK_UNITS]
 export const unitById = new Map(ALL_UNITS.map((u) => [u.id, u]))
 export const levelOf = (u: Unit) => LEVELS.find((l) => l.level === u.level)!
 

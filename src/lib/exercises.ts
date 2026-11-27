@@ -5,6 +5,7 @@ import { stripPunct } from '@/content/validate.ts'
 import { acceptedForms, gradeTyped } from './grade.ts'
 import { chance, pick, pickOne, shuffle } from './random.ts'
 import { t } from '@/i18n/index.ts'
+import { dialogueVoices, type VoiceId } from '@/content/speakers.ts'
 
 /** Something shown on screen: Persian with transliteration, English, or both. */
 export interface Shown {
@@ -13,6 +14,8 @@ export interface Shown {
   en?: string
   /** Hide the transliteration (letters, where it would give the answer away). */
   hideTr?: boolean
+  /** Dialogue lines: the speaker's voice (right gender). Everything else uses the narrator. */
+  voice?: VoiceId
 }
 
 export interface Prompt extends Shown {
@@ -81,6 +84,8 @@ export interface CardEx {
   examples?: Phrase[]
   passage?: Phrase[]
   dialogue?: DialogueLine[]
+  /** The unit the dialogue belongs to, so each speaker gets their own voice. */
+  unitId?: string
 }
 
 export type Ex = ChoiceEx | MatchEx | BuildEx | TypeEx | CardEx
@@ -291,27 +296,32 @@ function sentencesLesson(u: Unit, o: LessonOptions): Ex[] {
 
 function dialogueLesson(u: Unit, o: LessonOptions): Ex[] {
   const d = u.dialogue ?? []
-  const ex: Ex[] = [{ kind: 'card', title: t('Read the conversation'), dialogue: d }]
+  const voices = dialogueVoices(u)
+  const voiceOf = (line: DialogueLine) => voices.get(line.who)
+  const ex: Ex[] = [{ kind: 'card', title: t('Read the conversation'), dialogue: d, unitId: u.id }]
   const lines: Phrase[] = d
   pick(d, Math.min(4, d.length)).forEach((line) => {
     const e = sentenceMeaning(line, lines, t('What does {who} say?', { who: line.who }))
     e.prompt.who = line.who
+    e.prompt.voice = voiceOf(line)
+    if (e.reveal) e.reveal.voice = voiceOf(line)
     ex.push(e)
   })
   const replies = d.slice(0, -1).map((line, i) => ({ line, next: d[i + 1] }))
   pick(replies, Math.min(3, replies.length)).forEach(({ line, next }) => {
     const options = optionsFor(next, lines, lines)
     ex.push({
-      kind: 'choice', title: t('What does {who} answer?', { who: next.who }), prompt: { fa: line.fa, tr: line.tr, en: line.en, who: line.who, audio: line.fa },
-      options: options.map((x) => ({ fa: x.fa, tr: x.tr })), answer: options.indexOf(next), faOptions: true, reveal: show(next),
+      kind: 'choice', title: t('What does {who} answer?', { who: next.who }), prompt: { fa: line.fa, tr: line.tr, en: line.en, who: line.who, audio: line.fa, voice: voiceOf(line) },
+      // Every option is read in the voice of the person who would answer.
+      options: options.map((x) => ({ fa: x.fa, tr: x.tr, voice: voiceOf(next) })), answer: options.indexOf(next), faOptions: true, reveal: { ...show(next), voice: voiceOf(next) },
     })
   })
   if (o.hasVoice && d.length) {
     const line = pickOne(d)
     const options = optionsFor(line, lines, lines)
     ex.push({
-      kind: 'choice', title: t('Listen, then pick the meaning'), prompt: { audio: line.fa, listen: true },
-      options: options.map((x) => ({ en: x.en })), answer: options.indexOf(line), faOptions: false, reveal: show(line),
+      kind: 'choice', title: t('Listen, then pick the meaning'), prompt: { audio: line.fa, listen: true, voice: voiceOf(line) },
+      options: options.map((x) => ({ en: x.en })), answer: options.indexOf(line), faOptions: false, reveal: { ...show(line), voice: voiceOf(line) },
     })
   }
   return ex

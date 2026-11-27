@@ -2,13 +2,18 @@ import { LEVELS } from './course.ts'
 import { LETTERS } from './alphabet.ts'
 import { VOWELS, VOWEL_PAIRS } from './vowels.ts'
 import { APP } from '../app.ts'
+import { dialogueVoices, type VoiceId } from './speakers.ts'
+import { NARRATOR, clipKey } from './voices.ts'
+import { TRACKS } from './tracks/index.ts'
 
-/** The app's main voice, and a second one for the other speaker in dialogues. */
-export type Voice = 'main' | 'second'
+/** A voice id: the narrator, or a dialogue speaker's voice (see speakers.ts and voices.ts). */
+export type Voice = VoiceId
 
 export interface SpeechItem {
   text: string
   voice: Voice
+  /** The audio file name: public/audio/<key>.mp3 (see clipKey). */
+  key: string
   /** Where it comes from, for the recording page. */
   where: string
   tr?: string
@@ -19,15 +24,18 @@ export interface SpeechItem {
 export const PISHI_LINES = Object.values(APP.pishi).map((l) => ({ text: l.fa, tr: l.tr, en: '' }))
 
 /**
- * Every Persian text the app can read aloud, once each.
- * Dialogue speakers alternate between the main and the second voice so conversations sound like two people.
+ * Every text the app can read aloud, once per voice.
+ * Words, sentences and readings use the narrator; each dialogue line uses its speaker's voice
+ * (the right gender, from speakers.ts), so the same sentence said by a woman and a man are two clips.
  */
 export function allSpeech(): SpeechItem[] {
   const out = new Map<string, SpeechItem>()
   const add = (text: string, where: string, extra: Partial<SpeechItem> = {}) => {
     const t = text.trim()
-    if (!t || out.has(t)) return
-    out.set(t, { text: t, voice: 'main', where, ...extra })
+    const voice = extra.voice ?? NARRATOR
+    const key = clipKey(t, voice)
+    if (!t || out.has(key)) return
+    out.set(key, { text: t, where, ...extra, voice, key })
   }
 
   if (APP.alphabet) for (const l of LETTERS) {
@@ -41,9 +49,10 @@ export function allSpeech(): SpeechItem[] {
   if (APP.alphabet) for (const pair of VOWEL_PAIRS) for (const e of pair) add(e.fa, 'Vowels', { tr: e.tr, en: e.en })
   for (const p of PISHI_LINES) add(p.text, 'Pishi', { tr: p.tr, en: p.en })
 
-  for (const lv of LEVELS) {
-    for (const u of lv.units) {
-      const at = `${lv.level} · ${u.title}`
+  const groups = [...LEVELS.map((lv) => ({ label: lv.level, units: lv.units })), ...TRACKS.map((t) => ({ label: t.name, units: t.units }))]
+  for (const g of groups) {
+    for (const u of g.units) {
+      const at = `${g.label} · ${u.title}`
       add(u.fa, at, { tr: u.tr })
       for (const w of u.words) add(w.fa, `${at} · words`, { tr: w.tr, en: w.en })
       for (const s of u.sentences) {
@@ -51,9 +60,9 @@ export function allSpeech(): SpeechItem[] {
         s.tiles.forEach((t, i) => add(t, `${at} · sentence tiles`, { tr: s.trTiles[i] }))
       }
       for (const e of u.grammar.examples) add(e.fa, `${at} · grammar`, { tr: e.tr, en: e.en })
-      const speakers = [...new Set((u.dialogue ?? []).map((d) => d.who))]
+      const voices = dialogueVoices(u)
       for (const d of u.dialogue ?? []) {
-        add(d.fa, `${at} · dialogue`, { tr: d.tr, en: d.en, voice: speakers.indexOf(d.who) % 2 ? 'second' : 'main' })
+        add(d.fa, `${at} · dialogue · ${d.who}`, { tr: d.tr, en: d.en, voice: voices.get(d.who) })
       }
       for (const p of u.reading?.paragraphs ?? []) add(p.fa, `${at} · reading`, { tr: p.tr, en: p.en })
     }

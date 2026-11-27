@@ -3,6 +3,7 @@
 //
 //   node scripts/gen-audio.ts            generate what is missing
 //   node scripts/gen-audio.ts --dry      only count what would be generated
+//   node scripts/gen-audio.ts --list     print the texts that would be generated (with their voice)
 //   node scripts/gen-audio.ts --compare  20 sample words with and without vowel marks, in audio-compare/, to listen to
 //   node scripts/gen-audio.ts --redo     regenerate every clip (after a pronunciation fix). This also replaces
 //                                        clips a person recorded, so keep those elsewhere and copy them back.
@@ -12,7 +13,8 @@
 // Files recorded by a person (public/audio/<key>.mp3 already present) are never overwritten.
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
 import { allSpeech, type Voice } from '../src/content/speech.ts'
-import { audioKey, normSpeech } from '../src/lib/audioKey.ts'
+import { normSpeech } from '../src/lib/audioKey.ts'
+import { VOICES } from '../src/content/voices.ts'
 import { APP } from '../src/app.ts'
 import { SPOKEN } from '../src/content/spoken/index.ts'
 import { buildLexicon, vocalize, vocalizeWith } from '../src/lib/vocalize.ts'
@@ -34,11 +36,9 @@ function sayable(text: string, tr?: string): string {
 }
 
 // Run with APP=begociao for the Italian clips of Bego Ciao.
-// Persian: Farid (chosen by ear by a native speaker), with Dilara as the second dialogue voice.
-// Italian: Elsa, with Diego as the second dialogue voice.
-const VOICES: Record<Voice, string> = APP.target === 'it'
-  ? { main: 'it-IT-ElsaNeural', second: 'it-IT-DiegoNeural' }
-  : { main: 'fa-IR-FaridNeural', second: 'fa-IR-DilaraNeural' }
+// Voices (which Azure voice, its gender, and a pitch for a second same-gender speaker) are in
+// src/content/voices.ts; every dialogue line uses its speaker's gender (src/content/speakers.ts).
+// Check with: npm run check:voices
 const OUT = APP.id === 'begociao' ? 'public-begociao/audio' : 'public/audio'
 const INDEX = APP.id === 'begociao' ? 'src/courses/begociao/audio-index.json' : 'src/content/audio-index.json'
 const XML_LANG = APP.target === 'it' ? 'it-IT' : 'fa-IR'
@@ -55,7 +55,8 @@ const xml = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replac
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
 
 async function synth(say: string, voice: Voice, key: string, region: string): Promise<Buffer> {
-  const ssml = `<speak version="1.0" xml:lang="${XML_LANG}"><voice name="${VOICES[voice]}"><prosody rate="0%">${xml(normSpeech(say))}</prosody></voice></speak>`
+  const v = VOICES[voice]
+  const ssml = `<speak version="1.0" xml:lang="${XML_LANG}"><voice name="${v.name}"><prosody rate="0%" pitch="${v.pitch}">${xml(normSpeech(say))}</prosody></voice></speak>`
   for (let attempt = 1; ; attempt++) {
     let res: Response
     try {
@@ -113,9 +114,10 @@ if (process.argv.includes('--compare')) {
   }
   process.exit(0)
 }
-const todo = redo ? items : items.filter((i) => !have.has(audioKey(i.text)))
+const todo = redo ? items : items.filter((i) => !have.has(i.key))
 const chars = todo.reduce((n, i) => n + i.text.length, 0)
 console.log(`${items.length} texts, ${have.size} already have audio, ${todo.length} to generate (${chars} characters)`)
+if (process.argv.includes('--list')) for (const i of todo) console.log(`  [${i.voice}] ${i.text}  · ${i.where}`)
 
 if (!dry && todo.length) {
   const key = env('AZURE_SPEECH_KEY')
@@ -126,7 +128,7 @@ if (!dry && todo.length) {
   } else {
     let done = 0
     for (const item of todo) {
-      const k = audioKey(item.text)
+      const k = item.key
       writeFileSync(`${OUT}/${k}.mp3`, await synth(sayable(item.text, item.tr), item.voice, key, region))
       have.add(k)
       if (++done % 25 === 0 || done === todo.length) console.log(`  ${done}/${todo.length}`)
@@ -136,6 +138,7 @@ if (!dry && todo.length) {
 }
 
 // The index lists only keys the course still uses, so old clips are ignored by the app.
-const used = items.map((i) => audioKey(i.text)).filter((k) => have.has(k))
-writeFileSync(INDEX, JSON.stringify([...new Set(used)].sort()) + '\n')
-console.log(`audio index: ${used.length} clips`)
+const used = items.map((i) => i.key).filter((k) => have.has(k))
+// A dry run only reports: it never rewrites the index.
+if (!dry) writeFileSync(INDEX, JSON.stringify([...new Set(used)].sort()) + '\n')
+console.log(`audio index: ${used.length} clips${dry ? ' (dry run: index not written)' : ''}`)

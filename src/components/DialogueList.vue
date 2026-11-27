@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import type { DialogueLine } from '@/content/types.ts'
+import type { Unit } from '@/content/types.ts'
+import { dialogueVoices } from '@/content/speakers.ts'
 import { hasVoice, speak, stopSpeech } from '@/lib/speech.ts'
 import SpeakButton from './SpeakButton.vue'
 import FaText from './FaText.vue'
 import { t } from '@/i18n/index.ts'
 
-const props = defineProps<{ lines: DialogueLine[] }>()
+const props = defineProps<{ lines: DialogueLine[]; unitId?: string }>()
+// Each speaker's voice (right gender; a second same-gender speaker at a different pitch).
+const voices = computed(() => dialogueVoices({ id: props.unitId ?? '', dialogue: props.lines } as Unit))
 const showEn = ref(false)
 const speakers = computed(() => [...new Set(props.lines.map((l) => l.who))])
 
@@ -18,7 +22,7 @@ async function playAll() {
   stop = false
   for (const l of props.lines) {
     if (stop) break
-    await speak(l.fa)
+    await speak(l.fa, false, voices.value.get(l.who))
   }
   playing.value = false
 }
@@ -34,7 +38,7 @@ async function playAll() {
       <li v-for="(l, i) in lines" :key="i" :class="speakers.indexOf(l.who) % 2 ? 'b' : 'a'">
         <span class="who">{{ l.who }}</span>
         <div class="bubble">
-          <SpeakButton :text="l.fa" />
+          <SpeakButton :text="l.fa" :voice="voices.get(l.who)" />
           <div class="t">
             <FaText :fa="l.fa" :tr="l.tr" size="sm" />
             <span v-if="showEn" class="en">{{ l.en }}</span>

@@ -23,7 +23,7 @@ defineProps<{ ex: CardEx }>()
       </li>
     </ul>
     <PassageText v-if="ex.passage" :paragraphs="ex.passage" />
-    <DialogueList v-if="ex.dialogue" :lines="ex.dialogue" />
+    <DialogueList v-if="ex.dialogue" :lines="ex.dialogue" :unit-id="ex.unitId" />
   </div>
 </template>
 

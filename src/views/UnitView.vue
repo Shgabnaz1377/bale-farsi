@@ -91,7 +91,7 @@ function go(key: string) {
 
     <section v-if="unit.dialogue?.length" class="card block">
       <h2>{{ t('Dialogue') }}</h2>
-      <DialogueList :lines="unit.dialogue" />
+      <DialogueList :lines="unit.dialogue" :unit-id="unit.id" />
     </section>
 
     <section v-if="unit.reading" class="card block">
