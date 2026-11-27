@@ -4,6 +4,9 @@ import { useRoute, useRouter } from 'vue-router'
 import type { Level } from '@/content/types.ts'
 import { LESSON_NAMES, LEVELS, unitById, type LessonKind } from '@/content/course.ts'
 import { LETTER_GROUPS } from '@/content/alphabet.ts'
+import { VOWELS_KEY } from '@/content/vowels.ts'
+import { vowelsLesson } from '@/lib/vowelsLesson.ts'
+import { provideFaLevel } from '@/lib/vowelMarks.ts'
 import {
   alphabetLesson, grade, levelTest, reviewLesson, unitLesson, TEST_PASS, type Answer, type Ex, type Grade,
 } from '@/lib/exercises.ts'
@@ -36,6 +39,7 @@ const unit = typeof q.u === 'string' ? unitById.get(q.u) : undefined
 const kind = (typeof q.k === 'string' ? q.k : '') as LessonKind
 const alpha = typeof q.alpha === 'string' ? Number(q.alpha) : NaN
 const testLevel = (typeof q.test === 'string' ? q.test : '') as Level
+const vowels = q.vowels === '1'
 const mode: Mode = q.review ? 'review' : testLevel ? 'test' : 'lesson'
 
 let doneKey = ''
@@ -54,12 +58,18 @@ if (mode === 'review') {
   queue = unitLesson(unit, kind, opts)
   doneKey = `${unit.id}/${kind}`
   title = `${unit.title} · ${LESSON_NAMES[kind]}`
+} else if (vowels) {
+  queue = vowelsLesson(opts)
+  doneKey = VOWELS_KEY
+  title = `${t('Alphabet')} · ${t('Vowels')}`
 } else if (!Number.isNaN(alpha) && LETTER_GROUPS[alpha]) {
   queue = alphabetLesson(alpha)
   doneKey = `alphabet/${alpha}`
   title = `${t('Alphabet')} · ${LETTER_GROUPS[alpha].title}`
 }
 const usesHearts = mode === 'lesson'
+// Vowel marks follow the level being studied (A1 on, A2 single words, B1+ off).
+provideFaLevel(unit?.level ?? (testLevel || null))
 const total = queue.length
 
 /* ---------- Runner state ---------- */
@@ -166,7 +176,7 @@ function leave() {
   stopSpeech()
   quitOpen.value = false
   if (unit) router.replace({ name: 'unit', params: { id: unit.id } })
-  else if (!Number.isNaN(alpha)) router.replace({ name: 'alphabet' })
+  else if (!Number.isNaN(alpha) || vowels) router.replace({ name: 'alphabet' })
   else router.replace({ name: 'home' })
 }
 function askQuit() {
