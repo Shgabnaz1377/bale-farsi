@@ -29,3 +29,120 @@ create policy "delete own progress" on public.progress
 -- Keep a saved progress document to a sane size (about 1 MB).
 alter table public.progress drop constraint if exists progress_size;
 alter table public.progress add constraint progress_size check (pg_column_size(data) < 1000000);
+
+-- ─────────────────────────────────────────────────────────────────────────────
+-- Accounts v2: profiles, the owner's admin page, blocking.
+-- Safe to run again. After you sign up in the app, make yourself the owner (admin) with:
+--   update public.profiles set role = 'admin' where email = 'YOUR EMAIL';
+-- ─────────────────────────────────────────────────────────────────────────────
+
+create table if not exists public.profiles (
+  id         uuid primary key references auth.users (id) on delete cascade,
+  email      text not null,
+  name       text not null default '',
+  role       text not null default 'learner' check (role in ('learner', 'admin')),
+  blocked    boolean not null default false,
+  created_at timestamptz not null default now(),
+  last_seen  timestamptz
+);
+alter table public.profiles enable row level security;
+
+-- A profile for every new sign-up (name comes from the sign-up form), and for anyone who signed up before.
+create or replace function public.handle_new_user() returns trigger
+language plpgsql security definer set search_path = '' as $$
+begin
+  insert into public.profiles (id, email, name)
+  values (new.id, coalesce(new.email, ''), left(coalesce(new.raw_user_meta_data ->> 'name', ''), 80))
+  on conflict (id) do nothing;
+  return new;
+end $$;
+drop trigger if exists on_auth_user_created on auth.users;
+create trigger on_auth_user_created after insert on auth.users
+  for each row execute function public.handle_new_user();
+insert into public.profiles (id, email, created_at)
+  select id, coalesce(email, ''), created_at from auth.users on conflict (id) do nothing;
+
+-- Is the caller an (unblocked) admin? security definer so policies can use it without recursion.
+create or replace function public.is_admin() returns boolean
+language sql stable security definer set search_path = '' as $$
+  select exists (select 1 from public.profiles where id = (select auth.uid()) and role = 'admin' and not blocked)
+$$;
+create or replace function public.is_blocked() returns boolean
+language sql stable security definer set search_path = '' as $$
+  select coalesce((select blocked from public.profiles where id = (select auth.uid())), false)
+$$;
+
+-- Learners read their own profile and may change only their name and last_seen; admins read all.
+drop policy if exists "read own profile" on public.profiles;
+create policy "read own profile" on public.profiles
+  for select to authenticated using ((select auth.uid()) = id or (select public.is_admin()));
+drop policy if exists "update own profile" on public.profiles;
+create policy "update own profile" on public.profiles
+  for update to authenticated using ((select auth.uid()) = id) with check ((select auth.uid()) = id);
+revoke insert, update, delete on public.profiles from anon, authenticated;
+grant select on public.profiles to authenticated;
+grant update (name, last_seen) on public.profiles to authenticated;
+
+-- Blocked learners can no longer save progress; admins can read everyone's progress.
+drop policy if exists "insert own progress" on public.progress;
+create policy "insert own progress" on public.progress
+  for insert to authenticated with check ((select auth.uid()) = user_id and not (select public.is_blocked()));
+drop policy if exists "update own progress" on public.progress;
+create policy "update own progress" on public.progress
+  for update to authenticated using ((select auth.uid()) = user_id)
+  with check ((select auth.uid()) = user_id and not (select public.is_blocked()));
+drop policy if exists "admin reads all progress" on public.progress;
+create policy "admin reads all progress" on public.progress
+  for select to authenticated using ((select public.is_admin()));
+
+-- The admin page: every learner with their numbers. Only admins get rows.
+create or replace function public.admin_users()
+returns table (id uuid, email text, name text, role text, blocked boolean, created_at timestamptz, last_seen timestamptz,
+               xp int, streak int, lessons int, days jsonb)
+language plpgsql stable security definer set search_path = '' as $$
+begin
+  if not public.is_admin() then raise exception 'not allowed' using errcode = '42501'; end if;
+  return query
+    select p.id, p.email, p.name, p.role, p.blocked, p.created_at, p.last_seen,
+           coalesce((g.data ->> 'xp')::int, 0), coalesce((g.data ->> 'streak')::int, 0),
+           coalesce((select count(*)::int from jsonb_object_keys(coalesce(g.data -> 'done', '{}'::jsonb))), 0),
+           coalesce(g.data -> 'days', '{}'::jsonb)
+    from public.profiles p left join public.progress g on g.user_id = p.id
+    order by p.last_seen desc nulls last;
+end $$;
+
+create or replace function public.admin_set_blocked(target uuid, value boolean) returns void
+language plpgsql security definer set search_path = '' as $$
+begin
+  if not public.is_admin() then raise exception 'not allowed' using errcode = '42501'; end if;
+  if target = (select auth.uid()) then raise exception 'you cannot block yourself'; end if;
+  update public.profiles set blocked = value where id = target;
+end $$;
+
+create or replace function public.admin_set_role(target uuid, value text) returns void
+language plpgsql security definer set search_path = '' as $$
+begin
+  if not public.is_admin() then raise exception 'not allowed' using errcode = '42501'; end if;
+  if target = (select auth.uid()) and value <> 'admin' then raise exception 'you cannot remove your own admin role'; end if;
+  update public.profiles set role = value where id = target;
+end $$;
+
+create or replace function public.admin_delete_user(target uuid) returns void
+language plpgsql security definer set search_path = '' as $$
+begin
+  if not public.is_admin() then raise exception 'not allowed' using errcode = '42501'; end if;
+  if target = (select auth.uid()) then raise exception 'you cannot delete yourself here'; end if;
+  delete from auth.users where id = target;  -- cascades to profiles and progress
+end $$;
+
+-- Any learner can delete their own account (and with it their profile and progress).
+create or replace function public.delete_my_account() returns void
+language plpgsql security definer set search_path = '' as $$
+begin
+  delete from auth.users where id = (select auth.uid());
+end $$;
+
+revoke execute on function public.admin_users(), public.admin_set_blocked(uuid, boolean), public.admin_set_role(uuid, text),
+  public.admin_delete_user(uuid), public.delete_my_account(), public.is_admin(), public.is_blocked(), public.handle_new_user() from public, anon;
+grant execute on function public.admin_users(), public.admin_set_blocked(uuid, boolean), public.admin_set_role(uuid, text),
+  public.admin_delete_user(uuid), public.delete_my_account(), public.is_admin(), public.is_blocked() to authenticated;
