@@ -5,6 +5,7 @@ import { clipCount, faVoice } from '@/lib/speech.ts'
 import { account } from '@/lib/account.ts'
 import { LANGS, t } from '@/i18n/index.ts'
 import InstallCard from '@/components/InstallCard.vue'
+import FoldSection from '@/components/FoldSection.vue'
 import { APP } from '@/app.ts'
 
 const modes = computed(() => [['both', t('Persian script + Finglish')], ['latin', t('Finglish only')], ['script', t('Persian script only')]] as const)
@@ -48,8 +49,7 @@ function restore() {
     <h1>{{ t('Settings') }}</h1>
     <InstallCard />
 
-    <section v-if="LANGS.length > 1" class="card block">
-      <h2>{{ t('I speak') }}</h2>
+    <FoldSection v-if="LANGS.length > 1" :title="t('I speak')" open>
       <div class="seg" role="radiogroup" :aria-label="t('I speak')">
         <template v-for="l in LANGS" :key="l.code">
           <input :id="'lang-' + l.code" v-model="P.settings.lang" type="radio" name="lang" :value="l.code" />
@@ -57,10 +57,9 @@ function restore() {
         </template>
       </div>
       <p class="muted small">{{ t('Meanings, explanations and buttons appear in this language. The Persian stays the same.') }}</p>
-    </section>
+    </FoldSection>
 
-    <section class="card block">
-      <h2>{{ t('Show Persian as') }}</h2>
+    <FoldSection :title="t('Show Persian as')" :open="LANGS.length <= 1">
       <div class="seg" role="radiogroup" :aria-label="t('Show Persian as')">
         <template v-for="[v, label] in modes" :key="v">
           <input :id="'mode-' + v" v-model="P.settings.mode" type="radio" name="mode" :value="v" />
@@ -78,10 +77,9 @@ function restore() {
         </div>
         <p class="muted small">{{ t('Marks for the short vowels, like مُبل (mobl). By level: on every word in A1, on single words in A2, and gone from B1, as in real Persian.') }}</p>
       </template>
-    </section>
+    </FoldSection>
 
-    <section class="card block">
-      <h2>{{ t('Lessons') }}</h2>
+    <FoldSection :title="t('Lessons')">
       <p class="eyebrow">{{ t('Daily goal') }}</p>
       <div class="seg" role="radiogroup" :aria-label="t('Daily goal')">
         <template v-for="g in goals" :key="g">
@@ -97,27 +95,24 @@ function restore() {
         <template v-else-if="faVoice">{{ t('Audio uses the voice “{name}”.', { name: faVoice.name }) }}</template>
         <template v-else>{{ t("Audio needs a Persian (fa-IR) voice. Microsoft Edge has one built in. Elsewhere, add a Persian voice in your system's speech settings and reload.") }}</template>
       </p>
-    </section>
+    </FoldSection>
 
-    <section class="card block">
-      <h2>{{ t('Appearance') }}</h2>
+    <FoldSection :title="t('Appearance')">
       <div class="seg" role="radiogroup" :aria-label="t('Theme')">
         <template v-for="[v, label] in themes" :key="v">
           <input :id="'theme-' + v" v-model="P.settings.theme" type="radio" name="theme" :value="v" />
           <label :for="'theme-' + v">{{ label }}</label>
         </template>
       </div>
-    </section>
+    </FoldSection>
 
-    <section v-if="APP.target === 'fa'" class="card block">
-      <h2>{{ t('How to read Finglish') }}</h2>
+    <FoldSection v-if="APP.target === 'fa'" :title="t('How to read Finglish')">
       <dl class="key">
         <template v-for="[k, d] in keyRows" :key="k"><dt>{{ k }}</dt><dd>{{ d }}</dd></template>
       </dl>
-    </section>
+    </FoldSection>
 
-    <section class="card block">
-      <h2>{{ t('Your progress') }}</h2>
+    <FoldSection :title="t('Your progress')">
       <p class="muted small">
         <template v-if="account.enabled"><RouterLink to="/account">{{ t('Sign in') }}</RouterLink> {{ t('to keep your progress in sync on every device. Without an account, progress stays in this browser; you can also move it by hand with a backup.') }}</template>
         <template v-else>{{ t('Progress is saved in this browser only. To move it to another device, copy a backup here and restore it there.') }}</template>
@@ -139,7 +134,7 @@ function restore() {
           <button type="button" class="btn ghost sm" @click="confirmReset = false">{{ t('Keep it') }}</button>
         </template>
       </div>
-    </section>
+    </FoldSection>
 
     <p class="muted small about">
       {{ t('{app} is free and open source. The course content was written with AI help and is being reviewed by native speakers; if you spot a mistake,', { app: APP.fullName }) }}

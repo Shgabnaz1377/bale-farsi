@@ -85,7 +85,8 @@ test('the Practice tab gathers review, games and extras on one screen', async ({
     await expect(page.getByRole('link', { name })).toBeVisible()
   }
   await expect(page.getByText('Word of the day')).toBeVisible()
-  expect(await page.evaluate(() => document.documentElement.scrollHeight <= innerHeight + 1)).toBe(true)
+  // No scrolling on a 390×844 phone (a string: the e2e tsconfig has no DOM types).
+  expect(await page.evaluate('document.documentElement.scrollHeight <= innerHeight + 1')).toBe(true)
   await page.getByRole('link', { name: /Quick play/ }).click()
   await expect(page).toHaveURL(/#\/quick\?mode=guess/)
   expect(ignoreFonts(problems)).toEqual([])
@@ -109,6 +110,7 @@ test('a full lesson can be completed', async ({ page }) => {
   test.setTimeout(120_000)
   const problems = watchConsole(page)
   await page.goto('/#/settings')
+  await page.getByRole('button', { name: 'Lessons', expanded: false }).click()
   await page.getByLabel(/Relaxed mode/).check()
   await page.goto('/#/lesson?alpha=0')
   // Learn from mistakes: after a wrong answer the right option is highlighted, so remember it.
