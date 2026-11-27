@@ -9,6 +9,10 @@ create table if not exists public.progress (
 
 -- Row level security: each signed-in learner can read and write only their own row.
 alter table public.progress enable row level security;
+-- The API sees only tables it is granted (new projects no longer expose public tables automatically).
+grant usage on schema public to anon, authenticated;
+revoke all on public.progress from anon;
+grant select, insert, update, delete on public.progress to authenticated;
 
 drop policy if exists "read own progress" on public.progress;
 create policy "read own progress" on public.progress
