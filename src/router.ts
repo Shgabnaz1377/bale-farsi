@@ -15,6 +15,7 @@ export const router = createRouter({
     { path: '/settings', name: 'settings', component: () => import('./views/SettingsView.vue') },
     { path: '/persian-not-arabic', name: 'not-arabic', component: () => import('./views/NotArabicView.vue') },
     { path: '/did-you-know', name: 'facts', component: () => import('./views/FactsView.vue') },
+    { path: '/idioms', name: 'idioms', component: () => import('./views/IdiomsView.vue') },
     { path: '/quick', name: 'quick', component: () => import('./views/QuickQuizView.vue') },
     { path: '/:pathMatch(.*)*', name: 'not-found', component: () => import('./views/NotFoundView.vue') },
   ],

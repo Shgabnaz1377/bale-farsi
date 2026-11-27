@@ -123,6 +123,10 @@ function goNext() {
         <span class="a-ico accent" aria-hidden="true">💡</span>
         <span><b>{{ t('Did you know?') }}</b><span class="muted small block">{{ t('Fun facts and words. Read one, win a heart.') }}</span></span>
       </RouterLink>
+      <RouterLink v-if="APP.id === 'persianmeow'" class="card action" :to="{ name: 'idioms' }">
+        <span class="a-ico saffron" aria-hidden="true">😼</span>
+        <span><b>{{ t('Persian idioms') }}</b><span class="muted small block">{{ t('Pishi acts out sayings. Learn one, win a heart.') }}</span></span>
+      </RouterLink>
       <RouterLink v-if="APP.alphabet && !alphabetDone()" class="card action" to="/alphabet">
         <span class="a-ico accent fa-brand" lang="fa">ب</span>
         <span><b>{{ t('Alphabet') }}</b><span class="muted small block">{{ t('32 letters, six short lessons. Open any time.') }}</span></span>

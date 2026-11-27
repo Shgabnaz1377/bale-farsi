@@ -118,3 +118,26 @@ describe('did you know? facts', () => {
     expect(P.hearts).toBe(4)
   })
 })
+
+describe('idioms', () => {
+  it('have unique ids, both languages and an example', async () => {
+    const { IDIOMS } = await import('@/content/idioms.ts')
+    expect(new Set(IDIOMS.map((d) => d.id)).size).toBe(IDIOMS.length)
+    for (const d of IDIOMS) {
+      for (const s of [d.fa, d.tr, d.literal.en, d.literal.it, d.meaning.en, d.meaning.it, d.example.fa, d.example.tr, d.example.en, d.example.it]) expect(s.trim()).not.toBe('')
+    }
+  })
+  it('keep old saves working: progress without idioms loads with none learned', () => {
+    expect(parseProgress(JSON.stringify({ v: 1, xp: 5, cards: {}, facts: { 'no-gender': true } })).idioms).toEqual({})
+  })
+  it('a new idiom earns a heart once, separately from facts', async () => {
+    const { P, learnIdiom, readFact } = await import('@/lib/store.ts')
+    P.hearts = 3
+    P.idioms = {}
+    P.facts = {}
+    expect(learnIdiom('watermelon')).toBe('heart')
+    expect(learnIdiom('watermelon')).toBe(null)
+    expect(readFact('watermelon')).toBe('heart')
+    expect(P.hearts).toBe(5)
+  })
+})
