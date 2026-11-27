@@ -189,3 +189,23 @@ test('reading a new "Did you know?" fact earns a heart', async ({ page }) => {
   await expect(page.getByText(/1 of \d+ read/)).toBeVisible()
   expect(ignoreFonts(problems)).toEqual([])
 })
+
+test('Pishi acts out an idiom and learning it earns a heart', async ({ page }) => {
+  const problems = watchConsole(page)
+  await page.goto('/#/')
+  await page.evaluate(() => {
+    const k = Object.keys(localStorage).find((x) => x.endsWith(':v1'))
+    const p = k ? JSON.parse(localStorage.getItem(k)!) : null
+    if (p) { p.hearts = 2; p.heartsDay = Math.floor((Date.now() - new Date().getTimezoneOffset() * 60000) / 864e5); localStorage.setItem(k!, JSON.stringify(p)) }
+  })
+  await page.getByRole('link', { name: /Persian idioms/ }).click()
+  await expect(page.getByRole('heading', { name: 'Persian idioms' })).toBeVisible()
+  await page.getByRole('button', { name: 'Play' }).click()
+  await expect(page.getByRole('heading', { name: /Word for word/ })).toBeVisible({ timeout: 8000 })
+  await page.getByRole('button', { name: 'Skip to the meaning' }).click()
+  await expect(page.getByRole('heading', { name: /What it really means/ })).toBeVisible()
+  await expect(page.getByText(/\+1 heart!|Hearts are full/)).toBeVisible()
+  await expect(page.getByText(/1 of \d+ learned/)).toBeVisible()
+  await expect(page.getByText('Rude: only with close friends.')).toHaveCount(0)
+  expect(ignoreFonts(problems)).toEqual([])
+})
