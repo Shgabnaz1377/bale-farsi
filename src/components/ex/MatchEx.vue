@@ -5,6 +5,7 @@ import { shuffle } from '@/lib/random.ts'
 import { speak } from '@/lib/speech.ts'
 import { meow } from '@/lib/sfx.ts'
 import FaText from '../FaText.vue'
+import { t } from '@/i18n/index.ts'
 
 const props = defineProps<{ ex: MatchEx; locked: boolean }>()
 const emit = defineEmits<{ complete: [misses: number] }>()
@@ -15,22 +16,29 @@ const sel = ref<{ side: 'L' | 'R'; i: number } | null>(null)
 const matched = ref(new Set<number>())
 const wrong = ref<{ L: number; R: number } | null>(null)
 let misses = 0
+/** Read out by screen readers: what was picked and whether it matched. */
+const said = ref('')
+// With Finglish hidden (reading practice) the Persian is what the learner sees, so that is what is read out.
+const label = (i: number) => (props.ex.hideTr ? props.ex.pairs[i].fa : props.ex.pairs[i].tr || props.ex.pairs[i].fa)
 
 function tap(side: 'L' | 'R', i: number) {
   if (props.locked || matched.value.has(i)) return
   if (side === 'L' && !props.ex.hideTr) speak(props.ex.pairs[i].fa)
   if (!sel.value || sel.value.side === side) {
     sel.value = { side, i }
+    said.value = t('Selected: {x}', { x: side === 'L' ? label(i) : props.ex.pairs[i].en })
     return
   }
   const other = sel.value
   sel.value = null
   if (other.i === i) {
     matched.value = new Set([...matched.value, i])
+    said.value = t('Match: {a} = {b}', { a: label(i), b: props.ex.pairs[i].en })
     if (matched.value.size === props.ex.pairs.length) emit('complete', misses)
     else meow('mew')
   } else {
     misses++
+    said.value = t('Not a pair. Try again.')
     meow('sad')
     wrong.value = side === 'L' ? { L: i, R: other.i } : { L: other.i, R: i }
     setTimeout(() => (wrong.value = null), 450)
@@ -45,13 +53,14 @@ const cls = (side: 'L' | 'R', i: number) => ({
 
 <template>
   <div class="match">
+    <p class="sr-only" role="status" aria-live="polite">{{ said }}</p>
     <div class="col">
-      <button v-for="i in left" :key="'l' + i" type="button" class="mt" :class="cls('L', i)" :disabled="matched.has(i) || locked" @click="tap('L', i)">
+      <button v-for="i in left" :key="'l' + i" type="button" class="mt" :class="cls('L', i)" :aria-pressed="sel?.side === 'L' && sel.i === i" :disabled="matched.has(i) || locked" @click="tap('L', i)">
         <FaText :fa="ex.pairs[i].fa" :tr="ex.pairs[i].tr" size="sm" :hide-tr="ex.hideTr" :keep-fa="ex.hideTr" />
       </button>
     </div>
     <div class="col">
-      <button v-for="i in right" :key="'r' + i" type="button" class="mt" :class="cls('R', i)" :disabled="matched.has(i) || locked" @click="tap('R', i)">
+      <button v-for="i in right" :key="'r' + i" type="button" class="mt" :class="cls('R', i)" :aria-pressed="sel?.side === 'R' && sel.i === i" :disabled="matched.has(i) || locked" @click="tap('R', i)">
         <span class="en">{{ ex.pairs[i].en }}</span>
       </button>
     </div>
