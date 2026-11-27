@@ -158,7 +158,8 @@ export function vocalize(fa: string, tr: string): string | null {
       take(go(i, j + 1, false), '', 0)
     }
     // A short vowel in Finglish after a markable letter becomes a mark.
-    if (m && j < T.length && MARK[T[j]] && !(T[j] === 'o' && T[j + 1] === 'w')) {
+    // (Not when the script already carries a mark there: that mark stands for the vowel, see below.)
+    if (m && j < T.length && MARK[T[j]] && !HARAKAT.test(F[i] ?? '') && !(T[j] === 'o' && T[j + 1] === 'w')) {
       take(go(i, j + 1, false), MARK[T[j]], 0)
     }
     // "-ye" ezâfe with no ی in the script: nothing to write.
@@ -169,6 +170,8 @@ export function vocalize(fa: string, tr: string): string | null {
       // A mark already present: keep it; a tanvin (لطفاً) also accounts for "n".
       if (ch === TANVIN_AN && T.startsWith('an', j)) take(go(i + 1, j + 2, false), ch, 0)
       else if (ch === TANVIN_AN && T.startsWith('n', j)) take(go(i + 1, j + 1, false), ch, 0)
+      // A short-vowel mark already written (نُه) stands for its vowel in the Finglish (noh).
+      else if (MARK[T[j]] === ch) take(go(i + 1, j + 1, false), ch, 0)
       else take(go(i + 1, j, false), ch, 0)
     } else if (!PERSIAN_LETTER.test(ch)) {
       // Spaces, ZWNJ, punctuation, digits: copy them.
