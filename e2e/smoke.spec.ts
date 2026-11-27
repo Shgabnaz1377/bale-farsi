@@ -12,11 +12,12 @@ function watchConsole(page: Page): string[] {
 
 const ignoreFonts = (p: string[]) => p.filter((x) => !/fonts\.(googleapis|gstatic)/.test(x))
 
-test('home shows the course and starts a lesson', async ({ page }) => {
+test('the first-visit welcome starts a lesson', async ({ page }) => {
   const problems = watchConsole(page)
   await page.goto('/')
   await expect(page.getByRole('heading', { name: /Learn to read, speak and understand Persian/ })).toBeVisible()
-  await expect(page.getByRole('button', { name: /A1/ }).first()).toBeVisible()
+  await expect(page.getByRole('radio', { name: 'English' })).toBeVisible()
+  await page.getByRole('button', { name: 'Next' }).click()
   await page.getByRole('button', { name: 'Start at A1' }).click()
   await expect(page).toHaveURL(/#\/lesson\?u=a1-greetings&k=words-1/)
   await expect(page.getByRole('button', { name: 'Check' })).toBeDisabled()
@@ -26,7 +27,72 @@ test('home shows the course and starts a lesson', async ({ page }) => {
   expect(ignoreFonts(problems)).toEqual([])
 })
 
-for (const path of ['/alphabet', '/words', '/progress', '/settings', '/unit/a1-family', '/unit/b1-travel', '/nope']) {
+/** Get past the first-visit welcome to the path. */
+async function toPath(page: Page) {
+  await page.goto('/#/')
+  await page.getByRole('button', { name: 'Next' }).click()
+  await page.getByRole('button', { name: 'Show me the path first' }).click()
+}
+
+test('the path map opens a unit sheet and starts the current unit', async ({ page }) => {
+  const problems = watchConsole(page)
+  await toPath(page)
+  await expect(page.getByRole('navigation', { name: 'Main' }).getByRole('link', { name: 'Practice' })).toBeVisible()
+  await expect(page.getByRole('button', { name: /A1/ }).first()).toHaveAttribute('aria-pressed', 'true')
+  const current = page.locator('.node[aria-current="step"]')
+  await expect(current).toHaveCount(1)
+  await current.click()
+  const sheet = page.getByRole('dialog')
+  await expect(sheet.getByRole('heading', { name: 'Greetings and politeness' })).toBeVisible()
+  await page.keyboard.press('Escape')
+  await expect(sheet).toBeHidden()
+  await expect(current).toBeFocused()
+  await current.click()
+  await expect(sheet.getByRole('link', { name: 'Test out of A1' })).toBeVisible()
+  await sheet.getByRole('button', { name: 'Start' }).click()
+  await expect(page).toHaveURL(/#\/lesson\?u=a1-greetings&k=words-1/)
+  expect(ignoreFonts(problems)).toEqual([])
+})
+
+test('a locked unit can still be read from its sheet', async ({ page }) => {
+  await toPath(page)
+  await page.getByRole('button', { name: /Me and you, locked/ }).click()
+  const sheet = page.getByRole('dialog')
+  await expect(sheet.getByText(/Finish the unit before this one/)).toBeVisible()
+  await expect(sheet.getByRole('button', { name: /Start|Continue/ })).toHaveCount(0)
+  await sheet.getByRole('link', { name: 'Read the unit' }).click()
+  await expect(page).toHaveURL(/#\/unit\/a1-me-and-you/)
+})
+
+test('the unit page folds its sections and keeps Start in reach', async ({ page }) => {
+  const problems = watchConsole(page)
+  await page.goto('/#/unit/a1-greetings')
+  const words = page.getByRole('button', { name: /^Words/, expanded: false })
+  await expect(words).toBeVisible()
+  await expect(page.getByRole('button', { name: 'Tip', expanded: true })).toBeVisible()
+  await words.click()
+  await expect(page.getByRole('button', { name: /^Words/, expanded: true })).toBeVisible()
+  await page.getByRole('button', { name: /^Start/ }).click()
+  await expect(page).toHaveURL(/#\/lesson\?u=a1-greetings&k=words-1/)
+  expect(ignoreFonts(problems)).toEqual([])
+})
+
+test('the Practice tab gathers review, games and extras on one screen', async ({ page }) => {
+  const problems = watchConsole(page)
+  await page.setViewportSize({ width: 390, height: 844 })
+  await page.goto('/#/practice')
+  for (const name of [/Quick play/, /Did you know\?/, /Persian idioms/, /Alphabet/, /Persian is not Arabic/]) {
+    await expect(page.getByRole('link', { name })).toBeVisible()
+  }
+  await expect(page.getByText('Word of the day')).toBeVisible()
+  // No scrolling on a 390×844 phone (a string: the e2e tsconfig has no DOM types).
+  expect(await page.evaluate('document.documentElement.scrollHeight <= innerHeight + 1')).toBe(true)
+  await page.getByRole('link', { name: /Quick play/ }).click()
+  await expect(page).toHaveURL(/#\/quick\?mode=guess/)
+  expect(ignoreFonts(problems)).toEqual([])
+})
+
+for (const path of ['/practice', '/alphabet', '/words', '/progress', '/settings', '/unit/a1-family', '/unit/b1-travel', '/nope']) {
   test(`${path} renders without console errors`, async ({ page }) => {
     const problems = watchConsole(page)
     await page.goto('/#' + path)
@@ -44,6 +110,7 @@ test('a full lesson can be completed', async ({ page }) => {
   test.setTimeout(120_000)
   const problems = watchConsole(page)
   await page.goto('/#/settings')
+  await page.getByRole('button', { name: 'Lessons', expanded: false }).click()
   await page.getByLabel(/Relaxed mode/).check()
   await page.goto('/#/lesson?alpha=0')
   // Learn from mistakes: after a wrong answer the right option is highlighted, so remember it.
@@ -142,6 +209,7 @@ test('visitors from Instagram get the "Comment MEOW" welcome, once dismissed it 
 test('the dialogue player toggles the script and lets you take a part', async ({ page }) => {
   const problems = watchConsole(page)
   await page.goto('/#/unit/a2-home')
+  await page.getByRole('button', { name: 'Dialogue', expanded: false }).click()
   const dlg = page.locator('.dlg').first()
   await expect(dlg.locator('.cast-avatar, .avatar').first()).toBeVisible()
   await dlg.getByLabel('Persian script').uncheck()
@@ -163,11 +231,16 @@ test('the skip link moves focus to the page content', async ({ page }) => {
 
 test('the Culture and For-couples tracks are open from the start', async ({ page }) => {
   const problems = watchConsole(page)
-  await page.goto('/#/')
+  await toPath(page)
+  await page.getByRole('button', { name: 'Culture' }).click()
   await expect(page.getByRole('heading', { name: /Culture/ })).toBeVisible()
+  await expect(page.locator('.node[aria-current="step"]')).toHaveCount(1)
+  await page.getByRole('button', { name: 'For couples' }).click()
   await expect(page.getByRole('heading', { name: /For couples/ })).toBeVisible()
-  await page.getByRole('link', { name: /Meeting your partner's family/ }).click()
+  await page.getByRole('button', { name: /Meeting your partner's family/ }).click()
+  await page.getByRole('dialog').getByRole('link', { name: 'Read the unit' }).click()
   await expect(page).toHaveURL(/#\/unit\/couples-meet-family/)
+  await page.getByRole('button', { name: 'Dialogue', expanded: false }).click()
   await expect(page.locator('.dlg .cast-avatar, .dlg .avatar').first()).toBeVisible()
   await page.goto('/#/persian-not-arabic')
   await expect(page.getByRole('heading', { name: 'Persian is not Arabic' })).toBeVisible()
@@ -182,7 +255,9 @@ test('reading a new "Did you know?" fact earns a heart', async ({ page }) => {
     const p = k ? JSON.parse(localStorage.getItem(k)!) : null
     if (p) { p.hearts = 2; p.heartsDay = Math.floor((Date.now() - new Date().getTimezoneOffset() * 60000) / 864e5); localStorage.setItem(k!, JSON.stringify(p)) }
   })
-  await page.goto('/#/did-you-know')
+  await page.goto('/#/practice')
+  await page.getByRole('link', { name: /Did you know\?/ }).click()
+  await expect(page).toHaveURL(/#\/did-you-know/)
   await expect(page.getByRole('heading', { name: 'Did you know?' })).toBeVisible()
   await expect(page.getByText(/\+1 heart!|Hearts are full/)).toBeVisible({ timeout: 8000 })
   await page.getByRole('button', { name: 'Next fact' }).click()
@@ -198,6 +273,7 @@ test('Pishi acts out an idiom and learning it earns a heart', async ({ page }) =
     const p = k ? JSON.parse(localStorage.getItem(k)!) : null
     if (p) { p.hearts = 2; p.heartsDay = Math.floor((Date.now() - new Date().getTimezoneOffset() * 60000) / 864e5); localStorage.setItem(k!, JSON.stringify(p)) }
   })
+  await page.goto('/#/practice')
   await page.getByRole('link', { name: /Persian idioms/ }).click()
   await expect(page.getByRole('heading', { name: 'Persian idioms' })).toBeVisible()
   await page.getByRole('button', { name: 'Play' }).click()
