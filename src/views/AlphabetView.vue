@@ -33,6 +33,7 @@ const vowelsState = () => (P.done[VOWELS_KEY] ? 'done' as const : 'current' as c
         {{ t('Most letters join the next one and change shape with their position. Seven never join forward:') }}
         <span class="fa keep" lang="fa">ا د ذ ر ز ژ و</span>. {{ t('Short vowels (a, e, o) are usually not written.') }}
       </p>
+      <RouterLink class="more" :to="{ name: 'not-arabic' }">{{ t('Persian is not Arabic: why you already know some words') }} →</RouterLink>
       <ol class="nodes">
         <StarNode v-for="(g, i) in LETTER_GROUPS" :key="i" :state="state(i)" :number="faNum(i + 1)" :label="t('Letters {letters}', { letters: g.title })" @go="router.push({ name: 'lesson', query: { alpha: String(i) } })">
           <span class="fa keep" lang="fa">{{ g.title }}</span>
@@ -91,6 +92,7 @@ const vowelsState = () => (P.done[VOWELS_KEY] ? 'done' as const : 'current' as c
 </template>
 
 <style scoped>
+.more { font-weight: 600; color: var(--accent) }
 .head { display: flex; flex-direction: column; gap: 10px }
 .head h1 { font-size: 1.7rem; font-weight: 800 }
 .title-row { display: flex; align-items: center; justify-content: space-between; gap: 12px }

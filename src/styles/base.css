@@ -49,6 +49,9 @@ a { color: var(--lapis) }
 h1, h2, h3, h4 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.15 }
 p { margin: 0 }
 [hidden] { display: none !important }
+.skip { position: absolute; inset-inline-start: 12px; top: -60px; z-index: 100; background: var(--ink); color: var(--surface); padding: 10px 16px; border-radius: 10px; font-weight: 700; text-decoration: none }
+.skip:focus { top: 12px }
+main:focus { outline: none }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap }
 
 .wrap { max-width: 680px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)) }

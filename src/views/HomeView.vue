@@ -9,6 +9,8 @@ import {
   P, dueCount, levelUnlocked, nextLesson, seenCount, unitDone, unitProgress, unitUnlocked, xpToday, alphabetDone, streakActiveToday as streakToday,
 } from '@/lib/store.ts'
 import { account } from '@/lib/account.ts'
+import { TRACKS } from '@/content/tracks/index.ts'
+import { fromInstagram, dismissInstagram } from '@/lib/instagram.ts'
 import { APP } from '@/app.ts'
 import { LANGS, t, tn } from '@/i18n/index.ts'
 import AppIcon from '@/components/AppIcon.vue'
@@ -53,6 +55,19 @@ function goNext() {
 
 <template>
   <main class="wrap page">
+    <section v-if="fromInstagram" class="card insta" aria-live="polite">
+      <MeowCat mood="cheer" :size="72" />
+      <div class="insta-text">
+        <b>{{ t('“Comment MEOW” brought you here 🐱') }}</b>
+        <span class="muted small">{{ t('Welcome! This is the free course from the Reels: start with A1, or try the 3-second challenge you just watched.') }}</span>
+        <span class="row">
+          <button type="button" class="btn primary sm" @click="goNext">{{ t('Start at A1') }}</button>
+          <RouterLink class="btn ghost sm" :to="{ name: 'quick', query: { mode: 'guess' } }">{{ t('3-second challenge') }}</RouterLink>
+        </span>
+      </div>
+      <button type="button" class="icon-btn" :aria-label="t('Hide this')" @click="dismissInstagram"><AppIcon name="x" /></button>
+    </section>
+
     <section v-if="fresh" class="card hero">
       <div class="hero-text">
         <div v-if="LANGS.length > 1" class="speak" role="radiogroup" :aria-label="t('I speak')">
@@ -99,6 +114,10 @@ function goNext() {
       <RouterLink v-if="seenCount() > 0" class="card action" :to="{ name: 'lesson', query: { review: '1' } }">
         <span class="a-ico saffron"><AppIcon name="review" /></span>
         <span><b>{{ due > 0 ? t('Review') : t('Practice') }}</b><span class="muted small block">{{ due > 0 ? tn(due, '{n} word due today', '{n} words due today') : t('Nothing due. Practise your weakest words.') }}</span></span>
+      </RouterLink>
+      <RouterLink class="card action" :to="{ name: 'quick', query: { mode: 'guess' } }">
+        <span class="a-ico saffron"><AppIcon name="star" /></span>
+        <span><b>{{ t('Quick play') }}</b><span class="muted small block">{{ t('3-second challenge, or listen & repeat.') }}</span></span>
       </RouterLink>
       <RouterLink v-if="APP.alphabet && !alphabetDone()" class="card action" to="/alphabet">
         <span class="a-ico accent fa-brand" lang="fa">ب</span>
@@ -152,6 +171,32 @@ function goNext() {
         </RouterLink>
       </li>
     </ol>
+
+    <section v-for="tr in TRACKS.filter((x) => x.units.length)" :key="tr.id" class="track" :aria-label="t(tr.name)">
+      <div class="level-head">
+        <div>
+          <h2>{{ t(tr.name) }} <FaText :fa="tr.fa" :tr="tr.tr" inline size="sm" class="lvl-fa" /></h2>
+          <p class="muted">{{ t(tr.blurb) }}</p>
+        </div>
+        <span class="chip accent">{{ t('Always open') }}</span>
+      </div>
+      <ol class="units">
+        <li v-for="(u, i) in tr.units" :key="u.id">
+          <RouterLink class="card unit" :class="{ done: unitDone(u) }" :to="{ name: 'unit', params: { id: u.id } }">
+            <span class="u-num">
+              <AppIcon v-if="unitDone(u)" name="check" />
+              <span v-else>{{ i + 1 }}</span>
+            </span>
+            <span class="u-body">
+              <span class="u-title">{{ u.title }}</span>
+              <span class="u-can muted small">{{ u.can }}</span>
+              <span class="meter accent u-meter"><i :style="{ width: Math.round(unitProgress(u) * 100) + '%' }"></i></span>
+            </span>
+            <FaText :fa="u.fa" :tr="u.tr" size="md" class="u-fa" />
+          </RouterLink>
+        </li>
+      </ol>
+    </section>
   </main>
 </template>
 
@@ -173,6 +218,9 @@ function goNext() {
 .wotd { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 4px }
 .wotd :deep(.fw) { align-items: flex-start }
 .en { font-weight: 600; margin-top: 4px }
+.insta { display: flex; align-items: center; gap: 14px; background: linear-gradient(135deg, var(--saffron-soft), var(--surface)) }
+.insta-text { flex: 1; display: flex; flex-direction: column; gap: 6px; min-width: 0 }
+.track { display: flex; flex-direction: column; gap: 12px; margin-top: 8px }
 .actions-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px }
 .action { display: flex; gap: 12px; align-items: center; text-align: start; cursor: pointer; color: var(--ink); text-decoration: none; border: 1px solid var(--line); font: inherit }
 .action:hover { border-color: var(--muted) }

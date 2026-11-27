@@ -119,3 +119,57 @@ test('has a valid web app manifest', async ({ request }) => {
   expect(m.name).toContain('PersianMeow')
   expect(m.icons.map((i: { sizes: string }) => i.sizes)).toEqual(expect.arrayContaining(['192x192', '512x512']))
 })
+
+test('the 3-second challenge runs out and reveals the answer', async ({ page }) => {
+  const problems = watchConsole(page)
+  await page.goto('/#/quick?mode=guess')
+  await page.getByRole('button', { name: 'Start' }).click()
+  await expect(page.locator('.opt')).toHaveCount(3)
+  await expect(page.getByText('Time is up!')).toBeVisible({ timeout: 6000 })
+  await page.getByRole('button', { name: 'Continue' }).click()
+  await expect(page.getByText(/^2 of 10/)).toBeVisible()
+  expect(ignoreFonts(problems)).toEqual([])
+})
+
+test('visitors from Instagram get the "Comment MEOW" welcome, once dismissed it stays hidden', async ({ page }) => {
+  await page.goto('/?from=instagram#/')
+  await expect(page.getByText('“Comment MEOW” brought you here 🐱')).toBeVisible()
+  await page.getByRole('button', { name: 'Hide this' }).click()
+  await page.goto('/#/')
+  await expect(page.getByText('“Comment MEOW” brought you here 🐱')).toHaveCount(0)
+})
+
+test('the dialogue player toggles the script and lets you take a part', async ({ page }) => {
+  const problems = watchConsole(page)
+  await page.goto('/#/unit/a2-home')
+  const dlg = page.locator('.dlg').first()
+  await expect(dlg.locator('.avatar').first()).toBeVisible()
+  await dlg.getByLabel('Persian script').uncheck()
+  await expect(dlg.locator('.tr-only').first()).toBeVisible()
+  await dlg.getByLabel('Persian script').check()
+  const part = dlg.getByLabel('Your part')
+  if (await part.count()) await expect(part.locator('option')).not.toHaveCount(1)
+  expect(ignoreFonts(problems)).toEqual([])
+})
+
+test('the skip link moves focus to the page content', async ({ page }) => {
+  await page.goto('/#/')
+  await page.keyboard.press('Tab')
+  await expect(page.getByRole('link', { name: 'Skip to content' })).toBeFocused()
+  await page.keyboard.press('Enter')
+  await expect(page.locator('main')).toBeFocused()
+  await expect(page).toHaveURL(/#\/$/)
+})
+
+test('the Culture and For-couples tracks are open from the start', async ({ page }) => {
+  const problems = watchConsole(page)
+  await page.goto('/#/')
+  await expect(page.getByRole('heading', { name: /Culture/ })).toBeVisible()
+  await expect(page.getByRole('heading', { name: /For couples/ })).toBeVisible()
+  await page.getByRole('link', { name: /Meeting your partner's family/ }).click()
+  await expect(page).toHaveURL(/#\/unit\/couples-meet-family/)
+  await expect(page.locator('.dlg .avatar').first()).toBeVisible()
+  await page.goto('/#/persian-not-arabic')
+  await expect(page.getByRole('heading', { name: 'Persian is not Arabic' })).toBeVisible()
+  expect(ignoreFonts(problems)).toEqual([])
+})

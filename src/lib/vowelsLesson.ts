@@ -2,6 +2,7 @@ import { VOWELS, VOWEL_PAIRS, type VowelWord } from '@/content/vowels.ts'
 import { matchEx, type Ex, type Shown } from './exercises.ts'
 import { pick, shuffle } from './random.ts'
 import { t } from '@/i18n/index.ts'
+import { homographExercises } from './homographs.ts'
 
 const show = (w: VowelWord): Shown => ({ fa: w.fa, tr: w.tr, en: w.en })
 
@@ -63,5 +64,6 @@ export function vowelsLesson(o: { hasVoice: boolean }): Ex[] {
   }
 
   ex.push(matchEx(VOWELS.map((v) => ({ fa: v.fa, tr: v.name, en: v.tr })), { hideTr: true }))
-  return [intro, ...shuffle(ex)]
+  // Then the homograph game (کِرم / کَرَم / کِرِم): context and vowel marks tell one printed word apart.
+  return [intro, ...shuffle(ex), ...homographExercises()]
 }
