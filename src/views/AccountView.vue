@@ -2,9 +2,10 @@
 import { computed, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import {
-  account, deleteMyAccount, isAdmin, sendPasswordReset, setName, setPassword, signIn, signOut, signUp, syncNow,
+  account, deleteMyAccount, isAdmin, isReviewer, sendPasswordReset, setName, setPassword, signIn, signOut, signUp, syncNow,
 } from '@/lib/account.ts'
 import MeowCat from '@/components/MeowCat.vue'
+import { flagOn } from '@/lib/pron.ts'
 import { APP } from '@/app.ts'
 import { t } from '@/i18n/index.ts'
 import { P } from '@/lib/store.ts'
@@ -122,8 +123,10 @@ const statusText = computed(() => {
         <p v-if="account.profile?.name" class="muted small">{{ account.user.email }}</p>
         <p class="muted small" role="status">{{ statusText }}</p>
         <p class="muted small">{{ t('Your progress ({xp} XP, {n} lessons) is saved to your account: sign in on any device to carry on.', { xp: P.xp, n: Object.keys(P.done).length }) }}</p>
+        <label class="check"><input v-model="flagOn" type="checkbox" /> {{ t('Help fix pronunciation: after a recording plays, offer “Sounds wrong?”') }}</label>
         <div class="row">
           <RouterLink v-if="isAdmin()" class="btn primary sm" :to="{ name: 'admin' }">{{ t('Owner page: learners') }}</RouterLink>
+          <RouterLink v-if="isReviewer()" class="btn ghost sm" :to="{ name: 'review' }">{{ t('Pronunciation review') }}</RouterLink>
           <button type="button" class="btn ghost sm" :disabled="account.status === 'syncing'" @click="syncNow()">{{ t('Sync now') }}</button>
           <button type="button" class="btn ghost sm" @click="signOut()">{{ t('Sign out') }}</button>
         </div>
@@ -217,4 +220,6 @@ h1 { font-size: 1.7rem; font-weight: 800 }
 .more summary { cursor: pointer; font-weight: 700 }
 .linkish { font: inherit; background: none; border: 0; padding: 0; color: var(--accent); text-decoration: underline; cursor: pointer; align-self: flex-start }
 .err { color: var(--bad) }
+.check { display: inline-flex; gap: 8px; align-items: flex-start; font-size: 0.92rem; cursor: pointer }
+.check input { accent-color: var(--accent); width: 17px; height: 17px; flex: none; margin-top: 2px }
 </style>

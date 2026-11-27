@@ -4,6 +4,7 @@ import { account, isAdmin, adminDeleteUser, adminSetBlocked, adminSetRole, admin
 import { dayNumber } from '@/lib/srs.ts'
 import { t } from '@/i18n/index.ts'
 import AppIcon from '@/components/AppIcon.vue'
+import { exportJson, feedbackList, setStatus, type Feedback } from '@/lib/pron.ts'
 
 /**
  * The owner's page: every learner, who is active, who stopped coming, and block / admin / delete.
@@ -20,6 +21,21 @@ async function load() {
   loading.value = false
 }
 onMounted(load)
+
+// Pronunciation feedback: open learner reports, clips reviewers marked wrong, and a download for the content fixes.
+const fb = ref<Feedback[]>([])
+async function loadFb() { fb.value = (await feedbackList()).rows }
+onMounted(loadFb)
+const openReports = computed(() => fb.value.filter((f) => f.kind === 'report' && f.status === 'open'))
+const wrongClips = computed(() => fb.value.filter((f) => f.kind === 'review' && f.verdict === 'wrong' && f.status === 'open'))
+const reviewedCount = computed(() => new Set(fb.value.filter((f) => f.kind === 'review').map((f) => f.clip_key)).size)
+async function markFixed(f: Feedback) { await setStatus([f.id], 'done'); await loadFb() }
+function download() {
+  const url = URL.createObjectURL(new Blob([exportJson(fb.value)], { type: 'application/json' }))
+  const a = Object.assign(document.createElement('a'), { href: url, download: `pronunciation-feedback-${new Date().toISOString().slice(0, 10)}.json` })
+  a.click()
+  setTimeout(() => URL.revokeObjectURL(url), 1000)
+}
 
 const DAY = 864e5
 const ago = (iso: string | null) => (iso ? (Date.now() - new Date(iso).getTime()) / DAY : Infinity)
@@ -102,6 +118,21 @@ const me = computed(() => account.user?.id)
       <div class="tile warn"><b>{{ stats.stopped }}</b><span>{{ t('stopped coming (2+ weeks)') }}</span></div>
     </div>
 
+    <details class="card days pron">
+      <summary>{{ t('Pronunciation') }}: {{ t('{n} open reports', { n: openReports.length }) }} · {{ t('{n} marked wrong', { n: wrongClips.length }) }} · {{ t('{n} clips reviewed', { n: reviewedCount }) }}</summary>
+      <div class="row">
+        <RouterLink class="btn primary sm" :to="{ name: 'review' }">{{ t('Open the review page') }}</RouterLink>
+        <button type="button" class="btn ghost sm" :disabled="!fb.length" @click="download">{{ t('Download all feedback (JSON)') }}</button>
+      </div>
+      <ul class="fb">
+        <li v-for="f in [...wrongClips, ...openReports]" :key="f.id">
+          <span><b class="fa" lang="fa">{{ f.fa }}</b> · {{ f.tr }}<template v-if="f.suggested_tr"> → <b>{{ f.suggested_tr }}</b></template></span>
+          <span class="muted small">{{ f.kind === 'review' ? t('reviewer') : t('learner') }}: {{ f.who }}<template v-if="f.comment"> · {{ f.comment }}</template></span>
+          <button type="button" class="btn ghost sm" @click="markFixed(f)">{{ t('Fixed') }}</button>
+        </li>
+      </ul>
+    </details>
+
     <details class="card days">
       <summary>{{ t('Last 14 days') }}</summary>
       <table>
@@ -133,6 +164,7 @@ const me = computed(() => account.user?.id)
             <span class="muted small">{{ t('last active {when}', { when: when(u.last_seen) }) }} · {{ u.xp }} XP · {{ t('{n} lessons', { n: u.lessons }) }}</span>
           </span>
           <span v-if="u.role === 'admin'" class="tag">{{ t('admin') }}</span>
+          <span v-else-if="u.role === 'reviewer'" class="tag">{{ t('reviewer') }}</span>
           <span v-if="u.blocked" class="tag bad">{{ t('blocked') }}</span>
           <AppIcon name="arrow" class="chev" :class="{ up: open === u.id }" />
         </button>
@@ -144,6 +176,7 @@ const me = computed(() => account.user?.id)
           </dl>
           <div v-if="u.id !== me" class="row">
             <button type="button" class="btn ghost sm" :disabled="busy === u.id" @click="act(u.id, () => adminSetBlocked(u.id, !u.blocked))">{{ u.blocked ? t('Unblock') : t('Block') }}</button>
+            <button v-if="u.role !== 'admin'" type="button" class="btn ghost sm" :disabled="busy === u.id" @click="act(u.id, () => adminSetRole(u.id, u.role === 'reviewer' ? 'learner' : 'reviewer'))">{{ u.role === 'reviewer' ? t('Remove reviewer') : t('Make reviewer') }}</button>
             <button type="button" class="btn ghost sm" :disabled="busy === u.id" @click="act(u.id, () => adminSetRole(u.id, u.role === 'admin' ? 'learner' : 'admin'))">{{ u.role === 'admin' ? t('Remove admin') : t('Make admin') }}</button>
             <button v-if="confirmDel !== u.id" type="button" class="btn ghost sm" @click="confirmDel = u.id">{{ t('Delete') }}</button>
             <template v-else>
@@ -191,4 +224,9 @@ dt { color: var(--muted) }
 dd { margin: 0; overflow-wrap: anywhere }
 .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center }
 @media (prefers-reduced-motion: reduce) { .chev { transition: none } }
+.pron .row { margin-top: 8px }
+.fb { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; gap: 6px }
+.fb li { display: flex; flex-direction: column; gap: 2px; border-bottom: 1px solid var(--line); padding-bottom: 6px }
+.fb li .btn { align-self: flex-start }
+.fb .fa { font-family: var(--f-fa) }
 </style>

@@ -21,7 +21,8 @@ const KEY = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined
 const OWNER_KEY = `${APP.storage}:owner`
 
 export type SyncStatus = 'idle' | 'syncing' | 'synced' | 'offline' | 'error'
-export interface Profile { name: string; role: 'learner' | 'admin'; blocked: boolean }
+export type Role = 'learner' | 'reviewer' | 'admin'
+export interface Profile { name: string; role: Role; blocked: boolean }
 
 export const account = reactive({
   enabled: !!(URL_ && KEY),
@@ -54,6 +55,11 @@ export function accountReady(): Promise<void> {
 }
 
 export const isAdmin = () => account.profile?.role === 'admin' && !account.profile.blocked
+/** Reviewers (native speakers) and the owner can review pronunciation. */
+export const isReviewer = () => (account.profile?.role === 'reviewer' || account.profile?.role === 'admin') && !account.profile.blocked
+
+/** The Supabase client, once accounts are on (for features built on top, like pronunciation feedback). */
+export const supabase = () => sb
 
 /** Lessons a guest may finish before signing up. */
 export const GUEST_LESSONS = 1
@@ -122,7 +128,7 @@ function fail(message: string) {
 async function loadProfile(): Promise<boolean> {
   if (!sb || !account.user) return false
   const { data } = await sb.from('profiles').select('name, role, blocked').eq('id', account.user.id).maybeSingle()
-  account.profile = data ? { name: data.name ?? '', role: data.role === 'admin' ? 'admin' : 'learner', blocked: !!data.blocked } : null
+  account.profile = data ? { name: data.name ?? '', role: data.role === 'admin' || data.role === 'reviewer' ? data.role : 'learner', blocked: !!data.blocked } : null
   if (account.profile?.blocked) {
     await sb.auth.signOut()
     writeOwner(null)
@@ -252,7 +258,7 @@ export const syncNow = () => pull()
 
 /** One learner as the owner sees them (supabase/schema.sql: admin_users). */
 export interface AdminUser {
-  id: string; email: string; name: string; role: 'learner' | 'admin'; blocked: boolean
+  id: string; email: string; name: string; role: Role; blocked: boolean
   created_at: string; last_seen: string | null; xp: number; streak: number; lessons: number
   /** XP per day number (days since 1970, local time of the learner). */
   days: Record<string, number>
@@ -269,7 +275,7 @@ async function adminCall(fn: string, args: Record<string, unknown>): Promise<str
   return error ? friendly(error.message) : null
 }
 export const adminSetBlocked = (id: string, value: boolean) => adminCall('admin_set_blocked', { target: id, value })
-export const adminSetRole = (id: string, value: 'learner' | 'admin') => adminCall('admin_set_role', { target: id, value })
+export const adminSetRole = (id: string, value: Role) => adminCall('admin_set_role', { target: id, value })
 export const adminDeleteUser = (id: string) => adminCall('admin_delete_user', { target: id })
 
 function friendly(msg: string) {
@@ -281,5 +287,6 @@ function friendly(msg: string) {
   if (/invalid.*email|email.*invalid/i.test(msg)) return t('That email address does not look right. Check it and try again.')
   if (/fetch|network/i.test(msg)) return t('Could not reach the server. Check your connection and try again.')
   if (/not allowed/i.test(msg)) return t('Only the course owner can do this.')
+  if (/too many reports/i.test(msg)) return t('That is a lot of reports for one day. Thank you! Try again tomorrow.')
   return msg
 }
