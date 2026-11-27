@@ -27,7 +27,8 @@
     "dev:bego": "vite --mode begociao",
     "test:bego": "vitest run --mode begociao",
     "preview:bego": "vite preview --mode begociao",
-    "check:spoken": "node scripts/check-spoken.ts"
+    "check:spoken": "node scripts/check-spoken.ts",
+    "check:vowels": "node scripts/check-vowels.ts"
   },
   "dependencies": {
     "@capacitor-community/text-to-speech": "8.0.2",

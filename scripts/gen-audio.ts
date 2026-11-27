@@ -3,6 +3,10 @@
 //
 //   node scripts/gen-audio.ts            generate what is missing
 //   node scripts/gen-audio.ts --dry      only count what would be generated
+//   node scripts/gen-audio.ts --compare  20 sample words with and without vowel marks, in audio-compare/, to listen to
+//   node scripts/gen-audio.ts --redo     regenerate every clip (after a pronunciation fix). This also replaces
+//                                        clips a person recorded, so keep those elsewhere and copy them back.
+//   --no-vowels                          read the plain script, as before vowel marks were added
 //
 // Needs AZURE_SPEECH_KEY and AZURE_SPEECH_REGION in the environment or in .env.local (git-ignored).
 // Files recorded by a person (public/audio/<key>.mp3 already present) are never overwritten.
@@ -11,9 +15,22 @@ import { allSpeech, type Voice } from '../src/content/speech.ts'
 import { audioKey, normSpeech } from '../src/lib/audioKey.ts'
 import { APP } from '../src/app.ts'
 import { SPOKEN } from '../src/content/spoken/index.ts'
+import { buildLexicon, vocalize, vocalizeWith } from '../src/lib/vocalize.ts'
 
 // Persian is read the way people say it (everyday forms); the file is still named after the displayed text.
-const sayable = (text: string) => (APP.target === 'fa' ? SPOKEN[text] ?? text : text)
+// Written Persian leaves out the short vowels (مبل: mobl or mabl?), so the voice reads a copy with the vowel
+// marks added from the Finglish (mobl). Spoken forms have no Finglish of their own: their words are vocalised
+// from the words the course already knows.
+const ALL_ITEMS = allSpeech()
+const LEXICON = buildLexicon(ALL_ITEMS.filter((i) => i.tr).map((i) => ({ fa: i.text, tr: i.tr! })))
+const novowels = process.argv.includes('--no-vowels')
+function sayable(text: string, tr?: string): string {
+  if (APP.target !== 'fa') return text
+  const spoken = SPOKEN[text]
+  if (novowels) return spoken ?? text
+  if (spoken) return vocalizeWith(LEXICON, spoken)
+  return (tr && vocalize(text, tr)) ?? vocalizeWith(LEXICON, text)
+}
 
 // Run with APP=begociao for the Italian clips of Bego Ciao.
 // Persian: Farid (chosen by ear by a native speaker), with Dilara as the second dialogue voice.
@@ -36,8 +53,8 @@ function env(name: string): string | undefined {
 const xml = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms))
 
-async function synth(text: string, voice: Voice, key: string, region: string): Promise<Buffer> {
-  const ssml = `<speak version="1.0" xml:lang="${XML_LANG}"><voice name="${VOICES[voice]}"><prosody rate="0%">${xml(normSpeech(sayable(text)))}</prosody></voice></speak>`
+async function synth(say: string, voice: Voice, key: string, region: string): Promise<Buffer> {
+  const ssml = `<speak version="1.0" xml:lang="${XML_LANG}"><voice name="${VOICES[voice]}"><prosody rate="0%">${xml(normSpeech(say))}</prosody></voice></speak>`
   for (let attempt = 1; ; attempt++) {
     let res: Response
     try {
@@ -70,10 +87,29 @@ async function synth(text: string, voice: Voice, key: string, region: string): P
   }
 }
 
-const items = allSpeech()
+const items = ALL_ITEMS
 mkdirSync(OUT, { recursive: true })
+const redo = process.argv.includes('--redo')
 const have = new Set(readdirSync(OUT).filter((f) => f.endsWith('.mp3')).map((f) => f.slice(0, -4)))
-const todo = items.filter((i) => !have.has(audioKey(i.text)))
+
+if (process.argv.includes('--compare')) {
+  // Words whose vowels a voice often guesses wrong, recorded both ways so a native speaker can choose.
+  const key = env('AZURE_SPEECH_KEY')
+  const region = env('AZURE_SPEECH_REGION')
+  if (!key || !region) throw new Error('Set AZURE_SPEECH_KEY and AZURE_SPEECH_REGION (environment or .env.local).')
+  const sample = items.filter((i) => i.tr && !i.text.includes(' ') && vocalize(i.text, i.tr) !== i.text).slice(0, 20)
+  mkdirSync('audio-compare', { recursive: true })
+  for (const [n, i] of sample.entries()) {
+    const name = `audio-compare/${String(n + 1).padStart(2, '0')}-${i.tr!.replace(/[^a-z]/gi, '')}`
+    writeFileSync(`${name}-plain.mp3`, await synth(SPOKEN[i.text] ?? i.text, i.voice, key, region))
+    await sleep(3100)
+    writeFileSync(`${name}-vowels.mp3`, await synth(sayable(i.text, i.tr), i.voice, key, region))
+    await sleep(3100)
+    console.log(`${name}: ${i.text} → ${sayable(i.text, i.tr)}`)
+  }
+  process.exit(0)
+}
+const todo = redo ? items : items.filter((i) => !have.has(audioKey(i.text)))
 const chars = todo.reduce((n, i) => n + i.text.length, 0)
 console.log(`${items.length} texts, ${have.size} already have audio, ${todo.length} to generate (${chars} characters)`)
 
@@ -87,7 +123,7 @@ if (!dry && todo.length) {
     let done = 0
     for (const item of todo) {
       const k = audioKey(item.text)
-      writeFileSync(`${OUT}/${k}.mp3`, await synth(item.text, item.voice, key, region))
+      writeFileSync(`${OUT}/${k}.mp3`, await synth(sayable(item.text, item.tr), item.voice, key, region))
       have.add(k)
       if (++done % 25 === 0 || done === todo.length) console.log(`  ${done}/${todo.length}`)
       await sleep(3100) // free tier: 20 requests per minute
