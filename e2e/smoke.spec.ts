@@ -138,3 +138,25 @@ test('visitors from Instagram get the "Comment MEOW" welcome, once dismissed it 
   await page.goto('/#/')
   await expect(page.getByText('“Comment MEOW” brought you here 🐱')).toHaveCount(0)
 })
+
+test('the dialogue player toggles the script and lets you take a part', async ({ page }) => {
+  const problems = watchConsole(page)
+  await page.goto('/#/unit/a2-home')
+  const dlg = page.locator('.dlg').first()
+  await expect(dlg.locator('.avatar').first()).toBeVisible()
+  await dlg.getByLabel('Persian script').uncheck()
+  await expect(dlg.locator('.tr-only').first()).toBeVisible()
+  await dlg.getByLabel('Persian script').check()
+  const part = dlg.getByLabel('Your part')
+  if (await part.count()) await expect(part.locator('option')).not.toHaveCount(1)
+  expect(ignoreFonts(problems)).toEqual([])
+})
+
+test('the skip link moves focus to the page content', async ({ page }) => {
+  await page.goto('/#/')
+  await page.keyboard.press('Tab')
+  await expect(page.getByRole('link', { name: 'Skip to content' })).toBeFocused()
+  await page.keyboard.press('Enter')
+  await expect(page.locator('main')).toBeFocused()
+  await expect(page).toHaveURL(/#\/$/)
+})
