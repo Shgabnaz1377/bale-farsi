@@ -458,4 +458,9 @@ export const FA_BEGO: Record<string, string> = {
   "{n} days ago": "{n} روز پیش",
   "{n} lessons": "{n} درس",
   "Word list": "فهرست واژه‌ها",
+  "Letters": "حروف",
+  "How it works": "چطور کار می‌کند",
+  "Tap a letter to see its shapes and hear it.": "روی یک حرف بزنید تا شکل‌هایش را ببینید و آن را بشنوید.",
+  "Previous letter": "حرف قبلی",
+  "Next letter": "حرف بعدی",
 }

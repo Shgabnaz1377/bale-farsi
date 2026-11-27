@@ -458,4 +458,9 @@ export const IT: Record<string, string> = {
   "{n} days ago": "{n} giorni fa",
   "{n} lessons": "{n} lezioni",
   "Word list": "Elenco delle parole",
+  "Letters": "Lettere",
+  "How it works": "Come funziona",
+  "Tap a letter to see its shapes and hear it.": "Tocca una lettera per vederne le forme e ascoltarla.",
+  "Previous letter": "Lettera precedente",
+  "Next letter": "Lettera successiva",
 }
