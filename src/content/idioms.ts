@@ -28,7 +28,7 @@ export const IDIOMS: Idiom[] = [
     literal: { en: 'to kill the cat at the door of the wedding room', it: 'uccidere il gatto davanti alla camera nuziale' },
     meaning: { en: 'To set the rules firmly on day one, so nobody tests you later.', it: 'Mettere in chiaro le regole fin dal primo giorno, così nessuno ti mette alla prova dopo.' },
     like: { en: 'start as you mean to go on', it: 'mettere subito i puntini sulle i' },
-    note: { en: 'From a folk tale: a groom shows on the wedding night that he means business; a friend tries the same trick months later and his wife just laughs. Too late! Today it is said about a new job, a new flatmate, a new class.', it: 'Da una favola popolare: uno sposo fa vedere la prima notte che non scherza; un amico ci prova mesi dopo e la moglie gli ride in faccia. Troppo tardi! Oggi si dice di un lavoro nuovo, un coinquilino, una classe.' }, // TODO(Shabnaz): check the folk tale
+    note: { en: 'From a folk tale: on the wedding night a groom shows his bride, with a cat, that he is strict. A friend tries the same long after his own wedding, and his wife just laughs: too late, you should have done it on the first night! Today it is said about a new job, a new flatmate, a new class.', it: 'Da una favola popolare: la prima notte di nozze uno sposo mostra alla sposa, con un gatto, che è severo. Un amico ci prova molto tempo dopo il suo matrimonio e la moglie gli ride in faccia: troppo tardi, dovevi farlo la prima notte! Oggi si dice di un lavoro nuovo, un coinquilino, una classe.' },
     example: { fa: 'روز اول کلاس، معلم گربه رو دمِ حجله کشت.', tr: 'ruz-e avval-e kelâs, moallem gorbe ro dam-e hejle kosht.', en: 'On the first day of class, the teacher laid down the law.', it: 'Il primo giorno di lezione, l’insegnante ha messo subito le cose in chiaro.' },
   },
   {
@@ -51,16 +51,16 @@ export const IDIOMS: Idiom[] = [
   },
   {
     id: 'shamurti', emoji: '😇',
-    fa: 'عجب آدمِ شامورتی‌ایه!', tr: 'ajab âdam-e shâmurti-ie!',
-    literal: { en: 'what a shâmurti person! (a word you won’t find in a textbook)', it: 'che persona shâmurti! (una parola che non trovi nei libri)' },
+    fa: 'عجب آدمِ شامورتی‌ایه!', tr: 'ajab âdam-e shâmorti-ie!',
+    literal: { en: 'what a shâmorti person! (a word you won’t find in a textbook)', it: 'che persona shâmorti! (una parola che non trovi nei libri)' },
     meaning: { en: 'Someone sly and sneaky who plays the innocent.', it: 'Una persona furba e imbrogliona che fa la santarellina.' },
     like: { en: 'a sly fox', it: 'una vecchia volpe' },
-    example: { fa: 'با اون چشمای معصوم گولت می‌زنه، خیلی شامورتیه.', tr: 'bâ un cheshmâ-ye ma’sum gulet mizane, kheyli shâmurtie.', en: 'He fools you with those innocent eyes; he’s a real trickster.', it: 'Ti frega con quegli occhi innocenti: è proprio un furbetto.' },
-  }, // TODO(Shabnaz): check the Finglish shâmurti
+    example: { fa: 'با اون چشمای معصوم گولت می‌زنه، خیلی شامورتیه.', tr: 'bâ un cheshmâ-ye ma’sum gulet mizane, kheyli shâmortie.', en: 'He fools you with those innocent eyes; he’s a real trickster.', it: 'Ti frega con quegli occhi innocenti: è proprio un furbetto.' },
+  },
   {
     id: 'stingy', emoji: '🔒', rude: true,
     fa: 'نمی‌رینه که نخوره', tr: 'nemirine ke nakhore',
-    literal: { en: 'he won’t even poop, so he never has to eat again', it: 'non va neanche in bagno, così non deve più mangiare' }, // TODO(Shabnaz): check the literal meaning
+    literal: { en: 'he won’t poop, so he doesn’t have to eat more', it: 'non va in bagno, così non deve mangiare di più' },
     meaning: { en: 'Someone extremely stingy.', it: 'Una persona tirchissima.' },
     like: { en: 'so tight he squeaks', it: 'avere il braccino corto' },
     note: { en: 'Very rude: only with close friends. dong is your share of a bill.', it: 'Molto volgare: solo con gli amici stretti. dong è la tua parte del conto.' },
@@ -114,7 +114,7 @@ export const IDIOMS: Idiom[] = [
     literal: { en: 'like Morteza Ali’s cat, it always comes down on all fours', it: 'come il gatto di Morteza Ali, viene sempre giù a quattro zampe' },
     meaning: { en: 'Someone who always comes out of trouble just fine.', it: 'Qualcuno che se la cava sempre.' },
     like: { en: 'always lands on their feet', it: 'cadere sempre in piedi' },
-    note: { en: 'Morteza Ali is Imam Ali. A folk story says he blessed a cat, and that is why cats land on their feet.', it: 'Morteza Ali è l’imam Ali. Una storia popolare dice che benedisse un gatto, ed è per questo che i gatti cadono in piedi.' }, // TODO(Shabnaz): check the story
+    note: { en: 'Morteza Ali is Imam Ali. The story goes that he stroked a cat’s back, so a cat never lands on its back, always on its feet. Some versions say it was the Prophet.', it: 'Morteza Ali è l’imam Ali. Si racconta che accarezzò la schiena di un gatto: per questo un gatto non cade mai sulla schiena, sempre in piedi. In alcune versioni è il Profeta.' },
     example: { fa: 'هر بار ورشکست میشه، دوباره سرپاست؛ مثلِ گربه‌ی مرتضی‌علی!', tr: 'har bâr varshekast mishe, dobâre sar-e pâst; mesl-e gorbe-ye Morteza Ali!', en: 'Every time he goes bust, he’s back on his feet, like Morteza Ali’s cat!', it: 'Ogni volta che fallisce si rimette in piedi: come il gatto di Morteza Ali!' },
   },
   {
@@ -133,7 +133,7 @@ export const IDIOMS: Idiom[] = [
     meaning: { en: 'He gave up and left without a word, empty-handed.', it: 'Ha rinunciato e se n’è andato senza una parola, a mani vuote.' },
     like: { en: 'he left with his tail between his legs (in Persian the tail goes up on the shoulder!)', it: 'se n’è andato con la coda tra le gambe (in persiano la coda va in spalla!)' },
     example: { fa: 'دید کسی بهش پول نمیده، دمشو گذاشت رو کولش و رفت.', tr: 'did kasi behesh pul nemide, dumesho gozâsht ru kulesh o raft.', en: 'He saw nobody would give him money, so off he went.', it: 'Ha visto che nessuno gli dava soldi, e se n’è andato.' },
-  }, // TODO(Shabnaz): check the meaning (left defeated? left proudly?)
+  },
   {
     id: 'watermelon', emoji: '🍉',
     fa: 'هندونه زیرِ بغلِ کسی گذاشتن', tr: 'hendune zir-e baghal-e kasi gozâshtan',
