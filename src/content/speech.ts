@@ -5,6 +5,14 @@ import { APP } from '../app.ts'
 import { dialogueVoices, type VoiceId } from './speakers.ts'
 import { NARRATOR, clipKey } from './voices.ts'
 import { TRACKS } from './tracks/index.ts'
+import { DICTIONARY } from './dictionary/index.ts'
+
+/**
+ * The dictionary (src/content/dictionary/) has no recorded clips yet. Turn this on when they are to be
+ * generated (node scripts/gen-audio.ts --dry first to count them); until then SpeakButton reads
+ * dictionary words with the device's Persian voice, when there is one.
+ */
+export const INCLUDE_DICTIONARY_AUDIO = false
 
 /** A voice id: the narrator, or a dialogue speaker's voice (see speakers.ts and voices.ts). */
 export type Voice = VoiceId
@@ -65,6 +73,12 @@ export function allSpeech(): SpeechItem[] {
         add(d.fa, `${at} · dialogue · ${d.who}`, { tr: d.tr, en: d.en, voice: voices.get(d.who) })
       }
       for (const p of u.reading?.paragraphs ?? []) add(p.fa, `${at} · reading`, { tr: p.tr, en: p.en })
+    }
+  }
+  if (INCLUDE_DICTIONARY_AUDIO && APP.id === 'persianmeow') {
+    for (const e of DICTIONARY) {
+      add(e.fa, 'Dictionary', { tr: e.tr, en: e.en })
+      if (e.ex) add(e.ex.fa, 'Dictionary · examples', { tr: e.ex.tr, en: e.ex.en })
     }
   }
   return [...out.values()]
