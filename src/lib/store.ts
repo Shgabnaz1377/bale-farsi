@@ -43,6 +43,8 @@ export interface Progress {
   cards: Record<string, Card>
   /** "Did you know?" facts already read (each earns a heart once). Older saves lack it and get {}. */
   facts: Record<string, true>
+  /** Idioms already learned (each earns a heart once). Older saves lack it and get {}. */
+  idioms: Record<string, true>
   settings: Settings
 }
 
@@ -53,7 +55,7 @@ const STORE_KEY = `${APP.storage}:v1`
 export function freshProgress(): Progress {
   return {
     v: 1, xp: 0, streak: 0, bestStreak: 0, lastDay: 0, hearts: MAX_HEARTS, heartsDay: 0,
-    days: {}, done: {}, passed: {}, cards: {}, facts: {},
+    days: {}, done: {}, passed: {}, cards: {}, facts: {}, idioms: {},
     settings: { mode: 'both', sfx: true, autoplay: true, goal: 30, relaxed: false, theme: 'system', lang: detectLang(), vowels: 'auto' },
   }
 }
@@ -128,8 +130,17 @@ export const gainHeart = () => { P.hearts = Math.min(MAX_HEARTS, P.hearts + 1) }
  * Returns what it earned.
  */
 export function readFact(id: string): 'heart' | 'xp' | null {
-  if (P.facts[id]) return null
-  P.facts[id] = true
+  return rewardOnce(P.facts, id)
+}
+
+/** Mark an idiom as learned: the first time it earns a heart (or 2 XP), like a fact. */
+export function learnIdiom(id: string): 'heart' | 'xp' | null {
+  return rewardOnce(P.idioms, id)
+}
+
+function rewardOnce(seen: Record<string, true>, id: string): 'heart' | 'xp' | null {
+  if (seen[id]) return null
+  seen[id] = true
   if (!P.settings.relaxed && P.hearts < MAX_HEARTS) { gainHeart(); return 'heart' }
   addXp(2)
   return 'xp'
