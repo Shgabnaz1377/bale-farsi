@@ -284,4 +284,13 @@ export const FA_BEGO: Record<string, string> = {
   "Listen. Which word do you hear?": "گوش کنید. کدام کلمه را می‌شنوید؟",
   "Same letters, different vowel: only the mark tells them apart.": "حرف‌ها یکی است و مصوت فرق دارد؛ فقط علامت آن‌ها را از هم جدا می‌کند.",
   "Which one is “{w}”?": "کدام یکی «{w}» است؟",
+  "Dictionary": "فرهنگ لغت",
+  "The dictionary adds {n} common words, open to everyone.": "فرهنگ لغت {n} کلمهٔ رایج دیگر دارد و برای همه باز است.",
+  "Loading the dictionary…": "در حال بارگذاری فرهنگ لغت…",
+  "The dictionary could not be loaded.": "فرهنگ لغت بارگذاری نشد.",
+  "Present stem": "بن مضارع",
+  "Show more ({n} left)": "نمایش بیشتر ({n} مورد دیگر)",
+  "No words found for “{q}”.": "کلمه‌ای برای «{q}» پیدا نشد.",
+  "Opens Google Translate in a new tab": "Google Translate را در زبانهٔ جدید باز می‌کند",
+  "Not in the dictionary? Translate it": "در فرهنگ لغت نیست؟ ترجمه‌اش کن",
 }

@@ -284,4 +284,13 @@ export const IT: Record<string, string> = {
   "Which sound does this mark give the letter?": "Che suono dà questo segno alla lettera?",
   "Listen. Which word do you hear?": "Ascolta. Quale parola senti?",
   "Same letters, different vowel: only the mark tells them apart.": "Stesse lettere, vocale diversa: solo il segno le distingue.",
+  "Dictionary": "Dizionario",
+  "The dictionary adds {n} common words, open to everyone.": "Il dizionario aggiunge {n} parole comuni, aperto a tutti.",
+  "Loading the dictionary…": "Caricamento del dizionario…",
+  "The dictionary could not be loaded.": "Impossibile caricare il dizionario.",
+  "Present stem": "Radice del presente",
+  "Show more ({n} left)": "Mostra altre ({n} rimanenti)",
+  "No words found for “{q}”.": "Nessuna parola trovata per “{q}”.",
+  "Opens Google Translate in a new tab": "Apre Google Traduttore in una nuova scheda",
+  "Not in the dictionary? Translate it": "Non è nel dizionario? Traducila",
 }
