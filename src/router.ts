@@ -6,6 +6,7 @@ export const router = createRouter({
   history: createWebHashHistory(),
   routes: [
     { path: '/', name: 'home', component: HomeView },
+    { path: '/practice', name: 'practice', component: () => import('./views/PracticeView.vue') },
     { path: '/unit/:id', name: 'unit', component: () => import('./views/UnitView.vue'), props: true },
     { path: '/lesson', name: 'lesson', component: () => import('./views/LessonView.vue') },
     { path: '/alphabet', name: 'alphabet', component: () => import('./views/AlphabetView.vue') },
