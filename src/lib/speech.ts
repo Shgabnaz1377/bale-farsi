@@ -4,8 +4,8 @@ import FA_INDEX from '@/content/audio-index.json'
 import IT_INDEX from '@/courses/begociao/audio-index.json'
 import { APP } from '@/app.ts'
 import { audioKey } from './audioKey.ts'
-import { clipKey } from '@/content/voices.ts'
-import type { VoiceId } from '@/content/speakers.ts'
+import { NARRATOR, clipKey } from '@/content/voices.ts'
+import { genderOfVoice, type VoiceId } from '@/content/speakers.ts'
 import { isNative } from './platform.ts'
 
 /**
@@ -57,9 +57,12 @@ else if (synth) {
 /** Number of recorded clips in this build. */
 export const clipCount = CLIPS.size
 /** The clip for a text in a voice: the speaker's own recording, else the narrator's while it is being recorded. */
+// Only when the narrator has the speaker's gender: a woman never speaks with a man's clip (without her own
+// clip, the device's voice reads her line).
 function clipFor(text: string, voice?: VoiceId): string | null {
   const own = clipKey(text, voice)
   if (CLIPS.has(own)) return own
+  if (voice && genderOfVoice(voice) !== genderOfVoice(NARRATOR)) return null
   const narrator = audioKey(text)
   return CLIPS.has(narrator) ? narrator : null
 }
@@ -70,6 +73,24 @@ export const canSpeak = (text: string, voice?: VoiceId) => !!text && (hasClip(te
 export const hasVoice = () => CLIPS.size > 0 || !!faVoice.value
 
 let current: HTMLAudioElement | null = null
+
+/**
+ * What is being said right now (text and voice), or null. The cast's faces watch it to move their mouths
+ * while their line plays (src/components/CastFace.vue).
+ */
+export const nowSpeaking = ref<{ text: string; voice?: VoiceId } | null>(null)
+let speakingToken = 0
+/** Marks the start of a line; returns the function that marks its end (ignored if another line started since). */
+function started(text: string, voice?: VoiceId): () => void {
+  const token = ++speakingToken
+  nowSpeaking.value = { text, voice }
+  return () => {
+    if (token === speakingToken) nowSpeaking.value = null
+  }
+}
+/** Is this text (in this voice, when given) being said right now? */
+export const isSpeaking = (text: string, voice?: VoiceId) =>
+  !!nowSpeaking.value && nowSpeaking.value.text === text && (voice === undefined || nowSpeaking.value.voice === voice)
 
 function playClip(key: string, slow: boolean): Promise<void> {
   return new Promise((resolve) => {
@@ -95,24 +116,29 @@ export function speak(text: string, slow = false, voice?: VoiceId): Promise<void
   const key = clipFor(text, voice)
   if (key) {
     stopSpeech()
-    return playClip(key, slow)
+    const done = started(text, voice)
+    return playClip(key, slow).finally(done)
   }
   if (!faVoice.value) return Promise.resolve()
   if (isNative) {
     return TextToSpeech.stop()
       .catch(() => undefined)
-      .then(() => TextToSpeech.speak({ text, lang: APP.ttsLang, rate: slow ? 0.6 : 0.9, category: 'playback' }))
+      .then(() => {
+        const done = started(text, voice)
+        return TextToSpeech.speak({ text, lang: APP.ttsLang, rate: slow ? 0.6 : 0.9, category: 'playback' }).finally(done)
+      })
       .catch(() => undefined)
   }
-  return new Promise((resolve) => {
+  return new Promise<void>((resolve) => {
     try {
       synth!.cancel()
       const u = new SpeechSynthesisUtterance(text)
       u.voice = webVoice
       u.lang = webVoice!.lang
       u.rate = slow ? 0.55 : 0.85
-      u.onend = () => resolve()
-      u.onerror = () => resolve()
+      const done = started(text, voice)
+      u.onend = () => { done(); resolve() }
+      u.onerror = () => { done(); resolve() }
       synth!.speak(u)
     } catch {
       resolve()
@@ -121,6 +147,8 @@ export function speak(text: string, slow = false, voice?: VoiceId): Promise<void
 }
 
 export function stopSpeech() {
+  speakingToken++
+  nowSpeaking.value = null
   try {
     current?.pause()
     current = null

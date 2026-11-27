@@ -1,28 +1,26 @@
 import type { Unit } from './types.ts'
+import { CAST } from './cast.ts'
 
 export type Gender = 'f' | 'm'
 
 /**
  * Who speaks in the dialogues, so every line gets a voice of the right gender.
- * Names keep their gender everywhere; a few role nouns that carry no gender (Cliente, Agente…) are set per unit.
- * scripts/check-voices.ts fails if a dialogue speaker is missing here.
+ * PersianMeow's speakers are the 21 people of the cast (src/content/cast.ts, from characters.json),
+ * the track family included (mum Leila, dad Babak, the learners Aria and Venus).
+ * Bego Ciao keeps its Italian names (and its Sara); a few role nouns with no gender (Cliente, Agente…) are set per unit.
+ * scripts/check-voices.ts fails if a dialogue speaker is missing here, or a PersianMeow speaker is not in the cast.
  */
 const NAMES: Record<string, Gender> = {
-  // Persian names
-  Ali: 'm', Arash: 'm', Babak: 'm', Kaveh: 'm', Nima: 'm', Omid: 'm', Pouya: 'm', Reza: 'm', Sina: 'm',
-  Arezoo: 'f', Atoosa: 'f', Bahar: 'f', Ladan: 'f', Leila: 'f', Mahsa: 'f', Maryam: 'f', Mina: 'f', Nasrin: 'f',
-  Neda: 'f', Niloufar: 'f', Parisa: 'f', Parvin: 'f', Sara: 'f', Shirin: 'f',
-  // The family and the foreign partner in the Culture and For-couples tracks (the character cast:
-  // maman, baba, the learner boy "Tom" and the Italian learner "Sofia").
-  Maman: 'f', Baba: 'm', Tom: 'm', Sofia: 'f', Ziba: 'f', Mehdi: 'm', Narges: 'f', Hamid: 'm', Farzaneh: 'f', Amir: 'm',
+  // The PersianMeow cast
+  ...Object.fromEntries(CAST.map((c) => [c.name, c.gender])),
+  // Bego Ciao: the Iranian learners in Italy (Sara, Arash and Babak are cast names too)
+  Nima: 'm', Omid: 'm', Reza: 'm',
   // Italian names (Bego Ciao)
   Davide: 'm', Luca: 'm', Paolo: 'm',
   Chiara: 'f', Elena: 'f', Francesca: 'f', Giulia: 'f', Marta: 'f',
   // Italian role nouns whose ending shows the gender
   Cameriere: 'm', Commesso: 'm', Fruttivendolo: 'm', Signore: 'm',
   Direttrice: 'f', Impiegata: 'f', Professoressa: 'f', Segretaria: 'f',
-  // Dr Sohrabi is addressed «خانم دکتر» in a2-health.
-  'Dr Sohrabi': 'f',
 }
 
 /**

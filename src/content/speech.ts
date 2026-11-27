@@ -9,6 +9,7 @@ import { APP } from '../app.ts'
 import { dialogueVoices, type VoiceId } from './speakers.ts'
 import { NARRATOR, clipKey } from './voices.ts'
 import { TRACKS } from './tracks/index.ts'
+import { sentenceSpeaker, sentenceVoice } from './sentenceSpeakers.ts'
 import { DICTIONARY } from './dictionary/index.ts'
 
 /**
@@ -37,7 +38,8 @@ export const PISHI_LINES = Object.values(APP.pishi).map((l) => ({ text: l.fa, tr
 
 /**
  * Every text the app can read aloud, once per voice.
- * Words, sentences and readings use the narrator; each dialogue line uses its speaker's voice
+ * Words and readings use the narrator; each lesson sentence and grammar example is said by a cast member
+ * in a voice of their gender (sentenceSpeakers.ts), and each dialogue line uses its speaker's voice
  * (the right gender, from speakers.ts), so the same sentence said by a woman and a man are two clips.
  */
 export function allSpeech(): SpeechItem[] {
@@ -78,13 +80,14 @@ export function allSpeech(): SpeechItem[] {
   for (const g of groups) {
     for (const u of g.units) {
       const at = `${g.label} · ${u.title}`
+      const by = (p: { fa: string; tr: string }) => { const c = sentenceSpeaker(p, u.id); return c ? ` · ${c.name}` : '' }
       add(u.fa, at, { tr: u.tr })
       for (const w of u.words) add(w.fa, `${at} · words`, { tr: w.tr, en: w.en })
       for (const s of u.sentences) {
-        add(s.fa, `${at} · sentences`, { tr: s.tr, en: s.en })
+        add(s.fa, `${at} · sentences${by(s)}`, { tr: s.tr, en: s.en, voice: sentenceVoice(s, u.id) })
         s.tiles.forEach((t, i) => add(t, `${at} · sentence tiles`, { tr: s.trTiles[i] }))
       }
-      for (const e of u.grammar.examples) add(e.fa, `${at} · grammar`, { tr: e.tr, en: e.en })
+      for (const e of u.grammar.examples) add(e.fa, `${at} · grammar${by(e)}`, { tr: e.tr, en: e.en, voice: sentenceVoice(e, u.id) })
       const voices = dialogueVoices(u)
       for (const d of u.dialogue ?? []) {
         add(d.fa, `${at} · dialogue · ${d.who}`, { tr: d.tr, en: d.en, voice: voices.get(d.who) })

@@ -42,7 +42,7 @@ export const IT_B2: CourseTr = {
       ],
     },
     dialogue: [
-      { fa: 'رضا، دیدی شهرداری سطل\u200cهای بازیافت گذاشته؟', it: 'Reza, hai visto che il comune ha messo i cassonetti per la differenziata?' },
+      { fa: 'ساسان، دیدی شهرداری سطل\u200cهای بازیافت گذاشته؟', it: 'Sasan, hai visto che il comune ha messo i cassonetti per la differenziata?' },
       { fa: 'آره، ولی فکر نکنم کسی ازشون استفاده کنه.', it: 'Sì, ma non credo che qualcuno li userà.' },
       { fa: 'چرا؟ توی محله\u200cی ما همه زباله\u200cهاشونو جدا می\u200cکنن.', it: 'Perché? Nel nostro quartiere tutti separano i rifiuti.' },
       { fa: 'آخه شنیدم آخرش همه\u200cچی با هم برده می\u200cشه.', it: 'Eh, ho sentito che alla fine portano via tutto insieme.' },
@@ -889,7 +889,7 @@ export const IT_B2: CourseTr = {
       ],
     },
     dialogue: [
-      { fa: 'کاوه، دیشب چرا انقدر دیر اومدی؟', it: 'Kaveh, perché ieri sera sei tornato così tardi?' },
+      { fa: 'بابک، دیشب چرا انقدر دیر اومدی؟', it: 'Babak, perché ieri sera sei tornato così tardi?' },
       { fa: 'مامان و بابامو رسوندم خونه، بعد تو ترافیک گیر کردم.', it: 'Ho accompagnato a casa mamma e papà, e poi sono rimasto bloccato nel traffico.' },
       { fa: 'منم تا ساعت یازده داشتم آرشو می\u200cخوابوندم!', it: 'E io fino alle undici ho cercato di far addormentare Arash!' },
       { fa: 'چرا؟ اون که همیشه زود می\u200cخوابه.', it: 'Perché? Lui si addormenta sempre presto.' },
@@ -1103,7 +1103,7 @@ export const IT_B2: CourseTr = {
       ],
     },
     dialogue: [
-      { fa: 'کاوه، این ماه هم پولمون تا آخر ماه نمی\u200cرسه.', it: 'Kaveh, anche questo mese i soldi non ci bastano fino alla fine del mese.' },
+      { fa: 'ساسان، این ماه هم پولمون تا آخر ماه نمی\u200cرسه.', it: 'Sasan, anche questo mese i soldi non ci bastano fino alla fine del mese.' },
       { fa: 'باز چی شده؟ مگه حقوقمو تازه نریختن؟', it: 'Che succede stavolta? Non mi hanno appena accreditato lo stipendio?' },
       { fa: 'چرا، ولی قسط وام و اجاره رو که بدیم، چیزی نمی\u200cمونه.', it: 'Sì, ma una volta pagati la rata del prestito e l\'affitto, non resta niente.' },
       { fa: 'همه\u200cچی گرون شده. نون، گوشت، حتی بنزین.', it: 'È rincarato tutto. Il pane, la carne, perfino la benzina.' },
@@ -1366,7 +1366,7 @@ export const IT_B2: CourseTr = {
       ],
     },
     dialogue: [
-      { fa: 'کاوه، این کلمه چیه؟ «اشخاص». «شخص» رو می\u200cدونم، ولی این یکی رو نه.', it: 'Kaveh, che parola è questa? "ashkhâs". "shakhs" lo conosco, ma questa no.' },
+      { fa: 'آرش، این کلمه چیه؟ «اشخاص». «شخص» رو می\u200cدونم، ولی این یکی رو نه.', it: 'Arash, che parola è questa? "ashkhâs". "shakhs" lo conosco, ma questa no.' },
       { fa: 'جمع عربی «شخص». یعنی آدم\u200cها.', it: 'Il plurale arabo di "shakhs". Vuol dire persone.' },
       { fa: 'چرا نمی\u200cگن «شخص\u200cها»؟', it: 'Perché non si dice "shakhshâ"?' },
       { fa: 'تو حرف زدن معمولاً می\u200cگیم «آدما». «اشخاص» بیشتر تو نوشته\u200cها و تابلوهاست.', it: 'Quando parliamo di solito diciamo "âdamâ". "ashkhâs" si trova soprattutto negli scritti e sui cartelli.' },
@@ -1449,7 +1449,7 @@ export const IT_B2: CourseTr = {
       ],
     },
     dialogue: [
-      { fa: 'ندا، می\u200cدونستی تخت جمشید رو داریوش شروع کرده؟', it: 'Neda, lo sapevi che è stato Dario a cominciare Persepoli?' },
+      { fa: 'آرتمیس، می\u200cدونستی تخت جمشید رو داریوش شروع کرده؟', it: 'Artemis, lo sapevi che è stato Dario a cominciare Persepoli?' },
       { fa: 'نه، فکر می\u200cکردم کوروش ساخته.', it: 'No, pensavo che l\'avesse costruita Ciro.' },
       { fa: 'نه، پایتخت کوروش پاسارگاد بود. تخت جمشید بعدها ساخته شد.', it: 'No, la capitale di Ciro era Pasargade. Persepoli è stata costruita dopo.' },
       { fa: 'آهان. بعد اسکندر اومد و آتیشش زد، درسته؟', it: 'Ah, ecco. Poi è arrivato Alessandro e le ha dato fuoco, giusto?' },
@@ -1537,7 +1537,7 @@ export const IT_B2: CourseTr = {
       ],
     },
     dialogue: [
-      { fa: 'بابک، دیشب «فروشنده» رو دیدی؟', it: 'Babak, ieri sera hai visto Il cliente?' },
+      { fa: 'داریوش، دیشب «فروشنده» رو دیدی؟', it: 'Dariush, ieri sera hai visto Il cliente?' },
       { fa: 'آره، ولی راستشو بخوای، اولش یه کم کند بود.', it: 'Sì, ma a dire la verità all\'inizio era un po\' lento.' },
       { fa: 'کند؟ من که اون\u200cقدر درگیر داستان شدم که گذر زمانو حس نکردم.', it: 'Lento? Io sono stata così presa dalla storia che non mi sono accorta del tempo che passava.' },
       { fa: 'بازی شهاب حسینی واقعاً عالی بود، اینو قبول دارم.', it: 'L\'interpretazione di Shahab Hosseini era davvero ottima, questo te lo concedo.' },
@@ -1601,7 +1601,7 @@ export const IT_B2: CourseTr = {
       ],
     },
     dialogue: [
-      { fa: 'کاوه، تو اصفهانی هستی؟ لهجه\u200cت اصلاً معلوم نیست!', it: 'Kaveh, sei di Isfahan? Non ti si sente per niente l\'accento!' },
+      { fa: 'ساسان، تو اصفهانی هستی؟ لهجه\u200cت اصلاً معلوم نیست!', it: 'Sasan, sei di Isfahan? Non ti si sente per niente l\'accento!' },
       { fa: 'تو تهران که هستم تهرونی حرف می\u200cزنم، ولی با مامانم که حرف می\u200cزنم لهجه\u200cم برمی\u200cگرده.', it: 'Quando sono a Teheran parlo come un teheranese, ma quando parlo con mia mamma l\'accento torna fuori.' },
       { fa: 'یه جمله به اصفهانی بگو ببینم!', it: 'Dimmi una frase in isfahanese, fammi sentire!' },
       { fa: 'همین\u200cجوری که نمی\u200cشه! لهجه\u200cی اصفهانی بیشتر تو آهنگ جمله\u200cست، نه تو کلمه\u200cها.', it: 'Così su due piedi non si può! L\'accento di Isfahan sta più nella melodia della frase che nelle parole.' },

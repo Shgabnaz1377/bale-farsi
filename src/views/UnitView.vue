@@ -13,11 +13,16 @@ import RichText from '@/components/RichText.vue'
 import DialogueList from '@/components/DialogueList.vue'
 import PassageText from '@/components/PassageText.vue'
 import { provideFaLevel } from '@/lib/vowelMarks.ts'
+import CastFace from '@/components/CastFace.vue'
+import { sentenceSpeaker } from '@/content/sentenceSpeakers.ts'
+import type { Phrase } from '@/content/types.ts'
 
 const props = defineProps<{ id: string }>()
 const router = useRouter()
 const unit = computed(() => unitById.get(props.id))
 provideFaLevel(computed(() => unit.value?.level))
+// Who says each grammar example and sentence (the same speaker and voice as in the lessons).
+const said = (p: Phrase) => (unit.value ? sentenceSpeaker(p, unit.value.id) : undefined)
 const lessons = computed(() => (unit.value ? lessonsOf(unit.value) : []))
 const faNum = (n: number) => String(n).replace(/\d/g, (d) => '۰۱۲۳۴۵۶۷۸۹'[Number(d)])
 
@@ -60,7 +65,8 @@ function go(key: string) {
       <RichText :html="unit.grammar.body" />
       <ul class="list">
         <li v-for="(e, i) in unit.grammar.examples" :key="i">
-          <SpeakButton :text="e.fa" />
+          <CastFace v-if="said(e)" :name="said(e)!.name" kind="avatar" :text="e.fa" :voice="said(e)!.gender" />
+          <SpeakButton :text="e.fa" :voice="said(e)?.gender" />
           <span class="col"><FaText :fa="e.fa" :tr="e.tr" inline keep-tr /><span class="muted small">{{ e.en }}</span></span>
         </li>
       </ul>
@@ -83,7 +89,8 @@ function go(key: string) {
       <h2>{{ t('Sentences') }}</h2>
       <ul class="list">
         <li v-for="(s, i) in unit.sentences" :key="i">
-          <SpeakButton :text="s.fa" />
+          <CastFace v-if="said(s)" :name="said(s)!.name" kind="avatar" :text="s.fa" :voice="said(s)!.gender" />
+          <SpeakButton :text="s.fa" :voice="said(s)?.gender" />
           <span class="col"><FaText :fa="s.fa" :tr="s.tr" inline keep-tr /><span class="muted small">{{ s.en }}</span></span>
         </li>
       </ul>

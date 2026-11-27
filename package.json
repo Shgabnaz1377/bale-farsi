@@ -11,7 +11,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "npm run check:content && npm run check:italian && vue-tsc --build && vite build",
+    "build": "npm run check:content && npm run check:italian && node scripts/check-voices.ts && vue-tsc --build && vite build",
     "preview": "vite preview",
     "typecheck": "vue-tsc --build --force",
     "lint": "eslint .",

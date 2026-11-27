@@ -941,7 +941,7 @@ export const IT_B1: CourseTr = {
       ],
     },
     dialogue: [
-      { fa: "کاوه، ساعت هشته! هنوز بیدار نشدی؟", it: "Kaveh, sono le otto! Non ti sei ancora alzato?" },
+      { fa: "ساسان، ساعت هشته! هنوز بیدار نشدی؟", it: "Sasan, sono le otto! Non ti sei ancora alzato?" },
       { fa: "چرا، چرا! فقط قبل از اینکه برم، باید یه دوش بگیرم.", it: "Sì, sì! Devo solo farmi una doccia prima di andare." },
       { fa: "وقت نداریم! جلسه ساعت نه شروع می‌شه.", it: "Non abbiamo tempo! La riunione comincia alle nove." },
       { fa: "باشه، تا تو صبحونه رو آماده کنی، من حاضرم.", it: "Va bene, nel tempo che prepari la colazione, io sono pronto." },
@@ -1069,7 +1069,7 @@ export const IT_B1: CourseTr = {
       ],
     },
     dialogue: [
-      { fa: "بابک، مامان زنگ زد. گفت که حتماً بهش زنگ بزنی.", it: "Babak, ha chiamato la mamma. Ha detto di richiamarla senza fallo." },
+      { fa: "آرش، مامان زنگ زد. گفت که حتماً بهش زنگ بزنی.", it: "Arash, ha chiamato la mamma. Ha detto di richiamarla senza fallo." },
       { fa: "چی شده؟ چیز فوریه؟", it: "Che cosa è successo? È una cosa urgente?" },
       { fa: "نه، فقط گفت که شب نون بخری و دیر نیای.", it: "No, ha detto solo di comprare il pane stasera e di non fare tardi." },
       { fa: "باشه. دیگه چی گفت؟", it: "Va bene. Che altro ha detto?" },
@@ -1198,7 +1198,7 @@ export const IT_B1: CourseTr = {
       ],
     },
     dialogue: [
-      { fa: "آتوسا، شنیدم رفتی یزد. چطور بود؟", it: "Atoosa, ho sentito che sei andata a Yazd. Com'è stato?" },
+      { fa: "ساحل، شنیدم رفتی یزد. چطور بود؟", it: "Sahel, ho sentito che sei andata a Yazd. Com'è stato?" },
       { fa: "فوق‌العاده! اولین بارم بود. شهر قدیمیش مثل یه موزه‌ست.", it: "Fantastico! Era la prima volta. La città vecchia è come un museo." },
       { fa: "بادگیرها رو دیدی؟", it: "Hai visto le torri del vento?" },
       { fa: "آره، همه‌جا بادگیر هست. تابستونا خونه‌ها رو خنک نگه می‌دارن.", it: "Sì, ci sono torri del vento dappertutto. D'estate tengono fresche le case." },

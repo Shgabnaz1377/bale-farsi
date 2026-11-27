@@ -140,6 +140,8 @@ export default defineConfig(({ mode }) => {
         workbox: {
           // The whole course is in the JS bundle, so precaching the build makes every lesson work offline.
           globPatterns: ['**/*.{js,css,html,svg,png,webmanifest}'],
+          // The cast's faces used by the app (idle, talking, avatar) are precached; the other moods are not used yet.
+          globIgnores: ['**/node_modules/**', 'characters/*_{happy,sad,confused,shock}*.svg'],
           navigateFallback: 'index.html',
           // Bego Ciao lives in a subfolder of PersianMeow's site; PersianMeow's worker must leave it alone.
           navigateFallbackDenylist: appId === 'persianmeow' ? [/\/begociao(\/|$)/] : [],

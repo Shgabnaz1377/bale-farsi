@@ -319,6 +319,7 @@ export const FA_BEGO: Record<string, string> = {
   "Repeat after me": "بعد از من تکرار کن",
   "Your turn: play a part": "نوبت توست: یک نقش را بازی کن",
   "Your part": "نقش تو",
+  "Now speaking": "در حال صحبت",
   "Show": "نمایش",
   "you": "تو",
   "Your line: say it now!": "جملهٔ توست: حالا بگو!",
