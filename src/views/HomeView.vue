@@ -55,6 +55,19 @@ function goNext() {
 
 <template>
   <main class="wrap page">
+    <section v-if="fromInstagram" class="card insta" aria-live="polite">
+      <MeowCat mood="cheer" :size="72" />
+      <div class="insta-text">
+        <b>{{ t('“Comment MEOW” brought you here 🐱') }}</b>
+        <span class="muted small">{{ t('Welcome! This is the free course from the Reels: start with A1, or try the 3-second challenge you just watched.') }}</span>
+        <span class="row">
+          <button type="button" class="btn primary sm" @click="goNext">{{ t('Start at A1') }}</button>
+          <RouterLink class="btn ghost sm" :to="{ name: 'quick', query: { mode: 'guess' } }">{{ t('3-second challenge') }}</RouterLink>
+        </span>
+      </div>
+      <button type="button" class="icon-btn" :aria-label="t('Hide this')" @click="dismissInstagram"><AppIcon name="x" /></button>
+    </section>
+
     <section v-if="fresh" class="card hero">
       <div class="hero-text">
         <div v-if="LANGS.length > 1" class="speak" role="radiogroup" :aria-label="t('I speak')">
@@ -92,19 +105,6 @@ function goNext() {
         <p class="en">{{ wotd.word.en }} <span class="muted small">· {{ wotd.unit.level }} {{ wotd.unit.title }}</span></p>
       </div>
     </div>
-
-    <section v-if="fromInstagram" class="card insta" aria-live="polite">
-      <MeowCat mood="cheer" :size="72" />
-      <div class="insta-text">
-        <b>{{ t('“Comment MEOW” brought you here 🐱') }}</b>
-        <span class="muted small">{{ t('Welcome! This is the free course from the Reels: start with A1, or try the 3-second challenge you just watched.') }}</span>
-        <span class="row">
-          <button type="button" class="btn primary sm" @click="goNext">{{ t('Start at A1') }}</button>
-          <RouterLink class="btn ghost sm" :to="{ name: 'quick', query: { mode: 'guess' } }">{{ t('3-second challenge') }}</RouterLink>
-        </span>
-      </div>
-      <button type="button" class="icon-btn" :aria-label="t('Hide this')" @click="dismissInstagram"><AppIcon name="x" /></button>
-    </section>
 
     <div class="actions-row">
       <button v-if="next && !fresh" type="button" class="card action" @click="goNext">
