@@ -323,6 +323,7 @@ const testLevelName = LEVELS.find((l) => l.level === testLevel)?.name
       <p class="muted msg">{{ t('Hearts refill tomorrow. A review round uses no hearts and wins one back. You can also switch on relaxed mode in Settings.') }}</p>
       <div class="actions">
         <button type="button" class="btn ghost" @click="leave">{{ t('Back') }}</button>
+        <RouterLink v-if="APP.id === 'persianmeow'" class="btn ghost" :to="{ name: 'facts' }">{{ t('Read a fun fact to win a heart') }}</RouterLink>
         <RouterLink class="btn primary" :to="{ name: 'lesson', query: { review: '1' } }" replace>{{ t('Review to win a heart') }}</RouterLink>
       </div>
     </main>

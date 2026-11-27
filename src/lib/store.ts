@@ -41,6 +41,8 @@ export interface Progress {
   /** Level tests passed. */
   passed: Partial<Record<Level, true>>
   cards: Record<string, Card>
+  /** "Did you know?" facts already read (each earns a heart once). Older saves lack it and get {}. */
+  facts: Record<string, true>
   settings: Settings
 }
 
@@ -51,7 +53,7 @@ const STORE_KEY = `${APP.storage}:v1`
 export function freshProgress(): Progress {
   return {
     v: 1, xp: 0, streak: 0, bestStreak: 0, lastDay: 0, hearts: MAX_HEARTS, heartsDay: 0,
-    days: {}, done: {}, passed: {}, cards: {},
+    days: {}, done: {}, passed: {}, cards: {}, facts: {},
     settings: { mode: 'both', sfx: true, autoplay: true, goal: 30, relaxed: false, theme: 'system', lang: detectLang(), vowels: 'auto' },
   }
 }
@@ -120,6 +122,18 @@ export function loseHeart() {
 }
 export const outOfHearts = () => !P.settings.relaxed && P.hearts <= 0
 export const gainHeart = () => { P.hearts = Math.min(MAX_HEARTS, P.hearts + 1) }
+
+/**
+ * Mark a "Did you know?" fact as read. The first time, it earns a heart (or 2 XP when hearts are full).
+ * Returns what it earned.
+ */
+export function readFact(id: string): 'heart' | 'xp' | null {
+  if (P.facts[id]) return null
+  P.facts[id] = true
+  if (!P.settings.relaxed && P.hearts < MAX_HEARTS) { gainHeart(); return 'heart' }
+  addXp(2)
+  return 'xp'
+}
 
 export function recordCard(key: string, correct: boolean) {
   P.cards[key] = review(P.cards[key], correct, today())

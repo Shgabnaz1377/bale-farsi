@@ -95,3 +95,26 @@ describe('pronunciation audio', () => {
     expect(audioKey(' سلام  خوبی؟ ')).toBe(audioKey('سلام خوبی؟'))
   })
 })
+
+describe('did you know? facts', () => {
+  it('have unique ids and both languages', async () => {
+    const { FACTS } = await import('@/content/facts.ts')
+    expect(new Set(FACTS.map((f) => f.id)).size).toBe(FACTS.length)
+    for (const f of FACTS) for (const s of [f.en.title, f.en.text, f.it.title, f.it.text, f.word.fa, f.word.tr]) expect(s.trim()).not.toBe('')
+  })
+  it('keep old saves working: progress without facts loads with none read', () => {
+    const old = JSON.stringify({ v: 1, xp: 40, hearts: 2, cards: {} })
+    const p = parseProgress(old)
+    expect(p.facts).toEqual({})
+    expect(p.xp).toBe(40)
+  })
+  it('a new fact earns a heart once', async () => {
+    const { P, readFact } = await import('@/lib/store.ts')
+    P.hearts = 3
+    P.facts = {}
+    expect(readFact('no-gender')).toBe('heart')
+    expect(P.hearts).toBe(4)
+    expect(readFact('no-gender')).toBe(null)
+    expect(P.hearts).toBe(4)
+  })
+})

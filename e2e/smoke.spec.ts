@@ -173,3 +173,19 @@ test('the Culture and For-couples tracks are open from the start', async ({ page
   await expect(page.getByRole('heading', { name: 'Persian is not Arabic' })).toBeVisible()
   expect(ignoreFonts(problems)).toEqual([])
 })
+
+test('reading a new "Did you know?" fact earns a heart', async ({ page }) => {
+  const problems = watchConsole(page)
+  await page.goto('/#/')
+  await page.evaluate(() => {
+    const k = Object.keys(localStorage).find((x) => x.endsWith(':v1'))
+    const p = k ? JSON.parse(localStorage.getItem(k)!) : null
+    if (p) { p.hearts = 2; p.heartsDay = Math.floor((Date.now() - new Date().getTimezoneOffset() * 60000) / 864e5); localStorage.setItem(k!, JSON.stringify(p)) }
+  })
+  await page.goto('/#/did-you-know')
+  await expect(page.getByRole('heading', { name: 'Did you know?' })).toBeVisible()
+  await expect(page.getByText(/\+1 heart!|Hearts are full/)).toBeVisible({ timeout: 8000 })
+  await page.getByRole('button', { name: 'Next fact' }).click()
+  await expect(page.getByText(/1 of \d+ read/)).toBeVisible()
+  expect(ignoreFonts(problems)).toEqual([])
+})
