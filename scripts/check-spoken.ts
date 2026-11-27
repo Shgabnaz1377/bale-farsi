@@ -6,7 +6,7 @@ import { allSpeech } from '../src/content/speech.ts'
 const texts = new Set(allSpeech().map((i) => i.text))
 const PERSIAN = /^[؀-ۿ‌\s،؟.!:«»؛\-]+$/
 let bad = 0
-for (const l of ['a1', 'a2', 'b1', 'b2']) {
+for (const l of ['a1', 'a2', 'b1', 'b2', 'tracks', 'couples']) {
   const file = new URL(`../src/content/spoken/${l}.ts`, import.meta.url)
   if (!existsSync(file)) { console.log(`spoken/${l}: not written yet`); continue }
   const map: Record<string, string> = (await import(file.href))[`SPOKEN_${l.toUpperCase()}`]

@@ -30,6 +30,7 @@
     "check:spoken": "node scripts/check-spoken.ts",
     "check:vowels": "node scripts/check-vowels.ts",
     "check:voices": "node scripts/check-voices.ts && node scripts/check-voices-bego.mjs",
+    "check:tracks": "node scripts/check-tracks.ts",
     "check:dictionary": "node scripts/check-dictionary.ts"
   },
   "dependencies": {

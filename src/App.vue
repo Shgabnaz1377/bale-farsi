@@ -10,6 +10,14 @@ import { applyCourseLang } from '@/content/localize.ts'
 import { APP } from '@/app.ts'
 
 const route = useRoute()
+
+// Hash routing: a plain #main link would change the route, so the skip link moves focus itself.
+function skipToMain() {
+  const main = document.querySelector('main')
+  if (!main) return
+  main.setAttribute('tabindex', '-1')
+  main.focus()
+}
 const inLesson = computed(() => route.name === 'lesson')
 
 rollDay()
@@ -41,6 +49,7 @@ const nav = computed(() => [
 </script>
 
 <template>
+  <a href="#" class="skip" @click.prevent="skipToMain">{{ t('Skip to content') }}</a>
   <header v-if="!inLesson" class="top">
     <div class="wrap top-in">
       <RouterLink to="/" class="brand" :aria-label="t('{app}, home', { app: APP.fullName })">

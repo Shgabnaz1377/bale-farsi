@@ -7,6 +7,9 @@ import { IT_A1 } from './i18n/it/a1.ts'
 import { IT_A2 } from './i18n/it/a2.ts'
 import { IT_B1 } from './i18n/it/b1.ts'
 import { IT_B2 } from './i18n/it/b2.ts'
+import { IT_CULTURE } from './i18n/it/culture.ts'
+import { IT_COUPLES } from './i18n/it/couples.ts'
+import { TRACK_UNITS } from './tracks/index.ts'
 import { IT_LESSON_NAMES, IT_LETTER_EXAMPLES, IT_LETTER_SOUNDS, IT_LEVELS } from './i18n/it/extra.ts'
 
 /**
@@ -14,10 +17,11 @@ import { IT_LESSON_NAMES, IT_LETTER_EXAMPLES, IT_LETTER_SOUNDS, IT_LEVELS } from
  * swapped in place (so every module holding a unit, word or letter sees the change); Persian, Finglish
  * and audio are never touched. Switching back restores the original English.
  */
-const IT: CourseTr = { ...IT_A1, ...IT_A2, ...IT_B1, ...IT_B2 }
+const IT: CourseTr = { ...IT_A1, ...IT_A2, ...IT_B1, ...IT_B2, ...IT_CULTURE, ...IT_COUPLES }
 
 const ORIGINAL = structuredClone({
   levels: LEVELS.map((l) => ({ name: l.name, blurb: l.blurb, units: l.units })),
+  tracks: TRACK_UNITS,
   lessonNames: { ...LESSON_NAMES },
   letters: LETTERS.map((l) => ({ sound: l.sound, en: l.example.en })),
 })
@@ -95,6 +99,11 @@ function translate(u: Unit, tr: CourseTr[string] | undefined) {
 
 export function applyCourseLang(lang: Lang) {
   if (applied === lang) return
+  // Culture and For-couples units switch language like the level units.
+  TRACK_UNITS.forEach((u, i) => {
+    restore(u, ORIGINAL.tracks[i])
+    if (lang === 'it') translate(u, IT[u.id])
+  })
   LEVELS.forEach((lv, li) => {
     const o = ORIGINAL.levels[li]
     lv.name = lang === 'it' ? IT_LEVELS[lv.level]?.name ?? o.name : o.name

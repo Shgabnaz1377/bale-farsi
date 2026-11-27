@@ -24,7 +24,7 @@ jobs:
           cache: npm
       - run: npm ci
       - name: Content rules (PersianMeow, its Italian translation, its spoken audio forms, and Bego Ciao)
-        run: npm run check:content && npm run check:italian && npm run check:bego && npm run check:spoken && npm run check:voices
+        run: npm run check:content && npm run check:italian && npm run check:bego && npm run check:spoken && npm run check:voices && npm run check:tracks
       - run: npm run lint
       - run: npm run typecheck
       - name: Unit tests, PersianMeow

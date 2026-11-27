@@ -12,6 +12,9 @@ const NAMES: Record<string, Gender> = {
   Ali: 'm', Arash: 'm', Babak: 'm', Kaveh: 'm', Nima: 'm', Omid: 'm', Pouya: 'm', Reza: 'm', Sina: 'm',
   Arezoo: 'f', Atoosa: 'f', Bahar: 'f', Ladan: 'f', Leila: 'f', Mahsa: 'f', Maryam: 'f', Mina: 'f', Nasrin: 'f',
   Neda: 'f', Niloufar: 'f', Parisa: 'f', Parvin: 'f', Sara: 'f', Shirin: 'f',
+  // The family and the foreign partner in the Culture and For-couples tracks (the character cast:
+  // maman, baba, the learner boy "Tom" and the Italian learner "Sofia").
+  Maman: 'f', Baba: 'm', Tom: 'm', Sofia: 'f', Ziba: 'f', Mehdi: 'm', Narges: 'f', Hamid: 'm', Farzaneh: 'f', Amir: 'm',
   // Italian names (Bego Ciao)
   Davide: 'm', Luca: 'm', Paolo: 'm',
   Chiara: 'f', Elena: 'f', Francesca: 'f', Giulia: 'f', Marta: 'f',

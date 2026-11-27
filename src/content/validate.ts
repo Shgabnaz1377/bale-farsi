@@ -16,7 +16,8 @@ export function validateUnits(units: Unit[], level: Level, target: 'fa' | 'it' =
   for (const u of units) {
     const at = (m: string) => errs.push(`${u.id}: ${m}`)
     if (u.level !== level) at(`level is ${u.level}, expected ${level}`)
-    if (!u.id.startsWith(level.toLowerCase() + '-')) at('id must start with the level prefix')
+    // Track units (always open, outside the A1–B2 path) start with their track name instead.
+    if (!u.id.startsWith(level.toLowerCase() + '-') && !/^(culture|couples)-/.test(u.id)) at('id must start with the level prefix')
     if (ids.has(u.id)) at('duplicate id')
     ids.add(u.id)
     if (!SCRIPT.test(u.fa)) at(`unit fa has non-${scriptName} characters: ${u.fa}`)

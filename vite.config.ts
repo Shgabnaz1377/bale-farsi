@@ -9,16 +9,16 @@ import { VitePWA } from 'vite-plugin-pwa'
  */
 const APPS = {
   persianmeow: {
-    title: 'PersianMeow · Learn Persian',
+    title: 'PersianMeow · Learn Persian (Farsi) free, A1 to B2',
     short: 'PersianMeow',
-    description: 'Learn Persian (Farsi) from A1 to B2, with Finglish and recorded audio for every word.',
+    description: 'Learn Persian (Farsi) free, from A1 to B2: Finglish and a real Persian voice for every word, dialogues, culture and a track for couples. In English and Italian (impara il persiano).',
     lang: 'en',
     dir: 'ltr',
     publicDir: 'public',
     outDir: 'dist',
     url: 'https://shgabnaz1377.github.io/persianmeow/',
     ogTitle: 'PersianMeow · Learn Persian with Pishi the cat',
-    keywords: 'learn Persian, learn Farsi, Persian course, Farsi lessons, Persian alphabet, Finglish, Persian for beginners, PersianMeow, impara il persiano',
+    keywords: 'learn Persian free, learn Persian, learn Farsi, Persian course, Farsi lessons, Persian alphabet, Finglish, Persian for beginners, Persian for couples, Nowruz, PersianMeow, impara il persiano, imparare il persiano, imparare il farsi, corso di persiano gratis',
     staticHtml: `<main style="max-width:680px;margin:0 auto;padding:24px 16px;font-family:system-ui,sans-serif;line-height:1.6">
 <h1>PersianMeow: learn Persian (Farsi) with Pishi the cat</h1>
 <p>A free course that teaches Persian to English and Italian speakers, from A1 to B2. Every word comes with Finglish (Persian in English letters) and recorded Persian audio, so you can start before you can read the alphabet.</p>
@@ -48,7 +48,7 @@ const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').repl
 
 /** Canonical address, sharing previews and structured data (a free educational web app). */
 function seoHead(app: (typeof APPS)[keyof typeof APPS]): string {
-  const image = `${app.url}icon-512.png`
+  const image = `${app.url}og-image.png`
   const ld = {
     '@context': 'https://schema.org',
     '@type': 'WebApplication',
@@ -74,7 +74,11 @@ function seoHead(app: (typeof APPS)[keyof typeof APPS]): string {
     `<meta property="og:description" content="${esc(app.description)}" />`,
     `<meta property="og:url" content="${app.url}" />`,
     `<meta property="og:image" content="${image}" />`,
-    `<meta name="twitter:card" content="summary" />`,
+    `<meta property="og:image:width" content="1200" />`,
+    `<meta property="og:image:height" content="630" />`,
+    `<meta property="og:image:alt" content="${esc(app.ogTitle)}" />`,
+    `<meta name="twitter:card" content="summary_large_image" />`,
+    `<meta name="twitter:image" content="${image}" />`,
     `<script type="application/ld+json">${JSON.stringify(ld)}</script>`,
   ].join('\n    ')
 }
