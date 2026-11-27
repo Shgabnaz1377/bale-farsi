@@ -165,3 +165,29 @@ describe('accounts: guest limit', () => {
     }
   })
 })
+
+describe('pronunciation review queue', () => {
+  it('puts learner reports first, then listen-back flags, then unreviewed clips, and skips what I reviewed', async () => {
+    const { reviewQueue, allClips } = await import('@/lib/pron.ts')
+    const clips = await allClips()
+    const [a, b, c, d] = clips
+    const row = (over: object) => ({ id: 1, kind: 'report', clip_key: a.key, fa: a.text, tr: a.tr ?? '', voice: String(a.voice), verdict: 'wrong', suggested_tr: '', comment: '', status: 'open', created_at: '', updated_at: '', who: 'x', who_role: 'learner', mine: false, ...over })
+    const realFetch = globalThis.fetch
+    globalThis.fetch = (async () => new Response(JSON.stringify({ generated: '', checked: 1, flags: [{ key: b.key, fa: b.text, tr: b.tr, heard: 'something', score: 0.8 }] }))) as typeof fetch
+    try {
+      const q = await reviewQueue([
+        row({ id: 1, suggested_tr: 'better' }) as never,
+        row({ id: 2, kind: 'review', clip_key: c.key, fa: c.text, verdict: 'ok', mine: true }) as never,
+      ], 10)
+      expect(q[0]).toMatchObject({ key: a.key, why: 'reported', reportIds: [1] })
+      expect(q[0].notes[0]).toContain('better')
+      expect(q[1]).toMatchObject({ key: b.key, why: 'stt' })
+      expect(q.slice(2).every((x) => x.why === 'sample')).toBe(true)
+      expect(q.some((x) => x.key === c.key)).toBe(false)
+      expect(q).toHaveLength(10)
+      expect(d).toBeTruthy()
+    } finally {
+      globalThis.fetch = realFetch
+    }
+  })
+})

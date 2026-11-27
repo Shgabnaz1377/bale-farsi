@@ -79,6 +79,8 @@ let current: HTMLAudioElement | null = null
  * while their line plays (src/components/CastFace.vue).
  */
 export const nowSpeaking = ref<{ text: string; voice?: VoiceId } | null>(null)
+/** The last thing read aloud, and whether it was a recorded clip (for the "sounds wrong?" bar). */
+export const lastHeard = ref<{ text: string; voice?: VoiceId; clip: string | null; at: number } | null>(null)
 let speakingToken = 0
 /** Marks the start of a line; returns the function that marks its end (ignored if another line started since). */
 function started(text: string, voice?: VoiceId): () => void {
@@ -114,6 +116,7 @@ function playClip(key: string, slow: boolean): Promise<void> {
 export function speak(text: string, slow = false, voice?: VoiceId): Promise<void> {
   if (!text) return Promise.resolve()
   const key = clipFor(text, voice)
+  lastHeard.value = { text, voice, clip: key, at: Date.now() }
   if (key) {
     stopSpeech()
     const done = started(text, voice)
