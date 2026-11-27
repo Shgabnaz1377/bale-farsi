@@ -499,4 +499,5 @@ export const IT: Record<string, string> = {
   "{n} marked wrong": "{n} segnati come sbagliati",
   "{n} open reports": "{n} segnalazioni aperte",
   "{n} reviewed": "{n} controllati",
+  "Language": "Lingua",
 }

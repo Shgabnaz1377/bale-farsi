@@ -29,10 +29,14 @@ export function t(en: string, params?: Record<string, string | number>): string 
 export const tn = (n: number, one: string, many: string) => t(n === 1 ? one : many, { n })
 
 /** The browser's preferred language, for a learner's first visit. */
+/**
+ * The language a new visitor starts in: English, whatever the browser says (the owner's choice).
+ * A link can ask for Italian with ?lang=it (for example from an Italian post); anyone can switch any time.
+ */
 export function detectLang(): Lang {
   if (APP_ID === 'begociao') return 'fa'
   try {
-    return (navigator.languages ?? [navigator.language]).some((l) => /^it\b/i.test(l)) ? 'it' : 'en'
+    return new URLSearchParams(location.search).get('lang') === 'it' ? 'it' : 'en'
   } catch {
     return 'en'
   }
