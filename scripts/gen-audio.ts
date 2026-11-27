@@ -25,7 +25,8 @@ const ALL_ITEMS = allSpeech()
 const LEXICON = buildLexicon(ALL_ITEMS.filter((i) => i.tr).map((i) => ({ fa: i.text, tr: i.tr! })))
 const novowels = process.argv.includes('--no-vowels')
 function sayable(text: string, tr?: string): string {
-  if (APP.target !== 'fa') return text
+  // Single letters are read by their names (be, pe, jim): vowel marks would only change that.
+  if (APP.target !== 'fa' || [...text].length === 1) return SPOKEN[text] ?? text
   const spoken = SPOKEN[text]
   if (novowels) return spoken ?? text
   if (spoken) return vocalizeWith(LEXICON, spoken)
@@ -97,7 +98,10 @@ if (process.argv.includes('--compare')) {
   const key = env('AZURE_SPEECH_KEY')
   const region = env('AZURE_SPEECH_REGION')
   if (!key || !region) throw new Error('Set AZURE_SPEECH_KEY and AZURE_SPEECH_REGION (environment or .env.local).')
-  const sample = items.filter((i) => i.tr && !i.text.includes(' ') && vocalize(i.text, i.tr) !== i.text).slice(0, 20)
+  // Real words only (not letter names), starting with ones a voice is known to misread.
+  const words = items.filter((i) => i.tr && [...i.text].length > 1 && !i.text.includes(' ') && vocalize(i.text, i.tr) !== i.text)
+  const tricky = new Set(['مبل', 'چشم', 'کتاب', 'گل', 'کرم', 'مرد', 'شکر', 'پسر', 'دختر', 'خوب', 'سر', 'در'])
+  const sample = [...words.filter((i) => tricky.has(i.text)), ...words.filter((i) => !tricky.has(i.text))].slice(0, 20)
   mkdirSync('audio-compare', { recursive: true })
   for (const [n, i] of sample.entries()) {
     const name = `audio-compare/${String(n + 1).padStart(2, '0')}-${i.tr!.replace(/[^a-z]/gi, '')}`
