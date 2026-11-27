@@ -84,7 +84,7 @@ export default `
 کندن | kandan | to dig; to pull off | v | کن/kan | کارگرها زمین را کندند. | kârgarhâ zamin râ kandand. | The workers dug the ground.
 خواباندن | khâbândan | to put to sleep; to lay down | v | خوابان/khâbân | مادر بچه را خواباند. | mâdar bachche râ khâbând. | The mother put the baby to sleep.
 ترساندن | tarsândan | to frighten | v | ترسان/tarsân | صدای رعد بچه\u200cها را ترساند. | sedâ-ye ra'd bachchehâ râ tarsând. | The sound of thunder frightened the children.
-گرداندن | gardândan | to run (a business); to turn | v | گردان/gardân | پدرش یک رستوران کوچک می\u200cگرداند. | pedarash yek resturân-e kuchak migardânad. | His father runs a small restaurant.
+گرداندن | gardândan | to run (a business); to turn | v | گردان/gardân | پدرش یک رستوران کوچک می\u200cگرداند. | pedarash yek restorân-e kuchak migardânad. | His father runs a small restaurant.
 چسبیدن | chasbidan | to stick | v | چسب/chasb | آدامس به کفشم چسبید. | âdâms be kafsham chasbid. | Chewing gum stuck to my shoe.
 کوبیدن | kubidan | to pound; to knock | v | کوب/kub | کسی محکم به در می\u200cکوبید. | kasi mohkam be dar mikubid. | Someone was knocking hard on the door.
 تراشیدن | tarâshidan | to shave; to sharpen | v | تراش/tarâsh | پدرم هر روز صبح ریشش را می\u200cتراشد. | pedaram har ruz sobh rishash râ mitarâshad. | My father shaves every morning.
@@ -207,7 +207,7 @@ export default `
 رانندگی کردن | rânandegi kardan | to drive | v | رانندگی کن/rânandegi kon | در تهران رانندگی کردن سخت است. | dar Tehrân rânandegi kardan sakht ast. | Driving in Tehran is hard.
 تماشا کردن | tamâshâ kardan | to watch | v | تماشا کن/tamâshâ kon | شب\u200cها با هم فیلم تماشا می\u200cکنیم. | shabhâ bâ ham film tamâshâ mikonim. | In the evenings we watch films together.
 گوش کردن | gush kardan | to listen | v | گوش کن/gush kon | خوب گوش کن، فقط یک بار می\u200cگویم. | khub gush kon, faghat yek bâr miguyam. | Listen carefully, I'll say it only once.
-قول دادن | ghol dâdan | to promise | v | قول ده/ghol deh | قول می\u200cدهم فردا زود بیایم. | ghol midaham fardâ zud biyâyam. | I promise to come early tomorrow.
+قول دادن | ghowl dâdan | to promise | v | قول ده/ghowl deh | قول می\u200cدهم فردا زود بیایم. | ghowl midaham fardâ zud biyâyam. | I promise to come early tomorrow.
 اجازه دادن | ejâze dâdan | to allow; to let | v | اجازه ده/ejâze deh | پدرش اجازه نداد به مهمانی برود. | pedarash ejâze nadâd be mehmâni beravad. | His father didn't let him go to the party.
 نشان دادن | neshân dâdan | to show | v | نشان ده/neshân deh | عکس\u200cهای سفرت را به من نشان بده. | akshâ-ye safarat râ be man neshân bede. | Show me the photos from your trip.
 توضیح دادن | towzih dâdan | to explain | v | توضیح ده/towzih deh | معلم درس را دوباره توضیح داد. | mo'allem dars râ dobâre towzih dâd. | The teacher explained the lesson again.
@@ -248,7 +248,7 @@ export default `
 علاقه داشتن | alâghe dâshtan | to be interested; to be fond of | v | علاقه دار/alâghe dâr | او به تاریخ ایران علاقه دارد. | u be târikh-e Irân alâghe dârad. | She is interested in Iranian history.
 حق داشتن | hagh dâshtan | to be right; to have the right | v | حق دار/hagh dâr | تو حق داری ناراحت باشی. | to hagh dâri nârâhat bâshi. | You have every right to be upset.
 اهمیت داشتن | ahammiyat dâshtan | to matter; to be important | v | اهمیت دار/ahammiyat dâr | برای من نظر تو اهمیت دارد. | barâye man nazar-e to ahammiyat dârad. | Your opinion matters to me.
-بستگی داشتن | bastegi dâshtan | to depend | v | بستگی دار/bastegi dâr | بستگی دارد فردا هوا چطور باشد. | bastegi dârad fardâ havâ chetowr bâshad. | It depends on what the weather is like tomorrow.
+بستگی داشتن | bastegi dâshtan | to depend | v | بستگی دار/bastegi dâr | بستگی دارد فردا هوا چطور باشد. | bastegi dârad fardâ havâ chetor bâshad. | It depends on what the weather is like tomorrow.
 رد شدن | rad shodan | to pass (by); to fail (an exam) | v | رد شو/rad shav | ماشین با سرعت از جلوی ما رد شد. | mâshin bâ sor'at az jelo-ye mâ rad shod. | The car sped past us.
 رد کردن | rad kardan | to reject; to turn down | v | رد کن/rad kon | او پیشنهاد کار را رد کرد. | u pishnahâd-e kâr râ rad kard. | She turned down the job offer.
 حرکت کردن | harekat kardan | to move; to leave (of vehicles) | v | حرکت کن/harekat kon | اتوبوس ساعت هفت حرکت می\u200cکند. | otobus sâ'at-e haft harekat mikonad. | The bus leaves at seven.
@@ -564,7 +564,7 @@ export default `
 نگهداری کردن | negahdâri kardan | to look after; to keep | v | نگهداری کن/negahdâri kon
 بزرگ کردن | bozorg kardan | to raise (a child); to enlarge | v | بزرگ کن/bozorg kon
 تربیت کردن | tarbiyat kardan | to bring up; to train | v | تربیت کن/tarbiyat kon
-معاینه کردن | mo'âyene kardan | to examine (medically) | v | معاینه کن/mo'âyene kon
+معاینه کردن | mo'âyne kardan | to examine (medically) | v | معاینه کن/mo'âyne kon
 درمان کردن | darmân kardan | to treat; to cure | v | درمان کن/darmân kon
 فوت کردن | fowt kardan | to pass away | v | فوت کن/fowt kon
 رشد کردن | roshd kardan | to grow | v | رشد کن/roshd kon

@@ -128,11 +128,11 @@ export const IDIOMS: Idiom[] = [
   },
   {
     id: 'tail-on-shoulder', emoji: '🚶',
-    fa: 'دمشو گذاشت رو کولش و رفت', tr: 'dumesho gozâsht ru kulesh o raft',
+    fa: 'دمشو گذاشت رو کولش و رفت', tr: 'domesho gozâsht ru kulesh o raft',
     literal: { en: 'he put his tail on his shoulder and left', it: 'si è messo la coda in spalla e se n’è andato' },
     meaning: { en: 'He gave up and left without a word, empty-handed.', it: 'Ha rinunciato e se n’è andato senza una parola, a mani vuote.' },
     like: { en: 'he left with his tail between his legs (in Persian the tail goes up on the shoulder!)', it: 'se n’è andato con la coda tra le gambe (in persiano la coda va in spalla!)' },
-    example: { fa: 'دید کسی بهش پول نمیده، دمشو گذاشت رو کولش و رفت.', tr: 'did kasi behesh pul nemide, dumesho gozâsht ru kulesh o raft.', en: 'He saw nobody would give him money, so off he went.', it: 'Ha visto che nessuno gli dava soldi, e se n’è andato.' },
+    example: { fa: 'دید کسی بهش پول نمیده، دمشو گذاشت رو کولش و رفت.', tr: 'did kasi behesh pul nemide, domesho gozâsht ru kulesh o raft.', en: 'He saw nobody would give him money, so off he went.', it: 'Ha visto che nessuno gli dava soldi, e se n’è andato.' },
   },
   {
     id: 'watermelon', emoji: '🍉',

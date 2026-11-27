@@ -184,7 +184,7 @@ export const B1: Unit[] = [
       body: '<span class="fa">فکر می‌کنم (که)…</span> <i>fekr mikonam (ke)…</i> "I think (that)…" and <span class="fa">به نظر من…</span> <i>be nazar-e man…</i> "in my opinion…" are followed by an ordinary verb: <i>fekr mikonam gerân ast</i> "I think it\'s expensive". Words of possibility and hope, <span class="fa">شاید</span> <i>shâyad</i> "maybe", <span class="fa">ممکن است</span> <i>momken ast</i> "it may be" and <span class="fa">امیدوارم</span> <i>omidvâram</i> "I hope", take the <b>subjunctive</b>: <i>shâyad biâyad</i> "she might come". The subjunctive of <i>budan</i> is irregular: <i>bâsham, bâshi, bâshad, bâshim, bâshid, bâshand</i>. In speech, <i>momken ast</i> becomes <i>momkene</i>, <i>bâshad</i> becomes <i>bâshe</i>, and <i>ke</i> is often left out.',
       examples: [
         { fa: 'فکر می‌کنم که حق با توست.', tr: 'fekr mikonam ke hagh bâ tost.', en: "I think you're right." },
-        { fa: 'شاید امشب به سینما برویم.', tr: 'shâyad emshab be sinemâ beravim.', en: 'We might go to the cinema tonight.' },
+        { fa: 'شاید امشب به سینما برویم.', tr: 'shâyad emshab be sinamâ beravim.', en: 'We might go to the cinema tonight.' },
         { fa: 'ممکن است دیر برسم.', tr: 'momken ast dir beresam.', en: 'I might be late.' },
         { fa: 'امیدوارم حالتان بهتر باشد.', tr: 'omidvâram hâletân behtar bâshad.', en: "I hope you're feeling better." },
       ],
@@ -220,7 +220,7 @@ export const B1: Unit[] = [
       { who: 'Khorshid', fa: 'شاید اگه دوباره ببینیش، خوشت بیاد.', tr: 'shâyad age dobâre bebinish, khoshet biâd.', en: 'Maybe if you watch it again, you will like it.' },
       { who: 'Arash', fa: 'بعید می‌دونم! ولی امیدوارم فیلم بعدیش بهتر باشه.', tr: "ba'id midunam! vali omidvâram film-e ba'dish behtar bâshe.", en: 'I doubt it! But I hope his next film is better.' },
       { who: 'Khorshid', fa: 'ممکنه سال دیگه یه فیلم جدید بسازه.', tr: 'momkene sâl-e dige ye film-e jadid besâze.', en: 'He might make a new film next year.' },
-      { who: 'Arash', fa: 'خب، پس اون موقع با هم می‌ریم سینما.', tr: "khob, pas un moghe' bâ ham mirim sinemâ.", en: "Well, then we'll go to the cinema together." },
+      { who: 'Arash', fa: 'خب، پس اون موقع با هم می‌ریم سینما.', tr: "khob, pas un mowghe' bâ ham mirim sinamâ.", en: "Well, then we'll go to the cinema together." },
     ],
     reading: {
       title: 'Big city or small town?',
@@ -479,7 +479,7 @@ export const B1: Unit[] = [
         },
         {
           fa: 'سینا هر ماه بخشی از پولش را پس‌انداز می‌کند، چون زندگی در خارج گران است. پدر و مادرش نگرانند، ولی می‌دانند که این فرصت برای آینده‌ی او مهم است. مادرش می‌گوید: «برو تا دنیا را ببینی، ولی زود برگرد!»',
-          tr: 'Sinâ har mâh bakhshi az pulash râ pasandâz mikonad, chon zendegi dar khârej gerân ast. pedar va mâdarash negarânand, vali midânand ke in forsat barâye âyande-ye u mohem ast. mâdarash miguyad: "borow tâ donyâ râ bebini, vali zud bargard!"',
+          tr: 'Sinâ har mâh bakhshi az pulash râ pasandâz mikonad, chon zendegi dar khârej gerân ast. pedar va mâdarash negarânand, vali midânand ke in forsat barâye âyande-ye u mohem ast. mâdarash miguyad: "boro tâ donyâ râ bebini, vali zud bargard!"',
           en: 'Every month Sina saves part of his money, because life abroad is expensive. His parents are worried, but they know this opportunity matters for his future. His mother says, "Go and see the world, but come back soon!"',
         },
       ],
@@ -585,8 +585,8 @@ export const B1: Unit[] = [
       { who: 'Sara', fa: 'بله، یه سال تو یه شرکت کوچیک برنامه‌نویس بودم.', tr: 'bale, ye sâl tu ye sherkat-e kuchik barnâmenevis budam.', en: 'Yes, I was a programmer at a small company for a year.' },
       { who: 'Babak', fa: 'چرا می‌خواین اینجا کار کنین؟', tr: 'cherâ mikhâin injâ kâr konin?', en: 'Why do you want to work here?' },
       { who: 'Sara', fa: 'چون شرکت شما پروژه‌های جالبی داره و می‌تونم چیزای زیادی یاد بگیرم.', tr: 'chon sherkat-e shomâ porozhehâ-ye jâlebi dâre va mitunam chizâ-ye ziâdi yâd begiram.', en: 'Because your company has interesting projects and I can learn a lot.' },
-      { who: 'Babak', fa: 'خیلی خب. حقوق مورد نظرتون چقدره؟', tr: 'kheyli khob. hoghugh-e mored-e nazaretun cheghadre?', en: 'All right. What salary are you expecting?' },
-      { who: 'Sara', fa: 'راستش هنوز بهش فکر نکردم. اول می‌خوام شرایط کار رو بدونم.', tr: 'râstesh hanuz behesh fekr nakardam. aval mikhâm sharâyet-e kâr ro bedunam.', en: "To be honest, I haven't thought about it yet. First I'd like to know the working conditions." },
+      { who: 'Babak', fa: 'خیلی خب. حقوق مورد نظرتون چقدره؟', tr: 'kheyli khob. hoghugh-e mowred-e nazaretun cheghadre?', en: 'All right. What salary are you expecting?' },
+      { who: 'Sara', fa: 'راستش هنوز بهش فکر نکردم. اول می‌خوام شرایط کار رو بدونم.', tr: 'râstesh hanuz behesh fekr nakardam. avval mikhâm sharâyet-e kâr ro bedunam.', en: "To be honest, I haven't thought about it yet. First I'd like to know the working conditions." },
     ],
     reading: {
       title: "Ali's first job",
@@ -598,7 +598,7 @@ export const B1: Unit[] = [
         },
         {
           fa: 'دیروز یک شرکت ساختمانی او را برای مصاحبه دعوت کرد. مدیر شرکت از او پرسید: «چه تجربه‌ای دارید؟» علی گفت که در دوران دانشجویی در دفتر یک معمار کار کرده است و چند پروژه‌ی کوچک انجام داده است.',
-          tr: "diruz yek sherkat-e sâkhtemâni u râ barâye mosâhebe da'vat kard. modir-e sherkat az u porsid: \"che tajrobe-i dârid?\" Ali goft ke dar dorân-e dâneshjuyi dar daftar-e yek me'mâr kâr karde ast va chand porozhe-ye kuchak anjâm dâde ast.",
+          tr: "diruz yek sherkat-e sâkhtemâni u râ barâye mosâhebe da'vat kard. modir-e sherkat az u porsid: \"che tajrobe-i dârid?\" Ali goft ke dar dowrân-e dâneshjuyi dar daftar-e yek me'mâr kâr karde ast va chand porozhe-ye kuchak anjâm dâde ast.",
           en: 'Yesterday a construction company invited him for an interview. The manager asked him, "What experience do you have?" Ali said that as a student he had worked in an architect\'s office and had done a few small projects.',
         },
         {
@@ -843,7 +843,7 @@ export const B1: Unit[] = [
       paragraphs: [
         {
           fa: 'تعارف بخشی از فرهنگ ایرانی است. وقتی مهمان به خانه‌ی کسی می‌رود، میزبان با چای، میوه و شیرینی از او پذیرایی می‌کند. مهمان معمولاً اول تعارف می‌کند و می‌گوید: «نه، ممنون.» میزبان دوباره اصرار می‌کند و بعد مهمان قبول می‌کند.',
-          tr: "ta'ârof bakhshi az farhang-e irâni ast. vaghti mehmân be khâne-ye kasi miravad, mizbân bâ châi, mive va shirini az u pazirâyi mikonad. mehmân ma'mulan aval ta'ârof mikonad va miguyad: \"na, mamnun.\" mizbân dobâre esrâr mikonad va ba'd mehmân ghabul mikonad.",
+          tr: "ta'ârof bakhshi az farhang-e irâni ast. vaghti mehmân be khâne-ye kasi miravad, mizbân bâ châi, mive va shirini az u pazirâyi mikonad. mehmân ma'mulan avval ta'ârof mikonad va miguyad: \"na, mamnun.\" mizbân dobâre esrâr mikonad va ba'd mehmân ghabul mikonad.",
           en: 'Ta\'ârof is part of Iranian culture. When a guest visits someone\'s home, the host serves tea, fruit and pastries. At first the guest usually declines politely and says, "No, thank you." The host insists again, and then the guest accepts.',
         },
         {
@@ -955,7 +955,7 @@ export const B1: Unit[] = [
       { who: 'Sara', fa: 'سلام. ببخشید، می‌خوام یه حساب باز کنم.', tr: 'salâm. bebakhshid, mikhâm ye hesâb bâz konam.', en: "Hello. Excuse me, I'd like to open an account." },
       { who: 'Babak', fa: 'حتماً. کارت ملی‌تونو آوردین؟', tr: 'hatman. kârt-e melli-tuno âvordin?', en: 'Certainly. Have you brought your national ID card?' },
       { who: 'Sara', fa: 'بله، بفرمایین. یه سؤال دیگه هم دارم: می‌شه قبض برقمو هم همین‌جا پرداخت کنم؟', tr: "bale, befarmâyin. ye so'âl-e dige ham dâram: mishe ghabz-e barghamo ham haminjâ pardâkht konam?", en: 'Yes, here you are. I have another question too: can I pay my electricity bill here as well?' },
-      { who: 'Babak', fa: 'نه، متأسفانه. قبضو باید با برنامه‌ی بانک یا با کارت پرداخت کنین.', tr: "na, mote'assefâne. ghabzo bâyad bâ barnâme-ye bânk yâ bâ kârt pardâkht konin.", en: "No, I'm afraid not. You have to pay bills with the bank's app or by card." },
+      { who: 'Babak', fa: 'نه، متأسفانه. قبضو باید با برنامه‌ی بانک یا با کارت پرداخت کنین.', tr: "na, mota'assefâne. ghabzo bâyad bâ barnâme-ye bânk yâ bâ kârt pardâkht konin.", en: "No, I'm afraid not. You have to pay bills with the bank's app or by card." },
       { who: 'Sara', fa: 'باشه. راستی، دیروز اینجا یه ساعت تو صف بودم.', tr: "bâshe. râsti, diruz injâ ye sâ'at tu saf budam.", en: 'OK. By the way, yesterday I stood in the queue here for an hour.' },
       { who: 'Babak', fa: 'ببخشید، حق با شماست. اگه بخواین، می‌تونین از سایت بانک شکایت کنین.', tr: 'bebakhshid, hagh bâ shomâst. age bekhâin, mitunin az sâyt-e bânk shekâyat konin.', en: "I'm sorry, you're right. If you like, you can make a complaint on the bank's website." },
       { who: 'Sara', fa: 'نه، مهم نیست. ممنون از کمکتون.', tr: 'na, mohem nist. mamnun az komaketun.', en: "No, it doesn't matter. Thanks for your help." },
@@ -1082,7 +1082,7 @@ export const B1: Unit[] = [
       { who: 'Hasti', fa: 'یه مدل ارزون‌تر ندارین؟', tr: 'ye model-e arzuntar nadârin?', en: "Don't you have a cheaper model?" },
       { who: 'Babak', fa: 'چرا، این یکی ارزون‌تره، ولی باتریش ضعیف‌تره.', tr: "cherâ, in yeki arzuntare, vali bâtrish za'iftare.", en: "Sure, this one's cheaper, but its battery is weaker." },
       { who: 'Hasti', fa: 'برای من باتری از دوربین مهم‌تره.', tr: 'barâye man bâtri az durbin mohemtare.', en: 'For me the battery matters more than the camera.' },
-      { who: 'Babak', fa: 'پس این بهترین انتخابه. سبک‌تر هم هست.', tr: 'pas in behtarin entekhâbe. sabuktar ham hast.', en: "Then this is the best choice. It's lighter, too." },
+      { who: 'Babak', fa: 'پس این بهترین انتخابه. سبک‌تر هم هست.', tr: 'pas in behtarin entekhâbe. saboktar ham hast.', en: "Then this is the best choice. It's lighter, too." },
       { who: 'Hasti', fa: 'باشه، همینو برمی‌دارم.', tr: 'bâshe, hamino barmidâram.', en: "OK, I'll take this one." },
     ],
     reading: {
@@ -1118,7 +1118,7 @@ export const B1: Unit[] = [
     level: 'B1',
     title: 'Films and music',
     fa: 'سینما و موسیقی',
-    tr: 'sinemâ va musighi',
+    tr: 'sinamâ va musighi',
     can: 'You can talk about the films and music you like, describe them and recommend something to a friend.',
     tip: 'Iranian cinema is admired around the world: Abbas Kiarostami won the Palme d\'Or at Cannes, and Asghar Farhadi\'s <i>A Separation</i> (<span class="fa">جدایی نادر از سیمین</span> <i>jodâyi-ye Nâder az Simin</i>) and <i>The Salesman</i> both won the Oscar for best foreign-language film.',
     words: [
@@ -1200,7 +1200,7 @@ export const B1: Unit[] = [
     },
     dialogue: [
       { who: 'Aseman', fa: 'دیشب چی کار کردی؟', tr: 'dishab chi kâr kardi?', en: 'What did you do last night?' },
-      { who: 'Dariush', fa: 'رفتم سینما، یه فیلم ایرانی جدید دیدم.', tr: 'raftam sinemâ, ye film-e irâni-ye jadid didam.', en: 'I went to the cinema and saw a new Iranian film.' },
+      { who: 'Dariush', fa: 'رفتم سینما، یه فیلم ایرانی جدید دیدم.', tr: 'raftam sinamâ, ye film-e irâni-ye jadid didam.', en: 'I went to the cinema and saw a new Iranian film.' },
       { who: 'Aseman', fa: 'خوشت اومد؟', tr: 'khoshet umad?', en: 'Did you like it?' },
       { who: 'Dariush', fa: 'آره، خیلی! داستانش جذاب بود و بازیگراش عالی بودن.', tr: 'âre, kheyli! dâstânesh jazzâb bud va bâzigarâsh âli budan.', en: 'Yes, a lot! The story was gripping and the actors were excellent.' },
       { who: 'Aseman', fa: 'ترسناک که نبود؟ من از فیلم ترسناک خوشم نمیاد.', tr: 'tarsnâk ke nabud? man az film-e tarsnâk khosham nemiâd.', en: "It wasn't scary, was it? I don't like horror films." },
@@ -1214,7 +1214,7 @@ export const B1: Unit[] = [
       paragraphs: [
         {
           fa: 'موسیقی سنتی ایرانی تاریخ بسیار طولانی دارد. سازهایی مانند تار، سه‌تار و سنتور در این موسیقی نقش مهمی دارند و خوانندگان اغلب شعرهای حافظ و مولوی را می‌خوانند. شنیدن این موسیقی برای بسیاری از ایرانیان یادآور خاطره‌های قدیمی است.',
-          tr: "musighi-ye sonnati-ye irâni târikh-e besyâr tulâni dârad. sâzhâyi mânand-e târ, setâr va santur dar in musighi naghsh-e mohemi dârand va khânandegân aghlab she'rhâ-ye Hâfez va Mowlavi râ mikhânand. shenidan-e in musighi barâye besyâri az irâniân yâdâvar-e khâterehâ-ye ghadimi ast.",
+          tr: "musighi-ye sonnati-ye irâni târikh-e besyâr tulâni dârad. sâzhâyi mânand-e târ, setâr va santur dar in musighi naghsh-e mohemmi dârand va khânandegân aghlab she'rhâ-ye Hâfez va Mowlavi râ mikhânand. shenidan-e in musighi barâye besyâri az irâniân yâdâvar-e khâterehâ-ye ghadimi ast.",
           en: 'Traditional Persian music has a very long history. Instruments such as the tar, setar and santur play an important part in it, and singers often sing poems by Hafez and Rumi. For many Iranians, hearing this music brings back old memories.',
         },
         {
@@ -1612,7 +1612,7 @@ export const B1: Unit[] = [
     tip: 'Older Iranians often begin a memory with <span class="fa">یادش بخیر</span> (<i>yâdesh bekheyr</i>, "may its memory be good"), a warm, nostalgic "those were the days".',
     words: [
       { fa: 'قدیم', tr: 'ghadim', en: 'the old days', alt: ['old times', 'the past'], note: 'Ghadimhâ = in the old days. Ghadimi = old (things).' },
-      { fa: 'آن موقع', tr: "ân moghe'", en: 'back then', alt: ['at that time', 'then'], note: "Spoken: un moghe'." },
+      { fa: 'آن موقع', tr: "ân mowghe'", en: 'back then', alt: ['at that time', 'then'], note: "Spoken: un mowghe'." },
       { fa: 'عادت داشتن', tr: 'âdat dâshtan', en: 'to be in the habit of', alt: ['to be used to', 'used to'], note: 'Âdat dâshtam sobh zud bidâr shavam = I used to get up early.' },
       { fa: 'روستا', tr: 'rustâ', en: 'village' },
       { fa: 'کوچه', tr: 'kuche', en: 'alley', alt: ['lane', 'side street', 'street'], note: 'Children traditionally played in the kuche outside their houses.' },
@@ -1648,9 +1648,9 @@ export const B1: Unit[] = [
         tiles: ['یادم', 'می‌آید', 'که', 'مادربزرگم', 'همیشه', 'برای', 'ما', 'قصه', 'می‌گفت'], trTiles: ['yâdam', 'miâyad', 'ke', 'mâdarbozorgam', 'hamishe', 'barâye', 'mâ', 'ghesse', 'migoft'],
       },
       {
-        fa: 'آن موقع در روستا تلفن نداشتیم.', tr: "ân moghe' dar rustâ telefon nadâshtim.", en: "Back then we didn't have a phone in the village.",
+        fa: 'آن موقع در روستا تلفن نداشتیم.', tr: "ân mowghe' dar rustâ telefon nadâshtim.", en: "Back then we didn't have a phone in the village.",
         alt: ["At that time we didn't have a telephone in the village.", 'Back then we had no phone in the village.'],
-        tiles: ['آن', 'موقع', 'در', 'روستا', 'تلفن', 'نداشتیم'], trTiles: ['ân', "moghe'", 'dar', 'rustâ', 'telefon', 'nadâshtim'],
+        tiles: ['آن', 'موقع', 'در', 'روستا', 'تلفن', 'نداشتیم'], trTiles: ['ân', "mowghe'", 'dar', 'rustâ', 'telefon', 'nadâshtim'],
         note: 'Dâshtan never takes mi- in the past: nadâshtim covers "we didn\'t have" and "we didn\'t use to have".',
       },
     ],
@@ -1661,13 +1661,13 @@ export const B1: Unit[] = [
         { fa: 'بچه که بودم، هر روز با پدربزرگم به پارک می‌رفتم.', tr: 'bachche ke budam, har ruz bâ pedarbozorgam be pârk miraftam.', en: 'When I was a child, I used to go to the park with my grandfather every day.' },
         { fa: 'قبلاً سیگار می‌کشید، ولی ترک کرد.', tr: 'ghablan sigâr mikeshid, vali tark kard.', en: 'He used to smoke, but he gave up.' },
         { fa: 'یک بار در کودکی در بازار گم شدم.', tr: 'yek bâr dar kudaki dar bâzâr gom shodam.', en: 'Once, as a child, I got lost in the bazaar.' },
-        { fa: 'آن موقع مردم نامه می‌نوشتند.', tr: "ân moghe' mardom nâme mineveshtand.", en: 'Back then people used to write letters.' },
+        { fa: 'آن موقع مردم نامه می‌نوشتند.', tr: "ân mowghe' mardom nâme mineveshtand.", en: 'Back then people used to write letters.' },
       ],
       checks: [
         {
           q: 'Which means "We used to go to the cinema every week"?',
           options: ['هر هفته به سینما رفتیم', 'هر هفته به سینما می‌رفتیم', 'هر هفته به سینما رفته بودیم'],
-          optionsTr: ['har hafte be sinemâ raftim', 'har hafte be sinemâ miraftim', 'har hafte be sinemâ rafte budim'],
+          optionsTr: ['har hafte be sinamâ raftim', 'har hafte be sinamâ miraftim', 'har hafte be sinamâ rafte budim'],
           answer: 1,
           why: 'A repeated habit in the past: mi- + past stem, miraftim.',
         },
@@ -1688,8 +1688,8 @@ export const B1: Unit[] = [
       ],
     },
     dialogue: [
-      { who: 'Arash', fa: 'مامان‌بزرگ، بچه که بودی، تلویزیون داشتین؟', tr: 'mâmânbozorg, bachche ke budi, televiziun dâshtin?', en: 'Grandma, when you were a child, did you have a TV?' },
-      { who: 'Ziba', fa: 'نه مادر، تا ده سالگی تلویزیون ندیده بودم.', tr: 'na mâdar, tâ dah sâlegi televiziun nadide budam.', en: "No, dear, I hadn't seen a TV until I was ten." },
+      { who: 'Arash', fa: 'مامان‌بزرگ، بچه که بودی، تلویزیون داشتین؟', tr: 'mâmânbozorg, bachche ke budi, televiziyon dâshtin?', en: 'Grandma, when you were a child, did you have a TV?' },
+      { who: 'Ziba', fa: 'نه مادر، تا ده سالگی تلویزیون ندیده بودم.', tr: 'na mâdar, tâ dah sâlegi televiziyon nadide budam.', en: "No, dear, I hadn't seen a TV until I was ten." },
       { who: 'Arash', fa: 'پس عصرا چی کار می‌کردین؟', tr: 'pas asrâ chi kâr mikardin?', en: 'So what did you do in the afternoons?' },
       { who: 'Ziba', fa: 'تو کوچه بازی می‌کردیم، یا مادرم برامون قصه می‌گفت.', tr: 'tu kuche bâzi mikardim, yâ mâdaram barâmun ghesse migoft.', en: 'We played in the alley, or my mother told us stories.' },
       { who: 'Arash', fa: 'مدرسه‌تون دور بود؟', tr: 'madrese-tun dur bud?', en: 'Was your school far away?' },
@@ -1707,7 +1707,7 @@ export const B1: Unit[] = [
         },
         {
           fa: 'عصرها مادربزرگم نان محلی می‌پخت و ما بچه‌ها در حیاط بازی می‌کردیم. شب‌ها همه دور هم می‌نشستیم و پدربزرگم از جوانی‌اش تعریف می‌کرد. آن موقع نه اینترنت داشتیم نه گوشی، ولی هیچ‌وقت حوصله‌مان سر نمی‌رفت.',
-          tr: "asrhâ mâdarbozorgam nân-e mahalli mipokht va mâ bachchehâ dar hayât bâzi mikardim. shabhâ hame dowr-e ham mineshastim va pedarbozorgam az javâni-ash ta'rif mikard. ân moghe' na internet dâshtim na gushi, vali hichvaght hosele-mân sar nemiraft.",
+          tr: "asrhâ mâdarbozorgam nân-e mahalli mipokht va mâ bachchehâ dar hayât bâzi mikardim. shabhâ hame dowr-e ham mineshastim va pedarbozorgam az javâni-ash ta'rif mikard. ân mowghe' na internet dâshtim na gushi, vali hichvaght howsele-mân sar nemiraft.",
           en: 'In the afternoons my grandmother would bake local bread, and we children played in the yard. In the evenings we all sat together and my grandfather told us about his youth. Back then we had neither internet nor phones, but we were never bored.',
         },
         {
@@ -1732,7 +1732,7 @@ export const B1: Unit[] = [
     fa: 'قبل و بعد',
     tr: "ghabl va ba'd",
     can: 'You can say in what order things happen, with "when", "before", "after" and "as soon as".',
-    tip: 'When the event is already clear, speakers often shorten <i>ghabl az inke…</i> and <i>ba\'d az inke…</i> to <span class="fa">قبلش</span> <i>ghablesh</i> "before that" and <span class="fa">بعدش</span> <i>ba\'desh</i> "after that": <i>ba\'desh raftim sinemâ</i> "afterwards we went to the cinema".',
+    tip: 'When the event is already clear, speakers often shorten <i>ghabl az inke…</i> and <i>ba\'d az inke…</i> to <span class="fa">قبلش</span> <i>ghablesh</i> "before that" and <span class="fa">بعدش</span> <i>ba\'desh</i> "after that": <i>ba\'desh raftim sinamâ</i> "afterwards we went to the cinema".',
     words: [
       { fa: 'وقتی', tr: 'vaghti', en: 'when', note: 'Vaghti (ke) starts a clause. To ask "when?", use key?' },
       { fa: 'قبل از اینکه', tr: 'ghabl az inke', en: 'before', alt: ['before (doing)'], note: 'Always followed by the subjunctive.' },
@@ -1783,7 +1783,7 @@ export const B1: Unit[] = [
       examples: [
         { fa: 'وقتی به خانه رسیدم، به تو زنگ می‌زنم.', tr: 'vaghti be khâne residam, be to zang mizanam.', en: "When I get home, I'll call you." },
         { fa: 'قبل از اینکه بخوابی، مسواک بزن.', tr: 'ghabl az inke bekhâbi, mesvâk bezan.', en: 'Brush your teeth before you go to sleep.' },
-        { fa: 'قبل از اینکه فیلم شروع شود، به سینما رسیدیم.', tr: "ghabl az inke film shoru' shavad, be sinemâ residim.", en: 'We got to the cinema before the film started.' },
+        { fa: 'قبل از اینکه فیلم شروع شود، به سینما رسیدیم.', tr: "ghabl az inke film shoru' shavad, be sinamâ residim.", en: 'We got to the cinema before the film started.' },
         { fa: 'بعد از اینکه درسش تمام شد، به شیراز برگشت.', tr: "ba'd az inke darsash tamâm shod, be Shirâz bargasht.", en: 'After he finished his studies, he went back to Shiraz.' },
       ],
       checks: [
@@ -1825,7 +1825,7 @@ export const B1: Unit[] = [
       paragraphs: [
         {
           fa: 'صبح دوشنبه، رضا وقتی بیدار شد که ساعت هشت و نیم بود. زنگ ساعتش را نشنیده بود. او بلافاصله لباس پوشید و قبل از اینکه صبحانه بخورد، از خانه بیرون دوید.',
-          tr: "sobh-e doshanbe, Rezâ vaghti bidâr shod ke sâ'at hasht-o nim bud. zang-e sâ'atash râ nashenide bud. u belâfâsele lebâs pushid va ghabl az inke sobhâne bekhorad, az khâne birun david.",
+          tr: "sobh-e doshanbe, Rezâ vaghti bidâr shod ke sâ'at hasht-o nim bud. zang-e sâ'atash râ nashenide bud. u belâfâsele lebâs pushid va ghabl az inke sobhâne bokhorad, az khâne birun david.",
           en: "On Monday morning, by the time Reza woke up it was half past eight. He hadn't heard his alarm. He got dressed straight away and ran out of the house before having breakfast.",
         },
         {
@@ -1920,7 +1920,7 @@ export const B1: Unit[] = [
         {
           q: 'Which means "They went to the cinema together"?',
           options: ['همدیگر به سینما رفتند', 'با هم به سینما رفتند', 'با هم را به سینما رفتند'],
-          optionsTr: ['hamdigar be sinemâ raftand', 'bâ ham be sinemâ raftand', 'bâ ham râ be sinemâ raftand'],
+          optionsTr: ['hamdigar be sinamâ raftand', 'bâ ham be sinamâ raftand', 'bâ ham râ be sinamâ raftand'],
           answer: 1,
           why: '"Together" is bâ ham, with no râ.',
         },
@@ -1948,7 +1948,7 @@ export const B1: Unit[] = [
       paragraphs: [
         {
           fa: 'در ایران رابطه‌ی خانوادگی بسیار مهم است. بسیاری از خانواده‌ها هر هفته دور هم جمع می‌شوند و فامیل‌ها مرتب به دیدن یکدیگر می‌روند. بچه‌ها معمولاً تا زمان ازدواج در خانه‌ی پدر و مادرشان زندگی می‌کنند.',
-          tr: "dar Irân râbete-ye khânevâdegi besyâr mohem ast. besyâri az khânevâdehâ har hafte dowr-e ham jam' mishavand va fâmilhâ moratteb be didan-e yekdigar miravand. bachchehâ ma'mulan tâ zamân-e ezdevâj dar khâne-ye pedar va mâdarashân zendegi mikonand.",
+          tr: "dar Irân râbete-ye khânevâdegi besyâr mohem ast. besyâri az khânevâdehâ har hafte dowr-e ham jam' mishavand va fâmilhâ morattab be didan-e yekdigar miravand. bachchehâ ma'mulan tâ zamân-e ezdevâj dar khâne-ye pedar va mâdarashân zendegi mikonand.",
           en: "In Iran family ties are very important. Many families get together every week, and relatives visit one another regularly. Children usually live in their parents' home until they marry.",
         },
         {
@@ -2149,9 +2149,9 @@ export const B1: Unit[] = [
       title: 'Rules for everyone: bâyad and mishavad + short infinitive',
       body: 'To state a general rule that is not about one person, Persian uses <span class="fa">باید</span> <i>bâyad</i> or <span class="fa">می‌شود</span> <i>mishavad</i> with the <b>short infinitive</b>, which is just the past stem: <i>khord, raft, kard</i>. So <i>bâyad sabr kard</i> means "one has to wait", <i>nabâyad bâ dahân-e por harf zad</i> "you shouldn\'t talk with your mouth full", and <i>mishavad injâ neshast?</i> "can one sit here?". Compare <i>bâyad sabr konam</i> "I have to wait", where the subjunctive names a person. The negatives are <i>nabâyad</i> and <i>nemishavad</i>. In speech <i>mishavad</i> is <i>mishe</i>: <i>mishe injâ aks gereft?</i> "can you take photos here?".',
       examples: [
-        { fa: 'برای پختن برنج خوب باید حوصله داشت.', tr: 'barâye pokhtan-e berenj-e khub bâyad hosele dâsht.', en: 'To cook good rice, you need patience.' },
+        { fa: 'برای پختن برنج خوب باید حوصله داشت.', tr: 'barâye pokhtan-e berenj-e khub bâyad howsele dâsht.', en: 'To cook good rice, you need patience.' },
         { fa: 'نباید با دهان پر حرف زد.', tr: 'nabâyad bâ dahân-e por harf zad.', en: "You shouldn't talk with your mouth full." },
-        { fa: 'با این پول نمی‌شود در آن رستوران غذا خورد.', tr: 'bâ in pul nemishavad dar ân resturân ghazâ khord.', en: "You can't eat at that restaurant with this money." },
+        { fa: 'با این پول نمی‌شود در آن رستوران غذا خورد.', tr: 'bâ in pul nemishavad dar ân restorân ghazâ khord.', en: "You can't eat at that restaurant with this money." },
         { fa: 'قورمه‌سبزی را باید با برنج خورد.', tr: 'ghormesabzi râ bâyad bâ berenj khord.', en: 'Ghormeh sabzi is eaten with rice.' },
       ],
       checks: [
@@ -2310,7 +2310,7 @@ export const B1: Unit[] = [
       { who: 'Sahel', fa: 'آره، همه‌جا بادگیر هست. تابستونا خونه‌ها رو خنک نگه می‌دارن.', tr: 'âre, hamejâ bâdgir hast. tâbestunâ khunehâ ro khonak negah midâran.', en: 'Yes, there are windcatchers everywhere. In summer they keep the houses cool.' },
       { who: 'Kourosh', fa: 'من پارسال رفتم تبریز. بازارش این‌قدر بزرگ بود که دو بار گم شدم!', tr: 'man pârsâl raftam Tabriz. bâzâresh inghadr bozorg bud ke do bâr gom shodam!', en: 'I went to Tabriz last year. Its bazaar was so big that I got lost twice!' },
       { who: 'Sahel', fa: 'دفعه‌ی بعد بیا با هم بریم اصفهان. من هنوز پل خواجو رو ندیدم.', tr: "daf'e-ye ba'd biâ bâ ham berim Esfahân. man hanuz pol-e Khâju ro nadidam.", en: "Next time let's go to Isfahan together. I still haven't seen the Khaju Bridge." },
-      { who: 'Kourosh', fa: 'فکر خوبیه! فقط باید قبل از عید بریم، چون اون موقع خیلی شلوغه.', tr: "fekr-e khubie! faghat bâyad ghabl az eyd berim, chon un moghe' kheyli sholughe.", en: "Good idea! We just have to go before Nowruz, because it's really crowded then." },
+      { who: 'Kourosh', fa: 'فکر خوبیه! فقط باید قبل از عید بریم، چون اون موقع خیلی شلوغه.', tr: "fekr-e khubie! faghat bâyad ghabl az eyd berim, chon un mowghe' kheyli sholughe.", en: "Good idea! We just have to go before Nowruz, because it's really crowded then." },
       { who: 'Sahel', fa: 'باشه. من بلیت قطار رو می‌گیرم.', tr: 'bâshe. man belit-e ghatâr ro migiram.', en: "OK. I'll get the train tickets." },
     ],
     reading: {
@@ -2318,7 +2318,7 @@ export const B1: Unit[] = [
       paragraphs: [
         {
           fa: 'تخت جمشید در نزدیکی شیراز قرار دارد و یکی از مهم‌ترین بناهای تاریخی ایران است. ساختن این کاخ‌ها در زمان داریوش بزرگ، در قرن ششم پیش از میلاد، آغاز شد. گفته می‌شود که پادشاهان هخامنشی در نوروز نمایندگان کشورهای مختلف را در اینجا می‌پذیرفتند.',
-          tr: 'takht-e Jamshid dar nazdiki-ye Shirâz gharâr dârad va yeki az mohemtarin banâhâ-ye târikhi-ye Irân ast. sâkhtan-e in kâkhhâ dar zamân-e Dâriush-e Bozorg, dar gharn-e sheshom-e pish az milâd, âghâz shod. gofte mishavad ke pâdeshâhân-e hakhâmaneshi dar Nowruz namâyandegân-e keshvarhâ-ye mokhtalef râ dar injâ mipaziroftand.',
+          tr: 'takht-e Jamshid dar nazdiki-ye Shirâz gharâr dârad va yeki az mohemmtarin banâhâ-ye târikhi-ye Irân ast. sâkhtan-e in kâkhhâ dar zamân-e Dâriush-e Bozorg, dar gharn-e sheshom-e pish az milâd, âghâz shod. gofte mishavad ke pâdeshâhân-e hakhâmaneshi dar Nowruz namâyandegân-e keshvarhâ-ye mokhtalef râ dar injâ mipaziroftand.',
           en: 'Persepolis lies near Shiraz and is one of the most important historical monuments in Iran. Work on its palaces began under Darius the Great, in the sixth century BC. It is said that the Achaemenid kings received envoys from many lands here at Nowruz.',
         },
         {

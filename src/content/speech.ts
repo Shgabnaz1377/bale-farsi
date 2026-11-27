@@ -13,11 +13,10 @@ import { sentenceSpeaker, sentenceVoice } from './sentenceSpeakers.ts'
 import { DICTIONARY } from './dictionary/index.ts'
 
 /**
- * The dictionary (src/content/dictionary/) has no recorded clips yet. Turn this on when they are to be
- * generated (node scripts/gen-audio.ts --dry first to count them); until then SpeakButton reads
- * dictionary words with the device's Persian voice, when there is one.
+ * Dictionary words and their examples (src/content/dictionary/) are recorded too. Turning this off
+ * drops them from the recording list; SpeakButton then reads them with the device's Persian voice.
  */
-export const INCLUDE_DICTIONARY_AUDIO = false
+export const INCLUDE_DICTIONARY_AUDIO = true
 
 /** A voice id: the narrator, or a dialogue speaker's voice (see speakers.ts and voices.ts). */
 export type Voice = VoiceId

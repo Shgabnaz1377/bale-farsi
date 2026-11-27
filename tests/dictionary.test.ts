@@ -39,9 +39,9 @@ describe('dictionary content', () => {
     expect(rate(DICTIONARY.flatMap((e) => (e.ex ? [e.ex] : [])))).toBeGreaterThanOrEqual(0.97)
   })
 
-  it('is left out of the recorded audio until its clips are generated', () => {
+  it('is recorded for PersianMeow (and never for Bego Ciao)', () => {
     const fromDict = allSpeech().filter((s) => s.where.startsWith('Dictionary')).length
-    expect(fromDict > 0).toBe(INCLUDE_DICTIONARY_AUDIO)
+    expect(fromDict > 0).toBe(INCLUDE_DICTIONARY_AUDIO && APP.id === 'persianmeow')
   })
 })
 

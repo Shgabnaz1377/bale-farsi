@@ -24,9 +24,9 @@ const PERSIAN_COURSE: LevelInfo[] = [
     blurb: 'Greet people, introduce yourself, count, tell the time, describe people, and talk about family, school, food, jobs and hobbies. Learn the key verbs and how spoken Persian differs from written.' },
   { level: 'A2', name: 'Elementary', fa: 'مقدماتی', tr: 'moghaddamâti', units: A2,
     blurb: 'Shop, eat out, travel, cook, make calls and invitations, talk about your day, feelings, the past and your plans, and celebrate Persian festivals.' },
-  { level: 'B1', name: 'Intermediate', fa: 'متوسط', tr: 'motevasset', units: B1,
+  { level: 'B1', name: 'Intermediate', fa: 'متوسط', tr: 'motavasset', units: B1,
     blurb: 'Give opinions and advice, handle ta\'ârof, interviews, renting and services, tell stories, link ideas with the subjunctive, and speak like Iranians do.' },
-  { level: 'B2', name: 'Upper intermediate', fa: 'فوق متوسط', tr: 'fogh-e motevasset', units: B2,
+  { level: 'B2', name: 'Upper intermediate', fa: 'فوق متوسط', tr: 'fogh-e motavasset', units: B2,
     blurb: 'Argue a point, read the news and formal letters, use idioms and slang, discuss science, money and history, and meet Persian poetry, cinema and dialects.' },
 ]
 

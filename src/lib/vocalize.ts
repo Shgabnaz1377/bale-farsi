@@ -35,7 +35,7 @@ const PERSIAN_LETTER = /[ء-يپچژکگی]/
 const HARAKAT = /[ً-ْٰ]/
 const HARAKAT_ALL = /[ً-ْٰ]/g
 /** Characters in Finglish that carry no sound of their own. */
-const TR_SKIP = /[\s\-,.?!:;"«»()…]/
+const TR_SKIP = /[\s\-,.?!:;"«»()…/]/
 
 interface Step { len: number; out: string; cost: number; mark?: boolean }
 interface Best { cost: number; out: string }
@@ -80,7 +80,10 @@ function readings(fa: string, i: number, tr: string, j: number): Step[] {
       if (at('vv')) out.push({ len: 2, out: ch + SHADDA, cost: 0.5, mark: true }) // avval
       if (at('uv')) out.push({ len: 2, out: ch, cost: 0.2, mark: true })
       if (at('w')) out.push({ len: 1, out: ch, cost: 0.5, mark: true })
-      if (at('ow')) out.push({ len: 2, out: ch, cost: 0.5 })
+      // The diphthong ow (now, dowlat, towzih) is written with a fatha before the و, as dictionaries do
+      // (نَو, دَولَت): without it the voice has to guess between u, o and ow.
+      if (at('ow') && !wordStart) out.push({ len: 2, out: FATHA + ch, cost: 0.5 })
+      if (at('ow') && wordStart) out.push({ len: 2, out: ch, cost: 0.5 })
       if (at('u')) out.push({ len: 1, out: ch, cost: 0 })
       // to, do, cho: the o is written with و; a damma on the letter before makes it unmistakable (تُو, not tu).
       if (at('o') && !wordStart) out.push({ len: 1, out: DAMMA + ch, cost: 0.5 })
@@ -151,16 +154,21 @@ export function vocalize(fa: string, tr: string): string | null {
     // Finglish characters with no sound (spaces, punctuation, hyphens).
     if (j < T.length && TR_SKIP.test(T[j])) {
       // Ezâfe written as -e: the kasra goes on the last letter, which has already been written.
-      if (T[j] === '-' && T[j + 1] === 'e' && (j + 2 === T.length || TR_SKIP.test(T[j + 2])) && m) {
+      if (T[j] === '-' && T[j + 1] === 'e' && (j + 2 === T.length || TR_SKIP.test(T[j + 2])) && m && F[i] !== KASRA) {
         take(go(i, j + 2, false), KASRA, 0)
       }
       // A space or hyphen ends the syllable: a vowel after it belongs to the next word.
-      take(go(i, j + 1, false), '', 0)
+      // A space in the Finglish in the middle of a written word is almost always a misalignment: the
+      // last letter of one word taking the first vowel of the next (khâne esterâhat read as خانِه + استراحت).
+      const midWord = /\s/.test(T[j]) && i > 0 && PERSIAN_LETTER.test(F[i]) && PERSIAN_LETTER.test(F[i - 1])
+      take(go(i, j + 1, false), '', midWord ? 3 : 0)
     }
     // A short vowel in Finglish after a markable letter becomes a mark.
     // (Not when the script already carries a mark there: that mark stands for the vowel, see below.)
     if (m && j < T.length && MARK[T[j]] && !HARAKAT.test(F[i] ?? '') && !(T[j] === 'o' && T[j + 1] === 'w')) {
-      take(go(i, j + 1, false), MARK[T[j]], 0)
+      // pas-andâz (پس‌انداز): a vowel just before a ZWNJ and an alef belongs to the alef, not to the letter before.
+      const beforeAlef = F[i] === ZWNJ && (F[i + 1] === 'ا' || F[i + 1] === 'آ')
+      take(go(i, j + 1, false), MARK[T[j]], beforeAlef ? 0.3 : 0)
     }
     // "-ye" ezâfe with no ی in the script: nothing to write.
     if (T.startsWith('-ye', j)) take(go(i, j + 3, false), '', 0.5)
@@ -201,22 +209,27 @@ export function vocalizeWith(lexicon: Map<string, string>, fa: string): string {
   return fa.replace(WORD, (w) => lexicon.get(stripVowels(w)) ?? w)
 }
 
+/**
+ * The words of a text paired with their readings: [plain word, word with its marks]. The ezâfe (the -e
+ * that links ketâb-e man) belongs to the phrase, not the word, so a final kasra is left out.
+ */
+export function wordReadings(fa: string, vocalized: string): [string, string][] {
+  const plain = fa.normalize('NFC').split(WORD_SPLIT).filter(Boolean)
+  const voc = vocalized.split(WORD_SPLIT).filter(Boolean)
+  if (plain.length !== voc.length) return []
+  return plain.map((w, i) => [stripVowels(w), voc[i].replace(/ِ$/, '')])
+}
+
 /** Build word → vocalised word from pairs of (Persian, Finglish); words read two ways are left out. */
 export function buildLexicon(pairs: { fa: string; tr: string }[]): Map<string, string> {
   const seen = new Map<string, Set<string>>()
   for (const p of pairs) {
     const v = vocalize(p.fa, p.tr)
     if (!v) continue
-    const plain = p.fa.normalize('NFC').split(WORD_SPLIT).filter(Boolean)
-    const voc = v.split(WORD_SPLIT).filter(Boolean)
-    if (plain.length !== voc.length) continue
-    plain.forEach((w, i) => {
-      // Ezâfe marks belong to the phrase, not the word: drop a final kasra before storing.
-      const vw = voc[i].replace(/ِ$/, '')
-      const k = stripVowels(w)
+    for (const [k, vw] of wordReadings(p.fa, v)) {
       if (!seen.has(k)) seen.set(k, new Set())
       seen.get(k)!.add(vw)
-    })
+    }
   }
   const lex = new Map<string, string>()
   for (const [w, forms] of seen) if (forms.size === 1) lex.set(w, [...forms][0])

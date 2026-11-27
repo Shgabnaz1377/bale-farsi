@@ -14,7 +14,7 @@ export const CULTURE: Unit[] = [
     words: [
       { fa: 'عید شما مبارک', tr: 'eyd-e shomâ mobârak', en: 'happy Nowruz (polite)', alt: ['happy Nowruz', 'happy New Year'], note: 'Literally "your feast blessed". The polite form, for elders and anyone you call shomâ.' },
       { fa: 'عیدت مبارک', tr: 'eydet mobârak', en: 'happy Nowruz (to a friend)', alt: ['happy Nowruz', 'happy New Year'], note: 'With -et, "your" for one friend or family member you call to.' },
-      { fa: 'سال نو مبارک', tr: 'sâl-e no mobârak', en: 'happy New Year', alt: ['happy new year'], note: 'Literally "new year blessed". Fine for everyone, also in messages and on cards.' },
+      { fa: 'سال نو مبارک', tr: 'sâl-e now mobârak', en: 'happy New Year', alt: ['happy new year'], note: 'Literally "new year blessed". Fine for everyone, also in messages and on cards.' },
       { fa: 'عید شما هم مبارک', tr: 'eyd-e shomâ ham mobârak', en: 'happy Nowruz to you too', alt: ['same to you', 'you too'], note: 'The usual answer. To a friend: eyd-e to ham mobârak.' },
       { fa: 'صد سال به این سال\u200cها', tr: 'sad sâl be in sâlhâ', en: 'many happy returns', alt: ['a hundred more years like this'], note: 'Literally "a hundred years to these years": may you see a hundred more. Said at Nowruz and on birthdays.' },
       { fa: 'عیدی', tr: 'eydi', en: 'New Year money', alt: ['New Year gift', 'Nowruz gift'], note: 'A gift, usually crisp new banknotes, that elders give to children and younger relatives.' },
@@ -39,11 +39,11 @@ export const CULTURE: Unit[] = [
       },
       {
         fa: 'بچه\u200cها از بزرگ\u200cترها عیدی می\u200cگیرند.',
-        tr: 'bachehâ az bozorgtarhâ eydi migirand.',
+        tr: 'bachchehâ az bozorgtarhâ eydi migirand.',
         en: 'Children get New Year money from the elders.',
         alt: ['The children get New Year money from the elders.', 'Children receive New Year money from the elders.'],
         tiles: ['بچه\u200cها', 'از', 'بزرگ\u200cترها', 'عیدی', 'می\u200cگیرند'],
-        trTiles: ['bachehâ', 'az', 'bozorgtarhâ', 'eydi', 'migirand'],
+        trTiles: ['bachchehâ', 'az', 'bozorgtarhâ', 'eydi', 'migirand'],
         note: 'eydi gereftan: "to receive eydi"; eydi dâdan: "to give eydi".',
       },
       {
@@ -81,7 +81,7 @@ export const CULTURE: Unit[] = [
         { fa: 'تولدت مبارک!', tr: 'tavallodet mobârak!', en: 'Happy birthday! (to a friend)' },
         { fa: 'عیدتون مبارک!', tr: 'eydetun mobârak!', en: 'Happy Nowruz! (spoken, polite)' },
         { fa: 'عید تو هم مبارک!', tr: 'eyd-e to ham mobârak!', en: 'Happy Nowruz to you too! (to a friend)' },
-        { fa: 'سال نو بر شما مبارک باد.', tr: 'sâl-e no bar shomâ mobârak bâd.', en: 'May the new year be blessed for you. (formal, on cards)' },
+        { fa: 'سال نو بر شما مبارک باد.', tr: 'sâl-e now bar shomâ mobârak bâd.', en: 'May the new year be blessed for you. (formal, on cards)' },
       ],
       checks: [
         {
@@ -183,11 +183,11 @@ export const CULTURE: Unit[] = [
       },
       {
         fa: 'بچه\u200cها تخم\u200cمرغ\u200cها را رنگ می\u200cکنند.',
-        tr: 'bachehâ tokhm-e morghhâ râ rang mikonand.',
+        tr: 'bachchehâ tokhm-e morghhâ râ rang mikonand.',
         en: 'The children paint the eggs.',
         alt: ['The children colour the eggs.', 'The kids paint the eggs.'],
         tiles: ['بچه\u200cها', 'تخم\u200cمرغ\u200cها', 'را', 'رنگ', 'می\u200cکنند'],
-        trTiles: ['bachehâ', 'tokhm-e morghhâ', 'râ', 'rang', 'mikonand'],
+        trTiles: ['bachchehâ', 'tokhm-e morghhâ', 'râ', 'rang', 'mikonand'],
         note: 'rang kardan: "to paint, to colour", from rang, "colour".',
       },
     ],

@@ -25,7 +25,7 @@ export default `
 
 # Possession
 مال من | mâl-e man | mine | phr | | این کیف مال من است. | in kif mâl-e man ast. | This bag is mine.
-مال تو | mâl-e to | yours (singular) | phr | | این کتاب مال توست؟ | in ketâb mâl-e tust? | Is this book yours?
+مال تو | mâl-e to | yours (singular) | phr | | این کتاب مال توست؟ | in ketâb mâl-e tost? | Is this book yours?
 مال او | mâl-e u | his; hers | phr | | آن ماشین مال اوست. | ân mâshin mâl-e ust. | That car is his.
 مال ما | mâl-e mâ | ours | phr | | آن خانه مال ماست. | ân khâne mâl-e mâst. | That house is ours.
 مال شما | mâl-e shomâ | yours (plural or polite) | phr
@@ -60,9 +60,9 @@ export default `
 همان | hamân | that very; the same | det | | همان روز به خانه برگشتیم. | hamân ruz be khâne bargashtim. | We came back home that same day.
 چنین | chenin | such | det | | چنین چیزی ممکن نیست. | chenin chizi momken nist. | Such a thing is not possible.
 فلان | felân | such-and-such | det
-این\u200cطور | intowr | like this; this way | adv | | این\u200cطور بنویس. | intowr benevis. | Write it like this.
+این\u200cطور | intor | like this; this way | adv | | این\u200cطور بنویس. | intor benevis. | Write it like this.
 آن\u200cطور | ântowr | like that; that way | adv
-همین\u200cطور | hamintowr | likewise; just like this | adv | | من هم همین\u200cطور. | man ham hamintowr. | Me too.
+همین\u200cطور | hamintor | likewise; just like this | adv | | من هم همین\u200cطور. | man ham hamintor. | Me too.
 
 # Question words
 چه | che | what | pron | | چه می\u200cخواهی؟ | che mikhâhi? | What do you want?
@@ -71,7 +71,7 @@ export default `
 کی | key | when | adv | | کی به ایران می\u200cآیی؟ | key be irân miâyi? | When are you coming to Iran?
 کی | ki | who | pron | | او کی است؟ | u ki ast? | Who is he?
 چه کسی | che kasi | who | pron | | چه کسی این را گفت؟ | che kasi in râ goft? | Who said this?
-چطور | chetowr | how | adv | | چطور به اینجا آمدی؟ | chetowr be injâ âmadi? | How did you get here?
+چطور | chetor | how | adv | | چطور به اینجا آمدی؟ | chetor be injâ âmadi? | How did you get here?
 چند | chand | how many; how much | det | | چند سال داری؟ | chand sâl dâri? | How old are you?
 چقدر | cheghadr | how much | adv | | این کفش چقدر است؟ | in kafsh cheghadr ast? | How much are these shoes?
 کدام | kodâm | which | det | | کدام رنگ را دوست داری؟ | kodâm rang râ dust dâri? | Which colour do you like?
@@ -92,7 +92,7 @@ export default `
 در | dar | in; at | prep | | ما در شیراز زندگی می\u200cکنیم. | mâ dar Shirâz zendegi mikonim. | We live in Shiraz.
 با | bâ | with | prep | | با دوستم به سینما رفتم. | bâ dustam be sinamâ raftam. | I went to the cinema with my friend.
 را | râ | (marks a definite object) | prep | | کتاب را خواندم. | ketâb râ khândam. | I read the book.
-برای | barâye | for | prep | | این هدیه برای توست. | in hediye barâye tust. | This gift is for you.
+برای | barâye | for | prep | | این هدیه برای توست. | in hediye barâye tost. | This gift is for you.
 تا | tâ | until; up to; as far as | prep | | تا شب کار کردیم. | tâ shab kâr kardim. | We worked until night.
 روی | ru-ye | on; on top of | prep | | کتاب روی میز است. | ketâb ru-ye miz ast. | The book is on the table.
 بی | bi | without | prep | | چای بی شکر می\u200cخورم. | chây bi shekar mikhoram. | I drink tea without sugar.
@@ -117,7 +117,7 @@ export default `
 به جای | be jâ-ye | instead of | prep | | به جای قهوه چای بخور. | be jâ-ye ghahve chây bokhor. | Drink tea instead of coffee.
 به جز | be joz | except | prep | | همه به جز رضا آمدند. | hame be joz Rezâ âmadand. | Everyone came except Reza.
 حدود | hodud-e | about; around (a number) | prep | | حدود ده نفر آمدند. | hodud-e dah nafar âmadand. | About ten people came.
-در مورد | dar mored-e | about; regarding | prep | | در مورد کار با او صحبت کردم. | dar mored-e kâr bâ u sohbat kardam. | I talked to him about work.
+در مورد | dar mowred-e | about; regarding | prep | | در مورد کار با او صحبت کردم. | dar mowred-e kâr bâ u sohbat kardam. | I talked to him about work.
 میان | miyân-e | among; in the middle of | prep
 وسط | vasat-e | in the middle of | prep | | وسط اتاق یک فرش است. | vasat-e otâgh yek farsh ast. | There is a rug in the middle of the room.
 همراه | hamrâh-e | along with; together with | prep
@@ -243,7 +243,7 @@ export default `
 امروز | emruz | today | adv | | امروز هوا خوب است. | emruz havâ khub ast. | The weather is nice today.
 فردا | fardâ | tomorrow | adv | | فردا صبح زود بیدار می\u200cشوم. | fardâ sobh zud bidâr mishavam. | Tomorrow I'll get up early.
 دیروز | diruz | yesterday | adv | | دیروز باران آمد. | diruz bârân âmad. | It rained yesterday.
-حالا | hâlâ | now | adv | | حالا نوبت توست. | hâlâ nowbat-e tust. | Now it's your turn.
+حالا | hâlâ | now | adv | | حالا نوبت توست. | hâlâ nowbat-e tost. | Now it's your turn.
 همیشه | hamishe | always | adv | | او همیشه دیر می\u200cآید. | u hamishe dir miâyad. | He always comes late.
 هنوز | hanuz | still; yet | adv | | هنوز غذا نخورده\u200cام. | hanuz ghazâ nakhorde-am. | I haven't eaten yet.
 دیگر | digar | anymore; any longer | adv | | دیگر سیگار نمی\u200cکشم. | digar sigâr nemikesham. | I don't smoke anymore.

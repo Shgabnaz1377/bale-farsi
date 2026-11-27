@@ -3,7 +3,7 @@ export default `
 خوب | khub | good; well | adj | | هوا امروز خیلی خوب است. | havâ emruz kheyli khub ast. | The weather is very good today.
 بد | bad | bad; badly | adj | | این فیلم اصلاً بد نبود. | in film aslan bad nabud. | This film wasn't bad at all.
 بزرگ | bozorg | big; large; great | adj | | تهران شهر بسیار بزرگی است. | Tehrân shahr-e besyâr bozorgi ast. | Tehran is a very big city.
-کوچک | kuchek | small; little | adj | | اتاق من کوچک ولی راحت است. | otâgh-e man kuchek vali râhat ast. | My room is small but comfortable.
+کوچک | kuchak | small; little | adj | | اتاق من کوچک ولی راحت است. | otâgh-e man kuchak vali râhat ast. | My room is small but comfortable.
 زیاد | ziyâd | a lot of; much; many | adj | | امروز کار زیادی دارم. | emruz kâr-e ziyâdi dâram. | I have a lot of work today.
 جدید | jadid | new | adj | | علی یک ماشین جدید خریده است. | Ali yek mâshin-e jadid kharide ast. | Ali has bought a new car.
 قدیمی | ghadimi | old (of things); ancient | adj | | این خانه خیلی قدیمی است. | in khâne kheyli ghadimi ast. | This house is very old.
@@ -93,7 +93,7 @@ export default `
 خشک | khoshk | dry | adj | | لباس\u200cها هنوز خشک نشده\u200cاند. | lebâs-hâ hanuz khoshk nashode-and. | The clothes haven't dried yet.
 نرم | narm | soft | adj | | این بالش خیلی نرم است. | in bâlesh kheyli narm ast. | This pillow is very soft.
 تازه | tâze | fresh; new | adj | | نان تازه بوی خوبی دارد. | nân-e tâze bu-ye khubi dârad. | Fresh bread smells good.
-نو | no | new; brand-new | adj | | دیروز یک کیف نو خریدم. | diruz yek kif-e no kharidam. | Yesterday I bought a brand-new bag.
+نو | no | new; brand-new | adj | | دیروز یک کیف نو خریدم. | diruz yek kif-e now kharidam. | Yesterday I bought a brand-new bag.
 شور | shur | salty | adj | | سوپ کمی شور است. | sup kami shur ast. | The soup is a bit salty.
 ترش | torsh | sour | adj | | این پرتقال ترش است. | in porteghâl torsh ast. | This orange is sour.
 تلخ | talkh | bitter | adj | | من قهوه تلخ دوست دارم. | man ghahve-ye talkh dust dâram. | I like bitter coffee.
@@ -398,8 +398,8 @@ export default `
 پررو | porru | cheeky; impudent | adj
 خودخواه | khodkhâh | selfish | adj
 مهمان\u200cنواز | mehmân-navâz | hospitable | adj
-خوش\u200cقول | khosh-ghol | reliable (keeps promises) | adj
-بدقول | bad-ghol | unreliable (breaks promises) | adj
+خوش\u200cقول | khosh-ghowl | reliable (keeps promises) | adj
+بدقول | bad-ghowl | unreliable (breaks promises) | adj
 وقت\u200cشناس | vaghtshenâs | punctual | adj
 خلاق | khallâgh | creative | adj
 نامهربان | nâmehrabân | unkind | adj

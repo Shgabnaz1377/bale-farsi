@@ -89,7 +89,7 @@ export default `
 توافق | tavâfogh | agreement | n | | بالاخره به توافق رسیدیم. | bâlâkhare be tavâfogh residim. | We finally reached an agreement.
 دعوت | da'vat | invitation | n | | از دعوت شما ممنونم. | az da'vat-e shomâ mamnunam. | Thank you for your invitation.
 اجازه | ejâze | permission | n | | با اجازه شما، من می\u200cروم. | bâ ejâze-ye shomâ, man miravam. | With your permission, I'll be going.
-قول | ghol | promise; word | n | | قول می\u200cدهم فردا بیایم. | ghol midaham fardâ biyâyam. | I promise to come tomorrow.
+قول | ghowl | promise; word | n | | قول می\u200cدهم فردا بیایم. | ghowl midaham fardâ biyâyam. | I promise to come tomorrow.
 توصیه | towsiye | advice; recommendation | n | | توصیه دکتر را گوش کن. | towsiye-ye doktor râ gush kon. | Listen to the doctor's advice.
 ارزش | arzesh | value; worth | n | | این کار ارزش وقت گذاشتن دارد. | in kâr arzesh-e vaght gozâshtan dârad. | This is worth spending time on.
 احترام | ehterâm | respect | n | | به بزرگ\u200cترها احترام بگذار. | be bozorgtarhâ ehterâm begozâr. | Respect your elders.
@@ -106,7 +106,7 @@ export default `
 حالت | hâlat | state; mode; manner | n
 حال | hâl | present; state | n
 وضع | vaz' | state; situation | n | | وضع او از دیروز بهتر است. | vaz'-e u az diruz behtar ast. | He is better than yesterday.
-اوضاع | owzâ' | the situation; things in general | n | | اوضاع کار چطور است؟ | owzâ'-e kâr chetowr ast? | How are things at work?
+اوضاع | owzâ' | the situation; things in general | n | | اوضاع کار چطور است؟ | owzâ'-e kâr chetor ast? | How are things at work?
 خاطره | khâtere | memory (of an event) | n | | از آن سفر خاطره\u200cهای خوبی دارم. | az ân safar khâterehâ-ye khubi dâram. | I have good memories of that trip.
 یاد | yâd | memory; remembrance | n | | یاد آن روزها به خیر. | yâd-e ân ruzhâ be kheyr. | Those were the days.
 رؤیا | ro'yâ | dream (hope) | n | | رؤیای او دیدن همه دنیاست. | ro'yâ-ye u didan-e hame-ye donyâst. | Her dream is to see the whole world.

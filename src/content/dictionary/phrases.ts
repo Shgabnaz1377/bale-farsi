@@ -54,10 +54,10 @@ export default `
 خیلی خوشم آمد | kheyli khosham âmad | I really liked it | phr
 
 # Understanding and asking
-ببخشید، متوجه نشدم | bebakhshid, motevajjeh nashodam | sorry, I didn't understand | phr
+ببخشید، متوجه نشدم | bebakhshid, motavajjeh nashodam | sorry, I didn't understand | phr
 نمی\u200cفهمم | nemifahmam | I don't understand | phr
 فهمیدم | fahmidam | I understand; got it | phr
-متوجه شدم | motevajjeh shodam | I see; I understood | phr
+متوجه شدم | motavajjeh shodam | I see; I understood | phr
 لطفاً آهسته\u200cتر صحبت کنید | lotfan âheste-tar sohbat konid | please speak more slowly | phr
 لطفاً تکرار کنید | lotfan tekrâr konid | please repeat | phr
 این به فارسی چه می\u200cشود؟ | in be fârsi che mishavad? | how do you say this in Persian? | phr | | به این می\u200cگویند مداد. | be in miguyand medâd. | This is called a medâd (pencil).
@@ -80,7 +80,7 @@ export default `
 لطفاً | lotfan | please | int
 ممنون | mamnun | thanks | phr | | خواهش می\u200cکنم. | khâhesh mikonam. | You're welcome.
 مرسی | mersi | thanks | phr
-متشکرم | moteshakkeram | thank you | phr | | خواهش می\u200cکنم، قابلی ندارد. | khâhesh mikonam, ghâbeli nadârad. | You're welcome, it's nothing.
+متشکرم | motashakkeram | thank you | phr | | خواهش می\u200cکنم، قابلی ندارد. | khâhesh mikonam, ghâbeli nadârad. | You're welcome, it's nothing.
 خیلی ممنون | kheyli mamnun | thanks a lot | phr | | خواهش می\u200cکنم، کاری نکردم. | khâhesh mikonam, kâri nakardam. | You're welcome, it was nothing.
 سپاسگزارم | sepâsgozâram | thank you (formal) | phr
 خواهش می\u200cکنم | khâhesh mikonam | you're welcome; please | phr
@@ -250,7 +250,7 @@ export default `
 گرسنه\u200cام | gorosne-am | I'm hungry | phr
 تشنه\u200cام | teshne-am | I'm thirsty | phr
 سردم است | sardam ast | I'm cold | phr
-حوصله\u200cام سر رفته است | hosele-am sar rafte ast | I'm bored | phr
+حوصله\u200cام سر رفته است | howsele-am sar rafte ast | I'm bored | phr
 دلم برایت تنگ شده است | delam barâyat tang shode ast | I miss you | phr
 دوستت دارم | dustat dâram | I love you | phr
 بی\u200cخیال | bikhiyâl | never mind; forget it | int

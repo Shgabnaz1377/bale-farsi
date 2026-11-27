@@ -157,7 +157,7 @@ export const IT_A1: CourseTr = {
       { fa: 'این مادر من است.', it: 'Questa è mia madre.', alt: ['Questa è mia mamma.', 'Lei è mia madre.'], note: 'Letteralmente "questa madre-di me è". La -e si pronuncia ma non si scrive.' },
       { fa: 'اسم پدرم علی است.', it: 'Mio padre si chiama Ali.', alt: ['Il nome di mio padre è Ali.', 'Mio papà si chiama Ali.'], note: 'Letteralmente "nome-di mio-padre Ali è".' },
       { fa: 'خواهرت کجاست؟', it: 'Dov\'è tua sorella?', alt: ['Dove è tua sorella?', 'Dove si trova tua sorella?'], note: 'Kojâst = kojâ ("dove") + ast ("è").' },
-      { fa: 'برادرش دو تا بچه داره.', it: 'Suo fratello ha due figli.', alt: ['Suo fratello ha due bambini.', 'Il fratello di lei ha due figli.', 'Il fratello di lui ha due figli.'], note: 'Forma parlata; scritto: do bache dârad. -esh può voler dire "di lui" o "di lei", proprio come il nostro "suo".' },
+      { fa: 'برادرش دو تا بچه داره.', it: 'Suo fratello ha due figli.', alt: ['Suo fratello ha due bambini.', 'Il fratello di lei ha due figli.', 'Il fratello di lui ha due figli.'], note: 'Forma parlata; scritto: do bachche dârad. -esh può voler dire "di lui" o "di lei", proprio come il nostro "suo".' },
       { fa: 'خانواده‌ی من بزرگ است.', it: 'La mia famiglia è grande.', alt: ['La mia famiglia è numerosa.'], note: 'Dopo una -e finale l\'ezâfe diventa -ye, e qui si scrive: خانواده‌ی (khânevâde-ye).' },
     ],
     grammar: {
@@ -322,14 +322,14 @@ export const IT_A1: CourseTr = {
       { fa: 'زن‌ها', it: 'donne', note: 'Formale: zanân.' },
       { fa: 'گل', it: 'fiore' },
       { fa: 'گل‌ها', it: 'fiori' },
-      { fa: 'بچه‌ها', it: 'bambini', alt: ['bambine', 'ragazzi', 'figli'], note: 'È anche il modo amichevole di rivolgersi a un gruppo: bachehâ! = ragazzi!' },
+      { fa: 'بچه‌ها', it: 'bambini', alt: ['bambine', 'ragazzi', 'figli'], note: 'È anche il modo amichevole di rivolgersi a un gruppo: bachchehâ! = ragazzi!' },
       { fa: 'خانه‌ها', it: 'case' },
     ],
     sentences: [
       { fa: 'دوستانم ایرانی هستند.', it: 'I miei amici sono iraniani.', alt: ['Le mie amiche sono iraniane.'], note: 'Dustân + -am "miei". Nel parlato: dustâm irâniyan.' },
       { fa: 'گل‌ها خیلی قشنگ هستند.', it: 'I fiori sono bellissimi.', alt: ['I fiori sono molto belli.'], note: 'Nel parlato: golâ kheyli ghashangan.' },
       { fa: 'من سه تا دوست دارم.', it: 'Ho tre amici.', alt: ['Io ho tre amici.', 'Ho tre amiche.'], note: 'Dopo un numero il nome resta al singolare: se tâ dust, non se tâ dustân.' },
-      { fa: 'بچه‌ها کجا هستند؟', it: 'Dove sono i bambini?', alt: ['Dove sono i ragazzi?'], note: 'Nel parlato: bachehâ kojân?' },
+      { fa: 'بچه‌ها کجا هستند؟', it: 'Dove sono i bambini?', alt: ['Dove sono i ragazzi?'], note: 'Nel parlato: bachchehâ kojân?' },
       { fa: 'این درخت‌ها خیلی بلند هستند.', it: 'Questi alberi sono molto alti.', alt: ['Questi alberi sono altissimi.'], note: 'Davanti a un nome "questi" è semplicemente in: in derakhthâ.' },
     ],
     grammar: {

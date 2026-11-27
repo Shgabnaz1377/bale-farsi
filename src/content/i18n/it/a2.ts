@@ -824,7 +824,7 @@ export const IT_A2: CourseTr = {
       { fa: 'نگران', it: 'preoccupato', alt: ['preoccupata', 'in ansia'], note: 'Nel parlato: negarun. negarân-e …: preoccupato per …' },
       { fa: 'هیجان‌زده', it: 'emozionato', alt: ['emozionata', 'eccitato', 'entusiasta'], note: 'Letteralmente "colpito dall\'emozione".' },
       { fa: 'ترسیدن', it: 'avere paura', alt: ['temere', 'spaventarsi'], note: 'az … tarsidan: "avere paura di". Presente: mitarsam.' },
-      { fa: 'حوصله', it: 'pazienza', note: 'hosele nadâram: "non ne ho voglia". hoselam sar rafte: "mi annoio".' },
+      { fa: 'حوصله', it: 'pazienza', note: 'howsele nadâram: "non ne ho voglia". howselam sar rafte: "mi annoio".' },
       { fa: 'چون', it: 'perché', alt: ['poiché', 'siccome'], note: 'Introduce la causa. Si usa nel parlato e nello scritto.' },
       { fa: 'برای اینکه', it: 'per il fatto che', alt: ['perché'], note: 'Vuol dire "perché", spesso in risposta a cherâ? ("perché?").' },
       { fa: 'چرا', it: 'perché?', alt: ['come mai'], note: 'Vale anche "sì, certo" in risposta a una domanda negativa.' },
@@ -998,7 +998,7 @@ export const IT_A2: CourseTr = {
     ],
     grammar: {
       title: 'Invitare: miyâi …? e berim …!',
-      body: "Per invitare qualcuno basta una domanda al presente: <i>jom'e miyâi khune-ye mâ?</i>, \"Vieni da noi venerdì?\". Per \"andiamo, facciamo…\", usa <b>be- + radice del presente + -im</b>: <i>berim</i> \"andiamo\", <i>bekhorim</i> \"mangiamo\". Per dire di sì usa <i>hatman</i> o <i>bâ kamâl-e meyl</i>. Per dire di no con garbo, comincia con <b>mote'assefâne</b> e dai un motivo: <i>mote'assefâne nemitunam, gereftâram</i>.",
+      body: "Per invitare qualcuno basta una domanda al presente: <i>jom'e miyâi khune-ye mâ?</i>, \"Vieni da noi venerdì?\". Per \"andiamo, facciamo…\", usa <b>be- + radice del presente + -im</b>: <i>berim</i> \"andiamo\", <i>bekhorim</i> \"mangiamo\". Per dire di sì usa <i>hatman</i> o <i>bâ kamâl-e meyl</i>. Per dire di no con garbo, comincia con <b>mota'assefâne</b> e dai un motivo: <i>mota'assefâne nemitunam, gereftâram</i>.",
       examples: [
         { fa: 'شنبه میای خونه‌ی ما؟', it: 'Vieni da noi sabato? (parlato)' },
         { fa: 'بریم پارک!', it: 'Andiamo al parco! (parlato)' },
@@ -1007,7 +1007,7 @@ export const IT_A2: CourseTr = {
       ],
       checks: [
         { q: 'Quale vuol dire "Andiamo al cinema!"?', why: 'be- + radice + -im vuol dire "andiamo / facciamo…". mirim è "andiamo" come semplice affermazione, boro è "vai!" a un amico.' },
-        { q: 'Rifiuta con cortesia: "Purtroppo non posso."', why: "mote'assefâne nemitunam è un no cortese. Le altre due risposte vogliono dire sì." },
+        { q: 'Rifiuta con cortesia: "Purtroppo non posso."', why: "mota'assefâne nemitunam è un no cortese. Le altre due risposte vogliono dire sì." },
         { q: 'Un amico ti chiede "jom\'e miyâi?". Quale risposta vuol dire "Sì, certo!"?', why: 'hatman vuol dire "certamente". zahmat nakesh è "non disturbarti".' },
       ],
     },

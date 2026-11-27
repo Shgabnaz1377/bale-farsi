@@ -478,7 +478,7 @@ export default `
 راست | râst | right | n | | بعد از پل به راست بروید. | ba'd az pol be râst beravid. | After the bridge, turn right.
 سمت | samt | side; direction | n
 گوشه | gushe | corner | n | | یک کافه در گوشه میدان هست. | yek kâfe dar gushe-ye meydân hast. | There's a café on the corner of the square.
-جلو | jelow | front | n | | جلوی سینما منتظرت هستم. | jelow-ye sinamâ montazeret hastam. | I'm waiting for you in front of the cinema.
+جلو | jelow | front | n | | جلوی سینما منتظرت هستم. | jelo-ye sinamâ montazeret hastam. | I'm waiting for you in front of the cinema.
 پشت | posht | back; behind | n | | ماشین پشت ساختمان است. | mâshin posht-e sâkhtemân ast. | The car is behind the building.
 بالا | bâlâ | top; upstairs | n | | خانه ما بالای کوه است. | khâne-ye mâ bâlâ-ye kuh ast. | Our house is at the top of the mountain.
 پایین | pâyin | bottom; downstairs | n | | ماشین پایین ساختمان است. | mâshin pâyin-e sâkhtemân ast. | The car is downstairs.
@@ -513,7 +513,7 @@ export default `
 تاکسی اینترنتی | tâksi-ye interneti | ride-hailing taxi | n
 مسافر | mosâfer | passenger; traveler | n | | همه مسافران سوار هواپیما شدند. | hame-ye mosâferân savâr-e havâpeymâ shodand. | All the passengers boarded the plane.
 ایستگاه اتوبوس | istgâh-e otobus | bus stop | n | | ایستگاه اتوبوس سر کوچه است. | istgâh-e otobus sar-e kuche ast. | The bus stop is at the end of the alley.
-سکو | saku | platform | n
+سکو | sakku | platform | n
 راه\u200cآهن | râhâhan | railway; railway station | n
 کرایه | kerâye | fare; rent | n | | کرایه تاکسی چقدر است؟ | kerâye-ye tâksi cheghadr ast? | How much is the taxi fare?
 
@@ -544,7 +544,7 @@ export default `
 پلیس راه | polis-e râh | highway police | n
 
 # Travel
-سفر | safar | trip; journey | n | | سفر شما چطور بود؟ | safar-e shomâ chetowr bud? | How was your trip?
+سفر | safar | trip; journey | n | | سفر شما چطور بود؟ | safar-e shomâ chetor bud? | How was your trip?
 مسافرت | mosâferat | travel; trip | n | | تابستان به مسافرت می\u200cرویم. | tâbestân be mosâferat miravim. | We go travelling in summer.
 گردش | gardesh | outing; stroll | n
 گردشگر | gardeshgar | tourist | n | | هر سال گردشگران زیادی به اصفهان می\u200cآیند. | har sâl gardeshgarân-e ziyâdi be Esfahân miâyand. | Many tourists come to Isfahan every year.
@@ -557,7 +557,7 @@ export default `
 ویزا | vizâ | visa | n | | برای سفر به آلمان ویزا لازم است. | barâye safar be Âlmân vizâ lâzem ast. | You need a visa to travel to Germany.
 روادید | ravâdid | visa | n
 چمدان | chamedân | suitcase | n | | چمدانم خیلی سنگین است. | chamedânam kheyli sangin ast. | My suitcase is very heavy.
-بار | bâr | luggage; load | n | | بار شما چند کیلو است؟ | bâr-e shomâ chand kilu ast? | How many kilos is your luggage?
+بار | bâr | luggage; load | n | | بار شما چند کیلو است؟ | bâr-e shomâ chand kilo ast? | How many kilos is your luggage?
 رزرو | rezerv | reservation; booking | n | | رزرو هتل را اینترنتی انجام دادم. | rezerv-e hotel râ interneti anjâm dâdam. | I made the hotel reservation online.
 پرواز | parvâz | flight | n | | پرواز ما دو ساعت تأخیر دارد. | parvâz-e mâ do sâ'at ta'khir dârad. | Our flight is two hours late.
 کارت پرواز | kârt-e parvâz | boarding pass | n

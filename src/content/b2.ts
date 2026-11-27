@@ -119,7 +119,7 @@ export const B2: Unit[] = [
       paragraphs: [
         {
           fa: 'کم\u200cآبی یکی از مهم\u200cترین مشکلات زیست\u200cمحیطی ایران است. بخش بزرگی از کشور خشک یا نیمه\u200cخشک است و در سال\u200cهای اخیر خشکسالی\u200cهای پی\u200cدرپی این مشکل را بیشتر کرده است. دریاچه\u200cی ارومیه در شمال\u200cغرب ایران نمونه\u200cی روشنی از این بحران است؛ این دریاچه در چند دهه\u200cی گذشته بخش بزرگی از آب خود را از دست داده است. کارشناسان می\u200cگویند که علاوه بر کاهش بارندگی، سدهایی که روی رودخانه\u200cها ساخته شده\u200cاند و چاه\u200cهایی که برای کشاورزی حفر شده\u200cاند نیز در این وضع نقش داشته\u200cاند.',
-          tr: "kam-âbi yeki az mohemtarin moshkelât-e zist-mohiti-ye Irân ast. bakhsh-e bozorgi az keshvar khoshk yâ nime-khoshk ast va dar sâlhâ-ye akhir khoshksâlihâ-ye pey-dar-pey in moshkel râ bishtar karde ast. daryâche-ye Orumiye dar shomâl-gharb-e Irân nemune-ye rowshani az in bohrân ast; in daryâche dar chand dahe-ye gozashte bakhsh-e bozorgi az âb-e khod râ az dast dâde ast. kârshenâsân miguyand ke alâve bar kâhesh-e bârandegi, sadhâyi ke ru-ye rudkhânehâ sâkhte shode-and va châhhâyi ke barâ-ye keshâvarzi hafr shode-and niz dar in vaz' naghsh dâshte-and.",
+          tr: "kam-âbi yeki az mohemmtarin moshkelât-e zist-mohiti-ye Irân ast. bakhsh-e bozorgi az keshvar khoshk yâ nime-khoshk ast va dar sâlhâ-ye akhir khoshksâlihâ-ye pey-dar-pey in moshkel râ bishtar karde ast. daryâche-ye Orumiye dar shomâl-gharb-e Irân nemune-ye rowshani az in bohrân ast; in daryâche dar chand dahe-ye gozashte bakhsh-e bozorgi az âb-e khod râ az dast dâde ast. kârshenâsân miguyand ke alâve bar kâhesh-e bârandegi, sadhâyi ke ru-ye rudkhânehâ sâkhte shode-and va châhhâyi ke barâ-ye keshâvarzi hafr shode-and niz dar in vaz' naghsh dâshte-and.",
           en: "Water shortage is one of Iran's most serious environmental problems. A large part of the country is dry or semi-dry, and in recent years one drought after another has made the problem worse. Lake Urmia in north-western Iran is a clear example of this crisis: over the past few decades the lake has lost a large part of its water. Experts say that besides falling rainfall, the dams built on rivers and the wells dug for farming have also played a part.",
         },
         {
@@ -129,7 +129,7 @@ export const B2: Unit[] = [
         },
         {
           fa: 'بسیاری از کارشناسان معتقدند که این مشکلات تنها با تصمیم\u200cهای دولتی حل نمی\u200cشوند. مصرف آب در خانه\u200cها باید کاهش یابد، زباله\u200cها باید تفکیک و بازیافت شوند و از حمل\u200cونقل عمومی بیشتر استفاده شود. در برخی شهرها، شهرداری سطل\u200cهای جداگانه\u200cای برای زباله\u200cهای خشک گذاشته است. با این حال، تغییر عادت\u200cهای مردم کار آسانی نیست و به زمان و آموزش نیاز دارد.',
-          tr: "bisyâri az kârshenâsân mo'taghedand ke in moshkelât tanhâ bâ tasmimhâ-ye dowlati hal nemishavand. masraf-e âb dar khânehâ bâyad kâhesh yâbad, zobâlehâ bâyad tafkik va bâzyâft shavand va az haml-o-naghl-e omumi bishtar estefâde shavad. dar barkhi shahrhâ, shahrdâri satlhâ-ye jodâgâne-i barâ-ye zobâlehâ-ye khoshk gozâshte ast. bâ in hâl, taghyir-e âdathâ-ye mardom kâr-e âsâni nist va be zamân va âmuzesh niyâz dârad.",
+          tr: "besyâri az kârshenâsân mo'taghedand ke in moshkelât tanhâ bâ tasmimhâ-ye dowlati hal nemishavand. masraf-e âb dar khânehâ bâyad kâhesh yâbad, zobâlehâ bâyad tafkik va bâzyâft shavand va az haml-o-naghl-e omumi bishtar estefâde shavad. dar barkhi shahrhâ, shahrdâri satlhâ-ye jodâgâne-i barâ-ye zobâlehâ-ye khoshk gozâshte ast. bâ in hâl, taghyir-e âdathâ-ye mardom kâr-e âsâni nist va be zamân va âmuzesh niyâz dârad.",
           en: 'Many experts believe these problems cannot be solved by government decisions alone. Household water use has to come down, rubbish has to be sorted and recycled, and public transport has to be used more. In some cities the municipality has put out separate bins for dry waste. Even so, changing people\'s habits is not easy; it takes time and education.',
         },
       ],
@@ -291,12 +291,12 @@ export const B2: Unit[] = [
         },
         {
           fa: 'بیشتر این تفاوت\u200cها قاعده\u200cمند است. برای نمونه، «آ» پیش از «ن» یا «م» در گفتار اغلب به «او» تبدیل می\u200cشود؛ به همین دلیل «خانه» و «نان» در گفتار «خونه» و «نون» تلفظ می\u200cشوند. بن بسیاری از فعل\u200cها نیز کوتاه می\u200cشود: «می\u200cروم» به «می\u200cرم» و «می\u200cگویم» به «می\u200cگم» تبدیل می\u200cشود. گونه\u200cی گفتاری\u200cای که در فیلم\u200cها و رادیو و تلویزیون شنیده می\u200cشود، بیشتر بر پایه\u200cی گفتار مردم تهران است.',
-          tr: "bishtar-e in tafâvothâ ghâ'edemand ast. barâ-ye nemune, «â» pish az «n» yâ «m» dar goftâr aghlab be «u» tabdil mishavad; be hamin dalil «khâne» va «nân» dar goftâr «khune» va «nun» talaffoz mishavand. bon-e bisyâri az fe'lhâ niz kutâh mishavad: «miravam» be «miram» va «miguyam» be «migam» tabdil mishavad. gune-ye goftâri-i ke dar filmhâ va râdiyo va televiziyon shenide mishavad, bishtar bar pâye-ye goftâr-e mardom-e Tehrân ast.",
+          tr: "bishtar-e in tafâvothâ ghâ'edemand ast. barâ-ye nemune, «â» pish az «n» yâ «m» dar goftâr aghlab be «u» tabdil mishavad; be hamin dalil «khâne» va «nân» dar goftâr «khune» va «nun» talaffoz mishavand. bon-e besyâri az fe'lhâ niz kutâh mishavad: «miravam» be «miram» va «miguyam» be «migam» tabdil mishavad. gune-ye goftâri-i ke dar filmhâ va râdiyo va televiziyon shenide mishavad, bishtar bar pâye-ye goftâr-e mardom-e Tehrân ast.",
           en: 'Most of these differences follow rules. For example, "â" before "n" or "m" often turns into "u" in speech, which is why "khâne" and "nân" are pronounced "khune" and "nun". Many verb stems get shorter too: "miravam" becomes "miram" and "miguyam" becomes "migam". The spoken variety heard in films and on radio and television is mostly based on the speech of Tehran.',
         },
         {
           fa: 'امروزه مرز میان این دو گونه کم\u200cرنگ\u200cتر از گذشته شده است. بسیاری از مردم در پیام\u200cها و شبکه\u200cهای اجتماعی همان\u200cطور می\u200cنویسند که حرف می\u200cزنند و برخی نویسندگان نیز گفت\u200cوگوهای شخصیت\u200cهای داستانشان را به زبان گفتاری می\u200cنویسند. با این حال، در نامه\u200cی رسمی یا مقاله\u200cی علمی، استفاده از گونه\u200cی گفتاری هنوز نادرست و غیرحرفه\u200cای به شمار می\u200cآید. پس زبان\u200cآموز موفق کسی است که هر دو گونه را بشناسد و بداند کدام را کجا به کار ببرد.',
-          tr: "emruze marz-e miyân-e in do gune kamrangtar az gozashte shode ast. bisyâri az mardom dar payâmhâ va shabakehâ-ye ejtemâ'i hamân-towr minevisand ke harf mizanand va barkhi nevisandegân niz goft-o-guhâ-ye shakhsiyathâ-ye dâstânashân râ be zabân-e goftâri minevisand. bâ in hâl, dar nâme-ye rasmi yâ maghâle-ye elmi, estefâde az gune-ye goftâri hanuz nâdorost va gheyr-e herfe'i be shomâr miâyad. pas zabânâmuz-e movaffagh kasi ast ke har do gune râ beshenâsad va bedânad kodâm râ kojâ be kâr bebarad.",
+          tr: "emruze marz-e miyân-e in do gune kamrangtar az gozashte shode ast. besyâri az mardom dar payâmhâ va shabakehâ-ye ejtemâ'i hamân-towr minevisand ke harf mizanand va barkhi nevisandegân niz goft-o-guhâ-ye shakhsiyathâ-ye dâstânashân râ be zabân-e goftâri minevisand. bâ in hâl, dar nâme-ye rasmi yâ maghâle-ye elmi, estefâde az gune-ye goftâri hanuz nâdorost va gheyr-e herfe'i be shomâr miâyad. pas zabânâmuz-e movaffagh kasi ast ke har do gune râ beshenâsad va bedânad kodâm râ kojâ be kâr bebarad.",
           en: 'Today the line between the two varieties is fainter than it used to be. Many people write in messages and on social media just as they speak, and some novelists write their characters\' dialogue in the spoken language. Even so, in a formal letter or an academic article, spoken forms are still considered wrong and unprofessional. So a successful learner is one who knows both varieties and knows which to use where.',
         },
       ],
@@ -780,7 +780,7 @@ export const B2: Unit[] = [
       paragraphs: [
         {
           fa: 'هفته\u200cی گذشته گربه\u200cی خانم احمدی، همسایه\u200cی طبقه\u200cی دوم، ناپدید شد. خانم احمدی همه\u200cی ساختمان را گشت، اما گربه را پیدا نکرد. یکی از همسایه\u200cها گفت شاید گربه از پنجره\u200cی باز بیرون پریده باشد. دیگری معتقد بود که بعید است گربه\u200cای به این تنبلی از طبقه\u200cی دوم پایین رفته باشد و احتمالاً جایی در خود ساختمان پنهان شده است.',
-          tr: "hafte-ye gozashte gorbe-ye khânom-e Ahmadi, hamsâye-ye tabaghe-ye dovvom, nâpadid shod. khânom-e Ahmadi hame-ye sâkhtemân râ gasht, ammâ gorbe râ peydâ nakard. yeki az hamsâyehâ goft shâyad gorbe az panjere-ye bâz birun paride bâshad. digari mo'taghed bud ke ba'id ast gorbe-i be in tanbali az tabaghe-ye dovvom pâyin rafte bâshad va ehtemâlan jâyi dar khod-e sâkhtemân penhân shode ast.",
+          tr: "hafte-ye gozashte gorbe-ye khânom-e Ahmadi, hamsâye-ye tabaghe-ye dovvom, nâpadid shod. khânom-e Ahmadi hame-ye sâkhtemân râ gasht, ammâ gorbe râ peydâ nakard. yeki az hamsâyehâ goft shâyad gorbe az panjare-ye bâz birun paride bâshad. digari mo'taghed bud ke ba'id ast gorbe-i be in tanbali az tabaghe-ye dovvom pâyin rafte bâshad va ehtemâlan jâyi dar khod-e sâkhtemân penhân shode ast.",
           en: 'Last week the cat belonging to Mrs Ahmadi, the neighbour on the second floor, disappeared. Mrs Ahmadi searched the whole building but could not find it. One neighbour said the cat might have jumped out of an open window. Another believed it was unlikely that such a lazy cat had gone down from the second floor, and that it had probably hidden somewhere inside the building itself.',
         },
         {
@@ -1006,7 +1006,7 @@ export const B2: Unit[] = [
       { fa: 'فرصت', tr: 'forsat', en: 'opportunity', alt: ['chance', 'time'] },
       { fa: 'پشیمان', tr: 'pashimân', en: 'regretful', alt: ['sorry', 'remorseful'], note: 'pashimân shodan: to come to regret. Spoken: pashimun.' },
       { fa: 'کاش', tr: 'kâsh', en: 'if only', alt: ['I wish'], note: 'kâsh + past perfect for past regrets: kâsh rafte budam.' },
-      { fa: 'به موقع', tr: "be moghe'", en: 'on time', alt: ['at the right time', 'in time'] },
+      { fa: 'به موقع', tr: "be mowghe'", en: 'on time', alt: ['at the right time', 'in time'] },
       { fa: 'قبول شدن', tr: 'ghabul shodan', en: 'to pass (an exam)', alt: ['to pass', 'to be accepted'] },
       { fa: 'از دست دادن', tr: 'az dast dâdan', en: 'to lose', alt: ['to miss'], note: 'Literally "to give from the hand".' },
       { fa: 'شانس', tr: 'shâns', en: 'luck', alt: ['chance'] },
@@ -1043,11 +1043,11 @@ export const B2: Unit[] = [
       },
       {
         fa: 'اگر به موقع درس خوانده بودم، در امتحان قبول می\u200cشدم.',
-        tr: "agar be moghe' dars khânde budam, dar emtehân ghabul mishodam.",
+        tr: "agar be mowghe' dars khânde budam, dar emtehân ghabul mishodam.",
         en: "If I'd studied in time, I'd have passed the exam.",
         alt: ['If I had studied on time, I would have passed the exam.'],
         tiles: ['اگر', 'به', 'موقع', 'درس', 'خوانده', 'بودم', 'در', 'امتحان', 'قبول', 'می\u200cشدم'],
-        trTiles: ['agar', 'be', "moghe'", 'dars', 'khânde', 'budam', 'dar', 'emtehân', 'ghabul', 'mishodam'],
+        trTiles: ['agar', 'be', "mowghe'", 'dars', 'khânde', 'budam', 'dar', 'emtehân', 'ghabul', 'mishodam'],
         note: 'Past perfect after agar, past continuous in the result: the most common unreal-past pattern.',
       },
       {
@@ -1100,7 +1100,7 @@ export const B2: Unit[] = [
       { who: 'Darya', fa: 'الان می\u200cتونم ببینمش؟', tr: 'alân mitunam bebinamesh?', en: 'Can I see it now?' },
       { who: 'Arash', fa: 'آره، اگه وقت داشته باشی، بعد از ناهار نشونت می\u200cدم.', tr: "âre, age vaght dâshte bâshi, ba'd az nâhâr neshunet midam.", en: "Sure, if you have time, I'll show you after lunch." },
       { who: 'Darya', fa: 'عالیه. کاش رئیس امروز نپرسه چرا نبودم!', tr: "âliye. kâsh ra'is emruz naporse cherâ nabudam!", en: "Great. I hope the boss doesn't ask me today why I wasn't there!" },
-      { who: 'Arash', fa: 'اگه جای تو بودم، خودم بهش توضیح می\u200cدادم.', tr: 'age jâ-ye to budam, khodam behesh tozih midâdam.', en: "If I were you, I'd explain it to him myself." },
+      { who: 'Arash', fa: 'اگه جای تو بودم، خودم بهش توضیح می\u200cدادم.', tr: 'age jâ-ye to budam, khodam behesh towzih midâdam.', en: "If I were you, I'd explain it to him myself." },
       { who: 'Darya', fa: 'راست می\u200cگی. اگه نگم، بدتر می\u200cشه.', tr: 'râst migi. age nagam, badtar mishe.', en: "You're right. If I don't tell him, it'll be worse." },
     ],
     reading: {
@@ -1265,7 +1265,7 @@ export const B2: Unit[] = [
       { who: 'Leila', fa: 'منم تا ساعت یازده داشتم آرشو می\u200cخوابوندم!', tr: "manam tâ sâ'at-e yâzdah dâshtam Ârasho mikhâbundam!", en: 'And I was trying to get Arash to sleep until eleven!' },
       { who: 'Babak', fa: 'چرا؟ اون که همیشه زود می\u200cخوابه.', tr: 'cherâ? un ke hamishe zud mikhâbe.', en: 'Why? He always goes to sleep early.' },
       { who: 'Leila', fa: 'عموش یه داستان ترسناک براش تعریف کرده بود و حسابی ترسونده بودش.', tr: "amush ye dâstân-e tarsnâk barâsh ta'rif karde bud va hesâbi tarsunde budesh.", en: 'His uncle had told him a scary story and properly frightened him.' },
-      { who: 'Babak', fa: 'وای! آخرش چطوری خوابید؟', tr: 'vây! âkharesh chetowri khâbid?', en: 'Oh no! So how did he get to sleep in the end?' },
+      { who: 'Babak', fa: 'وای! آخرش چطوری خوابید؟', tr: 'vây! âkharesh chetori khâbid?', en: 'Oh no! So how did he get to sleep in the end?' },
       { who: 'Leila', fa: 'یه کارتون خنده\u200cدار براش گذاشتم. اونقدر خندوندش که خسته شد و خوابش برد.', tr: 'ye kârtun-e khandedâr barâsh gozâshtam. unghadr khandundesh ke khaste shod o khâbesh bord.', en: 'I put on a funny cartoon for him. It made him laugh so much that he got tired and fell asleep.' },
       { who: 'Babak', fa: 'آفرین! پس کارتونه جواب داد.', tr: 'âfarin! pas kârtune javâb dâd.', en: 'Well done! So the cartoon did the trick.' },
     ],
@@ -1427,7 +1427,7 @@ export const B2: Unit[] = [
       { who: 'Sara', fa: 'خب می\u200cتونی با مترو بری تا تو ترافیک نمونی.', tr: 'khob mituni bâ metro beri tâ tu terâfik namuni.', en: "Well, you could take the metro so you don't get stuck in traffic." },
       { who: 'Sasan', fa: 'مترو به اونجا نمی\u200cرسه، مگه اینکه دو بار عوض کنم.', tr: 'metro be unjâ nemirese, mage inke do bâr avaz konam.', en: "The metro doesn't go there, unless I change twice." },
       { who: 'Sara', fa: 'آدمایی که اونجا کار می\u200cکنن چی می\u200cگن؟', tr: 'âdamâyi ke unjâ kâr mikonan chi migan?', en: 'What do the people who work there say?' },
-      { who: 'Sasan', fa: 'می\u200cگن نه تنها محیطش خوبه، بلکه آدم کلی چیز یاد می\u200cگیره.', tr: 'migan na tanhâ mohitesh khube, balke âdam koli chiz yâd migire.', en: 'They say not only is it a nice place to work, you also learn loads.' },
+      { who: 'Sasan', fa: 'می\u200cگن نه تنها محیطش خوبه، بلکه آدم کلی چیز یاد می\u200cگیره.', tr: 'migan na tanhâ mohitesh khube, balke âdam kolli chiz yâd migire.', en: 'They say not only is it a nice place to work, you also learn loads.' },
       { who: 'Sara', fa: 'پس به جای اینکه نگران راه باشی، به آینده\u200cت فکر کن.', tr: 'pas be jâ-ye inke negarân-e râh bâshi, be âyandat fekr kon.', en: 'Then instead of worrying about the commute, think about your future.' },
       { who: 'Sasan', fa: 'حق با توئه. قبل از اینکه دیر بشه، بهشون زنگ می\u200cزنم.', tr: "hagh bâ to'e. ghabl az inke dir beshe, beheshun zang mizanam.", en: "You're right. I'll call them before it's too late." },
     ],
@@ -1441,7 +1441,7 @@ export const B2: Unit[] = [
         },
         {
           fa: 'مادربزرگ دفترچه\u200cای داشت که دستور غذاهایش را در آن نوشته بود. در حالی که ما بچه\u200cها در حیاط بازی می\u200cکردیم، او در آشپزخانه غذا می\u200cپخت و گاهی از ما می\u200cخواست کنارش بنشینیم تا آشپزی یاد بگیریم. او همیشه می\u200cگفت که آشپزی نه تنها کار است، بلکه نوعی هنر است.',
-          tr: "mâdarbozorg daftarche-i dâsht ke dastur-e ghazâhâyash râ dar ân neveshte bud. dar hâli ke mâ bachchehâ dar hayât bâzi mikardim, u dar âshpazkhâne ghazâ mipokht va gâhi az mâ mikhâst kenârash beneshinim tâ âshpazi yâd begirim. u hamishe migoft ke âshpazi na tanhâ kâr ast, balke no'i honar ast.",
+          tr: "mâdarbozorg daftarche-i dâsht ke dastur-e ghazâhâyash râ dar ân neveshte bud. dar hâli ke mâ bachchehâ dar hayât bâzi mikardim, u dar âshpazkhâne ghazâ mipokht va gâhi az mâ mikhâst kenârash beneshinim tâ âshpazi yâd begirim. u hamishe migoft ke âshpazi na tanhâ kâr ast, balke now'i honar ast.",
           en: 'Grandmother had a little notebook in which she had written down her recipes. While we children played in the courtyard, she cooked in the kitchen, and sometimes she asked us to sit beside her so that we would learn to cook. She always said cooking was not just work but a kind of art.',
         },
         {
@@ -1589,7 +1589,7 @@ export const B2: Unit[] = [
     },
     dialogue: [
       { who: 'Arash', fa: 'به نظرم باید ماشین شخصی رو کلاً از مرکز شهر ممنوع کنن.', tr: "be nazaram bâyad mâshin-e shakhsi ro kollan az markaz-e shahr mamnu' konan.", en: 'I think they should ban private cars from the city centre altogether.' },
-      { who: 'Sara', fa: 'با اینکه هوا آلوده\u200cست، این کار خیلیا رو اذیت می\u200cکنه.', tr: 'bâ inke havâ âludast, in kâr kheyliâ ro aziyat mikone.', en: "Even though the air's polluted, that would make life hard for a lot of people." },
+      { who: 'Sara', fa: 'با اینکه هوا آلوده\u200cست، این کار خیلیا رو اذیت می\u200cکنه.', tr: 'bâ inke havâ âludast, in kâr kheyliâ ro aziyyat mikone.', en: "Even though the air's polluted, that would make life hard for a lot of people." },
       { who: 'Arash', fa: 'قبول دارم. ولی در عوض، مردم مجبور می\u200cشن از مترو استفاده کنن و ترافیک کم می\u200cشه.', tr: 'ghabul dâram. vali dar avaz, mardom majbur mishan az metro estefâde konan va terâfik kam mishe.', en: "Granted. But on the other hand, people would have to use the metro and there'd be less traffic." },
       { who: 'Sara', fa: 'حتی اگه مترو رو گسترش بدن، به همه\u200cجای شهر نمی\u200cرسه.', tr: 'hattâ age metro ro gostaresh bedan, be hame-jâ-ye shahr nemirese.', en: "Even if they extend the metro, it won't reach every part of the city." },
       { who: 'Arash', fa: 'نکته\u200cی خوبیه. با این همه، فکر نمی\u200cکنم راه دیگه\u200cای داشته باشیم.', tr: 'nokte-ye khubiye. bâ in hame, fekr nemikonam râh-e dige-i dâshte bâshim.', en: "Good point. Even so, I don't think we have any other option." },
@@ -1756,7 +1756,7 @@ export const B2: Unit[] = [
     },
     dialogue: [
       { who: 'Aseman', fa: 'آرش، تو هم برای درسات از هوش مصنوعی استفاده می\u200cکنی؟', tr: "Ârash, to ham barâ-ye darsât az hush-e masnu'i estefâde mikoni?", en: 'Arash, do you use AI for your schoolwork too?' },
-      { who: 'Arash', fa: 'گاهی. بیشتر برای اینکه یه چیزی رو برام توضیح بده.', tr: 'gâhi. bishtar barâ-ye inke ye chizi ro barâm tozih bede.', en: 'Sometimes. Mostly to get it to explain something to me.' },
+      { who: 'Arash', fa: 'گاهی. بیشتر برای اینکه یه چیزی رو برام توضیح بده.', tr: 'gâhi. bishtar barâ-ye inke ye chizi ro barâm towzih bede.', en: 'Sometimes. Mostly to get it to explain something to me.' },
       { who: 'Aseman', fa: 'من دیروز ازش یه سؤال تاریخی پرسیدم، جوابش کاملاً غلط بود!', tr: "man diruz azash ye so'âl-e târikhi porsidam, javâbesh kâmelan ghalat bud!", en: 'Yesterday I asked it a history question and its answer was completely wrong!' },
       { who: 'Arash', fa: 'آره، همیشه درست نمی\u200cگه. باید جواباشو چک کنی.', tr: 'âre, hamishe dorost nemige. bâyad javâbâsho chek koni.', en: "Yeah, it isn't always right. You have to check its answers." },
       { who: 'Aseman', fa: 'پس فایده\u200cش چیه؟', tr: 'pas fâyedash chiye?', en: "Then what's the point of it?" },
@@ -1926,7 +1926,7 @@ export const B2: Unit[] = [
       { who: 'Sara', fa: 'چرا، ولی قسط وام و اجاره رو که بدیم، چیزی نمی\u200cمونه.', tr: 'cherâ, vali ghest-e vâm o ejâre ro ke bedim, chizi nemimune.', en: "It did, but once we've paid the loan instalment and the rent, there's nothing left." },
       { who: 'Sasan', fa: 'همه\u200cچی گرون شده. نون، گوشت، حتی بنزین.', tr: 'hame-chi gerun shode. nun, gusht, hattâ benzin.', en: 'Everything has got more expensive. Bread, meat, even petrol.' },
       { who: 'Sara', fa: 'باید درست بودجه\u200cبندی کنیم و خرجامونو کم کنیم.', tr: 'bâyad dorost budjebandi konim o kharjâmuno kam konim.', en: 'We need to budget properly and cut our spending.' },
-      { who: 'Sasan', fa: 'باشه، از رستوران رفتن شروع کنیم؟', tr: "bâshe, az resturân raftan shoru' konim?", en: 'OK, shall we start with eating out?' },
+      { who: 'Sasan', fa: 'باشه، از رستوران رفتن شروع کنیم؟', tr: "bâshe, az restorân raftan shoru' konim?", en: 'OK, shall we start with eating out?' },
       { who: 'Sara', fa: 'آره. هر چی زودتر شروع کنیم، بهتره.', tr: "âre. har chi zudtar shoru' konim, behtare.", en: 'Yes. The sooner we start, the better.' },
       { who: 'Sasan', fa: 'پس بیا یه کم هم پس\u200cانداز کنیم که دستمون خالی نمونه.', tr: 'pas biâ ye kam ham pas-andâz konim ke dastemun khâli namune.', en: "Then let's save a little too, so we're not left empty-handed." },
     ],
@@ -1935,12 +1935,12 @@ export const B2: Unit[] = [
       paragraphs: [
         {
           fa: 'تورم یکی از مهم\u200cترین مشکلات اقتصادی ایران در دهه\u200cهای اخیر بوده است. وقتی نرخ تورم بالا باشد، قیمت کالاها مدام افزایش می\u200cیابد و ارزش پول ملی کاهش پیدا می\u200cکند. به همین دلیل، بسیاری از خانواده\u200cها هر ماه با درآمد ثابتی که دارند، کالای کمتری می\u200cتوانند بخرند.',
-          tr: 'tavarrom yeki az mohemtarin moshkelât-e eghtesâdi-ye Irân dar dahehâ-ye akhir bude ast. vaghti nerkh-e tavarrom bâlâ bâshad, gheymat-e kâlâhâ modâm afzâyesh miyâbad va arzesh-e pul-e melli kâhesh peydâ mikonad. be hamin dalil, besyâri az khânevâdehâ har mâh bâ darâmad-e sâbeti ke dârand, kâlâ-ye kamtari mitavânand bekharand.',
+          tr: 'tavarrom yeki az mohemmtarin moshkelât-e eghtesâdi-ye Irân dar dahehâ-ye akhir bude ast. vaghti nerkh-e tavarrom bâlâ bâshad, gheymat-e kâlâhâ modâm afzâyesh miyâbad va arzesh-e pul-e melli kâhesh peydâ mikonad. be hamin dalil, besyâri az khânevâdehâ har mâh bâ darâmad-e sâbeti ke dârand, kâlâ-ye kamtari mitavânand bekharand.',
           en: "Inflation has been one of Iran's most serious economic problems in recent decades. When the inflation rate is high, the prices of goods keep rising and the national currency loses value. For this reason many families can buy fewer goods each month with the fixed income they have.",
         },
         {
           fa: 'در چنین شرایطی، مردم برای حفظ ارزش پس\u200cانداز خود به سراغ راه\u200cهای دیگری می\u200cروند. عده\u200cای سکه\u200cی طلا یا ارز خارجی می\u200cخرند و عده\u200cای دیگر پولشان را در خرید خانه یا خودرو سرمایه\u200cگذاری می\u200cکنند. اما این کار خود به افزایش تقاضا و در نتیجه بالا رفتن بیشتر قیمت\u200cها کمک می\u200cکند؛ هر چه مردم بیشتر به این بازارها هجوم ببرند، قیمت\u200cها سریع\u200cتر بالا می\u200cرود.',
-          tr: "dar chenin sharâyeti, mardom barâ-ye hefz-e arzesh-e pas-andâz-e khod be sorâgh-e râhhâ-ye digari miravand. edde-i sekke-ye talâ yâ arz-e khâreji mikharand va edde-i digar pulashân râ dar kharid-e khâne yâ khodro sarmâyegozâri mikonand. ammâ in kâr khod be afzâyesh-e taghâzâ va dar natije bâlâ raftan-e bishtar-e gheymathâ komak mikonad; har che mardom bishtar be in bâzârhâ hojum bebarand, gheymathâ sari'tar bâlâ miravad.",
+          tr: "dar chenin sharâyeti, mardom barâ-ye hefz-e arzesh-e pas-andâz-e khod be sorâgh-e râhhâ-ye digari miravand. edde-i sekke-ye talâ yâ arz-e khâreji mikharand va edde-i digar pulashân râ dar kharid-e khâne yâ khodrow sarmâyegozâri mikonand. ammâ in kâr khod be afzâyesh-e taghâzâ va dar natije bâlâ raftan-e bishtar-e gheymathâ komak mikonad; har che mardom bishtar be in bâzârhâ hojum bebarand, gheymathâ sari'tar bâlâ miravad.",
           en: 'In such conditions people look for other ways to protect the value of their savings. Some buy gold coins or foreign currency, and others invest their money in a house or a car. But this in turn raises demand and so pushes prices even higher: the more people rush into these markets, the faster prices go up.',
         },
         {
@@ -2059,7 +2059,7 @@ export const B2: Unit[] = [
       examples: [
         { fa: 'همان\u200cطور که فرمودید، باید زودتر شروع کنیم.', tr: "hamân-tor ke farmudid, bâyad zudtar shoru' konim.", en: 'As you said, we should start sooner.' },
         { fa: 'عرض کردم که من فردا نیستم.', tr: 'arz kardam ke man fardâ nistam.', en: "I mentioned that I won't be here tomorrow." },
-        { fa: 'ممکن است کمی بیشتر توضیح بدهید؟', tr: 'momken ast kami bishtar tozih bedahid?', en: 'Could you explain a little more?' },
+        { fa: 'ممکن است کمی بیشتر توضیح بدهید؟', tr: 'momken ast kami bishtar towzih bedahid?', en: 'Could you explain a little more?' },
         { fa: 'با احترام، من با این تصمیم موافق نیستم.', tr: 'bâ ehterâm, man bâ in tasmim movâfegh nistam.', en: "With respect, I don't agree with this decision." },
       ],
       checks: [
@@ -2087,7 +2087,7 @@ export const B2: Unit[] = [
       ],
     },
     dialogue: [
-      { who: 'Babak', fa: 'خب، بریم سراغ مورد بعدی: قرارداد با شرکت پارس.', tr: "khob, berim sorâgh-e mored-e ba'di: gharârdâd bâ sherkat-e Pârs.", en: "Right, let's move on to the next item: the contract with Pars." },
+      { who: 'Babak', fa: 'خب، بریم سراغ مورد بعدی: قرارداد با شرکت پارس.', tr: "khob, berim sorâgh-e mowred-e ba'di: gharârdâd bâ sherkat-e Pârs.", en: "Right, let's move on to the next item: the contract with Pars." },
       { who: 'Leila', fa: 'ببخشید آقای کریمی، من یه نگرانی کوچیک دارم.', tr: 'bebakhshid âghâ-ye Karimi, man ye negarâni-ye kuchik dâram.', en: 'Excuse me, Mr Karimi, I have one small concern.' },
       { who: 'Babak', fa: 'بفرمایید خانم احمدی.', tr: 'befarmâyid khânom-e Ahmadi.', en: 'Go ahead, Ms Ahmadi.' },
       { who: 'Leila', fa: 'به نظرم مهلتی که دادن خیلی کوتاهه. سه هفته برای این حجم کار کمه.', tr: 'be nazaram mohlati ke dâdan kheyli kutâhe. se hafte barâ-ye in hajm-e kâr kame.', en: "I think the deadline they've given is very short. Three weeks isn't enough for this much work." },
@@ -2253,7 +2253,7 @@ export const B2: Unit[] = [
       ],
     },
     dialogue: [
-      { who: 'Sasan', fa: 'باید یه ایمیل رسمی به مدیر بنویسم. چطوری شروع کنم؟', tr: "bâyad ye imeyl-e rasmi be modir benevisam. chetowri shoru' konam?", en: 'I have to write a formal email to the manager. How do I start?' },
+      { who: 'Sasan', fa: 'باید یه ایمیل رسمی به مدیر بنویسم. چطوری شروع کنم؟', tr: "bâyad ye imeyl-e rasmi be modir benevisam. chetori shoru' konam?", en: 'I have to write a formal email to the manager. How do I start?' },
       { who: 'Sara', fa: 'بنویس «با سلام و احترام». بعد خودتو معرفی کن.', tr: "benevis «bâ salâm va ehterâm». ba'd khodeto mo'arrefi kon.", en: 'Write "bâ salâm va ehterâm". Then introduce yourself.' },
       { who: 'Sasan', fa: 'می\u200cخوام بگم که گزارشو دیر می\u200cفرستم.', tr: 'mikhâm begam ke gozâresho dir miferestam.', en: "I want to say I'll be sending the report late." },
       { who: 'Sara', fa: 'تو ایمیل رسمی ننویس «دیر می\u200cفرستم». بنویس «گزارش با چند روز تأخیر ارسال خواهد شد.»', tr: "tu imeyl-e rasmi nanevis «dir miferestam». benevis «gozâresh bâ chand ruz ta'khir ersâl khâhad shod.»", en: 'Don\'t write "I\'ll send it late" in a formal email. Write "The report will be sent with a few days\' delay."' },
@@ -2277,7 +2277,7 @@ export const B2: Unit[] = [
         },
         {
           fa: 'نامه\u200cها و ایمیل\u200cهای اداری نیز قواعد خود را دارند. نامه\u200cی رسمی معمولاً با «با سلام و احترام» آغاز می\u200cشود و نویسنده پس از معرفی کوتاه، درخواست خود را با واژه\u200cای مانند «احتراماً» بیان می\u200cکند. به جای «می\u200cفرستم» اغلب نوشته می\u200cشود «ارسال می\u200cگردد» و به جای «است» گاهی «می\u200cباشد» به کار می\u200cرود، هرچند بسیاری از ویراستاران کاربرد بی\u200cجای «می\u200cباشد» را نادرست می\u200cدانند. نامه هم معمولاً با «با سپاس» یا «با تشکر» و سپس نام و امضای نویسنده به پایان می\u200cرسد.',
-          tr: "nâmehâ va imeylhâ-ye edâri niz ghavâ'ed-e khod râ dârand. nâme-ye rasmi ma'mulan bâ «bâ salâm va ehterâm» âghâz mishavad va nevisande pas az mo'arrefi-ye kutâh, darkhâst-e khod râ bâ vâzhe-i mânand-e «ehterâman» bayân mikonad. be jâ-ye «miferestam» aghlab neveshte mishavad «ersâl migardad» va be jâ-ye «ast» gâhi «mibâshad» be kâr miravad, harchand bisyâri az virâstârân kârbord-e bijâ-ye «mibâshad» râ nâdorost midânand. nâme ham ma'mulan bâ «bâ sepâs» yâ «bâ tashakkor» va sepas nâm va emzâ-ye nevisande be pâyân miresad.",
+          tr: "nâmehâ va imeylhâ-ye edâri niz ghavâ'ed-e khod râ dârand. nâme-ye rasmi ma'mulan bâ «bâ salâm va ehterâm» âghâz mishavad va nevisande pas az mo'arrefi-ye kutâh, darkhâst-e khod râ bâ vâzhe-i mânand-e «ehterâman» bayân mikonad. be jâ-ye «miferestam» aghlab neveshte mishavad «ersâl migardad» va be jâ-ye «ast» gâhi «mibâshad» be kâr miravad, harchand besyâri az virâstârân kârbord-e bijâ-ye «mibâshad» râ nâdorost midânand. nâme ham ma'mulan bâ «bâ sepâs» yâ «bâ tashakkor» va sepas nâm va emzâ-ye nevisande be pâyân miresad.",
           en: 'Official letters and emails have their own rules too. A formal letter usually opens with "bâ salâm va ehterâm", and after a short introduction the writer makes the request with a word such as "ehterâman" (respectfully). Instead of "I am sending" people often write "is being sent", and "mibâshad" is sometimes used instead of "ast" (is), although many editors consider unnecessary use of "mibâshad" incorrect. The letter usually ends with "bâ sepâs" or "bâ tashakkor", followed by the writer\'s name and signature.',
         },
       ],
@@ -2773,7 +2773,7 @@ export const B2: Unit[] = [
         },
         {
           fa: 'در اواخر دوره\u200cی قاجار، بسیاری از ایرانیان از قدرت بی\u200cحد شاه و نفوذ کشورهای خارجی ناراضی بودند. در اوایل قرن بیستم میلادی، پس از ماه\u200cها اعتراض، شاه قاجار فرمان مشروطه را امضا کرد و نخستین مجلس ایران افتتاح شد. انقلاب مشروطه نخستین تلاش جدی برای محدود کردن قدرت پادشاه با قانون بود و هنوز یکی از مهم\u200cترین رویدادهای تاریخ معاصر ایران به شمار می\u200cرود.',
-          tr: "dar avâkher-e dowre-ye Ghâjâr, besyâri az Irâniyân az ghodrat-e bi-hadd-e shâh va nofuz-e keshvarhâ-ye khâreji nârâzi budand. dar avâyel-e gharn-e bistom-e milâdi, pas az mâhhâ e'terâz, shâh-e Ghâjâr farmân-e mashrute râ emzâ kard va nokhostin majles-e Irân eftetâh shod. enghelâb-e mashrute nokhostin talâsh-e jeddi barâ-ye mahdud kardan-e ghodrat-e pâdeshâh bâ ghânun bud va hanuz yeki az mohemtarin ruydâdhâ-ye târikh-e mo'âser-e Irân be shomâr miravad.",
+          tr: "dar avâkher-e dowre-ye Ghâjâr, besyâri az Irâniyân az ghodrat-e bi-hadd-e shâh va nofuz-e keshvarhâ-ye khâreji nârâzi budand. dar avâyel-e gharn-e bistom-e milâdi, pas az mâhhâ e'terâz, shâh-e Ghâjâr farmân-e mashrute râ emzâ kard va nakhostin majles-e Irân eftetâh shod. enghelâb-e mashrute nakhostin talâsh-e jeddi barâ-ye mahdud kardan-e ghodrat-e pâdeshâh bâ ghânun bud va hanuz yeki az mohemmtarin ruydâdhâ-ye târikh-e mo'âser-e Irân be shomâr miravad.",
           en: 'Towards the end of the Qajar period, many Iranians were unhappy with the shah\'s unlimited power and the influence of foreign countries. In the early twentieth century, after months of protest, the Qajar shah signed the constitutional decree and Iran\'s first parliament opened. The Constitutional Revolution was the first serious attempt to limit the king\'s power by law, and it is still regarded as one of the most important events in Iran\'s modern history.',
         },
       ],
@@ -2930,17 +2930,17 @@ export const B2: Unit[] = [
       paragraphs: [
         {
           fa: 'فردوسی، شاعر بزرگ ایرانی، اهل توس در نزدیکی مشهد بود. او سال\u200cهای بسیاری از عمر خود را صرف سرودن «شاهنامه» کرد؛ کتابی که داستان پهلوانان و پادشاهان ایران را از روزگار اسطوره\u200cای تا پایان دوران ساسانیان روایت می\u200cکند. بسیاری از ایرانیان فردوسی را نگهبان زبان فارسی می\u200cدانند و مصراع «توانا بود هر که دانا بود» از او هنوز بر زبان مردم است.',
-          tr: "Ferdowsi, shâ'er-e bozorg-e Irâni, ahl-e Tus dar nazdiki-ye Mashhad bud. u sâlhâ-ye bisyâri az omr-e khod râ sarf-e sorudan-e «Shâhnâme» kard; ketâbi ke dâstân-e pahlavânân va pâdeshâhân-e Irân râ az ruzegâr-e osture-i tâ pâyân-e dowrân-e Sâsâniyân revâyat mikonad. bisyâri az Irâniyân Ferdowsi râ negahbân-e zabân-e fârsi midânand va mesrâ'-e «tavânâ bovad har ke dânâ bovad» az u hanuz bar zabân-e mardom ast.",
+          tr: "Ferdowsi, shâ'er-e bozorg-e Irâni, ahl-e Tus dar nazdiki-ye Mashhad bud. u sâlhâ-ye besyâri az omr-e khod râ sarf-e sorudan-e «Shâhnâme» kard; ketâbi ke dâstân-e pahlavânân va pâdeshâhân-e Irân râ az ruzegâr-e osture-i tâ pâyân-e dowrân-e Sâsâniyân revâyat mikonad. besyâri az Irâniyân Ferdowsi râ negahbân-e zabân-e fârsi midânand va mesrâ'-e «tavânâ bovad har ke dânâ bovad» az u hanuz bar zabân-e mardom ast.",
           en: 'Ferdowsi, the great Iranian poet, came from Tus near Mashhad. He spent many years of his life composing the Shahnameh, a book that tells the stories of Iran\'s heroes and kings from mythical times to the end of the Sasanian era. Many Iranians see Ferdowsi as the guardian of the Persian language, and his line "Whoever is wise is strong" is still on people\'s lips.',
         },
         {
           fa: 'سعدی و حافظ هر دو اهل شیراز بودند. سعدی دو کتاب معروف دارد: «بوستان» که سراسر شعر است و «گلستان» که نثری آمیخته با شعر است. شعر «بنی آدم اعضای یک پیکرند» از گلستان است. حافظ بیشتر به خاطر غزل\u200cهایش شناخته می\u200cشود. در بسیاری از خانه\u200cهای ایرانی دیوان حافظ پیدا می\u200cشود و مردم در شب یلدا و نوروز با آن فال می\u200cگیرند. آرامگاه این دو شاعر در شیراز هر سال میزبان گردشگران فراوانی است.',
-          tr: "Sa'di va Hâfez har do ahl-e Shirâz budand. Sa'di do ketâb-e ma'ruf dârad: «Bustân» ke sarâsar she'r ast va «Golestân» ke nasri âmikhte bâ she'r ast. she'r-e «bani âdam a'zâ-ye yek peykarand» az Golestân ast. Hâfez bishtar be khâter-e ghazalhâyash shenâkhte mishavad. dar bisyâri az khânehâ-ye Irâni divân-e Hâfez peydâ mishavad va mardom dar shab-e Yaldâ va Nowruz bâ ân fâl migirand. ârâmgâh-e in do shâ'er dar Shirâz har sâl mizbân-e gardeshgarân-e farâvâni ast.",
+          tr: "Sa'di va Hâfez har do ahl-e Shirâz budand. Sa'di do ketâb-e ma'ruf dârad: «Bustân» ke sarâsar she'r ast va «Golestân» ke nasri âmikhte bâ she'r ast. she'r-e «bani âdam a'zâ-ye yek peykarand» az Golestân ast. Hâfez bishtar be khâter-e ghazalhâyash shenâkhte mishavad. dar besyâri az khânehâ-ye Irâni divân-e Hâfez peydâ mishavad va mardom dar shab-e Yaldâ va Nowruz bâ ân fâl migirand. ârâmgâh-e in do shâ'er dar Shirâz har sâl mizbân-e gardeshgarân-e farâvâni ast.",
           en: 'Saadi and Hafez both came from Shiraz. Saadi wrote two famous books: the Bustan, entirely in verse, and the Golestan, prose mixed with verse. The poem "Human beings are members of one body" comes from the Golestan. Hafez is known above all for his ghazals. Many Iranian homes have a copy of his Divan, and people take a fâl from it on Yalda night and at Nowruz. The tombs of both poets in Shiraz welcome large numbers of visitors every year.',
         },
         {
           fa: 'مولوی، که در ایران بیشتر با نام «مولانا» شناخته می\u200cشود، به روایت مشهور در بلخ به دنیا آمد و بیشتر عمرش را در قونیه گذراند. «مثنوی معنوی» او با مصراع معروف «بشنو این نی چون شکایت می\u200cکند» آغاز می\u200cشود. شعر این چهار شاعر فقط در کتاب\u200cها نمانده است؛ بسیاری از مصراع\u200cهایشان به ضرب\u200cالمثل تبدیل شده\u200cاند و مردم در گفت\u200cوگوهای روزمره، گاهی بی\u200cآنکه بدانند، شعر آن\u200cها را نقل می\u200cکنند.',
-          tr: "Mowlavi, ke dar Irân bishtar bâ nâm-e «Mowlânâ» shenâkhte mishavad, be revâyat-e mashhur dar Balkh be donyâ âmad va bishtar-e omrash râ dar Ghuniye gozarând. «Masnavi-ye Ma'navi»-ye u bâ mesrâ'-e ma'ruf-e «beshnow in ney chon shekâyat mikonad» âghâz mishavad. she'r-e in chahâr shâ'er faghat dar ketâbhâ namânde ast; bisyâri az mesrâ'hâyashân be zarbolmasal tabdil shode-and va mardom dar goft-o-guhâ-ye ruzmarre, gâhi bi-ânke bedânand, she'r-e ânhâ râ naghl mikonand.",
+          tr: "Mowlavi, ke dar Irân bishtar bâ nâm-e «Mowlânâ» shenâkhte mishavad, be revâyat-e mashhur dar Balkh be donyâ âmad va bishtar-e omrash râ dar Ghuniye gozarând. «Masnavi-ye Ma'navi»-ye u bâ mesrâ'-e ma'ruf-e «beshnow in ney chon shekâyat mikonad» âghâz mishavad. she'r-e in chahâr shâ'er faghat dar ketâbhâ namânde ast; besyâri az mesrâ'hâyashân be zarbolmasal tabdil shode-and va mardom dar goft-o-guhâ-ye ruzmarre, gâhi bi-ânke bedânand, she'r-e ânhâ râ naghl mikonand.",
           en: 'Rumi, known in Iran mostly as Mowlana, was born, according to the well-known account, in Balkh, and spent most of his life in Konya. His Masnavi opens with the famous line "Listen to this reed, how it complains". The poetry of these four has not stayed in books: many of their lines have become proverbs, and people quote them in everyday conversation, sometimes without knowing it.',
         },
       ],
@@ -3096,17 +3096,17 @@ export const B2: Unit[] = [
       paragraphs: [
         {
           fa: 'سینمای ایران در چند دهه\u200cی گذشته جایگاه ویژه\u200cای در جشنواره\u200cهای جهانی پیدا کرده است. عباس کیارستمی یکی از نخستین کارگردانانی بود که نام سینمای ایران را در جهان مطرح کرد. فیلم\u200cهای او معمولاً داستان ساده\u200cای دارند، بازیگرانشان اغلب حرفه\u200cای نیستند و بسیاری از صحنه\u200cها در جاده یا داخل ماشین می\u200cگذرند. یکی از فیلم\u200cهای او، «طعم گیلاس»، برنده\u200cی نخل طلای جشنواره\u200cی کن شد و هنوز هم یکی از مهم\u200cترین آثار سینمای ایران به شمار می\u200cرود.',
-          tr: "sinamâ-ye Irân dar chand dahe-ye gozashte jâygâh-e vizhe-i dar jashnvârehâ-ye jahâni peydâ karde ast. Abbâs Kiyârostami yeki az nakhostin kârgardânâni bud ke nâm-e sinamâ-ye Irân râ dar jahân matrah kard. filmhâ-ye u ma'mulan dâstân-e sâde-i dârand, bâzigarânashân aghlab herfe-i nistand va besyâri az sahnehâ dar jâdde yâ dâkhel-e mâshin migozarand. yeki az filmhâ-ye u, «Ta'm-e gilâs», barande-ye nakhl-e talâ-ye jashnvâre-ye Kan shod va hanuz ham yeki az mohemtarin âsâr-e sinamâ-ye Irân be shomâr miravad.",
+          tr: "sinamâ-ye Irân dar chand dahe-ye gozashte jâygâh-e vizhe-i dar jashnvârehâ-ye jahâni peydâ karde ast. Abbâs Kiyârostami yeki az nakhostin kârgardânâni bud ke nâm-e sinamâ-ye Irân râ dar jahân matrah kard. filmhâ-ye u ma'mulan dâstân-e sâde-i dârand, bâzigarânashân aghlab herfe-i nistand va besyâri az sahnehâ dar jâdde yâ dâkhel-e mâshin migozarand. yeki az filmhâ-ye u, «Ta'm-e gilâs», barande-ye nakhl-e talâ-ye jashnvâre-ye Kan shod va hanuz ham yeki az mohemmtarin âsâr-e sinamâ-ye Irân be shomâr miravad.",
           en: 'Over the past few decades Iranian cinema has earned a special place at international festivals. Abbas Kiarostami was one of the first directors to make Iranian cinema known around the world. His films usually have simple stories, their actors are often not professionals, and many scenes take place on the road or inside a car. One of his films, Taste of Cherry, won the Palme d\'Or at Cannes and is still counted among the most important works of Iranian cinema.',
         },
         {
           fa: 'یک نسل بعد، اصغر فرهادی با فیلم\u200cهایی درباره\u200cی زندگی طبقه\u200cی متوسط شهری توجه جهان را جلب کرد. «جدایی نادر از سیمین» داستان زن و شوهری است که می\u200cخواهند از هم جدا شوند و این تصمیم زندگی دو خانواده را درگیر می\u200cکند. این فیلم نخستین فیلم ایرانی بود که جایزه\u200cی اسکار بهترین فیلم خارجی\u200cزبان را برد. چند سال بعد، فرهادی با «فروشنده» برای دومین بار این جایزه را به دست آورد. در فیلم\u200cهای او معمولاً هیچ شخصیتی کاملاً خوب یا کاملاً بد نیست و تماشاگر باید خودش قضاوت کند.',
-          tr: "yek nasl ba'd, Asghar Farhâdi bâ filmhâyi darbâre-ye zendegi-ye tabaghe-ye motevasset-e shahri tavajjoh-e jahân râ jalb kard. «jodâyi-ye Nâder az Simin» dâstân-e zan va showhari ast ke mikhâhand az ham jodâ shavand va in tasmim zendegi-ye do khânevâde râ dargir mikonad. in film nakhostin film-e Irâni bud ke jâyeze-ye oskâr-e behtarin film-e khâreji-zabân râ bord. chand sâl ba'd, Farhâdi bâ «Forushande» barâ-ye dovvomin bâr in jâyeze râ be dast âvard. dar filmhâ-ye u ma'mulan hich shakhsiyyati kâmelan khub yâ kâmelan bad nist va tamâshâgar bâyad khodash ghezâvat konad.",
+          tr: "yek nasl ba'd, Asghar Farhâdi bâ filmhâyi darbâre-ye zendegi-ye tabaghe-ye motavasset-e shahri tavajjoh-e jahân râ jalb kard. «jodâyi-ye Nâder az Simin» dâstân-e zan va showhari ast ke mikhâhand az ham jodâ shavand va in tasmim zendegi-ye do khânevâde râ dargir mikonad. in film nakhostin film-e Irâni bud ke jâyeze-ye oskâr-e behtarin film-e khâreji-zabân râ bord. chand sâl ba'd, Farhâdi bâ «Forushande» barâ-ye dovvomin bâr in jâyeze râ be dast âvard. dar filmhâ-ye u ma'mulan hich shakhsiyyati kâmelan khub yâ kâmelan bad nist va tamâshâgar bâyad khodash ghezâvat konad.",
           en: 'A generation later, Asghar Farhadi caught the world\'s attention with films about urban middle-class life. A Separation is the story of a husband and wife who want to separate, a decision that draws two families into conflict. It was the first Iranian film to win the Oscar for Best Foreign Language Film. A few years later Farhadi won the award a second time with The Salesman. In his films no character is usually entirely good or entirely bad, and viewers have to judge for themselves.',
         },
         {
           fa: 'سینمای ایران فقط به جشنواره\u200cها محدود نیست. فیلم «بچه\u200cهای آسمان»، ساخته\u200cی مجید مجیدی، داستان خواهر و برادری را روایت می\u200cکند که فقط یک جفت کفش دارند و به نوبت با آن به مدرسه می\u200cروند. این فیلم نخستین فیلم ایرانی بود که نامزد اسکار شد. در خود ایران نیز جشنواره\u200cی فیلم فجر هر سال در بهمن\u200cماه برگزار می\u200cشود و برای بسیاری از مردم فرصتی است تا فیلم\u200cهای تازه را پیش از اکران عمومی ببینند.',
-          tr: "sinamâ-ye Irân faghat be jashnvârehâ mahdud nist. film-e «Bachehâ-ye âsemân», sâkhte-ye Majid Majidi, dâstân-e khâhar va barâdari râ revâyat mikonad ke faghat yek joft kafsh dârand va be nowbat bâ ân be madrese miravand. in film nakhostin film-e Irâni bud ke nâmzad-e oskâr shod. dar khod-e Irân niz jashnvâre-ye film-e Fajr har sâl dar Bahman-mâh bargozâr mishavad va barâ-ye besyâri az mardom forsati ast tâ filmhâ-ye tâze râ pish az ekrân-e omumi bebinand.",
+          tr: "sinamâ-ye Irân faghat be jashnvârehâ mahdud nist. film-e «Bachchehâ-ye âsemân», sâkhte-ye Majid Majidi, dâstân-e khâhar va barâdari râ revâyat mikonad ke faghat yek joft kafsh dârand va be nowbat bâ ân be madrese miravand. in film nakhostin film-e Irâni bud ke nâmzad-e oskâr shod. dar khod-e Irân niz jashnvâre-ye film-e Fajr har sâl dar Bahman-mâh bargozâr mishavad va barâ-ye besyâri az mardom forsati ast tâ filmhâ-ye tâze râ pish az ekrân-e omumi bebinand.",
           en: 'Iranian cinema is not only for festivals. Children of Heaven, made by Majid Majidi, tells the story of a brother and sister who have only one pair of shoes and take turns wearing them to school. It was the first Iranian film to be nominated for an Oscar. In Iran itself, the Fajr Film Festival is held every year in the month of Bahman, and for many people it is a chance to see new films before their general release.',
         },
       ],

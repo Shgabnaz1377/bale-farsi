@@ -41,3 +41,26 @@ describe('vocalizeWith', () => {
     expect(vocalizeWith(lex, 'یه مبل')).toBe(`یه م${DA}بل`)
   })
 })
+
+describe('one mark per vowel', () => {
+  it('does not let a final letter take the first vowel of the next word', () => {
+    expect(vocalize('امروز در خانه استراحت می‌کنم.', 'emruz dar khâne esterâhat mikonam.')).toContain('خانه اِستِراحَت')
+    expect(vocalize('هر دو امیدوارند', 'har do omidvârand')).not.toContain('ُُ')
+    expect(vocalize('یک بلیت به اصفهان', 'yek belit be Esfahân')).toContain(' به اِصفَهان')
+  })
+
+  it('keeps an ezâfe mark that is already written, without adding a second one', () => {
+    expect(vocalize('زیرِ بغلِ کسی', 'zir-e baghal-e kasi')).not.toMatch(/ِِ/)
+  })
+})
+
+describe('ow and ZWNJ', () => {
+  it('writes the diphthong ow with a fatha, as dictionaries do', () => {
+    expect(vocalize('دولت', 'dowlat')).toBe('دَولَت')
+    expect(vocalize('نو', 'now')).toBe('نَو')
+  })
+
+  it('puts the vowel after a ZWNJ on the alef', () => {
+    expect(vocalize('پس‌انداز', 'pasandâz')).toBe('پَس‌اَنداز')
+  })
+})

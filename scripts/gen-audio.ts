@@ -7,10 +7,16 @@
 //   node scripts/gen-audio.ts --compare  20 sample words with and without vowel marks, in audio-compare/, to listen to
 //   node scripts/gen-audio.ts --redo     regenerate every clip (after a pronunciation fix). This also replaces
 //                                        clips a person recorded, so keep those elsewhere and copy them back.
+//   node scripts/gen-audio.ts --seed     only write the manifest for the clips that exist (no recording)
 //   --no-vowels                          read the plain script, as before vowel marks were added
 //
+// The manifest (src/content/audio-manifest.json) remembers what each clip was recorded from: the voice and
+// the exact text handed to it, vowel marks included. When a reading changes (a Finglish fix, a better vowel
+// rule) the clip no longer matches and is recorded again; clips whose reading did not change are left alone.
+// A clip a person recorded is marked "person" there and is never replaced.
+//
 // Needs AZURE_SPEECH_KEY and AZURE_SPEECH_REGION in the environment or in .env.local (git-ignored).
-// Files recorded by a person (public/audio/<key>.mp3 already present) are never overwritten.
+import { createHash } from 'node:crypto'
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs'
 import { allSpeech, type Voice } from '../src/content/speech.ts'
 import { normSpeech } from '../src/lib/audioKey.ts'
@@ -41,6 +47,7 @@ function sayable(text: string, tr?: string): string {
 // Check with: npm run check:voices
 const OUT = APP.id === 'begociao' ? 'public-begociao/audio' : 'public/audio'
 const INDEX = APP.id === 'begociao' ? 'src/courses/begociao/audio-index.json' : 'src/content/audio-index.json'
+const MANIFEST = APP.id === 'begociao' ? 'src/courses/begociao/audio-manifest.json' : 'src/content/audio-manifest.json'
 const XML_LANG = APP.target === 'it' ? 'it-IT' : 'fa-IR'
 const dry = process.argv.includes('--dry')
 
@@ -94,6 +101,30 @@ mkdirSync(OUT, { recursive: true })
 const redo = process.argv.includes('--redo')
 const have = new Set(readdirSync(OUT).filter((f) => f.endsWith('.mp3')).map((f) => f.slice(0, -4)))
 
+/** key → fingerprint of what the clip was recorded from, or "person" for a human recording. */
+const manifest: Record<string, string> = existsSync(MANIFEST) ? JSON.parse(readFileSync(MANIFEST, 'utf8')) : {}
+const PERSON = 'person'
+function fingerprint(item: { text: string; tr?: string; voice: Voice }): string {
+  const v = VOICES[item.voice]
+  const say = novowels ? (SPOKEN[item.text] ?? item.text) : sayable(item.text, item.tr)
+  return createHash('sha1').update(`${v.name}|${v.pitch}|${normSpeech(say)}`).digest('base64url').slice(0, 12)
+}
+function saveManifest() {
+  const lines = Object.keys(manifest).sort().map((k) => `${JSON.stringify(k)}:${JSON.stringify(manifest[k])}`)
+  writeFileSync(MANIFEST, `{\n${lines.join(',\n')}\n}\n`)
+}
+const upToDate = (i: { key: string; text: string; tr?: string; voice: Voice }) =>
+  have.has(i.key) && (manifest[i.key] === PERSON || manifest[i.key] === fingerprint(i))
+
+if (process.argv.includes('--seed')) {
+  // Record nothing: say that every clip on disk was made from what the course reads today.
+  let n = 0
+  for (const i of items) if (have.has(i.key) && manifest[i.key] !== PERSON) { manifest[i.key] = fingerprint(i); n++ }
+  saveManifest()
+  console.log(`manifest: ${n} clips fingerprinted`)
+  process.exit(0)
+}
+
 if (process.argv.includes('--compare')) {
   // Words whose vowels a voice often guesses wrong, recorded both ways so a native speaker can choose.
   const key = env('AZURE_SPEECH_KEY')
@@ -114,9 +145,12 @@ if (process.argv.includes('--compare')) {
   }
   process.exit(0)
 }
-const todo = redo ? items : items.filter((i) => !have.has(i.key))
+// One entry per clip: the same words with the same voice in two lessons are one recording.
+const unique = [...new Map(items.map((i) => [i.key, i])).values()]
+const todo = unique.filter((i) => (redo ? manifest[i.key] !== PERSON : !upToDate(i)))
+const changed = todo.filter((i) => have.has(i.key)).length
 const chars = todo.reduce((n, i) => n + i.text.length, 0)
-console.log(`${items.length} texts, ${have.size} already have audio, ${todo.length} to generate (${chars} characters)`)
+console.log(`${unique.length} clips, ${todo.length} to generate: ${todo.length - changed} new, ${changed} whose reading changed (${chars} characters)`)
 if (process.argv.includes('--list')) for (const i of todo) console.log(`  [${i.voice}] ${i.text}  · ${i.where}`)
 
 if (!dry && todo.length) {
@@ -131,7 +165,8 @@ if (!dry && todo.length) {
       const k = item.key
       writeFileSync(`${OUT}/${k}.mp3`, await synth(sayable(item.text, item.tr), item.voice, key, region))
       have.add(k)
-      if (++done % 25 === 0 || done === todo.length) console.log(`  ${done}/${todo.length}`)
+      manifest[k] = fingerprint(item)
+      if (++done % 25 === 0 || done === todo.length) { console.log(`  ${done}/${todo.length}`); saveManifest() }
       await sleep(3100) // free tier: 20 requests per minute
     }
   }
@@ -141,4 +176,5 @@ if (!dry && todo.length) {
 const used = items.map((i) => i.key).filter((k) => have.has(k))
 // A dry run only reports: it never rewrites the index.
 if (!dry) writeFileSync(INDEX, JSON.stringify([...new Set(used)].sort()) + '\n')
+if (!dry) saveManifest()
 console.log(`audio index: ${used.length} clips${dry ? ' (dry run: index not written)' : ''}`)
