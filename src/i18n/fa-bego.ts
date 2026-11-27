@@ -338,4 +338,13 @@ export const FA_BEGO: Record<string, string> = {
   "Borrowed, but said the Persian way": "قرضی، اما به شیوهٔ فارسی",
   "Many everyday words come from Arabic (and some from French), but they follow Persian sounds and grammar.": "بسیاری از کلمه‌های روزمره از عربی (و بعضی از فرانسوی) آمده‌اند، اما از صدا و دستور فارسی پیروی می‌کنند.",
   "Persian is not Arabic: why you already know some words": "فارسی عربی نیست: چرا بعضی کلمه‌ها را از قبل می‌دانی",
+  "Dictionary": "فرهنگ لغت",
+  "The dictionary adds {n} common words, open to everyone.": "فرهنگ لغت {n} کلمهٔ رایج دیگر دارد و برای همه باز است.",
+  "Loading the dictionary…": "در حال بارگذاری فرهنگ لغت…",
+  "The dictionary could not be loaded.": "فرهنگ لغت بارگذاری نشد.",
+  "Present stem": "بن مضارع",
+  "Show more ({n} left)": "نمایش بیشتر ({n} مورد دیگر)",
+  "No words found for “{q}”.": "کلمه‌ای برای «{q}» پیدا نشد.",
+  "Opens Google Translate in a new tab": "Google Translate را در زبانهٔ جدید باز می‌کند",
+  "Not in the dictionary? Translate it": "در فرهنگ لغت نیست؟ ترجمه‌اش کن",
 }

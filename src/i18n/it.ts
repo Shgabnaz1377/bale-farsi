@@ -338,4 +338,13 @@ export const IT: Record<string, string> = {
   "Borrowed, but said the Persian way": "Prese in prestito, ma dette alla persiana",
   "Many everyday words come from Arabic (and some from French), but they follow Persian sounds and grammar.": "Molte parole di tutti i giorni vengono dall'arabo (e alcune dal francese), ma seguono i suoni e la grammatica del persiano.",
   "Persian is not Arabic: why you already know some words": "Il persiano non è arabo: perché conosci già alcune parole",
+  "Dictionary": "Dizionario",
+  "The dictionary adds {n} common words, open to everyone.": "Il dizionario aggiunge {n} parole comuni, aperto a tutti.",
+  "Loading the dictionary…": "Caricamento del dizionario…",
+  "The dictionary could not be loaded.": "Impossibile caricare il dizionario.",
+  "Present stem": "Radice del presente",
+  "Show more ({n} left)": "Mostra altre ({n} rimanenti)",
+  "No words found for “{q}”.": "Nessuna parola trovata per “{q}”.",
+  "Opens Google Translate in a new tab": "Apre Google Traduttore in una nuova scheda",
+  "Not in the dictionary? Translate it": "Non è nel dizionario? Traducila",
 }
