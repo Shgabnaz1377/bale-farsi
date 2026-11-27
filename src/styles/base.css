@@ -55,7 +55,14 @@ main:focus { outline: none }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap }
 
 .wrap { max-width: 680px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)) }
-.page { padding-block: 20px 72px; display: flex; flex-direction: column; gap: 18px }
+.page { padding-block: 20px calc(72px + var(--tab-h)); display: flex; flex-direction: column; gap: 18px }
+
+/* App shell: a slim top bar, and on phones a tab bar fixed to the bottom. Views that fill the screen use
+   calc(100dvh - var(--top-h) - var(--tab-h)). */
+:root { --top-h: 64px; --tab-h: 0px }
+@media (max-width: 720px) {
+  :root { --top-h: 54px; --tab-h: calc(64px + env(safe-area-inset-bottom, 0px)) }
+}
 
 /* Bego Ciao: Persian interface (right to left, Vazirmatn), Italian is the learned text (left to right, Latin font). */
 html.app-begociao body, html.app-begociao h1, html.app-begociao h2, html.app-begociao h3 { font-family: var(--f-fa) }
