@@ -2,6 +2,7 @@ import { LEVELS } from './course.ts'
 import { LETTERS } from './alphabet.ts'
 import { VOWELS, VOWEL_PAIRS } from './vowels.ts'
 import { HOMOGRAPHS } from './homographs.ts'
+import { COGNATES, EXTRA_LETTERS, LOANWORDS, NO_GENDER } from './notArabic.ts'
 import { APP } from '../app.ts'
 import { dialogueVoices, type VoiceId } from './speakers.ts'
 import { NARRATOR, clipKey } from './voices.ts'
@@ -53,6 +54,8 @@ export function allSpeech(): SpeechItem[] {
     add(f.fa, 'Vowels · homographs', { tr: f.tr, en: f.en })
     add(f.context.fa, 'Vowels · homographs', { tr: f.context.tr, en: f.context.en })
   }
+  // The "Persian is not Arabic" page.
+  if (APP.alphabet) for (const w of [...COGNATES, ...EXTRA_LETTERS.map((l) => l.word), ...NO_GENDER, ...LOANWORDS]) add(w.fa, 'Persian is not Arabic', { tr: w.tr, en: w.en })
   for (const p of PISHI_LINES) add(p.text, 'Pishi', { tr: p.tr, en: p.en })
 
   const groups = [...LEVELS.map((lv) => ({ label: lv.level, units: lv.units })), ...TRACKS.map((t) => ({ label: t.name, units: t.units }))]

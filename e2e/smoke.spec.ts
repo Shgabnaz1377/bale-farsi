@@ -160,3 +160,16 @@ test('the skip link moves focus to the page content', async ({ page }) => {
   await expect(page.locator('main')).toBeFocused()
   await expect(page).toHaveURL(/#\/$/)
 })
+
+test('the Culture and For-couples tracks are open from the start', async ({ page }) => {
+  const problems = watchConsole(page)
+  await page.goto('/#/')
+  await expect(page.getByRole('heading', { name: /Culture/ })).toBeVisible()
+  await expect(page.getByRole('heading', { name: /For couples/ })).toBeVisible()
+  await page.getByRole('link', { name: /Meeting your partner's family/ }).click()
+  await expect(page).toHaveURL(/#\/unit\/couples-meet-family/)
+  await expect(page.locator('.dlg .avatar').first()).toBeVisible()
+  await page.goto('/#/persian-not-arabic')
+  await expect(page.getByRole('heading', { name: 'Persian is not Arabic' })).toBeVisible()
+  expect(ignoreFonts(problems)).toEqual([])
+})
