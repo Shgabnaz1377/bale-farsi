@@ -1,9 +1,9 @@
 /** Italian for the parts of the course outside the units: levels, lesson names and the alphabet's example words. */
 export const IT_LEVELS: Record<string, { name: string; blurb: string }> = {
-  A1: { name: 'Principiante', blurb: 'Saluta, presentati, conta, parla di famiglia, cibo e della tua giornata.' },
-  A2: { name: 'Elementare', blurb: 'Fai acquisti, chiedi la strada, descrivi la casa, racconta il passato, il tempo e la salute.' },
-  B1: { name: 'Intermedio', blurb: 'Fai progetti, parla di lavoro e studio, dai opinioni, gestisci il ta\'ârof e racconta storie.' },
-  B2: { name: 'Intermedio superiore', blurb: 'Leggi le notizie, passa dal persiano scritto a quello parlato, scopri la poesia e argomenta.' },
+  A1: { name: 'Principiante', blurb: 'Saluta, presentati, conta, di\' l\'ora, descrivi le persone e parla di famiglia, scuola, cibo, lavoro e hobby. Impara i verbi chiave e la differenza tra persiano parlato e scritto.' },
+  A2: { name: 'Elementare', blurb: 'Fai acquisti, mangia fuori, viaggia, cucina, telefona e invita, parla della giornata, dei sentimenti, del passato e dei tuoi piani, e festeggia le feste persiane.' },
+  B1: { name: 'Intermedio', blurb: 'Dai opinioni e consigli, gestisci il ta\'ârof, i colloqui, l\'affitto e i servizi, racconta storie, collega le idee con il congiuntivo e parla come gli iraniani.' },
+  B2: { name: 'Intermedio superiore', blurb: 'Argomenta, leggi notizie e lettere formali, usa modi di dire e slang, parla di scienza, economia e storia, e scopri poesia, cinema e dialetti persiani.' },
 }
 
 export const IT_LESSON_NAMES: Record<string, string> = {
