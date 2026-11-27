@@ -4,6 +4,7 @@ import { misreadings, vowelsLesson } from '../src/lib/vowelsLesson.ts'
 import { marksWanted, withMarks } from '../src/lib/vowelMarks.ts'
 import { stripVowels, vocalize } from '../src/lib/vocalize.ts'
 import { P } from '../src/lib/store.ts'
+import { APP } from '../src/app.ts'
 
 describe('vowel data', () => {
   it('has three short and three long vowels', () => {
@@ -41,7 +42,8 @@ describe('vowels lesson', () => {
   })
 })
 
-describe('vowel marks on screen', () => {
+// Vowel marks are for Persian only; Bego Ciao (Italian) never shows them.
+describe.runIf(APP.target === 'fa')('vowel marks on screen', () => {
   afterEach(() => { P.settings.vowels = 'auto' })
 
   it('shows marks in A1, on single words in A2, and not from B1', () => {
