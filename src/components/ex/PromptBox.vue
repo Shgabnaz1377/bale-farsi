@@ -13,8 +13,8 @@ defineProps<{ prompt: Prompt }>()
   </div>
   <div v-else-if="prompt.listen && prompt.audio" class="prompt">
     <div class="listen">
-      <SpeakButton :text="prompt.audio" big />
-      <SpeakButton :text="prompt.audio" slow />
+      <SpeakButton :text="prompt.audio" :voice="prompt.voice" big />
+      <SpeakButton :text="prompt.audio" :voice="prompt.voice" slow />
     </div>
   </div>
   <div v-else-if="prompt.digit" class="prompt">
@@ -22,7 +22,7 @@ defineProps<{ prompt: Prompt }>()
   </div>
   <div v-else-if="prompt.fa || prompt.en" class="prompt" :class="{ long: (prompt.fa?.length ?? 0) > 18 }">
     <span v-if="prompt.who" class="who chip lapis">{{ prompt.who }}</span>
-    <span v-if="prompt.audio" class="btns"><SpeakButton :text="prompt.audio" /><SpeakButton :text="prompt.audio" slow /></span>
+    <span v-if="prompt.audio" class="btns"><SpeakButton :text="prompt.audio" :voice="prompt.voice" /><SpeakButton :text="prompt.audio" :voice="prompt.voice" slow /></span>
     <div class="texts">
       <FaText v-if="prompt.fa" :fa="prompt.fa" :tr="prompt.tr" :size="(prompt.fa.length > 18 ? 'lg' : 'xl')" :hide-tr="prompt.hideTr" :keep-fa="prompt.hideTr" />
       <p v-if="prompt.en" class="en">{{ prompt.en }}</p>

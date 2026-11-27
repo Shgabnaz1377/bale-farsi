@@ -1,19 +1,20 @@
 <script setup lang="ts">
 import { canSpeak, speak } from '@/lib/speech.ts'
 import AppIcon from './AppIcon.vue'
+import type { VoiceId } from '@/content/speakers.ts'
 import { t } from '@/i18n/index.ts'
 
-withDefaults(defineProps<{ text: string; big?: boolean; slow?: boolean }>(), { big: false, slow: false })
+withDefaults(defineProps<{ text: string; big?: boolean; slow?: boolean; voice?: VoiceId }>(), { big: false, slow: false, voice: undefined })
 </script>
 
 <template>
   <button
-    v-if="canSpeak(text)"
+    v-if="canSpeak(text, voice)"
     type="button"
     class="spk"
     :class="{ big }"
     :aria-label="slow ? t('Play slowly') : t('Play audio')"
-    @click.stop="speak(text, slow)"
+    @click.stop="speak(text, slow, voice)"
   >
     <AppIcon :name="slow ? 'slow' : 'speaker'" />
   </button>

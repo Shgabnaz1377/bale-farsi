@@ -23,7 +23,20 @@ PersianMeow is a free app that teaches Persian to English speakers, from first l
 | **Audio** | Recorded Persian audio for every word, sentence, dialogue line and reading (Azure neural voices, `npm run audio`), with slow playback; your own recordings can replace any clip. |
 | **Settings** | Show Persian script + Finglish, Finglish only, or script only; light/dark; backup and restore progress. |
 
-Audio uses the browser's speech synthesis and needs a Persian (fa-IR) voice; Microsoft Edge ships one.
+### Voices
+
+| Who | Persian (PersianMeow) | Italian (Bego Ciao) |
+|---|---|---|
+| Narration (words, sentences, readings) | Farid, male (chosen by ear by a native speaker) | Elsa, female |
+| A woman in a dialogue | Dilara, female | Elsa, female |
+| A man in a dialogue | Farid, male | Diego, male |
+| A second woman / man in the same dialogue | same voice, pitch +10% / −12% | same voice, pitch +10% / −12% |
+
+Every dialogue speaker has a gender in `src/content/speakers.ts`; `src/content/voices.ts` maps genders to Azure voices and records each voice's real gender. `npm run check:voices` (in CI) fails if a speaker has no gender or would get a voice of the wrong gender. Narration clips are `public/audio/<audioKey(text)>.mp3`; dialogue lines in another voice are `<audioKey("<voice>|<text>")>.mp3`, so the same sentence said by a woman and a man are two recordings. Until a line's own clip is recorded, the app falls back to the narrator's clip.
+
+Recording (needs the Azure key in `.env.local`): `node scripts/gen-audio.ts --dry --list` shows what is missing and in which voice; `node scripts/gen-audio.ts` records it (`APP=begociao` for Bego Ciao).
+
+Without a recorded clip, audio falls back to the browser's speech synthesis, which needs a Persian (fa-IR) voice; Microsoft Edge ships one.
 
 ## Accounts (optional)
 

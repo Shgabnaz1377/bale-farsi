@@ -11,6 +11,7 @@ export type Theme = 'system' | 'light' | 'dark'
 export type { Lang } from '@/i18n/index.ts'
 import { detectLang, type Lang } from '@/i18n/index.ts'
 import { APP } from '@/app.ts'
+import { trackOf } from '@/content/tracks/index.ts'
 
 export interface Settings {
   mode: ScriptMode
@@ -162,6 +163,8 @@ export function levelUnlocked(level: Level): boolean {
 }
 
 export function unitUnlocked(u: Unit): boolean {
+  // Culture and For-couples units are always open.
+  if (trackOf(u)) return true
   if (!levelUnlocked(u.level)) return false
   if (P.passed[u.level]) return true
   const units = LEVELS.find((l) => l.level === u.level)!.units

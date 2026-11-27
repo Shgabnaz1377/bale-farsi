@@ -12,14 +12,14 @@ const answer = defineModel<number | null>({ default: null })
 
 onMounted(() => {
   const a = props.ex.prompt.audio
-  if (a && (props.ex.prompt.listen || P.settings.autoplay)) speak(a)
+  if (a && (props.ex.prompt.listen || P.settings.autoplay)) speak(a, false, props.ex.prompt.voice)
 })
 
 function choose(i: number) {
   if (props.locked) return
   answer.value = i
   const o = props.ex.options[i]
-  if (props.ex.faOptions && o.fa && !o.hideTr && P.settings.autoplay) speak(o.fa)
+  if (props.ex.faOptions && o.fa && !o.hideTr && P.settings.autoplay) speak(o.fa, false, o.voice)
 }
 defineExpose({ choose })
 </script>

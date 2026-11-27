@@ -127,7 +127,7 @@ function check() {
     if (usesHearts) loseHeart()
     if (mode !== 'test') queue.push(ex)
     const fa = 'reveal' in ex && ex.reveal && !ex.reveal.hideTr ? ex.reveal.fa : undefined
-    if (fa) speak(fa)
+    if (fa) speak(fa, false, 'reveal' in ex ? ex.reveal?.voice : undefined)
   }
   nextTick(() => primaryBtn.value?.focus({ preventScroll: true }))
 }
