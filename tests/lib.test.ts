@@ -141,3 +141,27 @@ describe('idioms', () => {
     expect(P.hearts).toBe(5)
   })
 })
+
+describe('accounts: guest limit', () => {
+  it('lets guests do one lesson, then asks for an account (only when accounts are on)', async () => {
+    const { account, needsAccount, GUEST_LESSONS } = await import('@/lib/account.ts')
+    const { P } = await import('@/lib/store.ts')
+    const was = { enabled: account.enabled, user: account.user, done: P.done }
+    try {
+      account.enabled = true
+      account.user = null
+      P.done = {}
+      expect(needsAccount()).toBe(false)
+      for (let i = 0; i < GUEST_LESSONS; i++) P.done[`a1-greetings/l${i}`] = true
+      expect(needsAccount()).toBe(true)
+      account.user = { id: 'x', email: 'x@example.com' }
+      expect(needsAccount()).toBe(false)
+      account.user = null
+      account.enabled = false
+      expect(needsAccount()).toBe(false)
+    } finally {
+      Object.assign(account, { enabled: was.enabled, user: was.user })
+      P.done = was.done
+    }
+  })
+})
