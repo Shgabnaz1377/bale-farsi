@@ -35,7 +35,8 @@ function startTimer() {
     progress.value = Math.min(1, (now - start) / READ_MS)
     if (progress.value < 1) { raf = requestAnimationFrame(tick); return }
     earned.value = readFact(fact.value.id)
-    if (earned.value) meow('happy')
+    // Browsers block sound before the first tap; opened straight from a link, the reward stays silent.
+    if (earned.value && navigator.userActivation?.hasBeenActive !== false) meow('happy')
   }
   raf = requestAnimationFrame(tick)
 }
