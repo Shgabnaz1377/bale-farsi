@@ -1,5 +1,6 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from './views/HomeView.vue'
+import { account, accountReady, needsAccount } from './lib/account.ts'
 
 export const router = createRouter({
   // Hash history so deep links work on any static host without rewrites.
@@ -13,6 +14,7 @@ export const router = createRouter({
     { path: '/words', name: 'words', component: () => import('./views/WordsView.vue') },
     { path: '/progress', name: 'progress', component: () => import('./views/ProgressView.vue') },
     { path: '/account', name: 'account', component: () => import('./views/AccountView.vue') },
+    { path: '/admin', name: 'admin', component: () => import('./views/AdminView.vue') },
     { path: '/settings', name: 'settings', component: () => import('./views/SettingsView.vue') },
     { path: '/persian-not-arabic', name: 'not-arabic', component: () => import('./views/NotArabicView.vue') },
     { path: '/did-you-know', name: 'facts', component: () => import('./views/FactsView.vue') },
@@ -21,4 +23,13 @@ export const router = createRouter({
     { path: '/:pathMatch(.*)*', name: 'not-found', component: () => import('./views/NotFoundView.vue') },
   ],
   scrollBehavior: () => ({ top: 0 }),
+})
+
+// Guests get one free lesson, then sign up to go on; the owner page needs a signed-in account.
+router.beforeEach(async (to) => {
+  if (to.name !== 'lesson' && to.name !== 'admin') return true
+  await accountReady()
+  if (to.name === 'lesson' && needsAccount()) return { name: 'account', query: { gate: '1', next: to.fullPath } }
+  if (to.name === 'admin' && account.enabled && !account.user) return { name: 'account', query: { next: to.fullPath } }
+  return true
 })

@@ -11,7 +11,7 @@ import type { Level, Unit } from '@/content/types.ts'
 import { LEVELS, lessonsOf } from '@/content/course.ts'
 import { TRACKS } from '@/content/tracks/index.ts'
 import {
-  P, dueCount, lessonUnlocked, levelUnlocked, nextLesson, unitDone, unitProgress, unitUnlocked, xpToday, streakActiveToday as streakToday,
+  P, lessonUnlocked, levelUnlocked, nextLesson, unitDone, unitProgress, unitUnlocked, xpToday,
 } from '@/lib/store.ts'
 import { account } from '@/lib/account.ts'
 import { fromInstagram, dismissInstagram } from '@/lib/instagram.ts'
@@ -98,12 +98,8 @@ const testState = computed<NodeState>(() => {
 })
 
 /** Pishi sits beside the current unit (asleep at the start of a locked level, cheering at the end of a finished one). */
-const greetMood = computed(() => {
-  if (xpToday() >= P.settings.goal) return 'cheer' as const
-  if (dueCount() > 0) return 'think' as const
-  if (P.streak > 0 && !streakToday()) return 'sad' as const
-  return 'wave' as const
-})
+// On the path Pishi has no speech bubble to explain a mood, so it stays welcoming: cheering once today's goal is met.
+const greetMood = computed(() => (xpToday() >= P.settings.goal ? 'cheer' as const : 'wave' as const))
 const pishi = computed(() => {
   const us = group.value.units
   let i = curIdx.value
