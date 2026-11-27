@@ -6,6 +6,7 @@ import { P } from '@/lib/store.ts'
 import { APP } from '@/app.ts'
 import FaText from '../FaText.vue'
 import SpeakButton from '../SpeakButton.vue'
+import CastSays from '../CastSays.vue'
 import { t } from '@/i18n/index.ts'
 
 const props = defineProps<{ ex: BuildEx; locked: boolean }>()
@@ -15,7 +16,7 @@ const chosen = computed(() => answer.value ?? [])
 const rtl = computed(() => (props.ex.to === 'fa' ? APP.targetDir : APP.uiDir) === 'rtl')
 
 onMounted(() => {
-  if (props.ex.to === 'en' && P.settings.autoplay) speak(props.ex.sentence.fa)
+  if (props.ex.to === 'en' && P.settings.autoplay) speak(props.ex.sentence.fa, false, props.ex.voice)
 })
 
 function add(i: number) {
@@ -33,7 +34,16 @@ function remove(pos: number) {
 </script>
 
 <template>
-  <div class="prompt">
+  <div v-if="ex.speaker" class="prompt cast">
+    <CastSays :name="ex.speaker" :text="ex.to === 'en' ? ex.sentence.fa : undefined" :voice="ex.voice">
+      <template v-if="ex.to === 'en'">
+        <SpeakButton :text="ex.sentence.fa" :voice="ex.voice" />
+        <FaText :fa="ex.sentence.fa" :tr="ex.sentence.tr" size="lg" />
+      </template>
+      <p v-else class="en-s">{{ ex.sentence.en }}</p>
+    </CastSays>
+  </div>
+  <div v-else class="prompt">
     <template v-if="ex.to === 'en'">
       <SpeakButton :text="ex.sentence.fa" />
       <FaText :fa="ex.sentence.fa" :tr="ex.sentence.tr" size="lg" />
@@ -56,6 +66,9 @@ function remove(pos: number) {
 
 <style scoped>
 .prompt { display: flex; align-items: center; gap: 14px; padding: 18px 16px; background: var(--surface); border: 1px solid var(--line); border-radius: 20px; flex-wrap: wrap }
+.prompt.cast { padding: 12px 12px 0; align-items: flex-end }
+.prompt.cast :deep(.bubble) { background: var(--sunk); border-color: var(--sunk) }
+.prompt.cast :deep(.bubble)::before { background: var(--sunk); border-color: var(--sunk) }
 .en-s { font-size: 1.35rem; font-weight: 500 }
 .answer { display: flex; flex-wrap: wrap; gap: 8px; align-content: flex-start; min-height: 132px; padding: 8px 0;
   background-image: repeating-linear-gradient(to bottom, transparent 0 63px, var(--line) 63px 65px) }

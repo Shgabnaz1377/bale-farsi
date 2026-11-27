@@ -1,12 +1,17 @@
 <script setup lang="ts">
 import type { CardEx } from '@/lib/exercises.ts'
+import type { Phrase } from '@/content/types.ts'
+import { sentenceSpeaker } from '@/content/sentenceSpeakers.ts'
 import FaText from '../FaText.vue'
 import SpeakButton from '../SpeakButton.vue'
 import PassageText from '../PassageText.vue'
 import DialogueList from '../DialogueList.vue'
 import RichText from '../RichText.vue'
+import CastSays from '../CastSays.vue'
 
-defineProps<{ ex: CardEx }>()
+const props = defineProps<{ ex: CardEx }>()
+// Grammar examples are said by a cast member; the alphabet card (no unit) stays with the narrator.
+const speaker = (e: Phrase) => (props.ex.unitId && !props.ex.dialogue ? sentenceSpeaker(e, props.ex.unitId) : undefined)
 </script>
 
 <template>
@@ -14,12 +19,21 @@ defineProps<{ ex: CardEx }>()
     <RichText v-if="ex.html" :html="ex.html" class="lead" />
     <ul v-if="ex.examples?.length" class="examples">
       <li v-for="(e, i) in ex.examples" :key="i">
-        <SpeakButton v-if="e.fa.includes('·')" :text="e.fa.split('·')[0].trim()" />
-        <SpeakButton :text="e.fa.split('·').pop()!.trim()" />
-        <div class="ex-text">
-          <FaText :fa="e.fa" :tr="e.tr" inline keep-tr />
-          <span class="muted">{{ e.en }}</span>
-        </div>
+        <CastSays v-if="speaker(e)" :name="speaker(e)!.name" :text="e.fa" :voice="speaker(e)!.gender" size="sm">
+          <SpeakButton :text="e.fa" :voice="speaker(e)!.gender" />
+          <div class="ex-text">
+            <FaText :fa="e.fa" :tr="e.tr" inline keep-tr />
+            <span class="muted">{{ e.en }}</span>
+          </div>
+        </CastSays>
+        <template v-else>
+          <SpeakButton v-if="e.fa.includes('·')" :text="e.fa.split('·')[0].trim()" />
+          <SpeakButton :text="e.fa.split('·').pop()!.trim()" />
+          <div class="ex-text">
+            <FaText :fa="e.fa" :tr="e.tr" inline keep-tr />
+            <span class="muted">{{ e.en }}</span>
+          </div>
+        </template>
       </li>
     </ul>
     <PassageText v-if="ex.passage" :paragraphs="ex.passage" />

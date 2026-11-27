@@ -319,6 +319,7 @@ export const IT: Record<string, string> = {
   "Repeat after me": "Ripeti dopo di me",
   "Your turn: play a part": "Tocca a te: fai una parte",
   "Your part": "La tua parte",
+  "Now speaking": "Sta parlando",
   "Show": "Mostra",
   "you": "tu",
   "Your line: say it now!": "La tua battuta: dilla ora!",

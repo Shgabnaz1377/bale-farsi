@@ -2,8 +2,10 @@
 import { computed, onBeforeUnmount, ref } from 'vue'
 import type { DialogueLine, Unit } from '@/content/types.ts'
 import { dialogueVoices, genderOf } from '@/content/speakers.ts'
-import { hasVoice, speak, stopSpeech } from '@/lib/speech.ts'
+import { hasVoice, isSpeaking, speak, stopSpeech } from '@/lib/speech.ts'
+import { castMember } from '@/content/cast.ts'
 import SpeakButton from './SpeakButton.vue'
+import CastFace from './CastFace.vue'
 import FaText from './FaText.vue'
 import { t } from '@/i18n/index.ts'
 import { APP } from '@/app.ts'
@@ -18,7 +20,9 @@ const faLabel = APP.target === 'it' ? t('Italian') : t('Persian script')
  * - listen:  play the whole conversation
  * - repeat:  after each line, a pause to say it yourself
  * - role:    you take one speaker's part; on your lines you speak first, then hear the model
- * Avatars are initials for now; the character cast (src/lib/people.ts) will replace them.
+ * Every line has its speaker's round avatar, and a larger bust shows who is speaking now: its mouth moves
+ * while that line's audio plays (the cast, src/content/cast.ts). Speakers outside the cast (Bego Ciao's
+ * Italian names) get their initial.
  */
 const props = defineProps<{ lines: DialogueLine[]; unitId?: string }>()
 const voices = computed(() => dialogueVoices({ id: props.unitId ?? '', dialogue: props.lines } as Unit))
@@ -38,6 +42,23 @@ let stop = false
 
 const gender = (who: string) => genderOf(who, props.unitId) ?? 'x'
 const initial = (who: string) => who.replace(/^(Mr|Mrs|Ms|Dr|Agha|Khanom|Signor|Signora)\.?\s+/i, '').charAt(0).toUpperCase()
+const inCast = (who: string) => !!castMember(who)
+
+/** The line being said right now (by any button or mode), else the current line of a mode. */
+const playing = computed(() => {
+  const i = props.lines.findIndex((l) => isSpeaking(l.fa, voices.value.get(l.who)))
+  return i >= 0 ? i : current.value
+})
+/** Whose bust is on stage: the speaker of the playing line, else the last line tapped, else the first speaker. */
+const lastTapped = ref(-1)
+const onStage = computed(() => {
+  const i = playing.value >= 0 ? playing.value : lastTapped.value
+  return props.lines[i]?.who ?? props.lines[0]?.who ?? ''
+})
+const stageTalking = computed(() => {
+  const i = props.lines.findIndex((l) => isSpeaking(l.fa, voices.value.get(l.who)))
+  return i >= 0 && props.lines[i].who === onStage.value
+})
 
 function wait(ms: number): Promise<void> {
   return new Promise((resolve) => {
@@ -116,17 +137,24 @@ const yourLine = (i: number) => mode.value === 'role' && props.lines[i].who === 
       <label class="check"><input v-model="showFa" type="checkbox" /> {{ faLabel }}</label>
       <label class="check"><input v-model="showEn" type="checkbox" /> {{ t('Show English') }}</label>
     </div>
+    <div v-if="inCast(onStage)" class="stage" :aria-label="t('Now speaking')" role="group">
+      <div v-for="s in speakers.filter(inCast)" :key="s" class="actor" :class="{ on: s === onStage }">
+        <CastFace :name="s" :talking="s === onStage && stageTalking" />
+        <span class="actor-name">{{ s }}</span>
+      </div>
+    </div>
     <ol class="lines">
       <li
         v-for="(l, i) in lines" :key="i"
-        :class="[speakers.indexOf(l.who) % 2 ? 'b' : 'a', { now: current === i, mine: yourLine(i) }]"
+        :class="[speakers.indexOf(l.who) % 2 ? 'b' : 'a', { now: current === i || playing === i, mine: yourLine(i) }]"
         :aria-current="current === i ? 'step' : undefined"
       >
         <span class="who">
-          <span class="avatar" :class="'g-' + gender(l.who)" aria-hidden="true">{{ initial(l.who) }}</span>
+          <CastFace v-if="inCast(l.who)" :name="l.who" kind="avatar" :talking="playing === i" />
+          <span v-else class="avatar" :class="'g-' + gender(l.who)" aria-hidden="true">{{ initial(l.who) }}</span>
           {{ l.who }}<span v-if="yourLine(i)" class="you"> · {{ t('you') }}</span>
         </span>
-        <div class="bubble">
+        <div class="bubble" @click.capture="lastTapped = i">
           <SpeakButton :text="l.fa" :voice="voices.get(l.who)" />
           <div class="t">
             <FaText v-if="showFa" :fa="l.fa" :tr="l.tr" size="sm" :hide-tr="!showTr" keep-fa />
@@ -150,6 +178,16 @@ const yourLine = (i: number) => mode.value === 'role' && props.lines[i].who === 
 .sel select { font: inherit; font-size: 0.88rem; border: 1.5px solid var(--line); border-radius: 10px; padding: 5px 8px; background: var(--surface); color: var(--ink) }
 .check { display: inline-flex; gap: 8px; align-items: center; font-size: 0.92rem; cursor: pointer }
 .check input { accent-color: var(--accent); width: 17px; height: 17px }
+/* The stage: everyone in the conversation; whoever is speaking steps forward and talks. */
+.stage { display: flex; justify-content: center; align-items: flex-end; gap: 4px; padding: 10px 8px 0; background: var(--sunk); border-radius: 18px; overflow: hidden }
+.actor { display: flex; flex-direction: column; align-items: center; width: 64px; opacity: 0.6; transform: scale(0.86); transform-origin: bottom center; transition: transform 0.2s, opacity 0.2s }
+.actor.on { width: 112px; opacity: 1; transform: none }
+.actor-name { font-size: 0.72rem; font-weight: 700; color: var(--muted); padding: 2px 0 6px }
+.actor.on .actor-name { color: var(--ink) }
+@media (min-width: 640px) {
+  .actor { width: 92px }
+  .actor.on { width: 150px }
+}
 .lines { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px }
 .lines li { display: flex; flex-direction: column; gap: 4px; max-width: 88% }
 .lines li.b { align-self: flex-end; align-items: flex-end }
@@ -176,5 +214,6 @@ const yourLine = (i: number) => mode.value === 'role' && props.lines[i].who === 
   .bubble { transition: none }
   .now .bubble { transform: none }
   .now .avatar { animation: none }
+  .actor { transition: none }
 }
 </style>

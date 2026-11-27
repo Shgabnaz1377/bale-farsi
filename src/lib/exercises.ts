@@ -6,6 +6,8 @@ import { acceptedForms, gradeTyped } from './grade.ts'
 import { chance, pick, pickOne, shuffle } from './random.ts'
 import { t } from '@/i18n/index.ts'
 import { dialogueVoices, type VoiceId } from '@/content/speakers.ts'
+import { castMember } from '@/content/cast.ts'
+import { sentenceSpeaker } from '@/content/sentenceSpeakers.ts'
 
 /** Something shown on screen: Persian with transliteration, English, or both. */
 export interface Shown {
@@ -14,8 +16,16 @@ export interface Shown {
   en?: string
   /** Hide the transliteration (letters, where it would give the answer away). */
   hideTr?: boolean
-  /** Dialogue lines: the speaker's voice (right gender). Everything else uses the narrator. */
+  /** Sentences and dialogue lines: the speaker's voice (right gender). Words use the narrator. */
   voice?: VoiceId
+  /** The cast member who says it (shown as a talking bust), if any. */
+  speaker?: string
+}
+
+/** Who says a lesson sentence, and in which voice (src/content/sentenceSpeakers.ts). */
+function saidBy(p: Phrase, unitId?: string): { speaker?: string; voice?: VoiceId } {
+  const c = unitId ? sentenceSpeaker(p, unitId) : undefined
+  return c ? { speaker: c.name, voice: c.gender } : {}
 }
 
 export interface Prompt extends Shown {
@@ -65,6 +75,9 @@ export interface BuildEx {
   tiles: BuildTile[]
   target: string[]
   note?: string
+  /** The cast member who says the sentence, and their voice. */
+  speaker?: string
+  voice?: VoiceId
 }
 
 export interface TypeEx {
@@ -195,7 +208,7 @@ export function matchEx(items: readonly Phrase[], opts: { hideTr?: boolean } = {
 // Words of a meaning sentence (English, Italian or Persian; ZWNJ keeps Persian words like می‌خواهم whole).
 const enWords = (en: string) => en.replace(/[^\p{L}\p{M}\p{N}‌'’ -]/gu, ' ').split(/\s+/).filter(Boolean)
 
-export function buildToEn(s: Sentence, pool: readonly Phrase[]): BuildEx {
+export function buildToEn(s: Sentence, pool: readonly Phrase[], unitId?: string): BuildEx {
   const target = enWords(s.en)
   const inTarget = new Set(target.map((w) => w.toLowerCase()))
   const extras = uniqBy(
@@ -204,26 +217,27 @@ export function buildToEn(s: Sentence, pool: readonly Phrase[]): BuildEx {
   ).slice(0, Math.min(4, Math.max(2, Math.ceil(target.length / 2))))
   return {
     kind: 'build', title: t('Translate this sentence'), to: 'en', sentence: s,
-    tiles: shuffle([...target, ...extras].map((w) => ({ key: w, en: w }))), target, note: s.note,
+    tiles: shuffle([...target, ...extras].map((w) => ({ key: w, en: w }))), target, note: s.note, ...saidBy(s, unitId),
   }
 }
 
-export function buildToFa(s: Sentence, pool: readonly Word[]): BuildEx {
+export function buildToFa(s: Sentence, pool: readonly Word[], unitId?: string): BuildEx {
   const real = s.tiles.map((fa, i) => ({ key: fa, fa, tr: s.trTiles[i] }))
   const extras = shuffle(pool.filter((w) => !s.tiles.includes(w.fa) && !w.fa.includes(' ')))
     .slice(0, Math.min(3, Math.max(2, Math.ceil(s.tiles.length / 2))))
     .map((w) => ({ key: w.fa, fa: w.fa, tr: w.tr }))
   return {
     kind: 'build', title: t('Write this in Persian'), to: 'fa', sentence: s,
-    tiles: shuffle([...real, ...extras]), target: s.tiles, note: s.note,
+    tiles: shuffle([...real, ...extras]), target: s.tiles, note: s.note, ...saidBy(s, unitId),
   }
 }
 
-export function sentenceMeaning(s: Phrase, pool: readonly Phrase[], title = t('What does this mean?')): ChoiceEx {
+export function sentenceMeaning(s: Phrase, pool: readonly Phrase[], title = t('What does this mean?'), unitId?: string): ChoiceEx {
   const options = optionsFor(s, pool, pool)
+  const by = saidBy(s, unitId)
   return {
-    kind: 'choice', title, prompt: { fa: s.fa, tr: s.tr, audio: s.fa },
-    options: options.map((o) => ({ en: o.en })), answer: options.indexOf(s), faOptions: false, reveal: show(s),
+    kind: 'choice', title, prompt: { fa: s.fa, tr: s.tr, audio: s.fa, ...by },
+    options: options.map((o) => ({ en: o.en })), answer: options.indexOf(s), faOptions: false, reveal: { ...show(s), voice: by.voice },
   }
 }
 
@@ -274,21 +288,22 @@ function grammarLesson(u: Unit): Ex[] {
     answer: c.answer, faOptions: true, note: c.why,
   }))
   const pool: Phrase[] = [...g.examples, ...u.sentences]
-  const examples = g.examples.map((e) => sentenceMeaning(e, pool))
-  return [{ kind: 'card', title: g.title, html: g.body, examples: g.examples }, ...shuffle([...checks, ...examples])]
+  const examples = g.examples.map((e) => sentenceMeaning(e, pool, undefined, u.id))
+  return [{ kind: 'card', title: g.title, html: g.body, examples: g.examples, unitId: u.id }, ...shuffle([...checks, ...examples])]
 }
 
 function sentencesLesson(u: Unit, o: LessonOptions): Ex[] {
   const ex: Ex[] = []
-  u.sentences.forEach((s, i) => ex.push(i % 2 === 0 ? buildToEn(s, u.sentences) : buildToFa(s, u.words)))
-  pick(u.sentences, 3).forEach((s) => ex.push(chance(0.5) ? buildToFa(s, u.words) : buildToEn(s, u.sentences)))
+  u.sentences.forEach((s, i) => ex.push(i % 2 === 0 ? buildToEn(s, u.sentences, u.id) : buildToFa(s, u.words, u.id)))
+  pick(u.sentences, 3).forEach((s) => ex.push(chance(0.5) ? buildToFa(s, u.words, u.id) : buildToEn(s, u.sentences, u.id)))
   ex.push(matchEx(u.words))
   if (o.hasVoice) {
     const s = pickOne(u.sentences)
     const options = optionsFor(s, u.sentences, ALL_UNITS.flatMap((x) => x.sentences))
+    const by = saidBy(s, u.id)
     ex.push({
-      kind: 'choice', title: t('Listen, then pick the meaning'), prompt: { audio: s.fa, listen: true },
-      options: options.map((x) => ({ en: x.en })), answer: options.indexOf(s), faOptions: false, reveal: show(s),
+      kind: 'choice', title: t('Listen, then pick the meaning'), prompt: { audio: s.fa, listen: true, ...by },
+      options: options.map((x) => ({ en: x.en })), answer: options.indexOf(s), faOptions: false, reveal: { ...show(s), voice: by.voice },
     })
   }
   return shuffle(ex)
@@ -298,12 +313,14 @@ function dialogueLesson(u: Unit, o: LessonOptions): Ex[] {
   const d = u.dialogue ?? []
   const voices = dialogueVoices(u)
   const voiceOf = (line: DialogueLine) => voices.get(line.who)
+  const faceOf = (line: DialogueLine) => (castMember(line.who) ? line.who : undefined)
   const ex: Ex[] = [{ kind: 'card', title: t('Read the conversation'), dialogue: d, unitId: u.id }]
   const lines: Phrase[] = d
   pick(d, Math.min(4, d.length)).forEach((line) => {
     const e = sentenceMeaning(line, lines, t('What does {who} say?', { who: line.who }))
     e.prompt.who = line.who
     e.prompt.voice = voiceOf(line)
+    e.prompt.speaker = faceOf(line)
     if (e.reveal) e.reveal.voice = voiceOf(line)
     ex.push(e)
   })
@@ -311,7 +328,7 @@ function dialogueLesson(u: Unit, o: LessonOptions): Ex[] {
   pick(replies, Math.min(3, replies.length)).forEach(({ line, next }) => {
     const options = optionsFor(next, lines, lines)
     ex.push({
-      kind: 'choice', title: t('What does {who} answer?', { who: next.who }), prompt: { fa: line.fa, tr: line.tr, en: line.en, who: line.who, audio: line.fa, voice: voiceOf(line) },
+      kind: 'choice', title: t('What does {who} answer?', { who: next.who }), prompt: { fa: line.fa, tr: line.tr, en: line.en, who: line.who, audio: line.fa, voice: voiceOf(line), speaker: faceOf(line) },
       // Every option is read in the voice of the person who would answer.
       options: options.map((x) => ({ fa: x.fa, tr: x.tr, voice: voiceOf(next) })), answer: options.indexOf(next), faOptions: true, reveal: { ...show(next), voice: voiceOf(next) },
     })
@@ -320,7 +337,7 @@ function dialogueLesson(u: Unit, o: LessonOptions): Ex[] {
     const line = pickOne(d)
     const options = optionsFor(line, lines, lines)
     ex.push({
-      kind: 'choice', title: t('Listen, then pick the meaning'), prompt: { audio: line.fa, listen: true, voice: voiceOf(line) },
+      kind: 'choice', title: t('Listen, then pick the meaning'), prompt: { audio: line.fa, listen: true, voice: voiceOf(line), speaker: faceOf(line) },
       options: options.map((x) => ({ en: x.en })), answer: options.indexOf(line), faOptions: false, reveal: { ...show(line), voice: voiceOf(line) },
     })
   }
@@ -369,7 +386,7 @@ export function levelTest(level: Level): Ex[] {
     const c = pickOne(u.grammar.checks)
     ex.push({ kind: 'choice', title: c.q, prompt: {}, options: c.options.map((fa, i) => ({ fa, tr: c.optionsTr[i] })), answer: c.answer, faOptions: true, note: c.why })
     const s = pickOne(u.sentences)
-    ex.push(chance(0.5) ? buildToEn(s, u.sentences) : buildToFa(s, u.words))
+    ex.push(chance(0.5) ? buildToEn(s, u.sentences, u.id) : buildToFa(s, u.words, u.id))
   }
   return shuffle(ex).slice(0, 20)
 }
