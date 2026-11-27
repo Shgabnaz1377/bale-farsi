@@ -5,6 +5,8 @@ import { LETTER_GROUPS } from '@/content/alphabet.ts'
 import { dayNumber, isDue, isLearned, review, type Card } from './srs.ts'
 
 export type ScriptMode = 'both' | 'script' | 'latin'
+/** Short-vowel marks on Persian: by level (A1 all, A2 single words, B1+ none), always, or never. */
+export type VowelMarks = 'auto' | 'always' | 'never'
 export type Theme = 'system' | 'light' | 'dark'
 export type { Lang } from '@/i18n/index.ts'
 import { detectLang, type Lang } from '@/i18n/index.ts'
@@ -19,6 +21,7 @@ export interface Settings {
   theme: Theme
   /** The learner's own language: meanings, explanations and buttons. */
   lang: Lang
+  vowels: VowelMarks
 }
 
 export interface Progress {
@@ -48,7 +51,7 @@ export function freshProgress(): Progress {
   return {
     v: 1, xp: 0, streak: 0, bestStreak: 0, lastDay: 0, hearts: MAX_HEARTS, heartsDay: 0,
     days: {}, done: {}, passed: {}, cards: {},
-    settings: { mode: 'both', sfx: true, autoplay: true, goal: 30, relaxed: false, theme: 'system', lang: detectLang() },
+    settings: { mode: 'both', sfx: true, autoplay: true, goal: 30, relaxed: false, theme: 'system', lang: detectLang(), vowels: 'auto' },
   }
 }
 

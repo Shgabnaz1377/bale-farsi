@@ -8,6 +8,7 @@ import InstallCard from '@/components/InstallCard.vue'
 import { APP } from '@/app.ts'
 
 const modes = computed(() => [['both', t('Persian script + Finglish')], ['latin', t('Finglish only')], ['script', t('Persian script only')]] as const)
+const vowelModes = computed(() => [['auto', t('By level')], ['always', t('Always')], ['never', t('Never')]] as const)
 const themes = computed(() => [['system', t('Match system')], ['light', t('Light')], ['dark', t('Dark')]] as const)
 const goals = [10, 20, 30, 50] as const
 const keyRows = computed(() => [
@@ -67,6 +68,16 @@ function restore() {
         </template>
       </div>
       <p class="muted small">{{ t('Finglish is Persian written in English letters, like salâm for hello. Keep it on while you learn the alphabet. Switch to script only once you can read, so you stop leaning on it.') }}</p>
+      <template v-if="APP.target === 'fa'">
+        <p class="eyebrow">{{ t('Vowel marks') }}</p>
+        <div class="seg" role="radiogroup" :aria-label="t('Vowel marks')">
+          <template v-for="[v, label] in vowelModes" :key="v">
+            <input :id="'vowels-' + v" v-model="P.settings.vowels" type="radio" name="vowels" :value="v" />
+            <label :for="'vowels-' + v">{{ label }}</label>
+          </template>
+        </div>
+        <p class="muted small">{{ t('Marks for the short vowels, like مُبل (mobl). By level: on every word in A1, on single words in A2, and gone from B1, as in real Persian.') }}</p>
+      </template>
     </section>
 
     <section class="card block">
