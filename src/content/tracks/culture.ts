@@ -109,7 +109,7 @@ export const CULTURE: Unit[] = [
     },
     dialogue: [
       { who: 'Aria', fa: 'سلام! عید شما مبارک!', tr: 'salâm! eyd-e shomâ mobârak!', en: 'Hello! Happy Nowruz!' },
-      { who: 'Leila', fa: 'سلام پسرم، عید شما هم مبارک! صد سال به این سال\u200cها!', tr: 'salâm pesaram, eyd-e shomâ ham mobârak! sad sâl be in sâlhâ!', en: 'Hello, dear, happy Nowruz to you too! Many happy returns!' }, // TODO(Shabnaz): check «پسرم» from a mother-in-law to Tom
+      { who: 'Leila', fa: 'سلام پسرم، عید شما هم مبارک! صد سال به این سال\u200cها!', tr: 'salâm pesaram, eyd-e shomâ ham mobârak! sad sâl be in sâlhâ!', en: 'Hello, dear, happy Nowruz to you too! Many happy returns!' },
       { who: 'Babak', fa: 'خوش اومدید! بفرمایید تو، بفرمایید بشینید.', tr: 'khosh umadid! befarmâyid tu, befarmâyid beshinid.', en: 'Welcome! Come in, please sit down.' },
       { who: 'Sara', fa: 'مامان، آریا چهارشنبه\u200cسوری از رو آتیش پرید!', tr: 'Mâmân, Âriyâ chahârshanbe-suri az ru âtish parid!', en: 'Mum, Aria jumped over the fire on Chaharshanbe Suri!' },
       { who: 'Leila', fa: 'آفرین! «زردی من از تو، سرخی تو از من» هم گفتید؟', tr: 'âfarin! "zardi-ye man az to, sorkhi-ye to az man" ham goftid?', en: 'Well done! Did you say "my yellow to you, your red to me" too?' },
@@ -132,17 +132,17 @@ export const CULTURE: Unit[] = [
     words: [
       { fa: 'سفره هفت\u200cسین', tr: 'sofre-ye haft-sin', en: 'haft-sin table', alt: ['haft-sin spread', 'haft-sin'], note: 'A sofre is the cloth spread for a meal. Also written سفره\u200cی هفت\u200cسین.' },
       { fa: 'سبزه', tr: 'sabze', en: 'sprouts', alt: ['sprouted grass', 'greens', 'sabzeh'], note: 'Wheat or lentil sprouts grown at home: rebirth and new growth. On Sizdah Bedar they go into running water.' },
-      { fa: 'سمنو', tr: 'samanu', en: 'samanu', alt: ['wheat pudding', 'sweet pudding'], note: 'A sweet pudding of sprouted wheat, stirred for hours: abundance and strength.' }, // TODO(Shabnaz): check symbolism of samanu (abundance/strength)
-      { fa: 'سنجد', tr: 'senjed', en: 'oleaster', alt: ['silverberry', 'Persian olive', 'senjed'], note: 'A small dried sweet fruit: love.' }, // TODO(Shabnaz): check senjed = love
+      { fa: 'سمنو', tr: 'samanu', en: 'samanu', alt: ['wheat pudding', 'sweet pudding'], note: 'A sweet pudding of sprouted wheat, stirred for hours: abundance and strength.' },
+      { fa: 'سنجد', tr: 'senjed', en: 'oleaster', alt: ['silverberry', 'Persian olive', 'senjed'], note: 'A small dried sweet fruit: love.' },
       { fa: 'سیر', tr: 'sir', en: 'garlic', note: 'Health and protection from illness. (sir also means "full": sir shodam, "I\'m full".)' },
       { fa: 'سیب', tr: 'sib', en: 'apple', note: 'Beauty and health.' },
       { fa: 'سرکه', tr: 'serke', en: 'vinegar', note: 'Patience and age: the wisdom that only comes with time.' },
       { fa: 'سکه', tr: 'sekke', en: 'coin', note: 'Wealth and prosperity in the new year. Many families use it in place of somâgh.' },
-      { fa: 'سماق', tr: 'somâgh', en: 'sumac', note: 'The colour of sunrise: light winning over darkness.' }, // TODO(Shabnaz): check sumac symbolism
+      { fa: 'سماق', tr: 'somâgh', en: 'sumac', note: 'The colour of sunrise: light winning over darkness.' },
       { fa: 'ماهی قرمز', tr: 'mâhi ghermez', en: 'goldfish', alt: ['red fish'], note: 'Literally "red fish": life and movement. Many families now set it free in a pond after the holidays.' },
-      { fa: 'آینه', tr: 'âyne', en: 'mirror', note: 'Light and honesty, and a look at yourself as the year turns. Also written آیینه.' }, // TODO(Shabnaz): check mirror symbolism
+      { fa: 'آینه', tr: 'âyne', en: 'mirror', note: 'Light and honesty, and a look at yourself as the year turns. Also written آیینه.' },
       { fa: 'سنبل', tr: 'sonbol', en: 'hyacinth', note: 'The scent of spring in every house at Nowruz.' },
-      { fa: 'تخم\u200cمرغ رنگی', tr: 'tokhm-e morgh-e rangi', en: 'painted eggs', alt: ['coloured eggs', 'colored eggs'], note: 'Fertility and new life; children love painting them. Spoken: tokhmorgh-e rangi.' }, // TODO(Shabnaz): check Finglish tokhm-e morgh / tokhmorgh
+      { fa: 'تخم\u200cمرغ رنگی', tr: 'tokhm-e morgh-e rangi', en: 'painted eggs', alt: ['coloured eggs', 'colored eggs'], note: 'Fertility and new life; children love painting them. Spoken: tokhmorgh-e rangi.' },
       { fa: 'شمع', tr: "sham'", en: 'candle', alt: ['candles'], note: 'Light and warmth for the new year.' },
     ],
     sentences: [
@@ -227,7 +227,7 @@ export const CULTURE: Unit[] = [
     dialogue: [
       { who: 'Venus', fa: 'سارا، این سفره چیه؟ چقدر قشنگه!', tr: 'Sârâ, in sofre chie? cheghadr ghashange!', en: "Sara, what's this table? It's so pretty!" },
       { who: 'Sara', fa: 'سفره\u200cی هفت\u200cسینه. هفت تا چیز داره که با «س» شروع می\u200cشن.', tr: "sofre-ye haft-sine. haft tâ chiz dâre ke bâ \"sin\" shoru' mishan.", en: 'It\'s the haft-sin table. It has seven things that start with "s".' },
-      { who: 'Venus', fa: 'این سیبه، اون سبزه. این قهوه\u200cایه چیه؟', tr: 'in sibe, un sabze. in ghahvei-ye chie?', en: "This is an apple, that's sprouts. What's this brown one?" }, // TODO(Shabnaz): check «این قهوه\u200cایه چیه؟»
+      { who: 'Venus', fa: 'این سیبه، اون سبزه. این قهوه\u200cایه چیه؟', tr: 'in sibe, un sabze. in ghahvei-ye chie?', en: "This is an apple, that's sprouts. What's this brown one?" },
       { who: 'Sara', fa: 'سمنوئه. خیلی شیرینه، نشونه\u200cی فراوونیه.', tr: 'samanue. kheyli shirine, neshune-ye farâvunie.', en: "It's samanu. It's very sweet, a sign of plenty." },
       { who: 'Kourosh', fa: 'سکه هم برای پوله! هر سال یه سکه از بابام می\u200cگیرم.', tr: 'sekke ham barâye pule! har sâl ye sekke az bâbâm migiram.', en: 'And the coin is for money! Every year I get a coin from my dad.' },
       { who: 'Venus', fa: 'ماهی قرمز چرا؟ اون که با «س» شروع نمی\u200cشه!', tr: "mâhi ghermez cherâ? un ke bâ \"sin\" shoru' nemishe!", en: 'Why the goldfish? That doesn\'t start with "s"!' },
@@ -461,7 +461,7 @@ export const CULTURE: Unit[] = [
     },
     dialogue: [
       { who: 'Venus', fa: 'آقا، رسیدیم. کرایه چند می\u200cشه؟', tr: 'âghâ, residim. kerâye chand mishe?', en: "We're here. How much is the fare?" },
-      { who: 'Babak', fa: 'قابلی نداره خانم، مهمون ما باشید.', tr: 'ghâbeli nadâre khânom, mehmun-e mâ bâshid.', en: "It's nothing, madam, be our guest." }, // TODO(Shabnaz): check «مهمون ما باشید» from a taxi driver
+      { who: 'Babak', fa: 'قابلی نداره خانم، مهمون ما باشید.', tr: 'ghâbeli nadâre khânom, mehmun-e mâ bâshid.', en: "It's nothing, madam, be our guest." },
       { who: 'Venus', fa: 'خواهش می\u200cکنم، بفرمایید.', tr: 'khâhesh mikonam, befarmâyid.', en: 'Please, here you are.' },
       { who: 'Babak', fa: 'باشه، پس دستتون درد نکنه. خدانگهدار!', tr: 'bâshe, pas dastetun dard nakone. khodânegahdâr!', en: 'All right then, thank you. Goodbye!' },
       { who: 'Artemis', fa: 'ونوس جان، خوش اومدی! بفرما تو.', tr: 'Venus jân, khosh umadi! befarmâ tu.', en: 'Venus dear, welcome! Come in.' },
@@ -485,7 +485,7 @@ export const CULTURE: Unit[] = [
     words: [
       { fa: 'شب یلدا', tr: 'shab-e yaldâ', en: 'Yalda night', alt: ['Yalda', 'winter solstice night'], note: 'The last night of autumn, before 1 Dey, the first day of winter.' },
       { fa: 'بلندترین شب سال', tr: 'bolandtarin shab-e sâl', en: 'the longest night of the year', alt: ['longest night of the year'] },
-      { fa: 'انار', tr: 'anâr', en: 'pomegranate', note: 'Its red seeds stand for the dawn and the warmth of life.' }, // TODO(Shabnaz): check pomegranate symbolism
+      { fa: 'انار', tr: 'anâr', en: 'pomegranate', note: 'Its red seeds stand for the dawn and the warmth of life.' },
       { fa: 'هندوانه', tr: 'hendevâne', en: 'watermelon', note: "Eat some on Yalda and you won't catch a cold all winter, they say. Spoken: hendune." },
       { fa: 'آجیل', tr: 'âjil', en: 'mixed nuts', alt: ['nuts', 'nuts and dried fruit'], note: 'Pistachios, almonds, hazelnuts, roasted chickpeas, raisins and dried figs.' },
       { fa: 'فال حافظ', tr: 'fâl-e Hâfez', en: 'Hafez fortune', alt: ['fal-e Hafez', 'fortune from Hafez', 'Hafez divination'], note: 'Make a wish, open the book at random: the poem is your answer.' },
@@ -584,7 +584,7 @@ export const CULTURE: Unit[] = [
       { who: 'Venus', fa: 'جدی؟ پس یه تیکه\u200cی بزرگ می\u200cخوام!', tr: 'jeddi? pas ye tike-ye bozorg mikhâm!', en: 'Really? Then I want a big slice!' },
       { who: 'Babak', fa: 'حالا وقت فال حافظه. کی نیت می\u200cکنه؟', tr: 'hâlâ vaght-e fâl-e Hâfeze. ki niyyat mikone?', en: "Now it's time for the Hafez fortune. Who's making a wish?" },
       { who: 'Venus', fa: 'من! نیت کردم.', tr: 'man! niyyat kardam.', en: "Me! I've made my wish." },
-      { who: 'Babak', fa: 'یوسف گم\u200cگشته بازآید به کنعان، غم مخور.', tr: "yusof-e gomgashte bâz âyad be Kan'ân, gham makhor.", en: '"Lost Joseph will come back to Canaan: do not grieve."' }, // TODO(Shabnaz): check the Hafez line and that it suits a fâl
+      { who: 'Babak', fa: 'یوسف گم\u200cگشته بازآید به کنعان، غم مخور.', tr: "yusof-e gomgashte bâz âyad be Kan'ân, gham makhor.", en: '"Lost Joseph will come back to Canaan: do not grieve."' },
       { who: 'Leila', fa: 'یعنی آرزوت برآورده می\u200cشه!', tr: "ya'ni ârezut barâvorde mishe!", en: 'That means your wish will come true!' },
       { who: 'Aria', fa: 'ونوس، چی نیت کردی؟', tr: 'Venus, chi niyyat kardi?', en: 'Venus, what did you wish for?' },
       { who: 'Venus', fa: 'نمی\u200cگم! نیت آدم مخفیه!', tr: 'nemigam! niyyat-e âdam makhfie!', en: "I won't tell! A wish is a secret!" },

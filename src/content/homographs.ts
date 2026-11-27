@@ -23,9 +23,9 @@ export const HOMOGRAPHS: Homograph[] = [
     bare: 'کرم',
     forms: [
       { fa: 'کِرم', tr: 'kerm', en: 'worm', it: 'verme',
-        context: { fa: 'یه کرم توی سیبه!', tr: 'ye kerm tu-ye sibe!', en: 'There\'s a worm in the apple!', it: 'C\'è un verme nella mela!' } }, // TODO(Shabnaz): check context
+        context: { fa: 'یه کرم توی سیبه!', tr: 'ye kerm tu-ye sibe!', en: 'There\'s a worm in the apple!', it: 'C\'è un verme nella mela!' } },
       { fa: 'کَرَم', tr: 'karam', en: 'generosity', it: 'generosità',
-        context: { fa: 'خدا به شما کرم کنه.', tr: 'khodâ be shomâ karam kone.', en: 'May God be generous to you.', it: 'Che Dio sia generoso con te.' } }, // TODO(Shabnaz): check context
+        context: { fa: 'خدا به شما کرم کنه.', tr: 'khodâ be shomâ karam kone.', en: 'May God be generous to you.', it: 'Che Dio sia generoso con te.' } },
       { fa: 'کِرِم', tr: 'kerem', en: 'cream (for the skin)', it: 'crema (per la pelle)',
         context: { fa: 'این کرم برای دست خیلی خوبه.', tr: 'in kerem barâ-ye dast kheyli khube.', en: 'This cream is really good for your hands.', it: 'Questa crema è ottima per le mani.' } },
     ],
@@ -43,7 +43,7 @@ export const HOMOGRAPHS: Homograph[] = [
     bare: 'کشتی',
     forms: [
       { fa: 'کَشتی', tr: 'kashti', en: 'ship', it: 'nave',
-        context: { fa: 'با کشتی رفتیم کیش.', tr: 'bâ kashti raftim Kish.', en: 'We went to Kish by ship.', it: 'Siamo andati a Kish in nave.' } }, // TODO(Shabnaz): check context
+        context: { fa: 'با کشتی رفتیم کیش.', tr: 'bâ kashti raftim Kish.', en: 'We went to Kish by ship.', it: 'Siamo andati a Kish in nave.' } },
       { fa: 'کُشتی', tr: 'koshti', en: 'wrestling', it: 'lotta',
         context: { fa: 'کشتی ورزش ملی ایرانه.', tr: 'koshti varzesh-e melli-ye irâne.', en: 'Wrestling is Iran\'s national sport.', it: 'La lotta è lo sport nazionale dell\'Iran.' } },
     ],

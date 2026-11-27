@@ -10,7 +10,7 @@ export const COUPLES: Unit[] = [
     fa: 'آشنایی با خانواده',
     tr: 'âshnâyi bâ khânevâde',
     can: "You can greet your partner's parents, hand over a gift the Iranian way and answer a warm welcome.",
-    tip: 'Not every Iranian shakes hands with the opposite sex, especially older or religious relatives: let the elder offer a hand first, and if none comes, a hand on your heart with a small nod is warm and always right. And never arrive empty-handed: a box of <i>shirini</i> (pastries) or flowers is the classic gift.', // TODO(Shabnaz): check the handshake advice and the hand-on-heart gesture
+    tip: 'Not every Iranian shakes hands with the opposite sex, especially older or religious relatives: let the elder offer a hand first, and if none comes, a hand on your heart with a small nod is warm and always right. And never arrive empty-handed: a box of <i>shirini</i> (pastries) or flowers is the classic gift.',
     words: [
       { fa: 'سلام', tr: 'salâm', en: 'hello', alt: ['hi'] },
       { fa: 'حالتون چطوره؟', tr: 'hâletun chetore?', en: 'how are you?', alt: ['how are you'], note: 'The polite form for elders. Written: hâl-e shomâ chetor ast?' },
@@ -54,7 +54,7 @@ export const COUPLES: Unit[] = [
         alt: ['This is for you.', 'These sweets are for you.'],
         tiles: ['این', 'شیرینی', 'برای', 'شماست'],
         trTiles: ['in', 'shirini', 'barâ-ye', 'shomâst'],
-        note: 'shomâst = shomâ + ast, "is (for) you". Hand it to the mother, with both hands if you can.', // TODO(Shabnaz): check "with both hands"
+        note: 'shomâst = shomâ + ast, "is (for) you". Hand it to the mother, with both hands if you can.',
       },
       {
         fa: 'خواهش می‌کنم، قابل شما رو نداره.',
@@ -128,7 +128,7 @@ export const COUPLES: Unit[] = [
     fa: 'تو یا شما؟',
     tr: 'to yâ shomâ?',
     can: "You can choose between to and shomâ, make your verbs match, and address your partner's relatives.",
-    tip: 'Use <i>shomâ</i> with every elder until you are told otherwise: too much respect never offends, and many Iranians say <i>shomâ</i> even to their own parents. Many in-laws are happy to be called <i>mâmân</i> and <i>bâbâ</i>, but wait for the invitation: <i>behem begu mâmân</i>, "call me maman".', // TODO(Shabnaz): check what foreign partners usually call in-laws before the invitation
+    tip: 'Use <i>shomâ</i> with every elder until you are told otherwise: too much respect never offends, and many Iranians say <i>shomâ</i> even to their own parents. Many in-laws are happy to be called <i>mâmân</i> and <i>bâbâ</i>, but wait for the invitation: <i>behem begu mâmân</i>, "call me maman".',
     words: [
       { fa: 'تو', tr: 'to', en: 'you (informal)', alt: ['you'], note: 'For your partner, friends, children, and family once you are close.' },
       { fa: 'شما', tr: 'shomâ', en: 'you (polite)', alt: ['you (plural)', 'you all'], note: 'For elders, strangers, and more than one person.' },
@@ -248,12 +248,12 @@ export const COUPLES: Unit[] = [
     fa: 'شام خونه‌ی مامان',
     tr: 'shâm khune-ye mâmân',
     can: 'You can praise the cook, say no to seconds without offending, and offer to help after dinner.',
-    tip: 'The host will offer you more, again and again: one "no" is just <i>ta\'ârof</i>. If you are really full, say so warmly two or three times with a hand on your heart. An empty plate gets refilled at once, so leave a little if you are done.', // TODO(Shabnaz): check the empty-plate advice
+    tip: 'The host will offer you more, again and again: one "no" is just <i>ta\'ârof</i>. If you are really full, say so warmly two or three times with a hand on your heart. An empty plate gets refilled at once, so leave a little if you are done.',
     words: [
       { fa: 'شام', tr: 'shâm', en: 'dinner', alt: ['supper'] },
       { fa: 'دستتون درد نکنه', tr: 'dastetun dard nakone', en: 'thank you (for your effort)', alt: ['thank you', 'thanks'], note: 'Literally "may your hand not hurt": thanks for something someone made or did. With to: dastet dard nakone.' },
       { fa: 'خوشمزه', tr: 'khoshmaze', en: 'delicious', alt: ['tasty'] },
-      { fa: 'نوش جان', tr: 'nush-e jân', en: 'enjoy your meal', alt: ['bon appétit', 'enjoy'], note: 'Roughly "may it nourish your soul". The cook says it when you thank them. Spoken also nush-e jun.' }, // TODO(Shabnaz): check the literal meaning
+      { fa: 'نوش جان', tr: 'nush-e jân', en: 'enjoy your meal', alt: ['bon appétit', 'enjoy'], note: 'Roughly "may it nourish your soul". The cook says it when you thank them. Spoken also nush-e jun.' },
       { fa: 'بازم', tr: 'bâzam', en: 'some more', alt: ['more', 'again'], note: 'Spoken for bâz ham, "again, more".' },
       { fa: 'کشیدن', tr: 'keshidan', en: 'to dish up', alt: ['to serve food', 'to help yourself'], note: 'For food: bekesh / bekeshid, "help yourself".' },
       { fa: 'سیر', tr: 'sir', en: 'full', alt: ['not hungry', 'satiated'], note: 'The same word also means "garlic"!' },
@@ -372,7 +372,7 @@ export const COUPLES: Unit[] = [
     words: [
       { fa: 'الو', tr: 'alo', en: 'hello (on the phone)', alt: ['hello'], note: 'Only for answering the phone.' },
       { fa: 'تلفن', tr: 'telefon', en: 'phone', alt: ['telephone'], note: 'A mobile is mobâyl or gushi.' },
-      { fa: 'تماس تصویری', tr: 'tamâs-e tasviri', en: 'video call', note: 'Many people just say vidyo kâl.' }, // TODO(Shabnaz): check "vidyo kâl"
+      { fa: 'تماس تصویری', tr: 'tamâs-e tasviri', en: 'video call', note: 'Many people just say vidyo kâl.' },
       { fa: 'خبر', tr: 'khabar', en: 'news', note: 'che khabar? "what\'s new?"' },
       { fa: 'سلامتی', tr: 'salâmati', en: 'health', alt: ['well-being'], note: 'salâmati! ("health!") is the usual answer to che khabar?: "all good".' },
       { fa: 'همه', tr: 'hame', en: 'everyone', alt: ['all', 'everybody'] },
@@ -461,7 +461,7 @@ export const COUPLES: Unit[] = [
           options: ['رضا هم میام؟', 'رضا هم میاد؟', 'رضا هم میای؟'],
           optionsTr: ['Rezâ ham miyâm?', 'Rezâ ham miyâd?', 'Rezâ ham miyây?'],
           answer: 1,
-          why: 'One other person takes -d: miyâd. (For an elder, people often use the plural as respect: bâbâ ham miyân?)', // TODO(Shabnaz): check the respectful plural note
+          why: 'One other person takes -d: miyâd. (For an elder, people often use the plural as respect: bâbâ ham miyân?)',
         },
       ],
     },
@@ -487,7 +487,7 @@ export const COUPLES: Unit[] = [
     fa: 'حرف‌های شیرین',
     tr: 'harfhâ-ye shirin',
     can: 'You can say sweet everyday things to your partner and the family, and understand what they say back.',
-    tip: '<i>ghorbunet beram</i> literally means "may I be sacrificed for you". It sounds dramatic, but Iranians say it all the time, to a child, a partner, or at the end of a phone call: think "love you, dear". Elders say it to younger people more than the other way round.', // TODO(Shabnaz): check who says ghorbunet beram to whom
+    tip: '<i>ghorbunet beram</i> literally means "may I be sacrificed for you". It sounds dramatic, but Iranians say it all the time, to a child, a partner, or at the end of a phone call: think "love you, dear". Elders say it to younger people more than the other way round.',
     words: [
       { fa: 'عزیزم', tr: 'azizam', en: 'my dear', alt: ['dear', 'darling', 'honey'], note: 'aziz + -am, "my dear". For partners, children, friends.' },
       { fa: 'عشقم', tr: 'eshgham', en: 'my love', alt: ['love', 'darling'] },
@@ -502,7 +502,7 @@ export const COUPLES: Unit[] = [
       { fa: 'مهربون', tr: 'mehrabun', en: 'kind', alt: ['sweet', 'caring'], note: 'Spoken for mehrabân.' },
       { fa: 'خوشحال', tr: 'khoshhâl', en: 'happy', alt: ['glad'] },
       { fa: 'نگران', tr: 'negarân', en: 'worried', note: 'Spoken: negarun. negarunet shodam: "I was worried about you".' },
-      { fa: 'بوس', tr: 'bus', en: 'kiss', note: 'Spoken; the written word is buse. bus bus! is a typical sign-off from grandmas.' }, // TODO(Shabnaz): check "bus bus!"
+      { fa: 'بوس', tr: 'bus', en: 'kiss', note: 'Spoken; the written word is buse. bus bus! is a typical sign-off from grandmas.' },
     ],
     sentences: [
       {
