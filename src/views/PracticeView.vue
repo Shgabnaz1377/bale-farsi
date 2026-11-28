@@ -63,6 +63,11 @@ const persian = APP.id === 'persianmeow'
         <b>{{ t('Persian idioms') }}</b>
         <span class="muted small">{{ t('Pishi acts out sayings. Learn one, win a heart.') }}</span>
       </RouterLink>
+      <RouterLink v-if="persian" class="card tile act" :to="{ name: 'cast' }">
+        <span class="a-ico lapis-soft" aria-hidden="true">👥</span>
+        <b>{{ t('Characters') }}</b>
+        <span class="muted small">{{ t('Meet everyone who speaks in the dialogues.') }}</span>
+      </RouterLink>
       <RouterLink v-if="APP.alphabet" class="card tile act" :to="{ name: 'alphabet' }">
         <span class="a-ico accent fa-brand" lang="fa" aria-hidden="true">ب</span>
         <b>{{ t('Alphabet') }}</b>
