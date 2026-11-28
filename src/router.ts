@@ -22,6 +22,8 @@ export const router = createRouter({
     { path: '/idioms', name: 'idioms', component: () => import('./views/IdiomsView.vue') },
     { path: '/characters', name: 'cast', component: () => import('./views/CastView.vue') },
     { path: '/quick', name: 'quick', component: () => import('./views/QuickQuizView.vue') },
+    { path: '/privacy', name: 'privacy', component: () => import('./views/LegalView.vue'), props: { doc: 'privacy' } },
+    { path: '/terms', name: 'terms', component: () => import('./views/LegalView.vue'), props: { doc: 'terms' } },
     { path: '/:pathMatch(.*)*', name: 'not-found', component: () => import('./views/NotFoundView.vue') },
   ],
   scrollBehavior: () => ({ top: 0 }),

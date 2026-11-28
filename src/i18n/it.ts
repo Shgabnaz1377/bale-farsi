@@ -512,4 +512,7 @@ export const IT: Record<string, string> = {
   "Sad": "Triste",
   "Shocked": "Sorpreso",
   "Meet everyone who speaks in the dialogues.": "Conosci tutti quelli che parlano nei dialoghi.",
+  "Privacy policy": "Informativa sulla privacy",
+  "Terms of use": "Condizioni d'uso",
+  "By creating an account you accept:": "Creando un account accetti:",
 }
