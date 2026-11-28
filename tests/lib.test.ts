@@ -75,6 +75,13 @@ describe('merging this device with the cloud', () => {
     expect(m.cards.j).toBeDefined()
     expect(m.settings.mode).toBe('latin')
   })
+  it('takes the account language on a device still on the starting language', () => {
+    const local = { ...base(), settings: { ...base().settings, lang: 'en' as const } }
+    const remote = { ...base(), settings: { ...base().settings, lang: 'it' as const } }
+    expect(mergeProgress(local, remote, 'en').settings.lang).toBe('it')
+    // A language picked on this device stays.
+    expect(mergeProgress({ ...local, settings: { ...local.settings, lang: 'it' } }, { ...remote, settings: { ...remote.settings, lang: 'en' } }, 'en').settings.lang).toBe('it')
+  })
   it('detects when nothing needs uploading', () => {
     const a = base()
     expect(sameLearning(a, { ...a, hearts: 2 })).toBe(true)
