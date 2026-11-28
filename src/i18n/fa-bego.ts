@@ -513,7 +513,7 @@ export const FA_BEGO: Record<string, string> = {
   "Shocked": "شوکه",
   "Meet everyone who speaks in the dialogues.": "با همهٔ آدم‌های گفت‌وگوها آشنا شو.",
   "Download my data": "دانلود داده‌های من",
-  "I am 14 or older and I have read the": "۱۴ سال یا بیشتر دارم و این را خوانده‌ام:",
-  "privacy policy": "سیاست حریم خصوصی",
-  "Privacy policy": "سیاست حریم خصوصی",
+  "Privacy policy": "حریم خصوصی",
+  "Terms of use": "شرایط استفاده",
+  "By creating an account you accept:": "با ساختن حساب این‌ها را می‌پذیری:",
 }

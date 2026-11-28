@@ -86,8 +86,6 @@ async function downloadData() {
   setTimeout(() => URL.revokeObjectURL(url), 1000)
 }
 
-const agreed = ref(false)
-
 const confirmDelete = ref(false)
 async function removeAccount() {
   const r = await deleteMyAccount()
@@ -207,13 +205,13 @@ const statusText = computed(() => {
           <input id="pw" v-model="password" type="password" :autocomplete="mode === 'signup' ? 'new-password' : 'current-password'" minlength="8" required />
           <span v-if="mode === 'signup'" class="muted small">{{ t('At least 8 characters.') }}</span>
         </template>
-        <label v-if="mode === 'signup'" class="agree small">
-          <input v-model="agreed" type="checkbox" required />
-          <span>{{ t('I am 14 or older and I have read the') }} <RouterLink :to="{ name: 'privacy' }" target="_blank">{{ t('privacy policy') }}</RouterLink>.</span>
-        </label>
         <button type="submit" class="btn primary" :disabled="busy">
           {{ busy ? t('Checking…') : mode === 'signup' ? t('Create account') : mode === 'signin' ? t('Sign in') : t('Email me a reset link') }}
         </button>
+        <p v-if="mode === 'signup'" class="muted small">
+          {{ t('By creating an account you accept:') }}
+          <RouterLink to="/terms">{{ t('Terms of use') }}</RouterLink> · <RouterLink to="/privacy">{{ t('Privacy policy') }}</RouterLink>
+        </p>
       </form>
       <p v-if="error" class="err small" role="alert">{{ error }}</p>
       <p v-if="notice" class="small" role="status">{{ notice }}</p>
@@ -230,8 +228,6 @@ const statusText = computed(() => {
 </template>
 
 <style scoped>
-.agree { display: flex; gap: 8px; align-items: flex-start; font-weight: 400 }
-.agree input { margin-top: 3px; width: auto }
 h1 { font-size: 1.7rem; font-weight: 800 }
 .langs { display: flex; gap: 6px; justify-content: flex-end }
 .title-row { display: flex; align-items: center; justify-content: space-between; gap: 12px }

@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Learn Persian (Farsi) free: A1 to B2 with Finglish and audio · PersianMeow</title>
+<meta name="description" content="Learn Persian (Farsi) from your first letter to B2. 95 short units, 4,600+ words with native-style audio, every word in Finglish so you can start before you read the alphabet. Free, works offline." />
+<link rel="canonical" href="https://shgabnaz1377.github.io/persianmeow/learn-persian/" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="Learn Persian (Farsi) free with PersianMeow" />
+<meta property="og:description" content="Short lessons from A1 to B2, Finglish for every word, audio for every word, and Pishi the Persian cat." />
+<meta property="og:url" content="https://shgabnaz1377.github.io/persianmeow/learn-persian/" />
+<meta property="og:image" content="https://shgabnaz1377.github.io/persianmeow/og-image.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="theme-color" content="#0a7b7a" />
+<link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="../apple-touch-icon.png" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Is PersianMeow free?","acceptedAnswer":{"@type":"Answer","text":"Yes. The whole course, the alphabet, the dictionary and the audio are free. You can use it without an account; a free account saves your progress across devices."}},
+{"@type":"Question","name":"Do I need to read the Persian alphabet first?","acceptedAnswer":{"@type":"Answer","text":"No. Every Persian word and sentence also comes in Finglish (Persian in English letters, like salâm for hello), so you can start speaking on day one and learn the 32 letters alongside."}},
+{"@type":"Question","name":"Is Persian the same as Farsi?","acceptedAnswer":{"@type":"Answer","text":"Yes. Farsi is the Persian name of the language. PersianMeow teaches the Persian spoken in Iran, in its everyday and written forms."}},
+{"@type":"Question","name":"Does Duolingo teach Persian?","acceptedAnswer":{"@type":"Answer","text":"No, Duolingo has no Persian (Farsi) course. PersianMeow was made to fill that gap, with the same short-lesson style."}},
+{"@type":"Question","name":"Does it work offline?","acceptedAnswer":{"@type":"Answer","text":"Yes. Install it from your browser and every lesson works without internet; words you have heard keep their audio offline."}}
+]}
+</script>
+<style>
+  /* Fonts are served from this site, not Google Fonts (GDPR). */
+  @font-face { font-family: 'Bricolage Grotesque'; src: url(fonts/bricolage-grotesque-latin-opsz-normal.woff2) format('woff2'); font-weight: 200 800; font-display: swap }
+  @font-face { font-family: 'Lexend'; src: url(fonts/lexend-latin-400-normal.woff2) format('woff2'); font-weight: 400; font-display: swap }
+  @font-face { font-family: 'Lexend'; src: url(fonts/lexend-latin-500-normal.woff2) format('woff2'); font-weight: 500; font-display: swap }
+  @font-face { font-family: 'Lexend'; src: url(fonts/lexend-latin-600-normal.woff2) format('woff2'); font-weight: 600; font-display: swap }
+  @font-face { font-family: 'Vazirmatn'; src: url(fonts/vazirmatn-arabic-500-normal.woff2) format('woff2'); font-weight: 500; font-display: swap }
+  @font-face { font-family: 'Vazirmatn'; src: url(fonts/vazirmatn-arabic-700-normal.woff2) format('woff2'); font-weight: 700; font-display: swap }
+  :root { --teal: #0a7b7a; --teal-soft: #d9efee; --ink: #142033; --muted: #55657a; --bg: #eef3f6; --card: #fff; --line: #d6e0e8; --gold: #e0a21c }
+  @media (prefers-color-scheme: dark) { :root { --ink: #e8eef4; --muted: #9fb0c2; --bg: #0f1722; --card: #172231; --line: #263447; --teal-soft: #12393b } }
+  * { box-sizing: border-box }
+  body { margin: 0; font-family: Lexend, system-ui, sans-serif; color: var(--ink); background: var(--bg); line-height: 1.55 }
+  h1, h2, h3 { font-family: 'Bricolage Grotesque', Lexend, sans-serif; line-height: 1.12; margin: 0 }
+  [lang=fa] { font-family: Vazirmatn, sans-serif }
+  a { color: var(--teal) }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px }
+  header { display: flex; align-items: center; justify-content: space-between; padding: 18px 0 }
+  .brand { display: flex; align-items: center; gap: 10px; font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 1.3rem; text-decoration: none; color: var(--ink) }
+  .brand img { width: 40px; height: 40px; border-radius: 10px }
+  .brand em { color: var(--teal); font-style: normal }
+  .btn { display: inline-block; background: var(--teal); color: #fff; text-decoration: none; font-weight: 600; padding: 14px 26px; border-radius: 14px; box-shadow: 0 4px 0 #075857; font-size: 1.05rem }
+  .btn:hover { filter: brightness(1.08) }
+  .btn.sm { padding: 9px 16px; font-size: 0.95rem; box-shadow: 0 3px 0 #075857 }
+  .hero { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 40px; align-items: center; padding: 36px 0 56px }
+  .kicker { text-transform: uppercase; letter-spacing: 0.12em; font-size: 0.8rem; font-weight: 600; color: var(--muted) }
+  .hero h1 { font-size: clamp(2.2rem, 5vw, 3.6rem); font-weight: 800; margin: 12px 0 16px }
+  .hero p.lead { font-size: 1.15rem; color: var(--muted); max-width: 34em }
+  .say { display: inline-flex; flex-direction: column; background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 10px 16px; margin: 18px 0 26px }
+  .say b[lang=fa] { font-size: 1.4rem }
+  .say span { color: var(--muted); font-size: 0.95rem }
+  .cta { display: flex; gap: 16px; align-items: center; flex-wrap: wrap }
+  .cta small { color: var(--muted) }
+  .phones { display: flex; gap: 16px; justify-content: center }
+  .phones img { width: 46%; max-width: 240px; border-radius: 26px; border: 6px solid var(--ink); box-shadow: 0 20px 40px rgba(20, 32, 51, 0.18) }
+  .phones img:last-child { margin-top: 48px }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 64px }
+  .stat { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 18px; text-align: center }
+  .stat b { display: block; font-family: 'Bricolage Grotesque', sans-serif; font-size: 2rem; color: var(--teal) }
+  .stat span { color: var(--muted); font-size: 0.92rem }
+  section { margin-bottom: 72px }
+  section > h2 { font-size: clamp(1.7rem, 3.4vw, 2.4rem); margin-bottom: 24px; text-align: center }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px }
+  .feat { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 22px }
+  .feat h3 { font-size: 1.2rem; margin-bottom: 8px }
+  .feat p { margin: 0; color: var(--muted) }
+  .feat .ex { margin-top: 10px; font-size: 0.95rem }
+  .show { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center }
+  .show img { width: 100%; max-width: 300px; justify-self: center; border-radius: 26px; border: 6px solid var(--ink) }
+  .show ul { padding-left: 1.2em; color: var(--muted) }
+  .show li { margin-bottom: 8px }
+  .levels { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px }
+  .lvl { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 18px }
+  .lvl b { font-family: 'Bricolage Grotesque', sans-serif; font-size: 1.5rem; color: var(--teal) }
+  .lvl p { margin: 6px 0 0; color: var(--muted); font-size: 0.95rem }
+  details { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px 18px; margin-bottom: 10px; max-width: 760px; margin-inline: auto }
+  summary { font-weight: 600; cursor: pointer }
+  details p { color: var(--muted); margin: 10px 0 0 }
+  .final { text-align: center; background: var(--teal-soft); border-radius: 24px; padding: 44px 20px }
+  .final h2 { margin-bottom: 14px }
+  footer { text-align: center; color: var(--muted); font-size: 0.9rem; padding: 24px 0 40px }
+  footer a { margin: 0 8px }
+  @media (max-width: 820px) {
+    .hero, .show { grid-template-columns: 1fr }
+    .grid, .levels { grid-template-columns: 1fr 1fr }
+    .stats { grid-template-columns: 1fr 1fr }
+  }
+  @media (max-width: 520px) { .grid, .levels { grid-template-columns: 1fr } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="brand" href="../"><img src="../icon-192.png" alt="" width="40" height="40" /><span class="name">Persian<em>Meow</em></span></a>
+    <a class="btn sm" href="../">Open the app</a>
+  </header>
+
+  <main>
+    <div class="hero">
+      <div>
+        <div class="kicker">Persian (Farsi) for English speakers · A1 to B2</div>
+        <h1>Learn Persian, one short lesson at a time.</h1>
+        <p class="lead">You don't need the alphabet to start: every word comes in Finglish, Persian in English letters. Listen, tap, build sentences, and let Pishi the Persian cat keep your streak alive.</p>
+        <div class="say"><b lang="fa" dir="rtl">سلام! من پیشی‌ام.</b><span>salâm! man Pishi-am. · Hello! I'm Pishi.</span></div>
+        <div class="cta">
+          <a class="btn" href="../">Start learning free</a>
+          <small>No sign-up needed · works offline</small>
+        </div>
+      </div>
+      <div class="phones">
+        <img src="2-lesson.webp" alt="A PersianMeow lesson: what does salâm mean?" width="360" height="640" />
+        <img src="3-path.webp" alt="The A1 learning path with Pishi the cat" width="360" height="640" />
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><b>95</b><span>units, A1 to B2</span></div>
+      <div class="stat"><b>4,600+</b><span>words with audio</span></div>
+      <div class="stat"><b>32</b><span>letters, step by step</span></div>
+      <div class="stat"><b>21</b><span>characters who talk</span></div>
+    </div>
+
+    <section>
+      <h2>Why people learn with PersianMeow</h2>
+      <div class="grid">
+        <div class="feat"><h3>Finglish everywhere</h3><p>Every Persian word and sentence also comes in English letters, with the vowels Persian script leaves out.</p><p class="ex"><span lang="fa" dir="rtl">خوبم، مرسی</span> · khubam, mersi</p></div>
+        <div class="feat"><h3>Hear every word</h3><p>Every word, sentence, dialogue and reading has audio, with a slow button. Native speakers review the pronunciation in the app.</p></div>
+        <div class="feat"><h3>The alphabet, gently</h3><p>All 32 letters with their joined shapes, example words, and six short lessons. The short vowel marks appear while you need them.</p></div>
+        <div class="feat"><h3>Real conversations</h3><p>Dialogues with a cast of 21 people, each with a face and a voice, from ordering tea to talking about family.</p></div>
+        <div class="feat"><h3>Remember for good</h3><p>Spaced review brings back every word just before you forget it. XP, daily goals and a streak on the Persian week.</p></div>
+        <div class="feat"><h3>Culture, not just words</h3><p>Idioms, fun facts, poetry lines and why Persian is not Arabic, a distant cousin of English, in fact.</p></div>
+      </div>
+    </section>
+
+    <section class="show">
+      <img src="6-dictionary.webp" alt="The PersianMeow dictionary with audio for every word" width="360" height="640" loading="lazy" />
+      <div>
+        <h2 style="text-align:left">A dictionary that talks</h2>
+        <ul>
+          <li>4,600+ common words, searchable in English, Finglish or Persian.</li>
+          <li>Each with an example sentence and its own recording.</li>
+          <li>The words you have met in lessons are marked, so you can review them.</li>
+        </ul>
+        <p><a class="btn sm" href="../#/words">Try the dictionary</a></p>
+      </div>
+    </section>
+
+    <section>
+      <h2>From hello to reading the news</h2>
+      <div class="levels">
+        <div class="lvl"><b>A1</b><p>Greet people, introduce yourself, count, tell the time, order food.</p></div>
+        <div class="lvl"><b>A2</b><p>Talk about your day, family, home, shopping and travel, in dialogues.</p></div>
+        <div class="lvl"><b>B1</b><p>Tell stories in the past, give opinions, read short texts.</p></div>
+        <div class="lvl"><b>B2</b><p>Follow longer readings, formal and spoken Persian, idioms.</p></div>
+      </div>
+    </section>
+
+    <section class="show">
+      <div>
+        <h2 style="text-align:left">Meet the cast</h2>
+        <ul>
+          <li>Twenty-one characters speak the dialogues, each with a matching voice.</li>
+          <li>They react, think and cheer, so lessons feel like a conversation.</li>
+          <li>And Pishi, the Persian cat, is with you all the way.</li>
+        </ul>
+        <p><a class="btn sm" href="../#/characters">See the characters</a></p>
+      </div>
+      <img src="7-characters.webp" alt="The 21 PersianMeow characters" width="360" height="640" loading="lazy" />
+    </section>
+
+    <section>
+      <h2>Questions</h2>
+      <details><summary>Is PersianMeow free?</summary><p>Yes. The whole course, the alphabet, the dictionary and the audio are free. You can use it without an account; a free account saves your progress across devices.</p></details>
+      <details><summary>Do I need to read the Persian alphabet first?</summary><p>No. Every word also comes in Finglish (like <i>salâm</i> for hello), so you can start speaking on day one and learn the 32 letters alongside.</p></details>
+      <details><summary>Is Persian the same as Farsi?</summary><p>Yes. Farsi is the Persian name of the language. PersianMeow teaches the Persian spoken in Iran, in its everyday and written forms.</p></details>
+      <details><summary>Does Duolingo teach Persian?</summary><p>No, Duolingo has no Persian course. PersianMeow was made to fill that gap, with the same short-lesson style.</p></details>
+      <details><summary>Does it work offline? On my phone?</summary><p>Yes. Open it in your phone's browser and add it to your home screen: every lesson then works without internet. Android and iPhone apps are on the way.</p></details>
+      <details><summary>I'm Persian and something sounds wrong.</summary><p>Thank you! Sign in and tap "sounds wrong?" next to the word. Native speakers review every report and we re-record the clip.</p></details>
+    </section>
+
+    <div class="final">
+      <h2>Your first Persian word is one tap away.</h2>
+      <p style="color:var(--muted)">Five minutes a day is enough. Pishi will cheer you on.</p>
+      <a class="btn" href="../">Start learning free</a>
+    </div>
+  </main>
+
+  <footer>
+    <a href="../">App</a><a href="../#/privacy">Privacy</a><a href="../#/terms">Terms</a><a href="https://github.com/Shgabnaz1377/persianmeow">GitHub</a>
+    <p>Made with care by <a href="https://www.shabnazghaffari.com/">Shabnaz Ghaffari</a></p>
+  </footer>
+</div>
+</body>
+</html>

@@ -5,6 +5,7 @@ import { mergeProgress, sameLearning } from './merge.ts'
 import { isNative } from './platform.ts'
 import { APP } from '@/app.ts'
 import { detectLang, t } from '@/i18n/index.ts'
+import { LEGAL_UPDATED } from '@/content/legal.ts'
 
 /** Where email links land when sent from inside the phone apps. */
 const WEB_URL = APP.webUrl
@@ -195,7 +196,7 @@ export async function signUp(name: string, email: string, password: string): Pro
   const { data, error } = await sb.auth.signUp({
     email: email.trim(), password,
     // When they agreed to the privacy policy (GDPR: we can show when and to which version).
-    options: { data: { name: name.trim().slice(0, 80), privacy_accepted: new Date().toISOString(), privacy_version: PRIVACY_VERSION }, emailRedirectTo: redirect() },
+    options: { data: { name: name.trim().slice(0, 80), privacy_accepted: new Date().toISOString(), privacy_version: LEGAL_UPDATED }, emailRedirectTo: redirect() },
   })
   if (error) return friendly(error.message)
   return data.session ? null : 'confirm'

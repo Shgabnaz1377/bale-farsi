@@ -108,7 +108,7 @@ export default defineConfig(({ mode }) => {
           this.emitFile({
             type: 'asset',
             fileName: 'sitemap.xml',
-            source: `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>${app.url}</loc><changefreq>weekly</changefreq><priority>1.0</priority></url></urlset>\n`,
+            source: `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url><loc>${app.url}</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>${appId === 'persianmeow' ? `<url><loc>${app.url}learn-persian/</loc><changefreq>monthly</changefreq><priority>0.9</priority></url>` : ''}</urlset>\n`,
           })
         },
       },
@@ -144,7 +144,7 @@ export default defineConfig(({ mode }) => {
           globIgnores: ['**/node_modules/**', 'characters/*_{happy,sad,confused,shock}*.svg'],
           navigateFallback: 'index.html',
           // Bego Ciao lives in a subfolder of PersianMeow's site; PersianMeow's worker must leave it alone.
-          navigateFallbackDenylist: appId === 'persianmeow' ? [/\/begociao(\/|$)/] : [],
+          navigateFallbackDenylist: appId === 'persianmeow' ? [/\/begociao(\/|$)/, /\/learn-persian(\/|$)/] : [],
           cleanupOutdatedCaches: true,
           runtimeCaching: [
             {
