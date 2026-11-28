@@ -203,8 +203,6 @@ const ring = computed(() => `${(left.value / SECONDS) * 100}`)
 .q-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap }
 .back { display: inline-flex; align-items: center; gap: 6px; color: var(--muted); text-decoration: none; font-weight: 500 }
 .modes { display: flex; gap: 6px; flex-wrap: wrap }
-.chip-btn { border: 1.5px solid var(--line); background: var(--surface); border-radius: 999px; padding: 5px 12px; font-size: 0.88rem; font-weight: 600; cursor: pointer }
-.chip-btn.on { border-color: var(--accent); background: var(--accent-soft); color: var(--accent) }
 .intro { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px; padding: 28px 18px }
 .intro h1 { font-size: 1.8rem; font-weight: 800 }
 .intro p { max-width: 46ch }
