@@ -13,9 +13,11 @@ function newerCard(a: Card | undefined, b: Card | undefined): Card | undefined {
  * Combine two copies of a learner's progress (this device and the cloud) without losing work:
  * finished lessons and passed tests are united, each review card keeps its most-practised copy,
  * daily XP keeps the higher figure per day, and the streak comes from whichever copy was active last.
- * Settings and today's hearts stay as they are on this device.
+ * Settings and today's hearts stay as they are on this device, except the language: a device still
+ * on the starting language takes the one saved with the account, so the learner's language follows
+ * their login to every device.
  */
-export function mergeProgress(local: Progress, remote: Progress): Progress {
+export function mergeProgress(local: Progress, remote: Progress, startLang?: Progress['settings']['lang']): Progress {
   const days: Progress['days'] = { ...remote.days }
   for (const [d, xp] of Object.entries(local.days)) days[Number(d)] = Math.max(xp, days[Number(d)] ?? 0)
 
@@ -26,8 +28,10 @@ export function mergeProgress(local: Progress, remote: Progress): Progress {
   }
 
   const latest = local.lastDay >= remote.lastDay ? local : remote
+  const lang = local.settings.lang === startLang && remote.settings?.lang ? remote.settings.lang : local.settings.lang
   return {
     ...local,
+    settings: { ...local.settings, lang },
     xp: Math.max(local.xp, remote.xp, Object.values(days).reduce((n, x) => n + x, 0)),
     streak: latest.streak,
     lastDay: latest.lastDay,

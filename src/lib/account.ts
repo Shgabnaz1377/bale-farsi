@@ -4,7 +4,7 @@ import { P, freshProgress, parseProgress, type Progress } from './store.ts'
 import { mergeProgress, sameLearning } from './merge.ts'
 import { isNative } from './platform.ts'
 import { APP } from '@/app.ts'
-import { t } from '@/i18n/index.ts'
+import { detectLang, t } from '@/i18n/index.ts'
 
 /** Where email links land when sent from inside the phone apps. */
 const WEB_URL = APP.webUrl
@@ -98,10 +98,10 @@ async function pull() {
   if (owner && owner !== user.id) local = { ...freshProgress(), settings: local.settings }
 
   const remote = data ? parseProgress(JSON.stringify(data.data)) : null
-  const merged = remote ? mergeProgress(local, remote) : local
+  const merged = remote ? mergeProgress(local, remote, detectLang()) : local
   apply(merged)
   writeOwner(user.id)
-  if (!remote || !sameLearning(merged, remote)) await push()
+  if (!remote || !sameLearning(merged, remote) || merged.settings.lang !== remote.settings.lang) await push()
   else done()
 }
 
