@@ -10,7 +10,8 @@ import { IT_B2 } from './i18n/it/b2.ts'
 import { IT_CULTURE } from './i18n/it/culture.ts'
 import { IT_COUPLES } from './i18n/it/couples.ts'
 import { TRACK_UNITS } from './tracks/index.ts'
-import { IT_LESSON_NAMES, IT_LETTER_EXAMPLES, IT_LETTER_SOUNDS, IT_LEVELS } from './i18n/it/extra.ts'
+import { IT_LESSON_NAMES, IT_LETTER_EXAMPLES, IT_LETTER_SOUNDS, IT_LEVELS, IT_VOWEL_WORDS } from './i18n/it/extra.ts'
+import { VOWELS, VOWEL_PAIRS } from './vowels.ts'
 
 /**
  * The course is written with English meanings. For another learner language the English-side fields are
@@ -24,6 +25,7 @@ const ORIGINAL = structuredClone({
   tracks: TRACK_UNITS,
   lessonNames: { ...LESSON_NAMES },
   letters: LETTERS.map((l) => ({ sound: l.sound, en: l.example.en })),
+  vowelWords: Object.fromEntries([...VOWELS.flatMap((v) => v.examples), ...VOWEL_PAIRS.flat()].map((w) => [w.tr, w.en])),
 })
 
 /** Lesson names for a Persian interface (Bego Ciao). */
@@ -121,5 +123,9 @@ export function applyCourseLang(lang: Lang) {
     l.example.en = lang === 'it' ? IT_LETTER_EXAMPLES[l.example.fa] ?? ORIGINAL.letters[i].en : ORIGINAL.letters[i].en
     l.sound = lang === 'it' ? IT_LETTER_SOUNDS[l.fa] ?? ORIGINAL.letters[i].sound : ORIGINAL.letters[i].sound
   })
+  // The vowels lesson's example words (shown in the lesson and read out on the alphabet page).
+  for (const w of [...VOWELS.flatMap((v) => v.examples), ...VOWEL_PAIRS.flat()]) {
+    w.en = lang === 'it' ? IT_VOWEL_WORDS[w.tr] ?? ORIGINAL.vowelWords[w.tr] : ORIGINAL.vowelWords[w.tr]
+  }
   applied = lang
 }
