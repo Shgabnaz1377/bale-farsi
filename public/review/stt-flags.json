@@ -1,0 +1,231 @@
+{
+ "generated": "2026-11-28T11:42:50.082Z",
+ "checked": 1852,
+ "flags": [
+  {
+   "key": "cxa2n295gl",
+   "fa": "خسته نباشید",
+   "tr": "khaste nabâshid",
+   "voice": "m",
+   "where": "B1 · Hospitality and ta'ârof · words",
+   "heard": "فصل نباشیم.",
+   "score": 0.57
+  },
+  {
+   "key": "4n92qmnphu",
+   "fa": "پس فایده‌ش چیه؟",
+   "tr": "pas fâyedash chiye?",
+   "voice": "f",
+   "where": "B2 · Science and technology · dialogue · Aseman",
+   "heard": "از فایده اش چیست?",
+   "score": 0.57
+  },
+  {
+   "key": "2g5fhdx9a36",
+   "fa": "اون آقا کیه؟",
+   "tr": "un âghâ kiye?",
+   "voice": "m",
+   "where": "A1 · Asking questions · sentences · Babak",
+   "heard": "اون آقا کیست?",
+   "score": 0.4
+  },
+  {
+   "key": "1c6svra8idr",
+   "fa": "گلوم درد می‌کنه.",
+   "tr": "galum dard mikone.",
+   "voice": "m",
+   "where": "A1 · The body · grammar · Aria",
+   "heard": "کیلومتر رد میکنه.",
+   "score": 0.4
+  },
+  {
+   "key": "23lblxvsyhu",
+   "fa": "حتماً! توپ رو من میارم.",
+   "tr": "hatman! tup ro man miyâram.",
+   "voice": "f",
+   "where": "A2 · Sports and games · dialogue · Artemis",
+   "heard": "حتما. توپ رومانیا را.",
+   "score": 0.4
+  },
+  {
+   "key": "17fkz8qqk6p",
+   "fa": "ناهار خورده‌ای؟",
+   "tr": "nâhâr khorde-i? (spoken: nâhâr khordi?)",
+   "voice": "f",
+   "where": "B1 · Work and study · grammar · Venus",
+   "heard": "نهال خرد هایی.",
+   "score": 0.4
+  },
+  {
+   "key": "263xbli3ut5",
+   "fa": "چای آماده‌ست.",
+   "tr": "chây âmâdast.",
+   "voice": "m",
+   "where": "Culture · Tea and tahdig · grammar · Kourosh",
+   "heard": "چای آماده است.",
+   "score": 0.4
+  },
+  {
+   "key": "8qih9cu6w2",
+   "fa": "سلام ساسان! جمعه شب وقت داری؟",
+   "tr": "salâm Sâsân! jom'e shab vaght dâri?",
+   "voice": "f",
+   "where": "A2 · Invitations · dialogue · Khorshid",
+   "heard": "سلام يا يا. جمعه شب فقط داری.",
+   "score": 0.36
+  },
+  {
+   "key": "bcapa7vgax",
+   "fa": "این میز",
+   "tr": "in miz",
+   "voice": "f",
+   "where": "A1 · This and that · grammar · Khorshid",
+   "heard": "این نیز.",
+   "score": 0.33
+  },
+  {
+   "key": "o5daui72z1",
+   "fa": "ته‌دیگ خیلی خوبه!",
+   "tr": "tahdig kheyli khube!",
+   "voice": "m",
+   "where": "Culture · Tea and tahdig · grammar · Kourosh",
+   "heard": "طرح دیگه خیلی خوبه.",
+   "score": 0.33
+  },
+  {
+   "key": "1vvh28s01tt",
+   "fa": "قند کجاست؟",
+   "tr": "ghand kojâst?",
+   "voice": "m",
+   "where": "Culture · Tea and tahdig · grammar · Kourosh",
+   "heard": "غم کجاست?",
+   "score": 0.33
+  },
+  {
+   "key": "1r0jp6k7847",
+   "fa": "توی پارک سگ هست.",
+   "tr": "tu-ye pârk sag hast.",
+   "voice": "m",
+   "where": "A1 · Animals · grammar · Babak",
+   "heard": "در پارک سگ است.",
+   "score": 0.29
+  },
+  {
+   "key": "1o74ikt2fyb",
+   "fa": "توی آب ماهی نیست.",
+   "tr": "tu-ye âb mâhi nist.",
+   "voice": "f",
+   "where": "A1 · Animals · grammar · Sara",
+   "heard": "در آب ماهی نیست.",
+   "score": 0.29
+  },
+  {
+   "key": "31vrtrm8tc",
+   "fa": "رزرو کردن",
+   "tr": "rezerv kardan",
+   "voice": "m",
+   "where": "B1 · Travel and plans · words",
+   "heard": "رضا رو کردن.",
+   "score": 0.29
+  },
+  {
+   "key": "2dfib3b013o",
+   "fa": "می‌توانم پیغام بگذارم؟",
+   "tr": "mitavânam peyghâm begozâram?",
+   "voice": "f",
+   "where": "A2 · On the phone · sentences · Sara",
+   "heard": "نمیتونم پیام بزارم.",
+   "score": 0.27
+  },
+  {
+   "key": "s2uv2ha5up",
+   "fa": "فیلمو دیدی؟ نظرت چیه؟",
+   "tr": "filmo didi? nazaret chie?",
+   "voice": "f",
+   "where": "B1 · Feelings and opinions · dialogue · Khorshid",
+   "heard": "فیلمو دیدی? نظر چیست?",
+   "score": 0.27
+  },
+  {
+   "key": "1ubba0vzbnq",
+   "fa": "قهوه دارید؟",
+   "tr": "ghahve dârid?",
+   "voice": "m",
+   "where": "A1 · Food and drink · sentences · Aria",
+   "heard": "قهوه داریم.",
+   "score": 0.25
+  },
+  {
+   "key": "1xlm7sml4vx",
+   "fa": "آب دارم.",
+   "tr": "âb dâram.",
+   "voice": "f",
+   "where": "A1 · Food and drink · grammar · Leila",
+   "heard": "آب دارد.",
+   "score": 0.25
+  },
+  {
+   "key": "kvpq8ue4wl",
+   "fa": "توی باغ‌وحش شیر هست؟",
+   "tr": "tu-ye bâgh-e vahsh shir hast?",
+   "voice": "f",
+   "where": "A1 · Animals · sentences · Khorshid",
+   "heard": "در باغ وحش شیر است.",
+   "score": 0.25
+  },
+  {
+   "key": "zmehhgzlnt",
+   "fa": "اونجا اسب هست؟",
+   "tr": "unjâ asb hast?",
+   "voice": "m",
+   "where": "A1 · Animals · grammar · Sasan",
+   "heard": "آنجا عصب هست.",
+   "score": 0.25
+  },
+  {
+   "key": "x4g74ec9f3",
+   "fa": "شغل شما چیه؟",
+   "tr": "shoghl-e shomâ chiye?",
+   "voice": "f",
+   "where": "A1 · Jobs · sentences · Khorshid",
+   "heard": "شغل شما چیست?",
+   "score": 0.25
+  },
+  {
+   "key": "1bivykhm9pv",
+   "fa": "پس عصرا چی کار می‌کردین؟",
+   "tr": "pas asrâ chi kâr mikardin?",
+   "voice": "m",
+   "where": "B1 · How things used to be · dialogue · Arash",
+   "heard": "پس است را چیکار میکردیم?",
+   "score": 0.25
+  },
+  {
+   "key": "n9xuhtb0pf",
+   "fa": "عید تو هم مبارک!",
+   "tr": "eyd-e to ham mobârak!",
+   "voice": "m",
+   "where": "Culture · Nowruz: the Persian New Year · grammar · Kourosh",
+   "heard": "خیلی تو هم مبارک.",
+   "score": 0.25
+  },
+  {
+   "key": "1f6vmxp8kzm",
+   "fa": "خیلی خوشمزه‌ست!",
+   "tr": "kheyli khoshmazast!",
+   "voice": "m",
+   "where": "Culture · Tea and tahdig · words",
+   "heard": "خیلی خوشمزه است.",
+   "score": 0.25
+  },
+  {
+   "key": "1osj0pr3vzt",
+   "fa": "ونوس، چی نیت کردی؟",
+   "tr": "Venus, chi niyyat kardi?",
+   "voice": "m",
+   "where": "Culture · Yalda night · dialogue · Aria",
+   "heard": "هنوز چینید کردی?",
+   "score": 0.25
+  }
+ ]
+}
