@@ -140,6 +140,9 @@ function restore() {
       {{ t('{app} is free and open source. The course content was written with AI help and is being reviewed by native speakers; if you spot a mistake,', { app: APP.fullName }) }}
       <a href="https://github.com/Shgabnaz1377/persianmeow/issues" target="_blank" rel="noopener">{{ t('open an issue on GitHub') }}</a>.
     </p>
+    <p class="muted small about">
+      <RouterLink to="/privacy">{{ t('Privacy policy') }}</RouterLink> · <RouterLink to="/terms">{{ t('Terms of use') }}</RouterLink>
+    </p>
   </main>
 </template>
 

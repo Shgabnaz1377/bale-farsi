@@ -195,6 +195,10 @@ const statusText = computed(() => {
         <button type="submit" class="btn primary" :disabled="busy">
           {{ busy ? t('Checking…') : mode === 'signup' ? t('Create account') : mode === 'signin' ? t('Sign in') : t('Email me a reset link') }}
         </button>
+        <p v-if="mode === 'signup'" class="muted small">
+          {{ t('By creating an account you accept:') }}
+          <RouterLink to="/terms">{{ t('Terms of use') }}</RouterLink> · <RouterLink to="/privacy">{{ t('Privacy policy') }}</RouterLink>
+        </p>
       </form>
       <p v-if="error" class="err small" role="alert">{{ error }}</p>
       <p v-if="notice" class="small" role="status">{{ notice }}</p>
