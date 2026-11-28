@@ -2,7 +2,7 @@
 import { computed, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import {
-  account, deleteMyAccount, isAdmin, isReviewer, sendPasswordReset, setName, setPassword, signIn, signOut, signUp, syncNow,
+  account, deleteMyAccount, exportMyData, isAdmin, isReviewer, sendPasswordReset, setName, setPassword, signIn, signOut, signUp, syncNow,
 } from '@/lib/account.ts'
 import MeowCat from '@/components/MeowCat.vue'
 import { flagOn } from '@/lib/pron.ts'
@@ -73,6 +73,20 @@ async function saveName() {
   const r = await setName(editName.value)
   notice.value = r ?? t('Saved.')
 }
+
+async function downloadData() {
+  error.value = ''
+  const r = await exportMyData()
+  if (r.error || !r.data) { error.value = r.error ?? ''; return }
+  const url = URL.createObjectURL(new Blob([JSON.stringify(r.data, null, 2)], { type: 'application/json' }))
+  const a = document.createElement('a')
+  a.href = url
+  a.download = 'my-data.json'
+  a.click()
+  setTimeout(() => URL.revokeObjectURL(url), 1000)
+}
+
+const agreed = ref(false)
 
 const confirmDelete = ref(false)
 async function removeAccount() {
@@ -151,6 +165,7 @@ const statusText = computed(() => {
           <span class="inline"><input id="newpw2" v-model="newPassword" type="password" autocomplete="new-password" minlength="8" /><button type="submit" class="btn ghost sm" :disabled="busy">{{ t('Save password') }}</button></span>
         </form>
         <button v-else type="button" class="btn ghost sm" @click="changing = true">{{ t('Change password') }}</button>
+        <button type="button" class="btn ghost sm" @click="downloadData">{{ t('Download my data') }}</button>
         <div class="row">
           <button v-if="!confirmDelete" type="button" class="btn ghost sm" @click="confirmDelete = true">{{ t('Delete my account') }}</button>
           <template v-else>
@@ -192,6 +207,10 @@ const statusText = computed(() => {
           <input id="pw" v-model="password" type="password" :autocomplete="mode === 'signup' ? 'new-password' : 'current-password'" minlength="8" required />
           <span v-if="mode === 'signup'" class="muted small">{{ t('At least 8 characters.') }}</span>
         </template>
+        <label v-if="mode === 'signup'" class="agree small">
+          <input v-model="agreed" type="checkbox" required />
+          <span>{{ t('I am 14 or older and I have read the') }} <RouterLink :to="{ name: 'privacy' }" target="_blank">{{ t('privacy policy') }}</RouterLink>.</span>
+        </label>
         <button type="submit" class="btn primary" :disabled="busy">
           {{ busy ? t('Checking…') : mode === 'signup' ? t('Create account') : mode === 'signin' ? t('Sign in') : t('Email me a reset link') }}
         </button>
@@ -203,11 +222,16 @@ const statusText = computed(() => {
       <p v-if="mode === 'signup'" class="muted small">{{ t('Progress you already have on this device is added to your new account.') }}</p>
     </section>
 
-    <p class="muted small">{{ t('We store your name, email and learning progress so you can carry on from any device. The course owner can see them to look after the course; nobody else can.') }}</p>
+    <p class="muted small">
+      {{ t('We store your name, email and learning progress so you can carry on from any device. The course owner can see them to look after the course; nobody else can.') }}
+      <RouterLink :to="{ name: 'privacy' }">{{ t('Privacy policy') }}</RouterLink>
+    </p>
   </main>
 </template>
 
 <style scoped>
+.agree { display: flex; gap: 8px; align-items: flex-start; font-weight: 400 }
+.agree input { margin-top: 3px; width: auto }
 h1 { font-size: 1.7rem; font-weight: 800 }
 .langs { display: flex; gap: 6px; justify-content: flex-end }
 .title-row { display: flex; align-items: center; justify-content: space-between; gap: 12px }

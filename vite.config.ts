@@ -139,7 +139,7 @@ export default defineConfig(({ mode }) => {
         },
         workbox: {
           // The whole course is in the JS bundle, so precaching the build makes every lesson work offline.
-          globPatterns: ['**/*.{js,css,html,svg,png,webmanifest}'],
+          globPatterns: ['**/*.{js,css,html,svg,png,webmanifest,woff2}'],
           // The cast's faces used by the app (idle, talking, avatar) are precached; the other moods are not used yet.
           globIgnores: ['**/node_modules/**', 'characters/*_{happy,sad,confused,shock}*.svg'],
           navigateFallback: 'index.html',
@@ -152,16 +152,6 @@ export default defineConfig(({ mode }) => {
               urlPattern: ({ url }) => url.pathname.includes('/audio/') && url.pathname.endsWith('.mp3'),
               handler: 'CacheFirst',
               options: { cacheName: `${appId}-audio`, rangeRequests: true, expiration: { maxEntries: 2000, maxAgeSeconds: 60 * 60 * 24 * 365 }, cacheableResponse: { statuses: [0, 200] } },
-            },
-            {
-              urlPattern: ({ url }) => url.origin === 'https://fonts.googleapis.com',
-              handler: 'StaleWhileRevalidate',
-              options: { cacheName: 'google-fonts-css' },
-            },
-            {
-              urlPattern: ({ url }) => url.origin === 'https://fonts.gstatic.com',
-              handler: 'CacheFirst',
-              options: { cacheName: 'google-fonts', expiration: { maxEntries: 30, maxAgeSeconds: 60 * 60 * 24 * 365 }, cacheableResponse: { statuses: [0, 200] } },
             },
           ],
         },

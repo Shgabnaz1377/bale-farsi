@@ -21,6 +21,7 @@ export const router = createRouter({
     { path: '/did-you-know', name: 'facts', component: () => import('./views/FactsView.vue') },
     { path: '/idioms', name: 'idioms', component: () => import('./views/IdiomsView.vue') },
     { path: '/characters', name: 'cast', component: () => import('./views/CastView.vue') },
+    { path: '/privacy', name: 'privacy', component: () => import('./views/PrivacyView.vue') },
     { path: '/quick', name: 'quick', component: () => import('./views/QuickQuizView.vue') },
     { path: '/:pathMatch(.*)*', name: 'not-found', component: () => import('./views/NotFoundView.vue') },
   ],

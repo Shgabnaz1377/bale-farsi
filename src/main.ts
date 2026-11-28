@@ -3,6 +3,14 @@ import { App as NativeApp } from '@capacitor/app'
 import App from './App.vue'
 import { router } from './router.ts'
 import { isNative } from './lib/platform.ts'
+// Fonts are served from this site, not Google Fonts, so no visitor data goes to Google (GDPR).
+import '@fontsource-variable/bricolage-grotesque/opsz.css'
+import '@fontsource/lexend/400.css'
+import '@fontsource/lexend/500.css'
+import '@fontsource/lexend/600.css'
+import '@fontsource/vazirmatn/400.css'
+import '@fontsource/vazirmatn/500.css'
+import '@fontsource/vazirmatn/700.css'
 import './styles/base.css'
 
 createApp(App).use(router).mount('#app')
