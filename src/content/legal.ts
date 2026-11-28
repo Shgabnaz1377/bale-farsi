@@ -29,14 +29,14 @@ const en = (app: string): Record<LegalDoc, Text> => ({
       ] },
       { h: 'Who else handles it', p: [
         'Supabase (servers in the European Union) stores accounts and synced progress for us.',
-        'GitHub Pages serves the app, and Google Fonts serves its fonts; like any web server they see your IP address when you open the app.',
+        'GitHub Pages serves the app; like any web server it sees your IP address when you open the app. Fonts, pictures and recordings come from the app itself, not from Google or other sites.',
         'Nobody else receives your data, and none of it is sold.',
       ] },
       { h: 'How long we keep it', p: [
         'As long as you have an account. When you delete it (Account → Delete my account), your account, profile and saved progress are erased straight away. What stays on your device is yours to clear (Settings → Reset progress).',
       ] },
       { h: 'Your rights', p: [
-        `You can see, correct, download or delete your data, and object to how we use it. Most of this you can do in the app; for anything else write to ${CONTACT_EMAIL} and we will answer within 30 days. You can also complain to your data protection authority (in Italy, the Garante per la protezione dei dati personali).`,
+        `You can see, correct, download or delete your data, and object to how we use it. Most of this you can do in the app (Account → Download my data gives you everything we keep about you as a file); for anything else write to ${CONTACT_EMAIL} and we will answer within 30 days. You can also complain to your data protection authority (in Italy, the Garante per la protezione dei dati personali).`,
       ] },
       { h: 'Children', p: [
         'Anyone can use the app without an account. To create an account you must be at least 16, or have a parent’s permission.',
@@ -96,14 +96,14 @@ const it = (app: string): Record<LegalDoc, Text> => ({
       ] },
       { h: 'Chi altro li tratta', p: [
         "Supabase (server nell'Unione europea) conserva per noi account e progressi.",
-        "GitHub Pages serve l'app e Google Fonts i caratteri; come ogni server web vedono il tuo indirizzo IP quando apri l'app.",
+        "GitHub Pages serve l'app; come ogni server web vede il tuo indirizzo IP quando apri l'app. Caratteri, immagini e registrazioni arrivano dall'app stessa, non da Google o da altri siti.",
         'Nessun altro riceve i tuoi dati e non vengono venduti.',
       ] },
       { h: 'Per quanto tempo', p: [
         "Finché hai un account. Quando lo elimini (Account → Elimina il mio account), account, profilo e progressi salvati vengono cancellati subito. Ciò che resta sul dispositivo puoi cancellarlo tu (Impostazioni → Azzera progressi).",
       ] },
       { h: 'I tuoi diritti', p: [
-        `Puoi vedere, correggere, scaricare o cancellare i tuoi dati e opporti al loro uso. Quasi tutto si fa nell'app; per il resto scrivi a ${CONTACT_EMAIL}, risponderemo entro 30 giorni. Puoi anche rivolgerti al Garante per la protezione dei dati personali.`,
+        `Puoi vedere, correggere, scaricare o cancellare i tuoi dati e opporti al loro uso. Quasi tutto si fa nell'app (Account → Scarica i miei dati ti dà in un file tutto ciò che conserviamo su di te); per il resto scrivi a ${CONTACT_EMAIL}, risponderemo entro 30 giorni. Puoi anche rivolgerti al Garante per la protezione dei dati personali.`,
       ] },
       { h: 'Minori', p: [
         "Chiunque può usare l'app senza account. Per creare un account devi avere almeno 16 anni, o il permesso di un genitore.",

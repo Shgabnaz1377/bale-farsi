@@ -2,7 +2,7 @@
 import { computed, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import {
-  account, deleteMyAccount, isAdmin, isReviewer, sendPasswordReset, setName, setPassword, signIn, signOut, signUp, syncNow,
+  account, deleteMyAccount, exportMyData, isAdmin, isReviewer, sendPasswordReset, setName, setPassword, signIn, signOut, signUp, syncNow,
 } from '@/lib/account.ts'
 import MeowCat from '@/components/MeowCat.vue'
 import { flagOn } from '@/lib/pron.ts'
@@ -72,6 +72,18 @@ watch(() => account.profile?.name, (n) => { editName.value = n ?? '' }, { immedi
 async function saveName() {
   const r = await setName(editName.value)
   notice.value = r ?? t('Saved.')
+}
+
+async function downloadData() {
+  error.value = ''
+  const r = await exportMyData()
+  if (r.error || !r.data) { error.value = r.error ?? ''; return }
+  const url = URL.createObjectURL(new Blob([JSON.stringify(r.data, null, 2)], { type: 'application/json' }))
+  const a = document.createElement('a')
+  a.href = url
+  a.download = 'my-data.json'
+  a.click()
+  setTimeout(() => URL.revokeObjectURL(url), 1000)
 }
 
 const confirmDelete = ref(false)
@@ -151,6 +163,7 @@ const statusText = computed(() => {
           <span class="inline"><input id="newpw2" v-model="newPassword" type="password" autocomplete="new-password" minlength="8" /><button type="submit" class="btn ghost sm" :disabled="busy">{{ t('Save password') }}</button></span>
         </form>
         <button v-else type="button" class="btn ghost sm" @click="changing = true">{{ t('Change password') }}</button>
+        <button type="button" class="btn ghost sm" @click="downloadData">{{ t('Download my data') }}</button>
         <div class="row">
           <button v-if="!confirmDelete" type="button" class="btn ghost sm" @click="confirmDelete = true">{{ t('Delete my account') }}</button>
           <template v-else>
@@ -207,7 +220,10 @@ const statusText = computed(() => {
       <p v-if="mode === 'signup'" class="muted small">{{ t('Progress you already have on this device is added to your new account.') }}</p>
     </section>
 
-    <p class="muted small">{{ t('We store your name, email and learning progress so you can carry on from any device. The course owner can see them to look after the course; nobody else can.') }}</p>
+    <p class="muted small">
+      {{ t('We store your name, email and learning progress so you can carry on from any device. The course owner can see them to look after the course; nobody else can.') }}
+      <RouterLink :to="{ name: 'privacy' }">{{ t('Privacy policy') }}</RouterLink>
+    </p>
   </main>
 </template>
 

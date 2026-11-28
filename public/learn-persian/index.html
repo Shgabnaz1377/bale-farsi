@@ -15,9 +15,6 @@
 <meta name="theme-color" content="#0a7b7a" />
 <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
 <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Lexend:wght@400;500;600&family=Vazirmatn:wght@500;700&display=swap" />
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
 {"@type":"Question","name":"Is PersianMeow free?","acceptedAnswer":{"@type":"Answer","text":"Yes. The whole course, the alphabet, the dictionary and the audio are free. You can use it without an account; a free account saves your progress across devices."}},
@@ -28,6 +25,13 @@
 ]}
 </script>
 <style>
+  /* Fonts are served from this site, not Google Fonts (GDPR). */
+  @font-face { font-family: 'Bricolage Grotesque'; src: url(fonts/bricolage-grotesque-latin-opsz-normal.woff2) format('woff2'); font-weight: 200 800; font-display: swap }
+  @font-face { font-family: 'Lexend'; src: url(fonts/lexend-latin-400-normal.woff2) format('woff2'); font-weight: 400; font-display: swap }
+  @font-face { font-family: 'Lexend'; src: url(fonts/lexend-latin-500-normal.woff2) format('woff2'); font-weight: 500; font-display: swap }
+  @font-face { font-family: 'Lexend'; src: url(fonts/lexend-latin-600-normal.woff2) format('woff2'); font-weight: 600; font-display: swap }
+  @font-face { font-family: 'Vazirmatn'; src: url(fonts/vazirmatn-arabic-500-normal.woff2) format('woff2'); font-weight: 500; font-display: swap }
+  @font-face { font-family: 'Vazirmatn'; src: url(fonts/vazirmatn-arabic-700-normal.woff2) format('woff2'); font-weight: 700; font-display: swap }
   :root { --teal: #0a7b7a; --teal-soft: #d9efee; --ink: #142033; --muted: #55657a; --bg: #eef3f6; --card: #fff; --line: #d6e0e8; --gold: #e0a21c }
   @media (prefers-color-scheme: dark) { :root { --ink: #e8eef4; --muted: #9fb0c2; --bg: #0f1722; --card: #172231; --line: #263447; --teal-soft: #12393b } }
   * { box-sizing: border-box }

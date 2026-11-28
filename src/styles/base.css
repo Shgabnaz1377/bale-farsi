@@ -8,7 +8,7 @@
   --bad: #b8323a; --bad-ink: #ffffff; --bad-bg: #fbe3e4;
   --scrim: rgba(19, 33, 58, 0.45);
   --shadow: 0 1px 0 rgba(19, 33, 58, 0.05), 0 8px 20px -14px rgba(19, 33, 58, 0.35);
-  --f-display: 'Bricolage Grotesque', 'Segoe UI', system-ui, sans-serif;
+  --f-display: 'Bricolage Grotesque Variable', 'Bricolage Grotesque', 'Segoe UI', system-ui, sans-serif;
   --f-body: 'Lexend', 'Segoe UI', system-ui, sans-serif;
   --f-fa: 'Vazirmatn', 'Tahoma', 'Segoe UI', sans-serif;
   --radius: 18px;

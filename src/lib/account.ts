@@ -5,6 +5,7 @@ import { mergeProgress, sameLearning } from './merge.ts'
 import { isNative } from './platform.ts'
 import { APP } from '@/app.ts'
 import { detectLang, t } from '@/i18n/index.ts'
+import { LEGAL_UPDATED } from '@/content/legal.ts'
 
 /** Where email links land when sent from inside the phone apps. */
 const WEB_URL = APP.webUrl
@@ -194,7 +195,8 @@ export async function signUp(name: string, email: string, password: string): Pro
   account.error = ''
   const { data, error } = await sb.auth.signUp({
     email: email.trim(), password,
-    options: { data: { name: name.trim().slice(0, 80) }, emailRedirectTo: redirect() },
+    // When they agreed to the privacy policy (GDPR: we can show when and to which version).
+    options: { data: { name: name.trim().slice(0, 80), privacy_accepted: new Date().toISOString(), privacy_version: LEGAL_UPDATED }, emailRedirectTo: redirect() },
   })
   if (error) return friendly(error.message)
   return data.session ? null : 'confirm'
@@ -255,6 +257,36 @@ export async function deleteMyAccount(): Promise<string | null> {
 }
 
 export const syncNow = () => pull()
+
+/** Date of the privacy policy in force (src/views/PrivacyView.vue). */
+export const PRIVACY_VERSION = '2026-11-28'
+
+/**
+ * Everything the course keeps about the signed-in learner, as one JSON document (GDPR: right of access
+ * and data portability): account, profile, saved progress and their pronunciation reports.
+ */
+export async function exportMyData(): Promise<{ data?: object; error?: string }> {
+  if (!sb || !account.user) return { error: t('You are not signed in.') }
+  const u = account.user
+  const { data: auth } = await sb.auth.getUser()
+  const [profile, progress, feedback] = await Promise.all([
+    sb.from('profiles').select('*').eq('id', u.id).maybeSingle(),
+    sb.from('progress').select('data, updated_at').eq('user_id', u.id).maybeSingle(),
+    sb.from('pron_feedback').select('kind, clip_key, fa, tr, verdict, suggested_tr, comment, status, created_at').eq('user_id', u.id),
+  ])
+  const err = profile.error ?? progress.error ?? feedback.error
+  if (err) return { error: friendly(err.message) }
+  return {
+    data: {
+      exported: new Date().toISOString(),
+      account: { id: u.id, email: u.email, created_at: auth.user?.created_at, last_sign_in_at: auth.user?.last_sign_in_at, metadata: auth.user?.user_metadata },
+      profile: profile.data,
+      progress: progress.data,
+      pronunciation_reports: feedback.data,
+      this_device: JSON.parse(JSON.stringify(P)),
+    },
+  }
+}
 
 /** One learner as the owner sees them (supabase/schema.sql: admin_users). */
 export interface AdminUser {
