@@ -31,3 +31,11 @@ export const IT_LETTER_SOUNDS: Record<string, string> = {
   'ج': 'j (g di "gelato")', 'غ': 'gh (g gutturale)', 'ق': 'gh (g gutturale)', 'ع': "' (colpo di glottide)",
   'و': 'v / u / o', 'ه': 'h / e', 'ی': 'y / i',
 }
+
+/** The vowels lesson's example words, keyed by their Finglish. */
+export const IT_VOWEL_WORDS: Record<string, string> = {
+  sar: 'testa', dar: 'porta', shab: 'notte', del: 'cuore', esm: 'nome', cheshm: 'occhio',
+  gol: 'fiore', mobl: 'divano', dokhtar: 'ragazza', 'âb': 'acqua', 'bâbâ': 'papà', 'nân': 'pane',
+  ruz: 'giorno', tut: 'gelso', dust: 'amico', sib: 'mela', fil: 'elefante', 'Irân': 'Iran',
+  gel: 'fango', mehr: 'gentilezza', mohr: 'timbro', ser: 'intorpidito',
+}
