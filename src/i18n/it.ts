@@ -516,4 +516,6 @@ export const IT: Record<string, string> = {
   "Privacy policy": "Informativa sulla privacy",
   "Terms of use": "Condizioni d'uso",
   "By creating an account you accept:": "Creando un account accetti:",
+  "{app} is free, with no ads. If it helps you, a small tip keeps it that way and pays for native speakers to review the audio.": "{app} è gratuita e senza pubblicità. Se ti è utile, una piccola mancia la mantiene così e paga i madrelingua che controllano l'audio.",
+  "Support PersianMeow": "Sostieni PersianMeow",
 }

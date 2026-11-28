@@ -516,4 +516,6 @@ export const FA_BEGO: Record<string, string> = {
   "Privacy policy": "حریم خصوصی",
   "Terms of use": "شرایط استفاده",
   "By creating an account you accept:": "با ساختن حساب این‌ها را می‌پذیری:",
+  "{app} is free, with no ads. If it helps you, a small tip keeps it that way and pays for native speakers to review the audio.": "{app} رایگان و بدون تبلیغ است. اگر به کارت می‌آید، یک کمک کوچک آن را رایگان نگه می‌دارد.",
+  "Support PersianMeow": "حمایت از PersianMeow",
 }

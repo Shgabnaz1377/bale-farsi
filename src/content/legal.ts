@@ -30,6 +30,7 @@ const en = (app: string): Record<LegalDoc, Text> => ({
       { h: 'Who else handles it', p: [
         'Supabase (servers in the European Union) stores accounts and synced progress for us.',
         'GitHub Pages serves the app; like any web server it sees your IP address when you open the app. Fonts, pictures and recordings come from the app itself, not from Google or other sites.',
+        'Tips are paid on Ko-fi, under Ko-fi’s own privacy policy; we see only the name and message you choose to leave there.',
         'Nobody else receives your data, and none of it is sold.',
       ] },
       { h: 'How long we keep it', p: [
@@ -97,6 +98,7 @@ const it = (app: string): Record<LegalDoc, Text> => ({
       { h: 'Chi altro li tratta', p: [
         "Supabase (server nell'Unione europea) conserva per noi account e progressi.",
         "GitHub Pages serve l'app; come ogni server web vede il tuo indirizzo IP quando apri l'app. Caratteri, immagini e registrazioni arrivano dall'app stessa, non da Google o da altri siti.",
+        'Le mance si pagano su Ko-fi, secondo la sua informativa; noi vediamo solo il nome e il messaggio che scegli di lasciare.',
         'Nessun altro riceve i tuoi dati e non vengono venduti.',
       ] },
       { h: 'Per quanto tempo', p: [

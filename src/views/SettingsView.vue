@@ -140,6 +140,10 @@ function restore() {
       {{ t('{app} is free and open source. The course content was written with AI help and is being reviewed by native speakers; if you spot a mistake,', { app: APP.fullName }) }}
       <a href="https://github.com/Shgabnaz1377/persianmeow/issues" target="_blank" rel="noopener">{{ t('open an issue on GitHub') }}</a>.
     </p>
+    <section v-if="APP.id === 'persianmeow'" class="card support">
+      <p>{{ t('{app} is free, with no ads. If it helps you, a small tip keeps it that way and pays for native speakers to review the audio.', { app: APP.fullName }) }}</p>
+      <a class="btn primary sm" href="https://ko-fi.com/persianmeow" target="_blank" rel="noopener">{{ t('Support PersianMeow') }}</a>
+    </section>
     <p class="muted small about">
       <RouterLink to="/privacy">{{ t('Privacy policy') }}</RouterLink> · <RouterLink to="/terms">{{ t('Terms of use') }}</RouterLink>
     </p>
@@ -163,4 +167,5 @@ h1 { font-size: 1.7rem; font-weight: 800 }
 .row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center }
 textarea { width: 100%; padding: 10px 12px; border-radius: 12px; border: 2px solid var(--line); background: var(--bg); font-family: ui-monospace, monospace; font-size: 0.8rem }
 .about { text-align: center }
+.support { display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center }
 </style>
