@@ -3,6 +3,7 @@ import { computed } from 'vue'
 import { ALL_WORDS, LEVELS } from '@/content/course.ts'
 import { P, learnedCount, seenCount, today, unitDone, streakActiveToday } from '@/lib/store.ts'
 import MeowCat from '@/components/MeowCat.vue'
+import FoldSection from '@/components/FoldSection.vue'
 import { APP } from '@/app.ts'
 import { t, tn } from '@/i18n/index.ts'
 
@@ -19,14 +20,16 @@ const days = computed(() => {
   })
 })
 const activeDays = computed(() => Object.values(P.days).filter((x) => x > 0).length)
+const unitsAll = LEVELS.reduce((n, l) => n + l.units.length, 0)
+const unitsDone = computed(() => LEVELS.reduce((n, l) => n + l.units.filter(unitDone).length, 0))
 const dateOf = (d: number) => new Date(d * 86400000).toLocaleDateString(undefined, { timeZone: 'UTC', month: 'short', day: 'numeric' })
 </script>
 
 <template>
-  <main class="wrap page">
+  <main class="wrap page progress">
     <div class="title-row">
       <h1>{{ t('Progress') }}</h1>
-      <MeowCat :mood="streakActiveToday() ? 'cheer' : P.streak ? 'sad' : 'sleep'" :size="72" :bubble="streakActiveToday() ? APP.pishi.cheer.tr : ''" :bubble-fa="APP.pishi.cheer.fa" />
+      <MeowCat :mood="streakActiveToday() ? 'cheer' : P.streak ? 'sad' : 'sleep'" :size="56" :bubble="streakActiveToday() ? APP.pishi.cheer.tr : ''" :bubble-fa="APP.pishi.cheer.fa" />
     </div>
     <div class="tiles">
       <div class="card tile"><span class="eyebrow">{{ t('Streak') }}</span><b>{{ P.streak }}</b><span class="muted small">{{ t('best {n}', { n: P.bestStreak }) }}</span></div>
@@ -34,8 +37,7 @@ const dateOf = (d: number) => new Date(d * 86400000).toLocaleDateString(undefine
       <div class="card tile"><span class="eyebrow">{{ t('Words learned') }}</span><b>{{ learnedCount() }}</b><span class="muted small">{{ t('{n} met of {total}', { n: seenCount(), total: ALL_WORDS.length }) }}</span></div>
     </div>
 
-    <section class="card">
-      <h2>{{ t('Last {n} weeks', { n: WEEKS }) }}</h2>
+    <FoldSection :title="t('Last {n} weeks', { n: WEEKS })" open>
       <p class="muted small">{{ t('Each square is a day, Saturday to Friday down each column.') }}</p>
       <div class="cal-wrap">
         <div class="cal" role="img" :aria-label="t('Activity over the last {weeks} weeks: {n} active days', { weeks: WEEKS, n: activeDays })">
@@ -43,10 +45,9 @@ const dateOf = (d: number) => new Date(d * 86400000).toLocaleDateString(undefine
         </div>
       </div>
       <div class="legend small muted">{{ t('Less') }} <span class="day l0"></span><span class="day l1"></span><span class="day l2"></span><span class="day l3"></span> {{ t('More') }}</div>
-    </section>
+    </FoldSection>
 
-    <section class="card">
-      <h2>{{ t('Levels') }}</h2>
+    <FoldSection :title="t('Levels')" :badge="`${unitsDone}/${unitsAll}`" open>
       <ul class="levels">
         <li v-for="lv in LEVELS" :key="lv.level">
           <span class="lv">{{ lv.level }}</span>
@@ -54,27 +55,34 @@ const dateOf = (d: number) => new Date(d * 86400000).toLocaleDateString(undefine
           <span class="small muted">{{ lv.units.filter(unitDone).length }}/{{ lv.units.length }} {{ t('units') }}<template v-if="P.passed[lv.level]"> · {{ t('test passed') }}</template></span>
         </li>
       </ul>
-    </section>
+    </FoldSection>
   </main>
 </template>
 
 <style scoped>
-h1 { font-size: 1.7rem; font-weight: 800 }
+/* One screen on a phone: three small tiles, then the calendar and the levels fold open and closed. */
+.progress { gap: 10px; padding-top: 12px; padding-bottom: calc(var(--tab-h) + 16px) }
+h1 { font-size: 1.6rem; font-weight: 800 }
 .title-row { display: flex; align-items: center; justify-content: space-between; gap: 12px }
-h2 { font-size: 1.15rem; font-weight: 800; margin-bottom: 4px }
-.tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px }
-.tile { display: flex; flex-direction: column; gap: 2px }
-.tile b { font-family: var(--f-display); font-size: 2rem; font-weight: 800; font-variant-numeric: tabular-nums }
-.cal-wrap { overflow-x: auto; margin-top: 12px }
+.tiles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px }
+.tile { display: flex; flex-direction: column; gap: 2px; padding: 10px 12px }
+.tile b { font-family: var(--f-display); font-size: 1.7rem; font-weight: 800; font-variant-numeric: tabular-nums; line-height: 1.15 }
+.tile .small { font-size: 0.78rem; line-height: 1.25 }
+.cal-wrap { overflow-x: auto }
 .cal { display: grid; grid-template-rows: repeat(7, 14px); grid-auto-flow: column; grid-auto-columns: 14px; gap: 4px; width: max-content }
 .day { display: inline-block; width: 14px; height: 14px; border-radius: 4px; background: var(--sunk) }
 .day.l1 { background: color-mix(in srgb, var(--accent) 35%, var(--sunk)) }
 .day.l2 { background: color-mix(in srgb, var(--accent) 65%, var(--sunk)) }
 .day.l3 { background: var(--accent) }
 .day.future { opacity: 0.3 }
-.legend { display: flex; align-items: center; gap: 4px; margin-top: 10px }
-.levels { list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; gap: 12px }
+.legend { display: flex; align-items: center; gap: 4px }
+.levels { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px }
 .levels li { display: grid; grid-template-columns: 36px 1fr auto; align-items: center; gap: 12px }
 .lv { font-family: var(--f-display); font-weight: 800 }
-@media (max-width: 520px) { .tiles { grid-template-columns: 1fr 1fr } .tile b { font-size: 1.6rem } .levels li { grid-template-columns: 36px 1fr } .levels li .small { grid-column: 2 } }
+@media (max-width: 520px) {
+  .tile { padding: 9px 10px }
+  .tile b { font-size: 1.4rem }
+  .tile .eyebrow { font-size: 0.62rem; letter-spacing: 0.05em }
+  .levels li { grid-template-columns: 30px 1fr auto; gap: 10px }
+}
 </style>

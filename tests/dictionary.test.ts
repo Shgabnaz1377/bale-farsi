@@ -91,3 +91,18 @@ describe.runIf(APP.id === 'persianmeow')('word search', () => {
     expect(translateUrl('آب')).toContain('sl=fa&tl=en&text=%D8%A2%D8%A8')
   })
 })
+
+describe('word search in Bego Ciao (Italian word, Persian pronunciation and meaning)', () => {
+  const ref = (fa: string, tr: string, en: string) =>
+    ({ key: fa, word: { fa, tr, en }, unit: { level: 'A1' } }) as unknown as Parameters<typeof buildIndex>[0][number]
+  const rows = buildIndex([ref('ciao', 'چائو', 'سلام؛ خداحافظ'), ref('acqua', 'آکوا', 'آب')], [])
+  it('finds the Italian word from Latin letters', () => {
+    expect(searchRows(rows, 'ciao').map((r) => r.fa)).toEqual(['ciao'])
+    expect(searchRows(rows, 'acq').map((r) => r.fa)).toEqual(['acqua'])
+  })
+  it('finds it from the Persian meaning or the Persian-letter pronunciation', () => {
+    expect(searchRows(rows, 'سلام').map((r) => r.fa)).toEqual(['ciao'])
+    expect(searchRows(rows, 'آب').map((r) => r.fa)).toEqual(['acqua'])
+    expect(searchRows(rows, 'چائو').map((r) => r.fa)).toEqual(['ciao'])
+  })
+})

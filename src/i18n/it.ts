@@ -457,6 +457,12 @@ export const IT: Record<string, string> = {
   "yesterday": "ieri",
   "{n} days ago": "{n} giorni fa",
   "{n} lessons": "{n} lezioni",
+  "Word list": "Elenco delle parole",
+  "Letters": "Lettere",
+  "How it works": "Come funziona",
+  "Tap a letter to see its shapes and hear it.": "Tocca una lettera per vederne le forme e ascoltarla.",
+  "Previous letter": "Lettera precedente",
+  "Next letter": "Lettera successiva",
   "A learner reported it": "Segnalato da uno studente",
   "All done for now. Thank you!": "Per ora è tutto. Grazie!",
   "Does the recording match the Finglish exactly, with no extra or missing vowel?": "La registrazione corrisponde esattamente al Finglish, senza vocali in più o in meno?",
@@ -493,4 +499,5 @@ export const IT: Record<string, string> = {
   "{n} marked wrong": "{n} segnati come sbagliati",
   "{n} open reports": "{n} segnalazioni aperte",
   "{n} reviewed": "{n} controllati",
+  "Language": "Lingua",
 }

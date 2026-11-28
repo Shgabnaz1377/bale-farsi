@@ -47,7 +47,11 @@ const keep = (r: SearchRow) =>
 
 const rows = computed(() => searchRows(index.value, query.value, keep))
 const shown = computed(() => rows.value.slice(0, limit.value))
-watch([query, level, onlyMine], () => { limit.value = PAGE })
+const scroller = ref<HTMLElement>()
+watch([query, level, onlyMine], () => {
+  limit.value = PAGE
+  scroller.value?.scrollTo({ top: 0 })
+})
 
 const q = computed(() => query.value.trim())
 const status = (r: SearchRow) => {
@@ -58,11 +62,13 @@ const status = (r: SearchRow) => {
 </script>
 
 <template>
-  <main class="wrap page">
-    <div>
+  <main class="wrap words-page">
+    <div class="w-top">
       <h1>{{ t('Words') }}</h1>
-      <p class="muted">{{ t('{n} words across A1 to B2. Search in English, Finglish or Persian.', { n: ALL_WORDS.length }) }}</p>
-      <p v-if="dictCount" class="muted small">{{ t('The dictionary adds {n} common words, open to everyone.', { n: dictCount }) }}</p>
+      <p class="muted intro">
+        {{ t('{n} words across A1 to B2. Search in English, Finglish or Persian.', { n: ALL_WORDS.length }) }}
+        <template v-if="dictCount">{{ t('The dictionary adds {n} common words, open to everyone.', { n: dictCount }) }}</template>
+      </p>
     </div>
     <div class="filters card">
       <label class="sr-only" for="word-search">{{ t('Search words') }}</label>
@@ -73,56 +79,71 @@ const status = (r: SearchRow) => {
           <label :for="'lvl-' + l">{{ levelLabel(l) }}</label>
         </template>
       </div>
-      <label class="check"><input id="only-mine" v-model="onlyMine" type="checkbox" /> {{ t('Only words I have met') }}</label>
+      <div class="f-row">
+        <label class="check"><input id="only-mine" v-model="onlyMine" type="checkbox" /> {{ t('Only words I have met') }}</label>
+        <p class="muted small count" aria-live="polite">
+          {{ t('{n} shown', { n: rows.length }) }}
+          <template v-if="loading">· {{ t('Loading the dictionary…') }}</template>
+          <template v-else-if="loadFailed">· {{ t('The dictionary could not be loaded.') }}</template>
+        </p>
+      </div>
     </div>
-    <p class="muted small" aria-live="polite">
-      {{ t('{n} shown', { n: rows.length }) }}
-      <template v-if="loading">· {{ t('Loading the dictionary…') }}</template>
-      <template v-else-if="loadFailed">· {{ t('The dictionary could not be loaded.') }}</template>
-    </p>
-    <ul class="list">
-      <li v-for="r in shown" :key="r.key" class="row" :data-dict="r.dict ? '' : undefined">
-        <span class="w-spk"><SpeakButton :text="r.fa" /></span>
-        <FaText :fa="r.fa" :tr="r.tr" size="sm" inline keep-tr class="w-fa" />
-        <span class="w-en">{{ r.alt?.length ? `${r.en}; ${r.alt.join('; ')}` : r.en }}</span>
-        <span class="w-meta">
-          <span v-if="r.level" class="chip">{{ r.level }}</span>
-          <span v-else class="chip lapis">{{ t('Dictionary') }}</span>
-          <span v-if="status(r)" class="chip" :class="status(r) === 'learned' ? 'accent' : 'saffron'">{{ t(status(r)!) }}</span>
-        </span>
-        <div v-if="r.stem || r.ex" class="w-more">
-          <p v-if="r.stem" class="small muted">{{ t('Present stem') }}: <FaText :fa="r.stem.fa" :tr="r.stem.tr" size="sm" inline keep-tr /></p>
-          <p v-if="r.ex" class="w-ex small">
-            <FaText :fa="r.ex.fa" :tr="r.ex.tr" size="sm" inline keep-tr />
-            <span class="muted">{{ r.ex.en }}</span>
-          </p>
-        </div>
-      </li>
-    </ul>
-    <button v-if="rows.length > shown.length" type="button" class="btn ghost sm more" @click="limit += PAGE">
-      {{ t('Show more ({n} left)', { n: rows.length - shown.length }) }}
-    </button>
-    <p v-if="q" class="translate card" :class="{ empty: !rows.length }">
-      <span v-if="!rows.length">{{ t('No words found for “{q}”.', { q }) }}</span>
-      <a :href="translateUrl(q)" target="_blank" rel="noopener noreferrer" :title="t('Opens Google Translate in a new tab')">
-        {{ t('Not in the dictionary? Translate it') }} ↗
-      </a>
-    </p>
+    <!-- The list scrolls inside its own area, so the search and the filters stay on screen. -->
+    <div ref="scroller" class="scroller" tabindex="0" role="region" :aria-label="t('Word list')">
+      <ul class="list">
+        <li v-for="r in shown" :key="r.key" class="row" :data-dict="r.dict ? '' : undefined">
+          <span class="w-spk"><SpeakButton :text="r.fa" /></span>
+          <FaText :fa="r.fa" :tr="r.tr" size="sm" inline keep-tr class="w-fa" />
+          <span class="w-en">{{ r.alt?.length ? `${r.en}; ${r.alt.join('; ')}` : r.en }}</span>
+          <span class="w-meta">
+            <span v-if="r.level" class="chip">{{ r.level }}</span>
+            <span v-else class="chip lapis">{{ t('Dictionary') }}</span>
+            <span v-if="status(r)" class="chip" :class="status(r) === 'learned' ? 'accent' : 'saffron'">{{ t(status(r)!) }}</span>
+          </span>
+          <div v-if="r.stem || r.ex" class="w-more">
+            <p v-if="r.stem" class="small muted">{{ t('Present stem') }}: <FaText :fa="r.stem.fa" :tr="r.stem.tr" size="sm" inline keep-tr /></p>
+            <p v-if="r.ex" class="w-ex small">
+              <FaText :fa="r.ex.fa" :tr="r.ex.tr" size="sm" inline keep-tr />
+              <span class="muted">{{ r.ex.en }}</span>
+            </p>
+          </div>
+        </li>
+      </ul>
+      <button v-if="rows.length > shown.length" type="button" class="btn ghost sm more" @click="limit += PAGE">
+        {{ t('Show more ({n} left)', { n: rows.length - shown.length }) }}
+      </button>
+      <p v-if="q" class="translate card" :class="{ empty: !rows.length }">
+        <span v-if="!rows.length">{{ t('No words found for “{q}”.', { q }) }}</span>
+        <a :href="translateUrl(q)" target="_blank" rel="noopener noreferrer" :title="t('Opens Google Translate in a new tab')">
+          {{ t('Not in the dictionary? Translate it') }} ↗
+        </a>
+      </p>
+    </div>
   </main>
 </template>
 
 <style scoped>
-h1 { font-size: 1.7rem; font-weight: 800 }
-.filters { display: flex; flex-direction: column; gap: 12px }
-input[type='search'] { width: 100%; padding: 12px 14px; border-radius: 12px; border: 2px solid var(--line); background: var(--bg); font-size: 1rem }
+/* A screen-sized column: the title and the filters stay put, the list scrolls on its own. */
+.words-page { height: calc(100dvh - var(--top-h) - var(--tab-h) - env(safe-area-inset-top, 0px)); display: flex; flex-direction: column; gap: 10px; padding-top: 12px; overflow: hidden }
+.w-top { flex: none; display: flex; flex-direction: column; gap: 2px }
+.intro { font-size: 0.84rem; line-height: 1.35 }
+h1 { font-size: 1.6rem; font-weight: 800 }
+.filters { flex: none; display: flex; flex-direction: column; gap: 10px; padding: 12px 14px }
+input[type='search'] { width: 100%; padding: 11px 14px; border-radius: 12px; border: 2px solid var(--line); background: var(--bg); font-size: 1rem }
 input[type='search']:focus { border-color: var(--lapis); outline: none }
-.seg { display: flex; flex-wrap: wrap; gap: 6px }
+/* One row of levels; on a narrow screen it scrolls sideways instead of wrapping. */
+.seg { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; padding: 3px; margin: -3px }
+.seg::-webkit-scrollbar { display: none }
 .seg input { position: absolute; opacity: 0; pointer-events: none }
-.seg label { padding: 6px 12px; border-radius: 10px; border: 1px solid var(--line); cursor: pointer; font-size: 0.9rem; background: var(--bg) }
+.seg label { padding: 6px 11px; border-radius: 10px; border: 1px solid var(--line); cursor: pointer; font-size: 0.9rem; background: var(--bg); white-space: nowrap; flex: none }
 .seg input:checked + label { background: var(--lapis-soft); border-color: var(--lapis); font-weight: 600 }
 .seg input:focus-visible + label { outline: 3px solid var(--lapis); outline-offset: 2px }
+.f-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 4px 12px }
 .check { display: inline-flex; gap: 8px; align-items: center; font-size: 0.92rem; cursor: pointer }
 .check input { accent-color: var(--accent); width: 17px; height: 17px }
+.count { font-size: 0.82rem }
+.scroller { flex: 1 1 auto; min-height: 0; overflow-y: auto; overscroll-behavior: contain; display: flex; flex-direction: column; gap: 12px; padding-bottom: 16px; border-radius: 12px }
+.scroller:focus-visible { outline: 3px solid var(--lapis); outline-offset: 2px }
 .list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column }
 .row { display: grid; grid-template-columns: auto minmax(0, 1.2fr) minmax(0, 1fr) auto; align-items: center; gap: 4px 12px; padding: 8px 0; border-bottom: 1px solid var(--line) }
 .w-spk { width: 36px; min-height: 1px }
@@ -132,8 +153,15 @@ input[type='search']:focus { border-color: var(--lapis); outline: none }
 .w-more { grid-column: 2 / -1; display: flex; flex-direction: column; gap: 2px }
 .w-more p { margin: 0 }
 .w-ex { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline }
-.more { align-self: center }
-.translate { display: flex; flex-direction: column; gap: 6px; margin: 0 }
+.more { align-self: center; flex: none }
+.translate { display: flex; flex-direction: column; gap: 6px; margin: 0; flex: none }
 .translate a { color: var(--lapis); font-weight: 600 }
-@media (max-width: 520px) { .row { grid-template-columns: auto minmax(0, 1fr); } .w-en { grid-column: 2 } .w-meta { grid-column: 2 } .w-more { grid-column: 2 } }
+/* Phones: Persian and the level chips on the first line, the meaning and the example under them. */
+@media (max-width: 520px) {
+  .row { grid-template-columns: auto minmax(0, 1fr) auto }
+  .w-fa { grid-column: 2 }
+  .w-meta { grid-column: 3; grid-row: 1 }
+  .w-en, .w-more { grid-column: 2 / -1 }
+  .seg label { padding: 6px 10px; font-size: 0.88rem }
+}
 </style>
